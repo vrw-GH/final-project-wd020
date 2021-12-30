@@ -1,10 +1,15 @@
-# Recipes-Project
+# Final Project
 
-View Page at [My-Recipe-Book](https://vrw-GH.github.io/vw_my-recipe-book)
-
-Page Deployed [on netlify](https://vigilant-turing-554418.netlify.app/)
+WBS Full Stack App and Web Development Course
 <br />
-Current Status: [![Netlify Status](https://api.netlify.com/api/v1/badges/e6ab701b-18f5-4dcf-8fa6-0e01a8926ae6/deploy-status)](https://app.netlify.com/sites/vigilant-turing-554418/deploys)
+<br />
+by Victor and Abdullah
+WBS Coding School: WD#020 (Jan,2022)
+<br />
 
-by Victor -
-WBS Group: WD#020 (Nov,2021)
+Page Deployed [on Netlify]
+<br />
+Current Status:
+
+<br />
+View GH Page at [Final Project](https://github.com/vrw-GH/final-project-wd020)
