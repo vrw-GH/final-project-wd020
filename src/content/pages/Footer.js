@@ -1,0 +1,68 @@
+import React from "react";
+import { FaFacebook, FaGithub, FaInstagram, FaDiscord } from "react-icons/fa";
+import "./Footer.css";
+
+const Footer = ({ APPDATA }) => {
+  return (
+    <div className="footer_container">
+      <img className="ftImg" src={APPDATA.FOOTERIMG} alt="footer" />
+
+      <ul className="ul1">
+        <li>
+          {APPDATA.PROJECT.toUpperCase()}{" "}
+          <i>
+            ver: {APPDATA.VER} <small>({APPDATA.FLIGHT})</small>
+          </i>
+        </li>
+        <li>
+          <small>{APPDATA.INFO}</small>
+        </li>
+        <li>
+          Hosted:{" "}
+          <a href={APPDATA.FRONTEND} target="_blank" rel="noreferrer">
+            {APPDATA.FRONTEND}
+          </a>
+        </li>
+        <li>
+          Backend:{" "}
+          <a href={APPDATA.BACKEND} target="_blank" rel="noreferrer">
+            {APPDATA.BACKEND}
+          </a>
+        </li>
+      </ul>
+      <ul className="ul2">
+        <li>Development Team: {APPDATA.DEVTEAM}</li>
+        <li>
+          <small>(Additional Development: {APPDATA.DEVLEAD})</small>
+        </li>
+        <li>
+          Contact:{" "}
+          <a
+            href={`mailto:${APPDATA.EMAIL}?subject=Inquiry:%20${APPDATA.PROJECT}
+&body=I%20am%20interested%20in%20your%20project!`}
+          >
+            {APPDATA.EMAIL}
+          </a>
+        </li>
+        <li>Phone: {APPDATA.PHONE}</li>
+        <li>{APPDATA.LOCATION}</li>
+      </ul>
+      <ul className="ul3">
+        <li>
+          <FaFacebook size="2.5em" />
+        </li>
+        <li>
+          <FaGithub size="2.5em" />
+        </li>
+        <li>
+          <FaInstagram size="2.5em" />
+        </li>
+        <li>
+          <FaDiscord size="2.5em" />
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default Footer;

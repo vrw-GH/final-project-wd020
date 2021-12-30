@@ -1,0 +1,13 @@
+.category_container{
+   display: flex;
+   align-items: left;
+   flex-direction: column;
+   text-align: left;
+   font-weight: bolder;
+   color:black;
+   width: 100%;
+   margin: auto;
+   padding: 5px; 
+   background: linear-gradient(rgba(156, 160, 104, 0.452),rgba(219, 106, 0, 0.26) );
+   /* box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165); */
+}

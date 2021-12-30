@@ -1,0 +1,38 @@
+.header {
+  margin-top: 1px;
+}
+
+.headerTitles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "lora", serif;
+  color: rgb(255, 255, 255);
+}
+
+.headerTitlesLg {
+  position: absolute;
+  margin-top: 8vh ;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 3.5rem;
+  text-align: center;
+  text-shadow: 2px 2px 5px  red;
+}
+
+.headerTitlesSm {
+  position: absolute;
+  margin-top: 30vh;
+  padding-left: 20%;
+  padding-right: 20%;
+  font-size: 2rem;
+  text-align:   center;
+  text-shadow: 10px 0px 10px  brown;
+}
+
+.headerImg {
+  width: 100%;
+  height: 480px;
+  margin-top: 0px;
+  object-fit: cover;
+}

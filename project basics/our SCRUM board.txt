@@ -1,0 +1,43 @@
+S C R U M  - WBS#020 Final Project (Abdullah/Victor)
+----------------------------------------------------
+
+PRODUCT BACKLOG - User Stories:
+ As a <user>
+ I want to <requirement>
+ So that <desired benefit>
+
+
+As a - GUEST :    I want to -
+--------------    ------------
+1. See some recipes - So that i can get inspired
+
+2. Sort recipes on mealtime & likes - So that i can get inspired
+
+3. Register/Login - So that i for more features
+
+
+
+As a - REGISTERED USER:   I want to -
+-----------------------   ------------
+4. Save a recipe as a favourite - So that i have a favourites list
+
+5. Search Recipes by available ingredients - So that i Cook something
+
+6. Add my own recipe - So that i can share it, (join a ranking)?
+
+7. "Unpublish"/Delete my recipe - So that i can have a private recipe stash
+
+8. Chat with others - So that i chat about their recipes
+
+9. Add/Change my Extra/Leftover ingredients - So that i can share or exchange it with others in close location 
+   // 3 categories?: Cooked, Fast-Perishables, long-term-ingredients
+
+10. See others locations for sharing - So that i Find shareables in my location
+
+11. Book a collection - so i can pick up stuff at a date/time.
+
+12. Get and confirm a booking - so i can Reserve something for someone.
+
+13.
+
+11.
