@@ -26,7 +26,14 @@ const NavbarTop = ({
             <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
               Home
             </ReactBootStrap.NavLink>
-            <NavDropdown title="Categories" id="collapsible-nav-dropdown">
+            <ReactBootStrap.NavLink
+              to="/share"
+              href="/share"
+              onClick={handleClearQry}
+            >
+              Sharing
+            </ReactBootStrap.NavLink>
+            <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
               <ul>
                 {categories.map((item) => (
                   <li key={key++}>
@@ -57,17 +64,44 @@ const NavbarTop = ({
             {currentUser ? (
               <>
                 <NavDropdown
-                  title={currentUser + "'s Recipes"}
+                  title={currentUser + "'s Food"}
                   id="collapsible-nav-dropdown"
                 >
                   <ul>
                     <li>
                       <NavLink
+                        to="/myshare"
+                        href="/myshare"
+                        onClick={handleClearQry}
+                      >
+                        My Sharing
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/mytitles"
+                        href="/mytitles"
+                        onClick={handleClearQry}
+                      >
+                        My Recipes
+                      </NavLink>
+                    </li>
+                    {/* <li>
+                      <NavLink
                         to="/newtitle"
                         href="/newtitle"
                         onClick={handleClearQry}
                       >
-                        Create a Title
+                        New Recipe
+                      </NavLink>
+                    </li> */}
+                    <li>
+                      <NavLink
+                        to="/profile"
+                        href="/profile"
+                        onClick={handleClearQry}
+                      >
+                        My Profile
                       </NavLink>
                     </li>
                     <li>
@@ -78,7 +112,7 @@ const NavbarTop = ({
                       >
                         Logout
                       </NavLink>
-                    </li>{" "}
+                    </li>
                   </ul>
                 </NavDropdown>
               </>
@@ -92,7 +126,7 @@ const NavbarTop = ({
           <ReactBootStrap.Form className="d-flex">
             <ReactBootStrap.FormControl
               type="search"
-              placeholder="Search in Titles"
+              placeholder="Keyword search (in Title)"
               autoFocus
               className="me-2"
               aria-label="Search"
@@ -101,7 +135,7 @@ const NavbarTop = ({
               type="submit"
               onClick={(e) => handleSearchClick(e)}
             >
-              Search
+              Find
             </ReactBootStrap.Button>
           </ReactBootStrap.Form>
         </Navbar.Collapse>

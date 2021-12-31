@@ -6,27 +6,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "lora", serif;
-  color: rgb(255, 255, 255);
+  font-family:  "lora", serif;    
 }
 
 .headerTitlesLg {
   position: absolute;
-  margin-top: 8vh ;
+  margin-top: 25vh;
   padding-left: 10%;
   padding-right: 10%;
-  font-size: 3.5rem;
+  font-size: 4rem;
   text-align: center;
-  text-shadow: 2px 2px 5px  red;
+  color: rgb(105, 4, 4);
+  text-shadow: 2px 2px 5px  rgb(255, 30, 0);
 }
 
 .headerTitlesSm {
   position: absolute;
-  margin-top: 30vh;
-  padding-left: 20%;
-  padding-right: 20%;
-  font-size: 2rem;
-  text-align:   center;
+  margin-bottom: 3vh;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 1.8rem;
+  font-style: oblique;
+  text-align: center;
+  color: rgb(173, 2, 2);
   text-shadow: 10px 0px 10px  brown;
 }
 
@@ -35,4 +37,6 @@
   height: 480px;
   margin-top: 0px;
   object-fit: cover;
+  /* filter: opacity(0.7) brightness(3.0) saturate(0.5) invert(0.1) ; */
+  /* filter: brightness(0.5) saturate(1.6); */
 }

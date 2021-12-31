@@ -6,7 +6,8 @@
   width: 90%;
   margin-top: 10px;
   background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
-  box-shadow: 2px 25px 40px rgb(165, 165, 165);
+  /* box-shadow: 2px 25px 40px rgb(165, 165, 165); */
+  box-shadow: 2px 25px 80px rgba(255, 200, 79, 0.712);
   padding: 5px; 
 }
 .single_title_title {

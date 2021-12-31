@@ -1,16 +1,15 @@
 import "./Header.css";
 
-const Header = ({ APPDATA }) => {
+const ShareHeader = ({ APPDATA }) => {
   return (
     <div>
       <div className="header">
         <div className="headerTitles">
           <img className="headerImg" src={APPDATA.TITLEIMG} alt="header" />
-          <span className="headerTitlesSm">{APPDATA.INFO}</span>
-          <span className="headerTitlesLg">{APPDATA.NAME.toUpperCase()}</span>
+          <span className="headerTitlesSm">Share List</span>
         </div>
       </div>
     </div>
   );
 };
-export default Header;
+export default ShareHeader;

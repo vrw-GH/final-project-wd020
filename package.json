@@ -1,7 +1,8 @@
 {
-  "name": "share-food",
+  "name": "share-my-food",
   "suffix": "final-project-wbs#020",
   "version": "0.1",
+  "info": "-·≡ Sharing is Caring ≡·-",
   "private": false,
   "type": "module",
   "dependencies": {

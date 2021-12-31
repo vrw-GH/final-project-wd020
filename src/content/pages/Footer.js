@@ -15,7 +15,7 @@ const Footer = ({ APPDATA }) => {
           </i>
         </li>
         <li>
-          <small>{APPDATA.INFO}</small>
+          <small>{APPDATA.DESCRIPTION}</small>
         </li>
         <li>
           Hosted:{" "}

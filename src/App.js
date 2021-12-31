@@ -5,6 +5,7 @@ import "./App.css";
 import "./loading.css";
 
 import Home from "./content/pages/Home";
+import Sharing from "./content/pages/Sharing";
 import Footer from "./content/pages/Footer";
 import NavbarTop from "./components/NavbarTop";
 import Login from "./components/Login";
@@ -17,6 +18,7 @@ import {
   name as appName,
   suffix as appSuffix,
   version as appVer,
+  info as appInfo,
 } from "../package.json";
 
 const APPDATA = {
@@ -28,10 +30,11 @@ const APPDATA = {
   PROJECT:
     appName.replace(/-/g, " ").toUpperCase() + ` (${appSuffix})` ||
     "Project Not Set",
-  VER: appVer || "Version Not Set",
+  VER: appVer || "App version Not Set",
+  INFO: appInfo || "App info not Set",
   HOME: "/",
   //---------------------------------------
-  TITLEIMG: process.env.REACT_APP_IMG_TITLE,
+  TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER,
   BACKEND: process.env.REACT_APP_BACKEND || "LocalHost:5000",
   FRONTEND:
@@ -43,11 +46,10 @@ const APPDATA = {
   PHONE: process.env.REACT_APP_DEV_PHONE || "",
   LOCATION: process.env.REACT_APP_DEV_ADDR || "",
   FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "",
-  INFO: process.env.REACT_APP_PROJECT_INFO || "-in development-",
+  DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
 };
 document.title = "Welcome to " + APPDATA.NAME;
 //-------------------------------------------------
-// const BACKEND = process.env.REACT_APP_BACKEND;
 
 function App() {
   const [currentUser, setCurrentUser] = useState("");
@@ -119,6 +121,17 @@ function App() {
                 exact
                 element={
                   <Home
+                    loading={loading}
+                    categories={categories}
+                    APPDATA={APPDATA}
+                  />
+                }
+              />
+              <Route
+                path="/share"
+                exact
+                element={
+                  <Sharing
                     loading={loading}
                     categories={categories}
                     APPDATA={APPDATA}
