@@ -33,17 +33,17 @@ const APPDATA = {
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE,
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER,
-  BACKEND: process.env.REACT_APP_BACKEND || "LocalHost:5000?",
+  BACKEND: process.env.REACT_APP_BACKEND || "LocalHost:5000",
   FRONTEND:
     process.env.REACT_APP_FRONTEND ||
     (process.env.HOST || "LocalHost") + ":" + (process.env.PORT || "3000"),
-  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "Victor Wright",
-  DEVTEAM: process.env.REACT_APP_DEV_TEAM || "-hidden-",
-  EMAIL: process.env.REACT_APP_DEV_EMAIL || "victor.wright@outlook.de",
-  PHONE: process.env.REACT_APP_DEV_PHONE || "-hidden-",
-  LOCATION: process.env.REACT_APP_DEV_ADDR || "-hidden-",
-  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "-pre-flight-",
-  INFO: process.env.REACT_APP_PROJECT_INFO || "-still under development-",
+  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "-",
+  DEVTEAM: process.env.REACT_APP_DEV_TEAM || "",
+  EMAIL: process.env.REACT_APP_DEV_EMAIL || "",
+  PHONE: process.env.REACT_APP_DEV_PHONE || "",
+  LOCATION: process.env.REACT_APP_DEV_ADDR || "",
+  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "",
+  INFO: process.env.REACT_APP_PROJECT_INFO || "-in development-",
 };
 document.title = "Welcome to " + APPDATA.NAME;
 //-------------------------------------------------

@@ -1,6 +1,6 @@
-# Final Project
+# Share Your Food
 
-WBS Full Stack App and Web Development Course
+Final Project - Full Stack App and Web Development Course
 <br />
 <br />
 by Victor and Abdullah

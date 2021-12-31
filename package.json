@@ -1,7 +1,7 @@
 {
-  "name": "the-recipe-book",
-  "suffix": "with-backend",
-  "version": "0.2-beta.0",
+  "name": "share-food",
+  "suffix": "final-project-wbs#020",
+  "version": "0.1",
   "private": false,
   "type": "module",
   "dependencies": {
@@ -47,5 +47,5 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "//homepage": "https://vrw-GH.github.io/my-recipe-book"
+  "//homepage": "https://vrw-gh.github.io/final-project-wd020/"
 }

@@ -11,7 +11,7 @@ const Footer = ({ APPDATA }) => {
         <li>
           {APPDATA.PROJECT.toUpperCase()}{" "}
           <i>
-            ver: {APPDATA.VER} <small>({APPDATA.FLIGHT})</small>
+            ver: {APPDATA.VER} <small> - {APPDATA.FLIGHT}</small>
           </i>
         </li>
         <li>
@@ -33,7 +33,7 @@ const Footer = ({ APPDATA }) => {
       <ul className="ul2">
         <li>Development Team: {APPDATA.DEVTEAM}</li>
         <li>
-          <small>(Additional Development: {APPDATA.DEVLEAD})</small>
+          <small>Course Instructor: {APPDATA.DEVLEAD}</small>
         </li>
         <li>
           Contact:{" "}

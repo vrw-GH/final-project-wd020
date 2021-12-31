@@ -1,6 +1,6 @@
 {
-   "short_name": "therecipebook",
-   "name": "The Recipe Book",
+   "short_name": "share-your-food",
+   "name": "Share Your Food",
    "start_url": ".",
    "scope": "/",
    "icons": [
