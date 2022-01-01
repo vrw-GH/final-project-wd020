@@ -26,13 +26,15 @@ const NavbarTop = ({
             <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
               Home
             </ReactBootStrap.NavLink>
+
             <ReactBootStrap.NavLink
-              to="/share"
-              href="/share"
+              to="/sharing"
+              href="/sharing"
               onClick={handleClearQry}
             >
               Sharing
             </ReactBootStrap.NavLink>
+
             <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
               <ul>
                 {categories.map((item) => (
@@ -51,22 +53,10 @@ const NavbarTop = ({
           </Nav>
 
           <Nav className="me-auto">
-            {currentUser ? null : (
-              <ReactBootStrap.NavLink
-                to="/login"
-                href="/login"
-                onClick={handleClearQry}
-              >
-                Login
-              </ReactBootStrap.NavLink>
-            )}
-
             {currentUser ? (
               <>
-                <NavDropdown
-                  title={currentUser + "'s Food"}
-                  id="collapsible-nav-dropdown"
-                >
+                <Navbar.Brand>{currentUser}:</Navbar.Brand>
+                <NavDropdown title="My Food" id="collapsible-nav-dropdown">
                   <ul>
                     <li>
                       <NavLink
@@ -86,7 +76,7 @@ const NavbarTop = ({
                         My Recipes
                       </NavLink>
                     </li>
-                    {/* <li>
+                    <li>
                       <NavLink
                         to="/newtitle"
                         href="/newtitle"
@@ -94,32 +84,36 @@ const NavbarTop = ({
                       >
                         New Recipe
                       </NavLink>
-                    </li> */}
-                    <li>
-                      <NavLink
-                        to="/profile"
-                        href="/profile"
-                        onClick={handleClearQry}
-                      >
-                        My Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/login"
-                        href="/login"
-                        onClick={handleClearQry}
-                      >
-                        Logout
-                      </NavLink>
                     </li>
                   </ul>
                 </NavDropdown>
+                <ReactBootStrap.NavLink
+                  to="/profile"
+                  href="/profile"
+                  onClick={handleClearQry}
+                >
+                  Profile
+                </ReactBootStrap.NavLink>
+                <ReactBootStrap.NavLink
+                  to="/login"
+                  href="/login"
+                  onClick={handleClearQry}
+                >
+                  Logout
+                </ReactBootStrap.NavLink>
               </>
-            ) : null}
+            ) : (
+              <ReactBootStrap.NavLink
+                to="/login"
+                href="/login"
+                onClick={handleClearQry}
+              >
+                Login
+              </ReactBootStrap.NavLink>
+            )}
 
             {/* <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
-              Contact
+              About
             </ReactBootStrap.NavLink> */}
           </Nav>
 

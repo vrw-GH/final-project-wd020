@@ -5,12 +5,11 @@ import "./CreateTitle.css";
 
 const CreateTitle = ({ currentUser, categories, BACKEND }) => {
   const [published, setPublished] = useState(false);
-  // const [titleImg, setTitleImg] = useState("");
   // eslint-disable-next-line
   const [ingredient, setIngredient] = useState([]);
   const [newInfo, setNewInfo] = useState({
     title: "",
-    category: "",
+    category: categories[0].category_id,
     image: "",
     ingredients: [],
     recipe: "",

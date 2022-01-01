@@ -1,6 +1,5 @@
 import Header from "./Header";
 import Categories from "./Categories";
-import "./Home.css";
 
 const Home = ({ loading, categories, APPDATA }) => {
   return (

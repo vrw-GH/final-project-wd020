@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 
-const Login = ({ setCurrentUser, BACKEND }) => {
+const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
   let navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Login = ({ setCurrentUser, BACKEND }) => {
     try {
       username = e.target.parentElement.children["username"].value;
       if (!username) throw Error("Should enter credentials.");
-      let result = await axios.get(`${BACKEND}/api/users/${username}`);
+      let result = await axios.get(`${APPDATA.BACKEND}/api/users/${username}`);
       if (!result.data.info.result) throw Error(result.data.info.message);
       if (
         //                                            TODO authentication here
@@ -46,7 +46,7 @@ const Login = ({ setCurrentUser, BACKEND }) => {
       if (!item.username) throw Error("Should enter the credentials.");
       if (!item.email) throw Error("Should enter the credentials.");
       if (!item.password) throw Error("Should enter the credentials.");
-      let result = await axios.post(`${BACKEND}/api/users`, item);
+      let result = await axios.post(`${APPDATA.BACKEND}/api/users`, item);
       if (!result.data.info.result) throw Error(result.data.info.message);
       setCurrentUser(result.data.tuple[0].username);
       setLoginMsg(result.data.info.message);
@@ -62,7 +62,14 @@ const Login = ({ setCurrentUser, BACKEND }) => {
   }
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      style={{
+        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+        backgroundSize: "cover",
+        height: "350px",
+      }}
+    >
       <div className="login-title">
         <h2>User Login / Registration</h2>
       </div>

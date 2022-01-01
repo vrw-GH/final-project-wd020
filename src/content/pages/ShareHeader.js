@@ -1,12 +1,12 @@
-import "./Header.css";
+import "./ShareHeader.css";
 
 const ShareHeader = ({ APPDATA }) => {
   return (
     <div>
-      <div className="header">
-        <div className="headerTitles">
-          <img className="headerImg" src={APPDATA.TITLEIMG} alt="header" />
-          <span className="headerTitlesSm">Share List</span>
+      <div className="shareheader">
+        <div className="shareheaderTitles">
+          <img className="shareheaderImg" src={APPDATA.TITLEIMG} alt="header" />
+          <span className="shareheaderTitlesSm">Share List</span>
         </div>
       </div>
     </div>

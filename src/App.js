@@ -35,7 +35,7 @@ const APPDATA = {
   HOME: "/",
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
-  FOOTERIMG: process.env.REACT_APP_IMG_FOOTER,
+  FOOTERIMG: process.env.REACT_APP_IMG_FOOTER || "/img-footer.jpg",
   BACKEND: process.env.REACT_APP_BACKEND || "LocalHost:5000",
   FRONTEND:
     process.env.REACT_APP_FRONTEND ||
@@ -128,7 +128,7 @@ function App() {
                 }
               />
               <Route
-                path="/share"
+                path="/sharing"
                 exact
                 element={
                   <Sharing
@@ -142,10 +142,7 @@ function App() {
                 exact
                 path="/login"
                 element={
-                  <Login
-                    setCurrentUser={setCurrentUser}
-                    BACKEND={APPDATA.BACKEND}
-                  />
+                  <Login setCurrentUser={setCurrentUser} APPDATA={APPDATA} />
                 }
               />
               {currentUser ? (
