@@ -14,17 +14,16 @@ export default function HomeSlider({ sliderData }) {
     slidesToScroll: 2,
   };
   let key = 0;
-  console.log(sliderData);
   return (
     <div>
       <Slider {...settings}>
         {sliderData.map((data) => (
           <div key={key++}>
-            <img className="categories_img" src={data.image} alt="category" />
-            <Link to={`/categories/${data.name}`} className="link">
-              <div className="categories_title">{data.name}</div>
+            <img className="categories_img" src={data.image} alt={data.image} />
+            <Link to={`/recipes/${data.slug}`} className="link">
+              <div className="categories_title">{data.title}</div>
             </Link>
-            <div className="categories_description">{data.description}</div>
+            <div className="categories_description">{data.username}</div>
           </div>
         ))}
       </Slider>

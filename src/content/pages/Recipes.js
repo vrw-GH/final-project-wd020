@@ -6,14 +6,26 @@ import "./Page.css";
 const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const [listReload, setListReload] = useState(true);
 
   useEffect(() => {
     (async () => {
       const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
       setRecipes(loaddata.data.tuples.filter(filterItems));
+      setListReload(false);
     })();
     // eslint-disable-next-line
   }, [category]);
+
+  useEffect(() => {
+    (async () => {
+      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/ingredients/`);
+      setIngredients(loaddata.data.tuples);
+      setListReload(false);
+    })();
+    // eslint-disable-next-line
+  }, [listReload]);
 
   const filterItems = (items) => {
     if (category) {
@@ -28,6 +40,13 @@ const Recipes = ({ loading, categories, APPDATA }) => {
 
   const selectCtg = (e) => {
     setCategory(e.target.value);
+  };
+
+  const selectIng = (e) => {
+    console.log(e);
+    e.target.checked = !e.target.checked;
+    // setCategory(e.target.value);
+    setListReload(true);
   };
 
   let key = 0;
@@ -69,7 +88,19 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 ))}
               </select>
             </li>
-            <li>Ingredients</li>
+            <li>
+              {ingredients.map((ingr) => (
+                <label>
+                  <input
+                    key={key++}
+                    type="checkbox"
+                    value={ingr.ingredient_id}
+                    onChange={selectIng}
+                  />
+                  {ingr.ingredient_name}
+                </label>
+              ))}
+            </li>
           </ul>
         </div>
       </div>
