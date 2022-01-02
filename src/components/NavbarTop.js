@@ -13,29 +13,25 @@ const NavbarTop = ({
   categories,
   currentUser,
 }) => {
-  let key = 0;
+  // let key = 0;
   return (
     <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
         <Navbar.Brand href="/" onClick={handleClearQry}>
-          {APPDATA.NAME}
+          ■■{APPDATA.NAME}■■
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">
-            <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
-              Home
-            </ReactBootStrap.NavLink>
-
             <ReactBootStrap.NavLink
-              to="/sharing"
-              href="/sharing"
+              to="/recipes"
+              href="/recipes"
               onClick={handleClearQry}
             >
-              Sharing
+              Recipes
             </ReactBootStrap.NavLink>
 
-            <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
+            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
               <ul>
                 {categories.map((item) => (
                   <li key={key++}>
@@ -49,7 +45,15 @@ const NavbarTop = ({
                   </li>
                 ))}
               </ul>
-            </NavDropdown>
+            </NavDropdown> */}
+
+            <ReactBootStrap.NavLink
+              to="/sharing"
+              href="/sharing"
+              onClick={handleClearQry}
+            >
+              Sharing
+            </ReactBootStrap.NavLink>
           </Nav>
 
           <Nav className="me-auto">
