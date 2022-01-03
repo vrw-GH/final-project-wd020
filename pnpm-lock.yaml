@@ -6,6 +6,7 @@ specifiers:
   axios: ^0.24.0
   bootstrap: ^5.1.3
   gh-pages: ^3.2.3
+  jquery: ^3.6.0
   react: ^17.0.2
   react-bootstrap: ^2.0.2
   react-dom: ^17.0.2
@@ -13,6 +14,8 @@ specifiers:
   react-router: ^6.1.1
   react-router-dom: ^6.0.2
   react-scripts: 4.0.3
+  react-slick: ^0.28.1
+  slick-carousel: ^1.8.1
   typescript: ^4.5.4
   web-vitals: ^1.1.2
 
@@ -21,6 +24,7 @@ dependencies:
   '@popperjs/core': 2.11.0
   axios: 0.24.0
   bootstrap: 5.1.3_@popperjs+core@2.11.0
+  jquery: 3.6.0
   react: 17.0.2
   react-bootstrap: 2.0.4_react-dom@17.0.2+react@17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -28,6 +32,8 @@ dependencies:
   react-router: 6.2.1_react@17.0.2
   react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
   react-scripts: 4.0.3_react@17.0.2+typescript@4.5.4
+  react-slick: 0.28.1_react-dom@17.0.2+react@17.0.2
+  slick-carousel: 1.8.1_jquery@3.6.0
   typescript: 4.5.4
   web-vitals: 1.1.2
 
@@ -4737,6 +4743,10 @@ packages:
       tapable: 1.1.3
     dev: false
 
+  /enquire.js/2.1.6:
+    resolution: {integrity: sha1-PoeAybi4NQhMP2DhZtvDwqPImBQ=}
+    dev: false
+
   /enquirer/2.3.6:
     resolution: {integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==}
     engines: {node: '>=8.6'}
@@ -7227,6 +7237,10 @@ packages:
       - utf-8-validate
     dev: false
 
+  /jquery/3.6.0:
+    resolution: {integrity: sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==}
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: false
@@ -7310,6 +7324,12 @@ packages:
 
   /json-stable-stringify-without-jsonify/1.0.1:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
+    dev: false
+
+  /json2mq/0.2.0:
+    resolution: {integrity: sha1-tje9O6nqvhIsg+lyBIOusQ0skEo=}
+    dependencies:
+      string-convert: 0.2.1
     dev: false
 
   /json3/3.3.3:
@@ -9651,6 +9671,21 @@ packages:
       - webpack-plugin-serve
     dev: false
 
+  /react-slick/0.28.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-JwRQXoWGJRbUTE7eZI1rGIHaXX/4YuwX6gn7ulfvUZ4vFDVQAA25HcsHSYaUiRCduTr6rskyIuyPMpuG6bbluw==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0
+      react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0
+    dependencies:
+      classnames: 2.3.1
+      enquire.js: 2.1.6
+      json2mq: 0.2.0
+      lodash.debounce: 4.0.8
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react-transition-group/4.4.2_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
     peerDependencies:
@@ -9855,6 +9890,10 @@ packages:
 
   /requires-port/1.0.0:
     resolution: {integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=}
+    dev: false
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
     dev: false
 
   /resolve-cwd/2.0.0:
@@ -10344,6 +10383,14 @@ packages:
       is-fullwidth-code-point: 3.0.0
     dev: false
 
+  /slick-carousel/1.8.1_jquery@3.6.0:
+    resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
+    peerDependencies:
+      jquery: '>=1.8.0'
+    dependencies:
+      jquery: 3.6.0
+    dev: false
+
   /snapdragon-node/2.1.1:
     resolution: {integrity: sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw==}
     engines: {node: '>=0.10.0'}
@@ -10580,6 +10627,10 @@ packages:
   /strict-uri-encode/1.1.0:
     resolution: {integrity: sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /string-convert/0.2.1:
+    resolution: {integrity: sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=}
     dev: false
 
   /string-length/4.0.2:

@@ -4,11 +4,12 @@ import axios from "axios";
 import "./App.css";
 import "./loading.css";
 
-import Home from "./content/pages/Home";
-import Sharing from "./content/pages/Sharing";
-import Footer from "./content/pages/Footer";
 import NavbarTop from "./components/NavbarTop";
-import Login from "./components/Login";
+import Header from "./content/pages/Header";
+import Footer from "./content/pages/Footer";
+import Recipes from "./content/pages/Recipes";
+import Sharing from "./content/pages/Sharing";
+import Login from "./content/pages/Login";
 import Category from "./content/pages/Category.js";
 import SingleTitle from "./content/pages/SingleTitle";
 import SearchTitles from "./content/pages/SearchTitles";
@@ -116,17 +117,20 @@ function App() {
             />
           ) : (
             <Routes>
+              <Route path="/" exact element={<Header APPDATA={APPDATA} />} />
+
               <Route
-                path="/"
+                path="/recipes"
                 exact
                 element={
-                  <Home
+                  <Recipes
                     loading={loading}
                     categories={categories}
                     APPDATA={APPDATA}
                   />
                 }
               />
+
               <Route
                 path="/sharing"
                 exact
@@ -138,6 +142,7 @@ function App() {
                   />
                 }
               />
+
               <Route
                 exact
                 path="/login"
@@ -145,6 +150,7 @@ function App() {
                   <Login setCurrentUser={setCurrentUser} APPDATA={APPDATA} />
                 }
               />
+
               {currentUser ? (
                 <>
                   <Route
@@ -167,6 +173,7 @@ function App() {
                   <Category categories={categories} BACKEND={APPDATA.BACKEND} />
                 }
               />
+
               <Route
                 exact
                 path="/recipes/:id" //                          TODO: change recipes route to "entry"
@@ -179,6 +186,7 @@ function App() {
               />
             </Routes>
           )}
+
           <div>
             <Footer APPDATA={APPDATA} />
           </div>
