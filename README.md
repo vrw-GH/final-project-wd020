@@ -13,4 +13,5 @@ Page Deployed [on Netlify] -
 Current Status:
 
 <br />
-View GH Page at https://github.com/vrw-GH/final-project-wd020
+View GH Page: https://github.com/vrw-GH/final-project-wd020
+Backend repo: https://github.com/vrw-GH/contentful_backend
