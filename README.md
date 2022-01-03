@@ -14,4 +14,5 @@ Current Status:
 
 <br />
 View GH Page: https://github.com/vrw-GH/final-project-wd020
+<br />
 Backend repo: https://github.com/vrw-GH/contentful_backend
