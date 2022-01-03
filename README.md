@@ -13,4 +13,4 @@ Page Deployed [on Netlify] -
 Current Status:
 
 <br />
-View GH Page at [Final Project](https://github.com/vrw-GH/final-project-wd020)
+View GH Page at https://github.com/vrw-GH/final-project-wd020
