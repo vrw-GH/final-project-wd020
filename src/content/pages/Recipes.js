@@ -7,13 +7,11 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [listReload, setListReload] = useState(true);
 
   useEffect(() => {
     (async () => {
       const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
       setRecipes(loaddata.data.tuples.filter(filterItems));
-      setListReload(false);
     })();
     // eslint-disable-next-line
   }, [category]);
@@ -21,15 +19,15 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   useEffect(() => {
     (async () => {
       const loaddata = await axios.get(`${APPDATA.BACKEND}/api/ingredients/`);
-      setIngredients(loaddata.data.tuples);
-      setListReload(false);
+      const data = loaddata.data.tuples;
+      const arr = data.map((obj) => ({ checked: false, ...obj }));
+      setIngredients(arr);
     })();
     // eslint-disable-next-line
-  }, [listReload]);
+  }, []);
 
   const filterItems = (items) => {
     if (category) {
-      console.log(category);
       if (items.category === category) {
         return true;
       } else return false;
@@ -43,10 +41,12 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   };
 
   const selectIng = (e) => {
-    console.log(e);
-    e.target.checked = !e.target.checked;
-    // setCategory(e.target.value);
-    setListReload(true);
+    const index = ingredients.findIndex(
+      (el) => el.ingredient_id === Number(e.target.value)
+    );
+    let newArr = [...ingredients];
+    newArr[index].checked = e.target.checked;
+    setIngredients(newArr);
   };
 
   let key = 0;
@@ -70,7 +70,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          Find A Recipe
+          Filter Recipes
           <ul>
             <li>
               <label htmlFor="categories">Select by Category : &nbsp;</label>
@@ -90,14 +90,16 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             </li>
             <li>
               {ingredients.map((ingr) => (
-                <label>
+                <label key={key++}>
                   <input
-                    key={key++}
                     type="checkbox"
                     value={ingr.ingredient_id}
+                    // value={ingr.ingredient_name}
+                    // checked={ingr.checked}
                     onChange={selectIng}
                   />
                   {ingr.ingredient_name}
+                  &nbsp;&nbsp;
                 </label>
               ))}
             </li>
