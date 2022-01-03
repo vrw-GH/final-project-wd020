@@ -10,30 +10,42 @@ const Recipes = ({ loading, categories, APPDATA }) => {
 
   useEffect(() => {
     (async () => {
-      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-      setRecipes(loaddata.data.tuples.filter(filterItems));
-    })();
-    // eslint-disable-next-line
-  }, [category]);
-
-  useEffect(() => {
-    (async () => {
       const loaddata = await axios.get(`${APPDATA.BACKEND}/api/ingredients/`);
-      const data = loaddata.data.tuples;
-      const arr = data.map((obj) => ({ checked: false, ...obj }));
-      setIngredients(arr);
+      const data = loaddata.data.tuples.map((obj) => ({
+        checked: false,
+        ...obj,
+      }));
+      setIngredients(data);
     })();
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+      setRecipes(loaddata.data.tuples.filter(filterItems));
+    })();
+    // eslint-disable-next-line
+  }, [category, ingredients]);
+
   const filterItems = (items) => {
-    if (category) {
-      if (items.category === category) {
-        return true;
-      } else return false;
-    } else {
-      return true; // select all recipes
+    if (category && items.category !== category) return false;
+    // else continue search with ingredient base
+    let string = items.title.toLowerCase();
+    let retValue = true;
+    for (let i = 0; i < ingredients.length; i++) {
+      if (ingredients[i].checked) {
+        let lookfor = ingredients[i].ingredient_name.toLowerCase();
+        lookfor = lookfor.match(/^\S+/)[0];
+        console.log(lookfor);
+        if (string.indexOf(lookfor) !== -1) {
+          return true; // exit loop
+        } else {
+          retValue = false;
+        }
+      }
     }
+    return retValue;
   };
 
   const selectCtg = (e) => {
@@ -70,10 +82,13 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          Filter Recipes
+          <strong style={{ color: "white" }}>Filter</strong>
+
           <ul>
             <li>
-              <label htmlFor="categories">Select by Category : &nbsp;</label>
+              <strong>
+                <label htmlFor="categories">Select by Category : &nbsp;</label>
+              </strong>
               <select
                 value={category}
                 onChange={selectCtg}
@@ -89,6 +104,9 @@ const Recipes = ({ loading, categories, APPDATA }) => {
               </select>
             </li>
             <li>
+              <strong>Filter by: </strong>
+              {/* <i>(Select at least 3)</i>  */}
+              <br />
               {ingredients.map((ingr) => (
                 <label key={key++}>
                   <input
