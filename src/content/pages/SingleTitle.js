@@ -12,10 +12,16 @@ const SingleTitle = ({ BACKEND }) => {
   const currentUser = sessionStorage.getItem("currentUser");
 
   useEffect(() => {
-    (async () => {
-      const results = await axios.get(`${BACKEND}/api/recipes/${id}`);
-      setRecipe(results.data.tuple[0]);
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const results = await axios.get(`${BACKEND}/api/recipes/${id}`);
+        setRecipe(results.data.tuple[0]);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -35,7 +41,7 @@ const SingleTitle = ({ BACKEND }) => {
         </div>
         <div className="row">
           <img
-            src={recipe.image}
+            src={recipe.title_img || recipe.image}
             alt="recipe"
             className="single_title_img col"
           />

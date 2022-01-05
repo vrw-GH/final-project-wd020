@@ -15,10 +15,16 @@ const Category = ({ categories, BACKEND }) => {
   ).category_id;
 
   useEffect(() => {
-    (async () => {
-      const recipes = await axios.get(`${BACKEND}/api/recipes/`);
-      setPosts(recipes.data.tuples.filter(filterItems));
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const recipes = await axios.get(`${BACKEND}/api/recipes/`);
+        setPosts(recipes.data.tuples.filter(filterItems));
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, [category]);
 

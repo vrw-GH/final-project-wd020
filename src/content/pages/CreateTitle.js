@@ -10,13 +10,16 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
   const [newInfo, setNewInfo] = useState({
     title: "",
     category: categories[0].category_id,
-    image: "",
+    // image: "",
+    title_img: "",
     ingredients: [],
     recipe: "",
     username: currentUser,
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(newInfo);
     try {
       for (const key in newInfo) {
         if (!newInfo[key]) throw Error(key + " is empty. All fields required.");
@@ -27,6 +30,7 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
       window.alert(error);
     }
   };
+
   function handle(e) {
     const info = { ...newInfo };
     info[e.target.id] = e.target.value;
@@ -34,9 +38,27 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
   }
 
   function handleImgInput(e) {
+    const maxAllowedSize = 20 * 1024;
+    if (e.target.files[0].size > maxAllowedSize) {
+      alert("File too big - max 20kb");
+      e.target.value = "";
+      return;
+    }
     const info = { ...newInfo };
-    info[e.target.id] = URL.createObjectURL(e.target.files[0]);
-    setNewInfo(info);
+    var reader = new FileReader();
+    reader.onloadend = (event) => {
+      info[e.target.id] = event.target.result; // raw image data ?
+      setNewInfo(info);
+      console.log(info);
+    };
+    // reader.readAsText(e.target.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
+
+    // ------------- original ----------
+    // const info = { ...newInfo };
+    // info[e.target.id] = URL.createObjectURL(e.target.files[0]);
+    // console.log(info);
+    // setNewInfo(info);
   }
 
   const addIngredient = (e) => {
@@ -105,19 +127,24 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
                 <input
                   // type="text"
                   type="file"
+                  // data-max-size="20000"
                   placeholder="image"
                   encType="multipart/form-data"
                   accept="image/png, .jpeg, .jpg, image/gif"
-                  id="image"
-                  name="image"
+                  // id="image"                  name="image"
+                  id="title_img"
+                  name="title_img"
                   onChange={(e) => handleImgInput(e)}
-                ></input>
+                />
                 <object
-                  data={newInfo.image}
+                  // data={newInfo.image}
+                  data={newInfo.title_img}
                   type="image/jpg"
                   className="create_title_img col"
                 >
-                  {/* <img src="default.jpg" alt="recipe" /> */}
+                  {/* <img src="default.img" alt="recipe" /> */}
+                  {/* <img src={newInfo.image} alt="recipe" /> */}
+                  <img src={newInfo.title_img} alt="recipe" />
                 </object>
               </div>
               {/* //!                              Need Database for Ingredients */}

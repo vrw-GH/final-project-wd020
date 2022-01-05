@@ -9,22 +9,50 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/ingredients/`);
-      const data = loaddata.data.tuples.map((obj) => ({
-        checked: false,
-        ...obj,
-      }));
-      setIngredients(data);
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(
+          `${APPDATA.BACKEND}/api/ingredients/`
+        );
+        const finalData = await axiosData.data.tuples.map((obj) => ({
+          checked: false,
+          ...obj,
+        }));
+
+        const sortedData = finalData.sort((a, b) => {
+          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1; //nameA comes first
+          }
+          if (nameA > nameB) {
+            return 1; // nameB comes first
+          }
+          return 0; // names must be equal
+        });
+
+        setIngredients(sortedData);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-      setRecipes(loaddata.data.tuples.filter(filterItems));
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+        const filterdData = await axiosData.data.tuples.filter(filterItems);
+        setRecipes(filterdData);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, [category, ingredients]);
 
@@ -37,7 +65,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       if (ingredients[i].checked) {
         let lookfor = ingredients[i].ingredient_name.toLowerCase();
         lookfor = lookfor.match(/^\S+/)[0];
-        console.log(lookfor);
         if (string.indexOf(lookfor) !== -1) {
           return true; // exit loop
         } else {
@@ -104,7 +131,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
               </select>
             </li>
             <li>
-              <strong>Filter by: </strong>
+              <strong>Filter recipes only containing: </strong>
               {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (
