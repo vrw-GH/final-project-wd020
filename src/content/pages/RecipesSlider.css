@@ -1,0 +1,56 @@
+.recipesSlider_container{
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+    justify-content:space-around;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 5px; 
+    background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
+    box-shadow: 2.5px 2.5px 80px rgba(255, 200, 79, 0.712);
+}
+
+.recipesSlider_container > a:any-link, a:visited {
+    text-decoration: none;
+    color: tomato;
+}
+
+.recipesSlider_container > a:hover {
+    text-decoration: none;
+    color: rgb(110, 17, 0);
+} 
+
+.recipesSlider_img {
+    width: 99%;
+    height: 300px;
+    object-fit: cover;
+    padding-top:0.1rem;
+    cursor:grab;    
+}
+
+.recipesSlider_title {
+    color: tomato;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2rem;
+    font-weight:bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align:center;
+}
+
+.recipesSlider_description{
+    /* background-color: rgba(255, 255, 255, 0.623); */
+    font-family: "varela Round", sans-serif;
+    font-size: 0.6rem;
+    font-style: italic;
+    color: #444;
+    line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 2px 1px 0px;
+    padding: 2px;
+    text-align:center;
+}

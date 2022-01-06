@@ -51,7 +51,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       })();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
   }, [category, ingredients]);
@@ -131,7 +131,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
               </select>
             </li>
             <li>
-              <strong>Filter recipes only containing: </strong>
+              <strong>Filter only recipes containing: </strong>
               {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (
@@ -139,8 +139,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   <input
                     type="checkbox"
                     value={ingr.ingredient_id}
-                    // value={ingr.ingredient_name}
-                    // checked={ingr.checked}
                     onChange={selectIng}
                   />
                   {ingr.ingredient_name}
