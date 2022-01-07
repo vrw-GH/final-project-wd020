@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router";
 import "./CreateTitle.css";
@@ -6,27 +6,66 @@ import "./CreateTitle.css";
 const CreateTitle = ({ currentUser, categories, BACKEND }) => {
   const [published, setPublished] = useState(false);
   // eslint-disable-next-line
+  const [ingredients, setIngredients] = useState([]);
+  // eslint-disable-next-line
   const [ingredient, setIngredient] = useState([]);
   const [newInfo, setNewInfo] = useState({
     title: "",
     category: categories[0].category_id,
-    image: "",
+    title_img: "",
+    image: "is from database",
     ingredients: [],
     recipe: "",
     username: currentUser,
   });
+  const maxAllowedSize = 1024 * 100; //kb
+
+  useEffect(() => {
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(`${BACKEND}/api/ingredients/`);
+        const finalData = await axiosData.data.tuples.map((obj) => ({
+          checked: false,
+          ...obj,
+        }));
+
+        const sortedData = finalData.sort((a, b) => {
+          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1; //nameA comes first
+          }
+          if (nameA > nameB) {
+            return 1; // nameB comes first
+          }
+          return 0; // names must be equal
+        });
+        setIngredients(sortedData);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
+    // eslint-disable-next-line
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const info = { ...newInfo };
+    info["ingredients"] = formatIngredients(info["ingredients"]); // convert [] to html!
+    info["recipe"] = formatMethod(info["recipe"]); // convert [] to html!
     try {
-      for (const key in newInfo) {
-        if (!newInfo[key]) throw Error(key + " is empty. All fields required.");
+      for (const key in info) {
+        if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
-      await axios.post(`${BACKEND}/api/recipes`, newInfo);
+      await axios.post(`${BACKEND}/api/recipes`, info);
       setPublished(true);
     } catch (error) {
       window.alert(error);
     }
   };
+
   function handle(e) {
     const info = { ...newInfo };
     info[e.target.id] = e.target.value;
@@ -34,9 +73,22 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
   }
 
   function handleImgInput(e) {
+    if (e.target.files[0].size > maxAllowedSize) {
+      alert(
+        `File too big (${Math.round(e.target.files[0].size / 1024)}kb) - max ${
+          maxAllowedSize / 1024
+        }kb`
+      );
+      e.target.value = "";
+      return;
+    }
     const info = { ...newInfo };
-    info[e.target.id] = URL.createObjectURL(e.target.files[0]);
-    setNewInfo(info);
+    var reader = new FileReader();
+    reader.onloadend = (event) => {
+      info[e.target.id] = event.target.result; // raw image data ?
+      setNewInfo(info);
+    };
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   const addIngredient = (e) => {
@@ -53,15 +105,24 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
       [e.target.form.elements["ingredient"].value, qty + " " + unit],
     ];
     setNewInfo(info);
-    e.target.form.elements["ingredient"].value = "";
     e.target.form.elements["quantity"].value = "";
+    e.target.form.elements["ingredient"].value = "";
+    e.target.form.elements["ingredient"].focus();
   };
 
   const formatIngredients = (data) => {
     data = JSON.stringify(data).replace(/","/g, " ");
-    data = data.replace('[["', "");
-    data = data.replace('"]]', "");
-    data = data.split('"],["').join("\n");
+    data = data.replace('[["', "<ul><li>");
+    data = data.replace('"]]', "</li></ul>");
+    data = data.split('"],["').join("</li><li>");
+    return data;
+  };
+
+  const formatMethod = (data) => {
+    // use only at end - to upload
+    data = data.split("\n").join("</p><p>");
+    data = "<p>" + data + "</p>";
+    data = data.replace("<p></p>", "");
     return data;
   };
 
@@ -102,71 +163,68 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
             </div>
             <div className="row">
               <div className="col">
-                <input
-                  // type="text"
-                  type="file"
-                  placeholder="image"
-                  encType="multipart/form-data"
-                  accept="image/png, .jpeg, .jpg, image/gif"
-                  id="image"
-                  name="image"
-                  onChange={(e) => handleImgInput(e)}
-                ></input>
                 <object
-                  data={newInfo.image}
-                  type="image/jpg"
-                  className="create_title_img col"
+                  data={newInfo.title_img}
+                  type="image/jpg,png"
+                  className="create_title_img row"
                 >
-                  {/* <img src="default.jpg" alt="recipe" /> */}
+                  <input
+                    type="file"
+                    encType="multipart/form-data"
+                    accept="image/png, .jpeg, .jpg, image/gif"
+                    id="title_img"
+                    name="title_img"
+                    onChange={(e) => handleImgInput(e)}
+                  />
+                  {/* <img src="default.img" alt="recipe" /> */}
+                  {/* <img src={newInfo.image} alt="recipe" /> */}
+                  <img
+                    src={newInfo.title_img}
+                    className="create_title_img row"
+                    alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                  />
                 </object>
               </div>
-              {/* //!                              Need Database for Ingredients */}
-              <div className="create_title_details col">
+              <div className="create_title_ingredients col">
                 <h5>
                   <u>INGREDIENTS</u>
                 </h5>
-                <input
-                  list="datalist1"
-                  placeholder="ingredient"
-                  id="ingredient"
-                  value={ingredient[0]}
-                />
-                <input
-                  list="datalist2"
-                  size="5"
-                  placeholder="quantity"
-                  id="quantity"
-                  value={ingredient[1]}
-                />
-                <button onClick={addIngredient}>Add</button>
-                {/* //! populate from database ? */}
-                <datalist id="datalist1">
-                  <option value="Rice" />
-                  <option value="Potato" />
-                  <option value="Sugar" />
-                  <option value="Milk" />
-                  <option value="Salt" />
-                </datalist>
-                <datalist id="datalist2">
-                  <option value="kg " />
-                  <option value="g" />
-                  <option value="ltr" />
-                  <option value="ml" />
-                  <option value="teaspoon" />
-                  <option value="tablespoon" />
-                  <option value="to-taste" />
-                </datalist>
-                <textarea
-                  cols="40"
-                  rows="8"
-                  type="text"
+                <div className="form-group">
+                  <input
+                    list="datalist_item"
+                    placeholder="select ingredient"
+                    id="ingredient"
+                    tabIndex="1"
+                    value={ingredient[0]}
+                  />
+                  <input
+                    size="5"
+                    placeholder="quantity"
+                    id="quantity"
+                    tabIndex="2"
+                    value={ingredient[1]}
+                  />
+                  <button onClick={addIngredient}>Add</button>
+
+                  <datalist id="datalist_item">
+                    {ingredients.map((el) => (
+                      <option
+                        key={k++}
+                        value={
+                          el.ingredient_name + " (" + el.ingredient_unit + ")"
+                        }
+                      />
+                    ))}
+                  </datalist>
+                </div>
+                <div
                   placeholder="ingredients"
                   id="ingredients"
-                  value={formatIngredients(newInfo.ingredients)}
-                  // onChange={(e) => handle(e)}
-                  onChange={handle}
-                  readOnly
-                ></textarea>
+                  // readOnly
+                  dangerouslySetInnerHTML={{
+                    __html: formatIngredients(newInfo.ingredients),
+                  }}
+                ></div>
               </div>
             </div>
             {/* //!                              set HTML IDE */}
@@ -176,7 +234,7 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
               </h5>
               <textarea
                 cols="40"
-                rows="8"
+                rows="6"
                 type="text"
                 placeholder="enter the recipe here"
                 id="recipe"

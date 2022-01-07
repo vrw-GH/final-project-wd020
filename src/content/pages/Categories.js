@@ -17,11 +17,17 @@ export default function Categories({ categories, BACKEND }) {
 function CtgList({ ctg, BACKEND }) {
   useEffect(() => {
     // setLoading(true);
-    (async () => {
-      // eslint-disable-next-line
-      const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
-      // setLoading(false);
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        // eslint-disable-next-line
+        const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
+        // setLoading(false);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, []);
 

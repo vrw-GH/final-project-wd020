@@ -9,11 +9,17 @@ const SearchTitles = ({ searchQry, handleClearQry, BACKEND }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      const recipes = await axios.get(`${BACKEND}/api/recipes/`);
-      setTitles(recipes.data.tuples.filter(filterPosts));
-      setTotal(recipes.data.tuples.filter(filterPosts).length);
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const recipes = await axios.get(`${BACKEND}/api/recipes/`);
+        setTitles(recipes.data.tuples.filter(filterPosts));
+        setTotal(recipes.data.tuples.filter(filterPosts).length);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, [searchQry]);
 

@@ -9,31 +9,70 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-      setRecipes(loaddata.data.tuples.filter(filterItems));
-    })();
-    // eslint-disable-next-line
-  }, [category]);
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(
+          `${APPDATA.BACKEND}/api/ingredients/`
+        );
+        const finalData = await axiosData.data.tuples.map((obj) => ({
+          checked: false,
+          ...obj,
+        }));
 
-  useEffect(() => {
-    (async () => {
-      const loaddata = await axios.get(`${APPDATA.BACKEND}/api/ingredients/`);
-      const data = loaddata.data.tuples;
-      const arr = data.map((obj) => ({ checked: false, ...obj }));
-      setIngredients(arr);
-    })();
+        const sortedData = finalData.sort((a, b) => {
+          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1; //nameA comes first
+          }
+          if (nameA > nameB) {
+            return 1; // nameB comes first
+          }
+          return 0; // names must be equal
+        });
+
+        setIngredients(sortedData);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, []);
 
-  const filterItems = (items) => {
-    if (category) {
-      if (items.category === category) {
-        return true;
-      } else return false;
-    } else {
-      return true; // select all recipes
+  useEffect(() => {
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+        const filterdData = await axiosData.data.tuples.filter(filterItems);
+        setRecipes(filterdData);
+      })();
     }
+    return () => {
+      isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
+    };
+    // eslint-disable-next-line
+  }, [category, ingredients]);
+
+  const filterItems = (items) => {
+    if (category && items.category !== category) return false;
+    // else continue search with ingredient base
+    let string = items.title.toLowerCase();
+    let retValue = true;
+    for (let i = 0; i < ingredients.length; i++) {
+      if (ingredients[i].checked) {
+        let lookfor = ingredients[i].ingredient_name.toLowerCase();
+        lookfor = lookfor.match(/^\S+/)[0];
+        if (string.indexOf(lookfor) !== -1) {
+          return true; // exit loop
+        } else {
+          retValue = false;
+        }
+      }
+    }
+    return retValue;
   };
 
   const selectCtg = (e) => {
@@ -70,10 +109,13 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          Filter Recipes
+          <strong style={{ color: "white" }}>Filter</strong>
+
           <ul>
             <li>
-              <label htmlFor="categories">Select by Category : &nbsp;</label>
+              <strong>
+                <label htmlFor="categories">Select by Category : &nbsp;</label>
+              </strong>
               <select
                 value={category}
                 onChange={selectCtg}
@@ -89,13 +131,14 @@ const Recipes = ({ loading, categories, APPDATA }) => {
               </select>
             </li>
             <li>
+              <strong>Filter only recipes containing: </strong>
+              {/* <i>(Select at least 3)</i>  */}
+              <br />
               {ingredients.map((ingr) => (
                 <label key={key++}>
                   <input
                     type="checkbox"
                     value={ingr.ingredient_id}
-                    // value={ingr.ingredient_name}
-                    // checked={ingr.checked}
                     onChange={selectIng}
                   />
                   {ingr.ingredient_name}

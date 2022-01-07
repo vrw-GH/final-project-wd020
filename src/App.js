@@ -37,10 +37,10 @@ const APPDATA = {
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER || "/img-footer.jpg",
-  BACKEND: process.env.REACT_APP_BACKEND || "LocalHost:5000",
+  BACKEND: process.env.REACT_APP_BACKEND || "localhost:5053",
   FRONTEND:
     process.env.REACT_APP_FRONTEND ||
-    (process.env.HOST || "LocalHost") + ":" + (process.env.PORT || "3000"),
+    (process.env.HOST || "localhost") + ":" + (process.env.PORT || "3000"),
   DEVLEAD: process.env.REACT_APP_DEV_LEAD || "-",
   DEVTEAM: process.env.REACT_APP_DEV_TEAM || "",
   EMAIL: process.env.REACT_APP_DEV_EMAIL || "",
@@ -63,17 +63,21 @@ function App() {
   useEffect(() => {
     setLoading("Loading ...");
     setCurrentUser(sessionStorage.getItem("currentUser"));
-    (async () => {
-      try {
-        sessionStorage.setItem("APPDATA", APPDATA);
-        const results = await axios.get(`${APPDATA.BACKEND}/api/categories/`);
-        setCategories(results.data.tuples);
-        setLoading("");
-      } catch (error) {
-        setLoading(error.message);
-      }
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        try {
+          sessionStorage.setItem("APPDATA", APPDATA);
+          const results = await axios.get(`${APPDATA.BACKEND}/api/categories/`);
+          setCategories(results.data.tuples);
+          setLoading("");
+        } catch (error) {
+          setLoading(error.message);
+        }
+      })();
+    }
     return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
       sessionStorage.clear();
       localStorage.clear();
     };

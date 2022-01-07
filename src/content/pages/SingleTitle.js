@@ -8,14 +8,20 @@ const SingleTitle = ({ BACKEND }) => {
   const [recipe, setRecipe] = useState([]);
   // eslint-disable-next-line
   const [error, setError] = useState(null);
-  const [likeBtn, setLikeBtn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const currentUser = sessionStorage.getItem("currentUser");
 
   useEffect(() => {
-    (async () => {
-      const results = await axios.get(`${BACKEND}/api/recipes/${id}`);
-      setRecipe(results.data.tuple[0]);
-    })();
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const results = await axios.get(`${BACKEND}/api/recipes/${id}`);
+        setRecipe(results.data.tuple[0]);
+      })();
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -23,7 +29,7 @@ const SingleTitle = ({ BACKEND }) => {
 
   const handleClick = (e) => {
     if (!currentUser) return alert("You must be logged in");
-    if (currentUser !== recipe.username) return setLikeBtn(!likeBtn);
+    if (currentUser !== recipe.username) return setIsLiked(!isLiked);
     if (currentUser === recipe.username) return alert("Edit");
   };
 
@@ -33,34 +39,41 @@ const SingleTitle = ({ BACKEND }) => {
         <div className="single_title_title">
           <h2>{recipe.title}</h2>
         </div>
+        <div className="col">
+          <div className="single_title_info col">
+            Submitted by: {recipe.username} (
+            {new Date(recipe.create_time).toLocaleString()}) &nbsp;
+            <button
+              style={{
+                background: "rgba(100, 200, 200, 1)",
+                border: "1px single",
+                borderRadius: "6px",
+                padding: "4px",
+              }}
+              onClick={(e) => handleClick(e)}
+            >
+              {recipe.username === currentUser
+                ? "✍ Edit my Recipe "
+                : isLiked
+                ? "✅ favourite Recipe!"
+                : "👍Add to favourites"}
+            </button>
+          </div>
+        </div>
         <div className="row">
-          <img
-            src={recipe.image}
-            alt="recipe"
-            className="single_title_img col"
-          />
+          <object
+            data={recipe.title_img || recipe.image}
+            type="image/jpg,jpeg,png"
+            className="col"
+          >
+            <img
+              src={recipe.title_img || recipe.image}
+              alt={recipe.slug}
+              className="create_title_img"
+            />
+          </object>
           <div className="col">
-            <div className="single_title_info col">
-              <button
-                style={{
-                  background: "rgba(14, 150, 0, 0.4)",
-                  border: "1px single",
-                  borderRadius: "6px",
-                  padding: "4px",
-                }}
-                onClick={(e) => handleClick(e)}
-              >
-                {recipe.username === currentUser
-                  ? "✍Edit"
-                  : likeBtn
-                  ? "✅"
-                  : "👍Like"}
-              </button>
-              {"   "}
-              Submitted by: {recipe.username} ...{" "}
-              {new Date(recipe.create_time).toLocaleString()}
-            </div>
-            <div className="single_title_details col">
+            <div className="single_title_ingredients col">
               <h5>
                 <u>INGREDIENTS</u>
               </h5>
