@@ -181,7 +181,7 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
                   <img
                     src={newInfo.title_img}
                     className="create_title_img row"
-                    alt={`upload a file (max size ${maxAllowedSize / 1024}kb)`}
+                    alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
                   />
                 </object>
               </div>
@@ -189,28 +189,34 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
                 <h5>
                   <u>INGREDIENTS</u>
                 </h5>
-                <input
-                  list="datalist_item"
-                  placeholder="select ingredient"
-                  id="ingredient"
-                  value={ingredient[0]}
-                />
-                <input
-                  size="5"
-                  placeholder="quantity"
-                  id="quantity"
-                  value={ingredient[1]}
-                />
-                <button onClick={addIngredient}>Add</button>
-                <datalist id="datalist_item">
-                  {ingredients.map((el) => (
-                    <option
-                      value={
-                        el.ingredient_name + " (" + el.ingredient_unit + ")"
-                      }
-                    />
-                  ))}
-                </datalist>
+                <div className="form-group">
+                  <input
+                    list="datalist_item"
+                    placeholder="select ingredient"
+                    id="ingredient"
+                    tabIndex="1"
+                    value={ingredient[0]}
+                  />
+                  <input
+                    size="5"
+                    placeholder="quantity"
+                    id="quantity"
+                    tabIndex="2"
+                    value={ingredient[1]}
+                  />
+                  <button onClick={addIngredient}>Add</button>
+
+                  <datalist id="datalist_item">
+                    {ingredients.map((el) => (
+                      <option
+                        key={k++}
+                        value={
+                          el.ingredient_name + " (" + el.ingredient_unit + ")"
+                        }
+                      />
+                    ))}
+                  </datalist>
+                </div>
                 <div
                   placeholder="ingredients"
                   id="ingredients"
