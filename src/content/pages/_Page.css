@@ -1,0 +1,61 @@
+.page-container {
+  background-size:35vw;  
+  background-repeat: repeat;
+  background-position-x: center;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: center;
+  font-family: "lora", serif;
+  color: rgb(199, 211, 33);
+  padding-bottom: 10px;
+}
+
+.page-Img {
+  width: 100%;
+  height: auto;
+  margin-top: 0px;
+  object-fit: cover;
+}
+
+.page-title {
+  font-family:  "lora", serif;    
+  font-style: oblique;
+  text-align: center;
+  color: rgb(173, 2, 2);
+  text-shadow: 2px 2px 5px  brown;
+}
+
+.page-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  max-width: 98%;    
+  box-shadow: 20px 10px 30px rgb(165, 165, 165);
+  background-color: rgba(47, 79, 79, 0.75);
+  padding: 1rem;
+}
+
+.page-title-lg {
+  font-style: oblique;
+  font-size: 4rem;
+  font-weight:600; 
+  color: rgb(196, 61, 61);
+  text-shadow: 2px 2px 5px  rgb(39, 7, 3);
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 2rem;
+}
+  
+.page-title-sm {
+  font-style: oblique;
+  font-size: 1.8rem;
+  color: rgb(221, 184, 184);
+  text-shadow: 10px 0px 10px  brown;
+  text-align: center;
+  /* margin: 1vh; */
+  padding-left: 10%;
+  padding-right: 10%;
+}

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Title from "./Title";
 import axios from "axios";
+import "./_Page.css";
 
-const SearchTitles = ({ searchQry, handleClearQry, BACKEND }) => {
+const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   const [titles, setTitles] = useState([]);
   const [total, setTotal] = useState(0);
   // eslint-disable-next-line
@@ -12,13 +13,13 @@ const SearchTitles = ({ searchQry, handleClearQry, BACKEND }) => {
     let isLoaded = true;
     if (isLoaded) {
       (async () => {
-        const recipes = await axios.get(`${BACKEND}/api/recipes/`);
+        const recipes = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
         setTitles(recipes.data.tuples.filter(filterPosts));
         setTotal(recipes.data.tuples.filter(filterPosts).length);
       })();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
   }, [searchQry]);
@@ -35,11 +36,15 @@ const SearchTitles = ({ searchQry, handleClearQry, BACKEND }) => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
+    <div
+      className="page-container"
+      style={{
+        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+      }}
+    >
       {total > 0 ? (
         <>
           <h5>
-            {" "}
             We found {total} entries containing the word "{searchQry}"{" "}
           </h5>
           {titles.map((title) => (

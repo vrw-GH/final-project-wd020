@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipesSlider from "./RecipesSlider";
-import "./Page.css";
+import "./_Page.css";
 
 const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [andOr, setAndOr] = useState(false);
+  const [andOr, setAndOr] = useState(false); // false=OR
 
   useEffect(() => {
     let isLoaded = true;
@@ -53,26 +53,27 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     }
     return () => {
       isLoaded = false;
-
     };
     // eslint-disable-next-line
-  }, [category, ingredients]);
+  }, [category, ingredients, andOr]);
 
   const filterItems = (items) => {
     if (category && items.category !== category) return false;
+
     // else continue search with ingredient base
     let string = items.title + " " + items.ingredients;
     string = string.toLowerCase();
-
     let retValue = true;
     for (let i = 0; i < ingredients.length; i++) {
       if (ingredients[i].checked) {
         let lookfor = ingredients[i].ingredient_name.toLowerCase();
-        lookfor = lookfor.match(/^\S+/)[0]; // get first word of ing. name
-
+        // lookfor = lookfor.match(/^\S+/)[0]; // get first word of ing. name
+        lookfor = lookfor.replace(/ .*/, "").replace(/s+$/, "");
         if (string.indexOf(lookfor) !== -1) {
-          return true; // exit loop
+          if (!andOr) return true; // exit the loop if OR, allow this recipe
+          retValue = true;
         } else {
+          if (andOr) return false; // exit the loop if AND, skip this recipe
           retValue = false;
         }
       }
@@ -113,12 +114,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         className="page-container"
         style={{
           backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-          backgroundSize: "cover",
-          height: "350px",
         }}
       >
         <div className="page-title">
-          <h2>Recipes Home</h2>
+          <h2>-·≡ Recipes Home ≡·-</h2>
         </div>
         <div
           className="page-box col-8"
@@ -177,8 +176,18 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 >
                   &nbsp;Clear all&nbsp;
                 </button>
+                {ingredients
+                  .filter((i) => i.checked)
+                  .map((ingr) => (
+                    <span style={{ color: "white", fontSize: "0.8rem" }}>
+                      &nbsp;
+                      {ingr.ingredient_name
+                        .replace(/ .*/, "")
+                        .replace(/s+$/, "")}
+                      {andOr ? " +" : ","}
+                    </span>
+                  ))}
               </i>
-              {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (
                 <label key={key++}>

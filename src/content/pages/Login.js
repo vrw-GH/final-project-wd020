@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Page.css";
+import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
@@ -67,19 +67,12 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       className="page-container"
       style={{
         backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-        backgroundSize: "cover",
-        height: "350px",
       }}
     >
       <div className="page-title">
-        <h2>User Login / Registration</h2>
+        <h2>-·≡ User Login / Registration ≡·-</h2>
       </div>
-      <div
-        className="page-box col-8"
-        style={{
-          width: "300px",
-        }}
-      >
+      <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
           <>
             {loginMsg}

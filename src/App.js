@@ -5,7 +5,7 @@ import "./App.css";
 import "./loading.css";
 
 import NavbarTop from "./components/NavbarTop";
-import Header from "./content/pages/Header";
+import About from "./content/pages/About";
 import Footer from "./content/pages/Footer";
 import Recipes from "./content/pages/Recipes";
 import Sharing from "./content/pages/Sharing";
@@ -13,6 +13,9 @@ import Login from "./content/pages/Login";
 import Category from "./content/pages/Category.js";
 import SingleTitle from "./content/pages/SingleTitle";
 import SearchTitles from "./content/pages/SearchTitles";
+import MyProfile from "./content/pages/MyProfile";
+import MyRecipes from "./content/pages/MyRecipes";
+import MyShares from "./content/pages/MyShares";
 import CreateTitle from "./content/pages/CreateTitle";
 //-------------------------------------------------
 import {
@@ -117,11 +120,26 @@ function App() {
             <SearchTitles
               searchQry={searchQry}
               handleClearQry={handleClearQry}
-              BACKEND={APPDATA.BACKEND}
+              APPDATA={APPDATA}
             />
           ) : (
             <Routes>
-              <Route path="/" exact element={<Header APPDATA={APPDATA} />} />
+              <Route
+                path="/"
+                exact
+                element={
+                  <Sharing
+                    loading={loading}
+                    categories={categories}
+                    APPDATA={APPDATA}
+                  />
+                }
+              />
+              <Route
+                path="/about"
+                exact
+                element={<About APPDATA={APPDATA} />}
+              />
 
               <Route
                 path="/recipes"
@@ -159,13 +177,42 @@ function App() {
                 <>
                   <Route
                     exact
+                    path="/myshare"
+                    element={
+                      <MyShares
+                        currentUser={currentUser}
+                        // categories={categories}
+                        APPDATA={APPDATA}
+                      />
+                    }
+                  />
+                  <Route
+                    exact
+                    path="/mytitles"
+                    element={
+                      <MyRecipes
+                        currentUser={currentUser}
+                        // categories={categories}
+                        APPDATA={APPDATA}
+                      />
+                    }
+                  />
+                  <Route
+                    exact
                     path="/newtitle"
                     element={
                       <CreateTitle
                         currentUser={currentUser}
                         categories={categories}
-                        BACKEND={APPDATA.BACKEND}
+                        APPDATA={APPDATA}
                       />
+                    }
+                  />
+                  <Route
+                    exact
+                    path="/profile"
+                    element={
+                      <MyProfile currentUser={currentUser} APPDATA={APPDATA} />
                     }
                   />
                 </>
@@ -173,29 +220,23 @@ function App() {
               <Route
                 exact
                 path="/categories/:category"
-                element={
-                  <Category categories={categories} BACKEND={APPDATA.BACKEND} />
-                }
+                element={<Category categories={categories} APPDATA={APPDATA} />}
               />
 
               <Route
                 exact
                 path="/recipes/:id" //                          TODO: change recipes route to "entry"
                 element={
-                  <SingleTitle
-                    categories={categories}
-                    BACKEND={APPDATA.BACKEND}
-                  />
+                  <SingleTitle categories={categories} APPDATA={APPDATA} />
                 }
               />
             </Routes>
           )}
-
-          <div>
-            <Footer APPDATA={APPDATA} />
-          </div>
         </>
       )}
+      <div>
+        <Footer APPDATA={APPDATA} />
+      </div>
     </>
   );
 }

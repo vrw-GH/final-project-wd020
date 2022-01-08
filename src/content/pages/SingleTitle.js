@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./SingleTitle.css";
 
-const SingleTitle = ({ BACKEND }) => {
+const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState([]);
   // eslint-disable-next-line
@@ -15,7 +15,7 @@ const SingleTitle = ({ BACKEND }) => {
     let isLoaded = true;
     if (isLoaded) {
       (async () => {
-        const results = await axios.get(`${BACKEND}/api/recipes/${id}`);
+        const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/${id}`);
         setRecipe(results.data.tuple[0]);
       })();
     }
@@ -35,9 +35,15 @@ const SingleTitle = ({ BACKEND }) => {
 
   return (
     <>
-      <div className="single_title_container">
+      <div
+        className="page-container"
+        style={{
+          backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+        }}
+      >
+        {/* <div className="single_title_container"> */}
         <div className="single_title_title">
-          <h2>{recipe.title}</h2>
+          <h2>-·≡ {recipe.title} ≡·-</h2>
         </div>
         <div className="col">
           <div className="single_title_info col">

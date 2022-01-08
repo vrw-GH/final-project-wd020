@@ -1,6 +1,6 @@
 import "./_Page.css";
 
-const Sharing = ({ loading, categories, APPDATA }) => {
+const MyProfile = ({ APPDATA }) => {
   return (
     <div
       className="page-container"
@@ -10,7 +10,7 @@ const Sharing = ({ loading, categories, APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-·≡ {APPDATA.INFO} ≡·- </span>
+          <span>-·≡ My Profile ≡·- </span>
         </h2>
       </div>
       <div
@@ -24,5 +24,4 @@ const Sharing = ({ loading, categories, APPDATA }) => {
     </div>
   );
 };
-
-export default Sharing;
+export default MyProfile;
