@@ -7,6 +7,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [andOr, setAndOr] = useState(false);
 
   useEffect(() => {
     let isLoaded = true;
@@ -21,8 +22,9 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         }));
 
         const sortedData = finalData.sort((a, b) => {
-          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
-          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          let nameA = a.ingredient_name.toUpperCase();
+          let nameB = b.ingredient_name.toUpperCase();
+
           if (nameA < nameB) {
             return -1; //nameA comes first
           }
@@ -36,7 +38,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       })();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; //    avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
   }, []);
@@ -51,7 +53,8 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       })();
     }
     return () => {
-      isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false;
+
     };
     // eslint-disable-next-line
   }, [category, ingredients]);
@@ -59,12 +62,15 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   const filterItems = (items) => {
     if (category && items.category !== category) return false;
     // else continue search with ingredient base
-    let string = items.title.toLowerCase();
+    let string = items.title + " " + items.ingredients;
+    string.toLowerCase();
+
     let retValue = true;
     for (let i = 0; i < ingredients.length; i++) {
       if (ingredients[i].checked) {
         let lookfor = ingredients[i].ingredient_name.toLowerCase();
-        lookfor = lookfor.match(/^\S+/)[0];
+        lookfor = lookfor.match(/^\S+/)[0]; // get first word of ing. name
+
         if (string.indexOf(lookfor) !== -1) {
           return true; // exit loop
         } else {
@@ -86,6 +92,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     let newArr = [...ingredients];
     newArr[index].checked = e.target.checked;
     setIngredients(newArr);
+  };
+
+  const handleAndOr = () => {
+    setAndOr(!andOr);
   };
 
   let key = 0;
@@ -132,6 +142,26 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             </li>
             <li>
               <strong>Filter only recipes containing: </strong>
+
+              {/* ☑ */}
+              <i>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  style={{
+                    color: "inherit",
+                    width: "auto",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
+                  value={andOr}
+                  onClick={handleAndOr}
+                >
+                  &nbsp;And{" "}
+                  <span style={{ color: "red" }}>{andOr ? "◄" : "►"}</span>{" "}
+                  Or&nbsp;
+                </button>
+              </i>
+
               {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (

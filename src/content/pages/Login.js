@@ -39,7 +39,8 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   const doCreateUser = async (e) => {
     try {
       let item = {
-        username: e.target.parentElement.children["username"].value,
+        username:
+          e.target.parentElement.children["username"].value.toLowerCase(),
         password: e.target.parentElement.children["password"].value,
         email: e.target.parentElement.children["email"].value,
       };
