@@ -33,7 +33,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           }
           return 0; // names must be equal
         });
-
         setIngredients(sortedData);
       })();
     }
@@ -54,7 +53,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     }
     return () => {
       isLoaded = false;
-
     };
     // eslint-disable-next-line
   }, [category, ingredients]);
@@ -63,7 +61,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     if (category && items.category !== category) return false;
     // else continue search with ingredient base
     let string = items.title + " " + items.ingredients;
-    string.toLowerCase();
+    string = string.toLowerCase();
 
     let retValue = true;
     for (let i = 0; i < ingredients.length; i++) {
@@ -79,6 +77,14 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       }
     }
     return retValue;
+  };
+
+  const resetIngredients = () => {
+    let tArr = [...ingredients];
+    for (let i = 0; i < tArr.length; i++) {
+      tArr[i].checked = false;
+    }
+    setIngredients(tArr);
   };
 
   const selectCtg = (e) => {
@@ -142,8 +148,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             </li>
             <li>
               <strong>Filter only recipes containing: </strong>
-
-              {/* ☑ */}
               <i>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button
@@ -160,8 +164,19 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   <span style={{ color: "red" }}>{andOr ? "◄" : "►"}</span>{" "}
                   Or&nbsp;
                 </button>
+                &nbsp;&nbsp;
+                <button
+                  style={{
+                    color: "inherit",
+                    width: "auto",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
+                  onClick={resetIngredients}
+                >
+                  &nbsp;Clear all&nbsp;
+                </button>
               </i>
-
               {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (
@@ -169,10 +184,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   <input
                     type="checkbox"
                     value={ingr.ingredient_id}
+                    checked={ingr.checked}
                     onChange={selectIng}
                   />
-                  {ingr.ingredient_name}
-                  &nbsp;&nbsp;
+                  {ingr.ingredient_name} &nbsp;&nbsp;
                 </label>
               ))}
             </li>
