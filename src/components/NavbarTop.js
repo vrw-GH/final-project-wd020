@@ -18,7 +18,15 @@ const NavbarTop = ({
     <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
         <Navbar.Brand href="/" onClick={handleClearQry}>
-          ■■{APPDATA.NAME}■■
+          &nbsp;
+          <img
+            src="../foodshare_313x383.png"
+            alt="logo"
+            width="50"
+            height="50"
+            title={APPDATA.NAME}
+          />
+          &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
