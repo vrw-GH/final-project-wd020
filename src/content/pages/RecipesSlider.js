@@ -13,13 +13,20 @@ export default function HomeSlider({ sliderData }) {
     slidesToShow: 3,
     slidesToScroll: 2,
   };
+
+  const toPlain = (html) => {
+    let str = html.replace(/<[^>]*>/g, "\n");
+    str = str.replace(/\n\n/g, "\n");
+    str = str.replace(/\n\n/g, "\n");
+    return str;
+  };
+
   let key = 0;
   return (
     <div>
       <Slider {...settings}>
         {sliderData.map((data) => (
           <div key={key++}>
-            {/* <img className="categories_img" src={data.image} alt={data.image} /> */}
             <object
               data={data.title_img || data.image}
               type="image/jpg,jpeg,png"
@@ -28,6 +35,7 @@ export default function HomeSlider({ sliderData }) {
                 src={data.title_img || data.image}
                 alt={data.image}
                 className="recipesSlider_img"
+                title={toPlain(data.ingredients)}
               />
             </object>
             <div className="recipesSlider_description">
