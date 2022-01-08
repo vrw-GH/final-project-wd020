@@ -17,10 +17,11 @@ const NavbarTop = ({
   return (
     <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-        <Navbar.Brand href="/" onClick={handleClearQry}>
+        <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img
-            src="../foodshare_313x383.png"
+            src="/foodshare_313x383.png"
+
             alt="logo"
             width="50"
             height="50"
@@ -31,6 +32,14 @@ const NavbarTop = ({
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">
+            <ReactBootStrap.NavLink
+              to="/sharing"
+              href="/sharing"
+              onClick={handleClearQry}
+            >
+              Sharing
+            </ReactBootStrap.NavLink>
+
             <ReactBootStrap.NavLink
               to="/recipes"
               href="/recipes"
@@ -54,14 +63,6 @@ const NavbarTop = ({
                 ))}
               </ul>
             </NavDropdown> */}
-
-            <ReactBootStrap.NavLink
-              to="/sharing"
-              href="/sharing"
-              onClick={handleClearQry}
-            >
-              Sharing
-            </ReactBootStrap.NavLink>
           </Nav>
 
           <Nav className="me-auto">
@@ -115,13 +116,23 @@ const NavbarTop = ({
                 </ReactBootStrap.NavLink>
               </>
             ) : (
-              <ReactBootStrap.NavLink
-                to="/login"
-                href="/login"
-                onClick={handleClearQry}
-              >
-                Login
-              </ReactBootStrap.NavLink>
+              <>
+                <ReactBootStrap.NavLink
+                  to="/login"
+                  href="/login"
+                  onClick={handleClearQry}
+                >
+                  Login
+                </ReactBootStrap.NavLink>
+                <ReactBootStrap.NavLink
+                  to="/about"
+                  href="/about"
+                  onClick={handleClearQry}
+                  title="About Us"
+                >
+                  About
+                </ReactBootStrap.NavLink>
+              </>
             )}
 
             {/* <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>

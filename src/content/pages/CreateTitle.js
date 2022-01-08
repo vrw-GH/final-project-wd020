@@ -3,7 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router";
 import "./CreateTitle.css";
 
-const CreateTitle = ({ currentUser, categories, BACKEND }) => {
+const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   const [published, setPublished] = useState(false);
   // eslint-disable-next-line
   const [ingredients, setIngredients] = useState([]);
@@ -24,7 +24,9 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
     let isLoaded = true;
     if (isLoaded) {
       (async () => {
-        const axiosData = await axios.get(`${BACKEND}/api/ingredients/`);
+        const axiosData = await axios.get(
+          `${APPDATA.BACKEND}/api/ingredients/`
+        );
         const finalData = await axiosData.data.tuples.map((obj) => ({
           checked: false,
           ...obj,
@@ -59,7 +61,7 @@ const CreateTitle = ({ currentUser, categories, BACKEND }) => {
       for (const key in info) {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
-      await axios.post(`${BACKEND}/api/recipes`, info);
+      await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
       setPublished(true);
     } catch (error) {
       window.alert(error);
