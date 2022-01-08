@@ -53,6 +53,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     }
     return () => {
       isLoaded = false;
+
     };
     // eslint-disable-next-line
   }, [category, ingredients]);
