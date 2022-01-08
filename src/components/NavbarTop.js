@@ -21,6 +21,7 @@ const NavbarTop = ({
           &nbsp;
           <img
             src="/foodshare_313x383.png"
+
             alt="logo"
             width="50"
             height="50"

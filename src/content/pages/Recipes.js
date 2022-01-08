@@ -188,6 +188,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                     </span>
                   ))}
               </i>
+
               <br />
               {ingredients.map((ingr) => (
                 <label key={key++}>
