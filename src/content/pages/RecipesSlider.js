@@ -27,6 +27,7 @@ export default function HomeSlider({ sliderData }) {
       <Slider {...settings}>
         {sliderData.map((data) => (
           <div key={key++}>
+
             <object
               data={data.title_img || data.image}
               type="image/jpg,jpeg,png"
@@ -35,7 +36,9 @@ export default function HomeSlider({ sliderData }) {
                 src={data.title_img || data.image}
                 alt={data.image}
                 className="recipesSlider_img"
+
                 title={toPlain(data.ingredients)}
+
               />
             </object>
             <div className="recipesSlider_description">

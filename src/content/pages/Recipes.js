@@ -20,9 +20,11 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           checked: false,
           ...obj,
         }));
+
         const sortedData = finalData.sort((a, b) => {
           let nameA = a.ingredient_name.toUpperCase();
           let nameB = b.ingredient_name.toUpperCase();
+
           if (nameA < nameB) {
             return -1; //nameA comes first
           }
@@ -31,6 +33,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           }
           return 0; // names must be equal
         });
+
         setIngredients(sortedData);
       })();
     }
@@ -51,6 +54,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     }
     return () => {
       isLoaded = false;
+
     };
     // eslint-disable-next-line
   }, [category, ingredients]);
@@ -60,11 +64,13 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     // else continue search with ingredient base
     let string = items.title + " " + items.ingredients;
     string.toLowerCase();
+
     let retValue = true;
     for (let i = 0; i < ingredients.length; i++) {
       if (ingredients[i].checked) {
         let lookfor = ingredients[i].ingredient_name.toLowerCase();
         lookfor = lookfor.match(/^\S+/)[0]; // get first word of ing. name
+
         if (string.indexOf(lookfor) !== -1) {
           return true; // exit loop
         } else {
@@ -136,6 +142,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             </li>
             <li>
               <strong>Filter only recipes containing: </strong>
+
               {/* ☑ */}
               <i>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -154,6 +161,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   Or&nbsp;
                 </button>
               </i>
+
               {/* <i>(Select at least 3)</i>  */}
               <br />
               {ingredients.map((ingr) => (
