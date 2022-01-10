@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipesSlider from "./RecipesSlider";
-import "./Page.css";
+import "./_Page.css";
 
 const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [andOr, setAndOr] = useState(false); // false=OR
 
   useEffect(() => {
     let isLoaded = true;
@@ -21,8 +22,9 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         }));
 
         const sortedData = finalData.sort((a, b) => {
-          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
-          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+          let nameA = a.ingredient_name.toUpperCase();
+          let nameB = b.ingredient_name.toUpperCase();
+
           if (nameA < nameB) {
             return -1; //nameA comes first
           }
@@ -31,12 +33,11 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           }
           return 0; // names must be equal
         });
-
         setIngredients(sortedData);
       })();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; //    avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
   }, []);
@@ -51,28 +52,41 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       })();
     }
     return () => {
-      isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false;
     };
     // eslint-disable-next-line
-  }, [category, ingredients]);
+  }, [category, ingredients, andOr]);
 
   const filterItems = (items) => {
     if (category && items.category !== category) return false;
+
     // else continue search with ingredient base
-    let string = items.title.toLowerCase();
+    let string = items.title + " " + items.ingredients;
+    string = string.toLowerCase();
     let retValue = true;
     for (let i = 0; i < ingredients.length; i++) {
       if (ingredients[i].checked) {
         let lookfor = ingredients[i].ingredient_name.toLowerCase();
-        lookfor = lookfor.match(/^\S+/)[0];
+        // lookfor = lookfor.match(/^\S+/)[0]; // get first word of ing. name
+        lookfor = lookfor.replace(/ .*/, "").replace(/s+$/, "");
         if (string.indexOf(lookfor) !== -1) {
-          return true; // exit loop
+          if (!andOr) return true; // exit the loop if OR, allow this recipe
+          retValue = true;
         } else {
+          if (andOr) return false; // exit the loop if AND, skip this recipe
           retValue = false;
         }
       }
     }
     return retValue;
+  };
+
+  const resetIngredients = () => {
+    let tArr = [...ingredients];
+    for (let i = 0; i < tArr.length; i++) {
+      tArr[i].checked = false;
+    }
+    setIngredients(tArr);
   };
 
   const selectCtg = (e) => {
@@ -88,6 +102,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     setIngredients(newArr);
   };
 
+  const handleAndOr = () => {
+    setAndOr(!andOr);
+  };
+
   let key = 0;
 
   return (
@@ -96,12 +114,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         className="page-container"
         style={{
           backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-          backgroundSize: "cover",
-          height: "350px",
         }}
       >
         <div className="page-title">
-          <h2>Recipes Home</h2>
+          <h2>-·≡ Recipes Home ≡·-</h2>
         </div>
         <div
           className="page-box col-8"
@@ -132,17 +148,57 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             </li>
             <li className="itemsList">
               <strong>Filter only recipes containing: </strong>
-              {/* <i>(Select at least 3)</i>  */}
+              <i>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  style={{
+                    color: "inherit",
+                    width: "auto",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
+                  value={andOr}
+                  onClick={handleAndOr}
+                >
+                  &nbsp;And{" "}
+                  <span style={{ color: "red" }}>{andOr ? "◄" : "►"}</span>{" "}
+                  Or&nbsp;
+                </button>
+                &nbsp;&nbsp;
+                <button
+                  style={{
+                    color: "inherit",
+                    width: "auto",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
+                  onClick={resetIngredients}
+                >
+                  &nbsp;Clear all&nbsp;
+                </button>
+                {ingredients
+                  .filter((i) => i.checked)
+                  .map((ingr) => (
+                    <span style={{ color: "white", fontSize: "0.8rem" }}>
+                      &nbsp;
+                      {ingr.ingredient_name
+                        .replace(/ .*/, "")
+                        .replace(/s+$/, "")}
+                      {andOr ? " +" : ","}
+                    </span>
+                  ))}
+              </i>
+
               <br />
               {ingredients.map((ingr) => (
                 <label key={key++}>
                   <input
                     type="checkbox"
                     value={ingr.ingredient_id}
+                    checked={ingr.checked}
                     onChange={selectIng}
                   />
-                  {ingr.ingredient_name}
-                  &nbsp;&nbsp;
+                  {ingr.ingredient_name} &nbsp;&nbsp;
                 </label>
               ))}
             </li>

@@ -4,7 +4,7 @@ import "./Category.css";
 import Title from "./Title.js";
 import axios from "axios";
 
-const Category = ({ categories, BACKEND }) => {
+const Category = ({ categories, APPDATA }) => {
   let { category } = useParams();
   category = category.toUpperCase();
   const [posts, setPosts] = useState([]);
@@ -18,7 +18,7 @@ const Category = ({ categories, BACKEND }) => {
     let isLoaded = true;
     if (isLoaded) {
       (async () => {
-        const recipes = await axios.get(`${BACKEND}/api/recipes/`);
+        const recipes = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
         setPosts(recipes.data.tuples.filter(filterItems));
       })();
     }

@@ -11,10 +11,14 @@
   padding: 5px; 
 }
 .single_title_title {
-  margin: 10px;
-  text-transform: uppercase;
-  text-shadow: -2px -2px red;
+  font-family:  "lora", serif;    
+  font-style: oblique;
   font-size: 2rem;
+  color: rgb(173, 2, 2);
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 5px  brown;
+  margin: 10px;
   cursor:auto;
 }
 
@@ -30,6 +34,7 @@
 .single_title_ingredients {
   background-color: rgb(151, 199, 119); 
   padding: 0.2rem; 
+  color: rgb(0, 0, 0);
   margin: 0 10px 5px 5px ; 
 }
 
@@ -58,11 +63,14 @@
 }
 .single_title_method > h5, .single_title_details > h5 {
   /* background-color: rgba(173, 226, 142, 0.795); */
+  padding: 5px;
+  margin:0;
 }
 .single_title_info {
   background-color: rgba(248, 149, 83, 0.795);
   font-style: italic;
   font-size: .7rem;
+  color: black;
   padding: 0.2rem;
   margin:2px;
 }

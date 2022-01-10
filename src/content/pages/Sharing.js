@@ -1,4 +1,4 @@
-import "./Page.css";
+import "./_Page.css";
 
 import React, { useState } from "react";
 import axios from 'axios'
@@ -86,6 +86,7 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
       </form>
 
     </>
+
   );
 };
 

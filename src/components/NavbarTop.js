@@ -17,12 +17,55 @@ const NavbarTop = ({
   return (
     <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-        <Navbar.Brand href="/" onClick={handleClearQry}>
-          <div className="navName">{APPDATA.NAME}</div>
+        <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
+          &nbsp;
+          <img
+            src="/foodshare_313x383.png"
+
+            alt="logo"
+            width="50"
+            height="50"
+            title={APPDATA.NAME}
+          />
+          &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-        <Nav className="me-auto">
+          <Nav className="ms-auto">
+            <ReactBootStrap.NavLink
+              to="/sharing"
+              href="/sharing"
+              onClick={handleClearQry}
+            >
+              Sharing
+            </ReactBootStrap.NavLink>
+
+            <ReactBootStrap.NavLink
+              to="/recipes"
+              href="/recipes"
+              onClick={handleClearQry}
+            >
+              Recipes
+            </ReactBootStrap.NavLink>
+
+            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
+              <ul>
+                {categories.map((item) => (
+                  <li key={key++}>
+                    <NavLink
+                      to={`categories/${item.name}`}
+                      href={item.name}
+                      onClick={handleClearQry}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </NavDropdown> */}
+          </Nav>
+
+          <Nav className="me-auto">
             {currentUser ? (
               <>
                 <Navbar.Brand>{currentUser}:</Navbar.Brand>
@@ -73,54 +116,29 @@ const NavbarTop = ({
                 </ReactBootStrap.NavLink>
               </>
             ) : (
-              <ReactBootStrap.NavLink
-                to="/login"
-                href="/login"
-                onClick={handleClearQry}
-              >
-                Login
-              </ReactBootStrap.NavLink>
+              <>
+                <ReactBootStrap.NavLink
+                  to="/login"
+                  href="/login"
+                  onClick={handleClearQry}
+                >
+                  Login
+                </ReactBootStrap.NavLink>
+                <ReactBootStrap.NavLink
+                  to="/about"
+                  href="/about"
+                  onClick={handleClearQry}
+                  title="About Us"
+                >
+                  About
+                </ReactBootStrap.NavLink>
+              </>
             )}
 
             {/* <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
               About
             </ReactBootStrap.NavLink> */}
           </Nav>
-          <Nav className="ms-auto">
-            <ReactBootStrap.NavLink
-              to="/recipes"
-              href="/recipes"
-              onClick={handleClearQry}
-            >
-              Recipes
-            </ReactBootStrap.NavLink>
-
-            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
-              <ul>
-                {categories.map((item) => (
-                  <li key={key++}>
-                    <NavLink
-                      to={`categories/${item.name}`}
-                      href={item.name}
-                      onClick={handleClearQry}
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </NavDropdown> */}
-
-            <ReactBootStrap.NavLink
-              to="/sharing"
-              href="/sharing"
-              onClick={handleClearQry}
-            >
-              Sharing
-            </ReactBootStrap.NavLink>
-          </Nav>
-
-          
 
           <ReactBootStrap.Form className="d-flex">
             <ReactBootStrap.FormControl
@@ -131,7 +149,6 @@ const NavbarTop = ({
               aria-label="Search"
             />
             <ReactBootStrap.Button
-              variant="warning"
               type="submit"
               onClick={(e) => handleSearchClick(e)}
             >
