@@ -161,7 +161,7 @@ const MyProfile = ({ APPDATA }) => {
                 required
                 value={thisUser.plz}
                 onChange={handleInput}
-              />{" "}
+              />
               <input
                 type="button"
                 value="Get Lon/Lat"
