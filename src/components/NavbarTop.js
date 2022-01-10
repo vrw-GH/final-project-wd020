@@ -150,6 +150,7 @@ const NavbarTop = ({
             />
             <ReactBootStrap.Button
               type="submit"
+              variant="dark"
               onClick={(e) => handleSearchClick(e)}
             >
               Find
