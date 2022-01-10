@@ -8,6 +8,7 @@ const MyProfile = ({ APPDATA }) => {
   const userName = sessionStorage.getItem("currentUser");
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
+  const [cityName, setCityName] = useState("");
   const maxAllowedSize = 1024 * 50; //kb
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const MyProfile = ({ APPDATA }) => {
         `${APPDATA.BACKEND}/api/users/${userName.toLowerCase()}`,
         info
       );
+      alert("Updated");
     } catch (error) {
       window.alert(error);
     }
@@ -59,6 +61,7 @@ const MyProfile = ({ APPDATA }) => {
         `${APPDATA.BACKEND}/api/plz-de/${thisUser.plz}`
       );
       setUserCoord([res.data.tuple[0].longitude, res.data.tuple[0].latitude]);
+      setCityName(res.data.tuple[0].place_name);
     } catch (error) {
       window.alert(error);
     }
@@ -141,7 +144,7 @@ const MyProfile = ({ APPDATA }) => {
               <br />
               Email:
               <input
-                style={{ width: "5rem" }}
+                // style={{ minWidth: "5rem" }}
                 type="email"
                 placeholder="email"
                 id="email"
@@ -167,6 +170,8 @@ const MyProfile = ({ APPDATA }) => {
                 value="Get Lon/Lat"
                 onClick={HandleGetLatLon}
               ></input>
+              <br />
+              <p hidden={!cityName}>City: {cityName}</p>
               <br />
               <u> My Location:</u>
               <br />
@@ -211,6 +216,9 @@ const MyProfile = ({ APPDATA }) => {
           <button type="submit" className="btns">
             Update
           </button>
+          {/* <button type="cancel" className="btns">
+            Reset
+          </button> */}
         </form>
       </div>
     </div>

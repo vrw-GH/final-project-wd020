@@ -15,7 +15,11 @@ export default function Title({ title, handleClearQry }) {
     <div className="title_container">
       <Link to={`/recipes/${title.slug}`} onClick={handleClearQry}>
         {/* <img className="title_image" src={title.image} alt="recipe" /> */}
-        <img className="title_image" src={title.title_img} alt="recipe" />
+        <img
+          className="title_image"
+          src={title.title_img || title.image}
+          alt="recipe"
+        />
         <div className="title_title">{title.title}</div>
       </Link>
       <div className="title_info">{title.username}</div>
