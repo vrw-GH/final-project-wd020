@@ -10,7 +10,7 @@ export default function HomeSlider({ sliderData }) {
     dots: true,
     infinite: sliderData.length > 3,
     speed: 800,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 2,
   };
   let key = 0;
@@ -39,7 +39,7 @@ export default function HomeSlider({ sliderData }) {
           </div>
         ))}
       </Slider>
-      <p>pages >>>> </p>
+    
     </div>
   );
 }

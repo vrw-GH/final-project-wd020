@@ -1,9 +1,22 @@
+*{
+  box-sizing: border-box;
+  margin: auto;
+  padding: auto;
+  list-style: none;
+  
+}
+
+.navName{
+  margin-left: 70px;
+}
 .page-container {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgb(199, 211, 33);
+  color: rgb(59, 59, 59);
   font-family: "lora", serif;
+  margin: 100px;
 }
 
 .page-title {
@@ -17,7 +30,21 @@
     align-items: center;    
     max-width: 98%;
     box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165);
-    background-color: darkslategrey;
-    padding: 1rem;
+    background-color: rgb(255, 203, 89);
+    padding: 2rem;
+    border-radius: 40px;
   }
 
+  .itemsCont{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .itemsList{
+    background-color: rgb(131, 208, 238);
+    padding: 25px;
+    margin-top: 10px;
+    line-height: 34px;
+    border-radius: 15px;
+  }

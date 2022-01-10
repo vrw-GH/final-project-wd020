@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import "./loading.css";
-
 import NavbarTop from "./components/NavbarTop";
 import Header from "./content/pages/Header";
 import Footer from "./content/pages/Footer";
@@ -58,7 +57,7 @@ function App() {
   const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
 
-  useEffect(() => {}, [loading]); //        to re-render when any loading event occurs
+  useEffect(() => { }, [loading]); //        to re-render when any loading event occurs
 
   useEffect(() => {
     setLoading("Loading ...");

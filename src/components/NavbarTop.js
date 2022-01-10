@@ -18,45 +18,11 @@ const NavbarTop = ({
     <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
         <Navbar.Brand href="/" onClick={handleClearQry}>
-          ■■{APPDATA.NAME}■■
+          <div className="navName">{APPDATA.NAME}</div>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav className="ms-auto">
-            <ReactBootStrap.NavLink
-              to="/recipes"
-              href="/recipes"
-              onClick={handleClearQry}
-            >
-              Recipes
-            </ReactBootStrap.NavLink>
-
-            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
-              <ul>
-                {categories.map((item) => (
-                  <li key={key++}>
-                    <NavLink
-                      to={`categories/${item.name}`}
-                      href={item.name}
-                      onClick={handleClearQry}
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </NavDropdown> */}
-
-            <ReactBootStrap.NavLink
-              to="/sharing"
-              href="/sharing"
-              onClick={handleClearQry}
-            >
-              Sharing
-            </ReactBootStrap.NavLink>
-          </Nav>
-
-          <Nav className="me-auto">
+        <Nav className="me-auto">
             {currentUser ? (
               <>
                 <Navbar.Brand>{currentUser}:</Navbar.Brand>
@@ -120,6 +86,41 @@ const NavbarTop = ({
               About
             </ReactBootStrap.NavLink> */}
           </Nav>
+          <Nav className="ms-auto">
+            <ReactBootStrap.NavLink
+              to="/recipes"
+              href="/recipes"
+              onClick={handleClearQry}
+            >
+              Recipes
+            </ReactBootStrap.NavLink>
+
+            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
+              <ul>
+                {categories.map((item) => (
+                  <li key={key++}>
+                    <NavLink
+                      to={`categories/${item.name}`}
+                      href={item.name}
+                      onClick={handleClearQry}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </NavDropdown> */}
+
+            <ReactBootStrap.NavLink
+              to="/sharing"
+              href="/sharing"
+              onClick={handleClearQry}
+            >
+              Sharing
+            </ReactBootStrap.NavLink>
+          </Nav>
+
+          
 
           <ReactBootStrap.Form className="d-flex">
             <ReactBootStrap.FormControl
@@ -130,6 +131,7 @@ const NavbarTop = ({
               aria-label="Search"
             />
             <ReactBootStrap.Button
+              variant="warning"
               type="submit"
               onClick={(e) => handleSearchClick(e)}
             >

@@ -1,13 +1,14 @@
 import React from "react";
+// eslint-disable-next-line
 import { FaFacebook, FaGithub, FaInstagram, FaDiscord } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = ({ APPDATA }) => {
   return (
     <div className="footer_container">
-      <img className="ftImg" src={APPDATA.FOOTERIMG} alt="footer" />
+      <img className="ftImg" src="https://gaiaprotection.org/wp-content/uploads/2019/11/food_sharing-min-1024x683.jpg" alt="footer" />
 
-      <ul className="ul1">
+      {/* <ul className="ul1">
         <li>
           {APPDATA.PROJECT.toUpperCase()}{" "}
           <i>
@@ -60,7 +61,7 @@ const Footer = ({ APPDATA }) => {
         <li>
           <FaDiscord size="2.5em" />
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

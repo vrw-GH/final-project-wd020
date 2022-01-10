@@ -109,9 +109,9 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          <strong style={{ color: "white" }}>Filter</strong>
+          <strong style={{ color: "black" }}>Filter</strong>
 
-          <ul>
+          <ul className="itemsCont">
             <li>
               <strong>
                 <label htmlFor="categories">Select by Category : &nbsp;</label>
@@ -130,7 +130,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 ))}
               </select>
             </li>
-            <li>
+            <li className="itemsList">
               <strong>Filter only recipes containing: </strong>
               {/* <i>(Select at least 3)</i>  */}
               <br />
