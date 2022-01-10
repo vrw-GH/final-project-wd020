@@ -1,0 +1,32 @@
+.myprofile_container {
+  display: flex;  
+  flex-direction: row;
+  /* align-items:stretch; */
+  font-family: "lora", serif;
+  color: rgb(199, 211, 33);
+    /* padding-top:3px; */  
+}
+
+.myprofile_profilepic {
+  min-height: 320px;
+  max-height: 330px;
+  object-fit: cover;  
+  font-weight: bold;
+  
+}
+.myprofile_profilepic > object > img {
+  border-radius: 30%;
+}
+
+.myprofile_details  {
+ 
+}
+.myprofile_location {
+  /* size: 100vh; */
+}
+
+.myprofile_map {
+  display: flex;
+  /* position:relative; */
+  width: 40vh;
+}
