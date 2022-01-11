@@ -172,8 +172,9 @@ const MyProfile = ({ APPDATA }) => {
                 onClick={HandleGetLatLon}
               ></input>
               <br />
-              <p hidden={!cityName}>City: {cityName}</p>
-              <br />
+              <p style={{ opacity: cityName ? "100%" : "0" }}>
+                City: <strong>{cityName}</strong>
+              </p>
               <u> My Location:</u>
               <br />
               Long:
@@ -181,7 +182,7 @@ const MyProfile = ({ APPDATA }) => {
                 // value={thisUser?.location?.x}
                 value={userCoord[0]}
                 type="number"
-                step="0.05"
+                step="0.0001"
                 defaultValue="10"
                 placeholder="Longitude in Decimal"
                 title="Decimal Notation"
@@ -197,7 +198,7 @@ const MyProfile = ({ APPDATA }) => {
                 // value={thisUser?.location?.y}
                 value={userCoord[1]}
                 type="number"
-                step="0.05"
+                step="0.0001"
                 defaultValue="51"
                 placeholder="Latitude in Decimal"
                 title="Decimal Notation"

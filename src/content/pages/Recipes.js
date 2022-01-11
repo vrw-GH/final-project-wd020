@@ -173,7 +173,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 {ingredients
                   .filter((i) => i.checked)
                   .map((ingr) => (
-                    <span style={{ color: "white", fontSize: "0.8rem" }}>
+                    <span
+                      key={ingr.ingredient_name}
+                      style={{ color: "white", fontSize: "0.8rem" }}
+                    >
                       &nbsp;
                       {ingr.ingredient_name
                         .replace(/ .*/, "")

@@ -46,6 +46,28 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    let isLoaded = true;
+    if (currentUser) {
+      if (isLoaded) {
+        (async () => {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/users/${currentUser}`
+          );
+          setThisUserLikes(
+            results.data.tuple[0].likes ? results.data.tuple[0].likes : []
+          );
+          // console.log(results.data.tuple[0].likes.find(recipe.slug));
+          // setIsLiked(results.data.tuple[0].likes.find(recipe.slug));
+        })();
+      }
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
+    // eslint-disable-next-line
+  }, []);
+
   if (error)
     return (
       <div className="loading_container">
