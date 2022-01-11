@@ -20,18 +20,12 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           checked: false,
           ...obj,
         }));
-
         const sortedData = finalData.sort((a, b) => {
           let nameA = a.ingredient_name.toUpperCase();
           let nameB = b.ingredient_name.toUpperCase();
-
-          if (nameA < nameB) {
-            return -1; //nameA comes first
-          }
-          if (nameA > nameB) {
-            return 1; // nameB comes first
-          }
-          return 0; // names must be equal
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
         });
         setIngredients(sortedData);
       })();

@@ -60,7 +60,7 @@ function App() {
   const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
 
-  useEffect(() => { }, [loading]); //        to re-render when any loading event occurs
+  useEffect(() => {}, [loading]); //        to re-render when any loading event occurs
 
   useEffect(() => {
     setLoading("Loading ...");
