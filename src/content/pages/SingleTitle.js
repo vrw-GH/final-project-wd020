@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../../loading.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
+  const currentUser = sessionStorage.getItem("currentUser");
   const [recipe, setRecipe] = useState([]);
   // eslint-disable-next-line
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); // TODO: return an error "page"?
   const [isLiked, setIsLiked] = useState(false);
-  const currentUser = sessionStorage.getItem("currentUser");
+  const [thisUserLikes, setThisUserLikes] = useState([]);
 
   useEffect(() => {
     let isLoaded = true;
@@ -25,11 +27,61 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (error) return <div>{error}</div>;
+  useEffect(() => {
+    let isLoaded = true;
+    if (currentUser) {
+      if (isLoaded) {
+        (async () => {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/users/${currentUser}`
+          );
+          setThisUserLikes(
+            results.data.tuple[0].likes ? results.data.tuple[0].likes : []
+          );
+          // console.log(results.data.tuple[0].likes.find(recipe.slug));
+          // setIsLiked(results.data.tuple[0].likes.find(recipe.slug));
+        })();
+      }
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+    };
+    // eslint-disable-next-line
+  }, []);
 
-  const handleClick = (e) => {
+  if (error)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{error}</h4>
+      </div>
+    );
+
+  const handleLikeEdit = (e) => {
     if (!currentUser) return alert("You must be logged in");
-    if (currentUser !== recipe.username) return setIsLiked(!isLiked);
+    if (currentUser !== recipe.username) {
+      if (!isLiked) {
+        thisUserLikes.push(recipe.slug);
+      } else {
+        for (let i = 0; i < thisUserLikes.length; i++) {
+          if (thisUserLikes[i] === recipe.slug) {
+            thisUserLikes.splice(i, 1);
+          }
+        }
+      }
+      console.log(thisUserLikes);
+      // (async () => {
+      //   try {
+      //     await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
+      //       likes: thisUserLikes,
+      //     });
+      //     console.log(thisUserLikes);
+      //   } catch (error) {
+      //     setError("Post User Data " + error);
+      //   }
+      // })();
+      return setIsLiked(!isLiked);
+    }
     if (currentUser === recipe.username) return alert("Edit");
   };
 
@@ -56,7 +108,7 @@ const SingleTitle = ({ APPDATA }) => {
                 borderRadius: "6px",
                 padding: "4px",
               }}
-              onClick={(e) => handleClick(e)}
+              onClick={(e) => handleLikeEdit(e)}
             >
               {recipe.username === currentUser
                 ? "✍ Edit my Recipe "
