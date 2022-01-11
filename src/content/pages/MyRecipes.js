@@ -1,6 +1,27 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import "./_Page.css";
 
 const MyRecipes = ({ APPDATA }) => {
+  const userName = sessionStorage.getItem("currentUser");
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    let isLoaded = true;
+    if (isLoaded) {
+      (async () => {
+        const axiosData = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+        setRecipes(axiosData.data.tuples);
+      })();
+    }
+    return () => {
+      isLoaded = false;
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  let k = 0;
   return (
     <div
       className="page-container"
@@ -14,12 +35,54 @@ const MyRecipes = ({ APPDATA }) => {
         </h2>
       </div>
       <div
-        className="page-box col-8"
+        className="page-box col-11"
         style={{
           width: "90%",
         }}
       >
-        something here
+        <div className="row">
+          <div className="col-5" style={{ backgroundColor: "lightgrey" }}>
+            <u>My own recipes</u>
+            <ul
+            // style={
+            //   {
+            //     // listStyleType: "upper-roman",
+            //     // color: "black",
+            //     // border: "2px solid blue",
+            //     // backgroundColor: "lightblue",
+            //     listStyleImage: recipes.title_img || recipes.image,
+            //   }
+            // }
+            >
+              {recipes
+                .filter((it) => it.username === userName)
+                .map((recipe) => (
+                  <li key={k++}>
+                    <Link to={`/recipes/${recipe.slug}`} className="link">
+                      {recipe.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="col-7" style={{ backgroundColor: "lightyellow" }}>
+            <u>My liked recipes</u>
+            <ul
+              style={{
+                // listStyleType: "upper-roman",
+                listStyleImage: recipes.title_img || recipes.image,
+              }}
+            >
+              {recipes.map((recipe) => (
+                <li key={k++}>
+                  <Link to={`/recipes/${recipe.slug}`} className="link">
+                    {recipe.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
