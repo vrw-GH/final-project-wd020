@@ -5,7 +5,7 @@ import "./_Page.css";
 import "./MyProfile.css";
 
 const MyProfile = ({ APPDATA }) => {
-  const userName = sessionStorage.getItem("currentUser");
+  const currentUser = sessionStorage.getItem("currentUser");
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
@@ -15,7 +15,7 @@ const MyProfile = ({ APPDATA }) => {
     (async () => {
       try {
         const results = await axios.get(
-          `${APPDATA.BACKEND}/api/users/${userName}`
+          `${APPDATA.BACKEND}/api/users/${currentUser}`
         );
         setThisUser(results.data.tuple[0]);
         setUserCoord([
@@ -36,7 +36,8 @@ const MyProfile = ({ APPDATA }) => {
     delete thisUser.create_time;
     delete thisUser.password;
     delete thisUser.likes;
-    // remove blank submission (-- depends if blanks should be allowe?? ! )
+    delete thisUser.likes2;
+    // remove currentUser submission (-- depends if blanks should be allowe?? ! )
     Object.keys(thisUser).reduce((acc, k) => !thisUser[k] && delete acc[k]);
     const info = { ...thisUser };
     info.location = userCoord[0] + "," + userCoord[1];
@@ -46,7 +47,7 @@ const MyProfile = ({ APPDATA }) => {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
       await axios.post(
-        `${APPDATA.BACKEND}/api/users/${userName.toLowerCase()}`,
+        `${APPDATA.BACKEND}/api/users/${currentUser.toLowerCase()}`,
         info
       );
       alert("Updated");
