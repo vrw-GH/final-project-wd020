@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
 import Title from "./Title";
 import axios from "axios";
+import "../../loading.css";
 import "./_Page.css";
 
 const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   const [titles, setTitles] = useState([]);
   const [total, setTotal] = useState(0);
-  // eslint-disable-next-line
-  const [error, setError] = useState(null);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const recipes = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-        setTitles(recipes.data.tuples.filter(filterPosts));
-        setTotal(recipes.data.tuples.filter(filterPosts).length);
-      })();
+      const getRecipes = async () => {
+        try {
+          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+          if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
+          setTitles(results.data.tuples.filter(filterPosts));
+          setTotal(results.data.tuples.filter(filterPosts).length);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getRecipes();
     }
     return () => {
       isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
@@ -33,7 +39,13 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
     }
   };
 
-  if (error) return <div>{error}</div>;
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
   return (
     <div

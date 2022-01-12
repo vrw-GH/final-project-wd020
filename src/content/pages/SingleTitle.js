@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import "../../loading.css";
+import "../../loading.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
   const currentUser = sessionStorage.getItem("currentUser");
   const [recipe, setRecipe] = useState([]);
-  const [error, setError] = useState(null); // TODO: return an error "page"?
+  const [err, setErr] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [thisUserLikes, setThisUserLikes] = useState([]);
 
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/${id}`);
-        setRecipe(results.data.tuple[0]);
-      })();
+      const getRecipe = async () => {
+        try {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/recipes/${id}`
+          );
+          if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
+          setRecipe(results.data.tuple[0]);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getRecipe();
     }
     return () => {
       isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
@@ -26,40 +34,50 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    let isLoaded = true;
-    if (isLoaded) {
-      (async () => {
-        const results = await axios.get(
-          `${APPDATA.BACKEND}/api/users/${currentUser}`
-        );
-        setThisUserLikes(
-          results.data.tuple[0].likes ? results.data.tuple[0].likes : []
-        );
-        // console.log(results.data.tuple[0].likes.find(recipe.slug));
-        // setIsLiked(results.data.tuple[0].likes.find(recipe.slug));
-      })();
-    }
-    return () => {
-      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
-    };
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   let isLoaded = true;
+  //   if (isLoaded) {
+  //     const getUser = async () => {
+  //       try {
+  //         const results = await axios.get(
+  //           `${APPDATA.BACKEND}/api/users/${currentUser}`
+  //         );
+  //         if (!results.data.tuple[0]) throw new Error("No User Data.");
+  //         setThisUserLikes(
+  //           results.data.tuple[0].likes ? results.data.tuple[0].likes : []
+  //         );
+  //       } catch (error) {
+  //         setErr(error.message);
+  //       }
+  //     };
+  //     getUser();
+  //   }
+  //   return () => {
+  //     isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
+  //   };
+  //   // eslint-disable-next-line
+  // }, []);
 
   useEffect(() => {
     let isLoaded = true;
     if (currentUser) {
       if (isLoaded) {
-        (async () => {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/users/${currentUser}`
-          );
-          let res2 = results.data.tuple[0].likes
-            ? results.data.tuple[0].likes
-            : [];
-          setThisUserLikes(res2);
-          if (res2.length !== 0) setIsLiked(res2.includes(recipe.slug));
-        })();
+        const getUser = async () => {
+          try {
+            const results = await axios.get(
+              `${APPDATA.BACKEND}/api/users/${currentUser}`
+            );
+            if (!results.data.tuple[0]) throw new Error("No User Data.");
+            let res2 = results.data.tuple[0].likes
+              ? results.data.tuple[0].likes
+              : [];
+            setThisUserLikes(res2);
+            if (res2.length !== 0) setIsLiked(res2.includes(recipe.slug));
+          } catch (error) {
+            setErr(error.message);
+          }
+        };
+        getUser();
       }
     }
     return () => {
@@ -68,11 +86,11 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, [recipe]);
 
-  if (error)
+  if (err)
     return (
       <div className="loading_container">
         <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{error}</h4>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
       </div>
     );
 
