@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router";
+import "../../loading.css";
 import "./CreateTitle.css";
 
 const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   const [published, setPublished] = useState(false);
-  // eslint-disable-next-line
+  const [err, setErr] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   // eslint-disable-next-line
   const [ingredient, setIngredient] = useState([]);
@@ -23,28 +24,32 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const axiosData = await axios.get(
-          `${APPDATA.BACKEND}/api/ingredients/`
-        );
-        const finalData = await axiosData.data.tuples.map((obj) => ({
-          checked: false,
-          ...obj,
-        }));
+      const getIngr = async () => {
+        try {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/ingredients/`
+          );
+          if (!results.data.tuples) {
+            throw new Error("No Ingredients Data.");
+          }
 
-        const sortedData = finalData.sort((a, b) => {
-          let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
-          let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1; //nameA comes first
-          }
-          if (nameA > nameB) {
-            return 1; // nameB comes first
-          }
-          return 0; // names must be equal
-        });
-        setIngredients(sortedData);
-      })();
+          const finalData = await results.data.tuples.map((obj) => ({
+            checked: false,
+            ...obj,
+          }));
+          const sortedData = finalData.sort((a, b) => {
+            let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
+            let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) return -1; //nameA comes first
+            if (nameA > nameB) return 1; // nameB comes first
+            return 0; // names must be equal
+          });
+          setIngredients(sortedData);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getIngr();
     }
     return () => {
       isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
@@ -64,7 +69,8 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
       await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
       setPublished(true);
     } catch (error) {
-      window.alert(error);
+      // alert(error);
+      setErr(error.message);
     }
   };
 
@@ -128,6 +134,13 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
     return data;
   };
 
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
   let k = 0;
   return (
     <>

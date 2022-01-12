@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import "../../loading.css";
 import "./Categories.css";
 
 export default function Categories({ categories, BACKEND }) {
@@ -15,21 +16,34 @@ export default function Categories({ categories, BACKEND }) {
 }
 
 function CtgList({ ctg, BACKEND }) {
+  const [err, setErr] = useState(null);
+
   useEffect(() => {
-    // setLoading(true);
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        // eslint-disable-next-line
-        const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
-        // setLoading(false);
-      })();
+      const getCat = async () => {
+        try {
+          const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
+          if (!results.data.tuple[0]) throw new Error("No Categories Data.");
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getCat();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false;
     };
     // eslint-disable-next-line
   }, []);
+
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
   return (
     <div className="categories_container">

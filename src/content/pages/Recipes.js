@@ -1,34 +1,42 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipesSlider from "./RecipesSlider";
+import "../../loading.css";
 import "./_Page.css";
 
 const Recipes = ({ loading, categories, APPDATA }) => {
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [err, setErr] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const [andOr, setAndOr] = useState(false); // false=OR
 
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const axiosData = await axios.get(
-          `${APPDATA.BACKEND}/api/ingredients/`
-        );
-        const finalData = await axiosData.data.tuples.map((obj) => ({
-          checked: false,
-          ...obj,
-        }));
-        const sortedData = finalData.sort((a, b) => {
-          let nameA = a.ingredient_name.toUpperCase();
-          let nameB = b.ingredient_name.toUpperCase();
-          if (nameA < nameB) return -1;
-          if (nameA > nameB) return 1;
-          return 0;
-        });
-        setIngredients(sortedData);
-      })();
+      const getIngr = async () => {
+        try {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/ingredients/`
+          );
+          if (!results.data.tuples[0]) throw new Error("No Ingredients Data.");
+          const finalData = await results.data.tuples.map((obj) => ({
+            checked: false,
+            ...obj,
+          }));
+          const sortedData = finalData.sort((a, b) => {
+            let nameA = a.ingredient_name.toUpperCase();
+            let nameB = b.ingredient_name.toUpperCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+          });
+          setIngredients(sortedData);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getIngr();
     }
     return () => {
       isLoaded = false; //    avoids a mem leak (of the promise) on unloaded component
@@ -39,11 +47,17 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const axiosData = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-        const filterdData = await axiosData.data.tuples.filter(filterItems);
-        setRecipes(filterdData);
-      })();
+      const getrecipes = async () => {
+        try {
+          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+          if (!results.data.tuples[0]) throw new Error("No Ingredients Data.");
+          const filterdData = await results.data.tuples.filter(filterItems);
+          setRecipes(filterdData);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getrecipes();
     }
     return () => {
       isLoaded = false;
@@ -100,8 +114,15 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     setAndOr(!andOr);
   };
 
-  let key = 0;
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
+  let key = 0;
   return (
     <>
       <div

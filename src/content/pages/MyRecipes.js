@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "../../loading.css";
 import "./_Page.css";
 
 const MyRecipes = ({ APPDATA }) => {
   const currentUser = sessionStorage.getItem("currentUser");
   const [recipes, setRecipes] = useState([]);
   const [thisUserLikes, setThisUserLikes] = useState([]);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const axiosData = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-        setRecipes(axiosData.data.tuples);
-      })();
+      const getRecipes = async () => {
+        try {
+          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+          if (!results.data.tuples) throw new Error("No Recipe Data.");
+          setRecipes(results.data.tuples);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getRecipes();
     }
     return () => {
       isLoaded = false;
@@ -26,15 +34,21 @@ const MyRecipes = ({ APPDATA }) => {
     let isLoaded = true;
     if (currentUser) {
       if (isLoaded) {
-        (async () => {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/users/${currentUser}`
-          );
-          let res2 = results.data.tuple[0].likes
-            ? results.data.tuple[0].likes
-            : [];
-          setThisUserLikes(res2);
-        })();
+        const getUser = async () => {
+          try {
+            const results = await axios.get(
+              `${APPDATA.BACKEND}/api/users/${currentUser}`
+            );
+            if (!results.data.tuple) throw new Error("No User Data.");
+            let res2 = results.data.tuple[0].likes
+              ? results.data.tuple[0].likes
+              : [];
+            setThisUserLikes(res2);
+          } catch (error) {
+            setErr(error.message);
+          }
+        };
+        getUser();
       }
     }
     return () => {
@@ -42,6 +56,14 @@ const MyRecipes = ({ APPDATA }) => {
     };
     // eslint-disable-next-line
   }, []);
+
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
   let k = 0;
   return (

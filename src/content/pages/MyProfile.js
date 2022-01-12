@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MapChart from "./MapChart";
+import "../../loading.css";
 import "./_Page.css";
 import "./MyProfile.css";
 
@@ -9,23 +10,27 @@ const MyProfile = ({ APPDATA }) => {
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
+  const [err, setErr] = useState(null);
   const maxAllowedSize = 1024 * 50; //kb
 
   useEffect(() => {
-    (async () => {
+    const getUser = async () => {
       try {
         const results = await axios.get(
           `${APPDATA.BACKEND}/api/users/${currentUser}`
         );
+        if (!results.data.tuple[0]) throw new Error("No User Data.");
         setThisUser(results.data.tuple[0]);
         setUserCoord([
           results.data.tuple[0].location.x,
           results.data.tuple[0].location.y,
         ]);
       } catch (error) {
-        alert("User Data - Get " + error);
+        // alert("User Data - Get " + error);
+        setErr(error.message);
       }
-    })();
+    };
+    getUser();
     return () => {};
     //eslint-disable-next-line
   }, []);
@@ -103,6 +108,14 @@ const MyProfile = ({ APPDATA }) => {
     };
     reader.readAsDataURL(e.target.files[0]);
   };
+
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
   return (
     <div

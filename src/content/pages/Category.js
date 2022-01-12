@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Category.css";
-import Title from "./Title.js";
 import axios from "axios";
+import Title from "./Title.js";
+import "../../loading.css";
+import "./Category.css";
 
 const Category = ({ categories, APPDATA }) => {
   let { category } = useParams();
   category = category.toUpperCase();
   const [posts, setPosts] = useState([]);
-  // eslint-disable-next-line
-  const [error, setError] = useState(null);
+  const [err, setErr] = useState(null);
   const ctgID = categories.find(
     (el) => el.name.toUpperCase() === category
   ).category_id;
@@ -17,10 +17,16 @@ const Category = ({ categories, APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
-        const recipes = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-        setPosts(recipes.data.tuples.filter(filterItems));
-      })();
+      const getRecipes = async () => {
+        try {
+          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+          if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
+          setPosts(results.data.tuples.filter(filterItems));
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getRecipes();
     }
     return () => {
       isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
@@ -28,7 +34,13 @@ const Category = ({ categories, APPDATA }) => {
     // eslint-disable-next-line
   }, [category]);
 
-  if (error) return <div>{error}</div>;
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
 
   const filterItems = (items) => {
     if (category) {

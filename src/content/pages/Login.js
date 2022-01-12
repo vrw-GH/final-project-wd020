@@ -8,7 +8,6 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   let navigate = useNavigate();
 
   let username = "";
-  // Toggle log-out if logged in
   if (sessionStorage.getItem("currentUser")) {
     sessionStorage.removeItem("currentUser");
     setCurrentUser("");
