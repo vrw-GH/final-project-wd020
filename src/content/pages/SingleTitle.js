@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../../loading.css";
+// import "../../loading.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
@@ -54,11 +54,11 @@ const SingleTitle = ({ APPDATA }) => {
           const results = await axios.get(
             `${APPDATA.BACKEND}/api/users/${currentUser}`
           );
-          setThisUserLikes(
-            results.data.tuple[0].likes ? results.data.tuple[0].likes : []
-          );
-          // console.log(results.data.tuple[0].likes.find(recipe.slug));
-          // setIsLiked(results.data.tuple[0].likes.find(recipe.slug));
+          let res2 = results.data.tuple[0].likes
+            ? results.data.tuple[0].likes
+            : [];
+          setThisUserLikes(res2);
+          if (res2.length !== 0) setIsLiked(res2.includes(recipe.slug));
         })();
       }
     }
@@ -66,7 +66,7 @@ const SingleTitle = ({ APPDATA }) => {
       isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
-  }, []);
+  }, [recipe]);
 
   if (error)
     return (
@@ -89,17 +89,15 @@ const SingleTitle = ({ APPDATA }) => {
           }
         }
       }
-      console.log(thisUserLikes);
-      // (async () => {
-      //   try {
-      //     await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
-      //       likes: thisUserLikes,
-      //     });
-      //     console.log(thisUserLikes);
-      //   } catch (error) {
-      //     setError("Post User Data " + error);
-      //   }
-      // })();
+      (async () => {
+        //   try {
+        await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
+          likes: thisUserLikes,
+        });
+        //  } catch (error) {
+        //    setError("Post User Data " + error);
+        //  }
+      })();
       return setIsLiked(!isLiked);
     }
     if (currentUser === recipe.username) return alert("Edit");

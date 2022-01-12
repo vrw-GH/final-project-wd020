@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import "./_Page.css";
 
 const MyRecipes = ({ APPDATA }) => {
-  const userName = sessionStorage.getItem("currentUser");
+  const currentUser = sessionStorage.getItem("currentUser");
   const [recipes, setRecipes] = useState([]);
+  const [thisUserLikes, setThisUserLikes] = useState([]);
 
   useEffect(() => {
     let isLoaded = true;
@@ -17,6 +18,27 @@ const MyRecipes = ({ APPDATA }) => {
     }
     return () => {
       isLoaded = false;
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    let isLoaded = true;
+    if (currentUser) {
+      if (isLoaded) {
+        (async () => {
+          const results = await axios.get(
+            `${APPDATA.BACKEND}/api/users/${currentUser}`
+          );
+          let res2 = results.data.tuple[0].likes
+            ? results.data.tuple[0].likes
+            : [];
+          setThisUserLikes(res2);
+        })();
+      }
+    }
+    return () => {
+      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
   }, []);
@@ -55,7 +77,7 @@ const MyRecipes = ({ APPDATA }) => {
             // }
             >
               {recipes
-                .filter((it) => it.username === userName)
+                .filter((it) => it.username === currentUser)
                 .map((recipe) => (
                   <li key={k++}>
                     <Link to={`/recipes/${recipe.slug}`} className="link">
@@ -73,13 +95,15 @@ const MyRecipes = ({ APPDATA }) => {
                 listStyleImage: recipes.title_img || recipes.image,
               }}
             >
-              {recipes.map((recipe) => (
-                <li key={k++}>
-                  <Link to={`/recipes/${recipe.slug}`} className="link">
-                    {recipe.title}
-                  </Link>
-                </li>
-              ))}
+              {recipes
+                .filter((it) => thisUserLikes.includes(it.slug))
+                .map((recipe) => (
+                  <li key={k++}>
+                    <Link to={`/recipes/${recipe.slug}`} className="link">
+                      {recipe.title}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
