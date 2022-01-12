@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import "../../loading.css";
 import "./_Page.css";
 
@@ -66,6 +68,7 @@ const MyRecipes = ({ APPDATA }) => {
     );
 
   let k = 0;
+  let k2 = 0;
   return (
     <div
       className="page-container"
@@ -79,55 +82,77 @@ const MyRecipes = ({ APPDATA }) => {
         </h2>
       </div>
       <div
-        className="page-box col-11"
+        className="page-box col-10"
         style={{
           width: "90%",
         }}
       >
-        <div className="row">
-          <div className="col-5" style={{ backgroundColor: "lightgrey" }}>
-            <u>My own recipes</u>
-            <ul
-            // style={
-            //   {
-            //     // listStyleType: "upper-roman",
-            //     // color: "black",
-            //     // border: "2px solid blue",
-            //     // backgroundColor: "lightblue",
-            //     listStyleImage: recipes.title_img || recipes.image,
-            //   }
-            // }
-            >
-              {recipes
-                .filter((it) => it.username === currentUser)
-                .map((recipe) => (
-                  <li key={k++}>
-                    <Link to={`/recipes/${recipe.slug}`} className="link">
-                      {recipe.title}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className="col-7" style={{ backgroundColor: "lightyellow" }}>
-            <u>My liked recipes</u>
-            <ul
-              style={{
-                // listStyleType: "upper-roman",
-                listStyleImage: recipes.title_img || recipes.image,
-              }}
-            >
-              {recipes
-                .filter((it) => thisUserLikes.includes(it.slug))
-                .map((recipe) => (
-                  <li key={k++}>
-                    <Link to={`/recipes/${recipe.slug}`} className="link">
-                      {recipe.title}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
+        <div className="col-11">
+          <Tabs>
+            <TabList>
+              <Tab style={{ backgroundColor: "orange" }}>✍ By me</Tab>
+              <Tab style={{ backgroundColor: "lightgreen" }}>✅ Favourites</Tab>
+            </TabList>
+
+            <TabPanel>
+              <ul
+                style={{
+                  listStyle: "none",
+                  paddingLeft: "0",
+                }}
+              >
+                {recipes
+                  .filter((it) => it.username === currentUser)
+                  .map((recipe) => (
+                    <li key={k++}>
+                      <Link to={`/recipes/${recipe.slug}`} className="link">
+                        <pre>
+                          <img
+                            src={recipe.title_img || recipe.image}
+                            style={{ height: "60px" }}
+                            alt={k + 1}
+                            title={k + 1}
+                          />
+                          {"  "}
+                          <text style={{ fontSize: "1.5rem" }}>
+                            {recipe.title}
+                          </text>
+                        </pre>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </TabPanel>
+            <TabPanel>
+              <ul
+                style={{
+                  listStyle: "none",
+                  paddingLeft: "0",
+                }}
+              >
+                {recipes
+                  .filter((it) => thisUserLikes.includes(it.slug))
+                  .map((recipe) => (
+                    <li key={k2++}>
+                      <Link to={`/recipes/${recipe.slug}`} className="link">
+                        <pre>
+                          <img
+                            src={recipe.title_img || recipe.image}
+                            style={{ height: "60px" }}
+                            alt={k2 + 1}
+                            title={k2 + 1}
+                          />
+                          {"  "}
+                          <text style={{ fontSize: "1.5rem" }}>
+                            {recipe.title}
+                          </text>
+                        </pre>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </TabPanel>
+          </Tabs>
         </div>
       </div>
     </div>

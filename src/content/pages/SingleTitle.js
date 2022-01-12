@@ -81,9 +81,8 @@ const SingleTitle = ({ APPDATA }) => {
       }
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false;
     };
-    // eslint-disable-next-line
   }, [recipe]);
 
   if (err)
@@ -107,15 +106,16 @@ const SingleTitle = ({ APPDATA }) => {
           }
         }
       }
-      (async () => {
-        //   try {
-        await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
-          likes: thisUserLikes,
-        });
-        //  } catch (error) {
-        //    setError("Post User Data " + error);
-        //  }
-      })();
+      const postUser = async () => {
+        try {
+          await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
+            likes: thisUserLikes,
+          });
+        } catch (error) {
+          setErr("Post User Data " + error);
+        }
+      };
+      postUser();
       return setIsLiked(!isLiked);
     }
     if (currentUser === recipe.username) return alert("Edit");

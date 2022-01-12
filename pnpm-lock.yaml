@@ -7,6 +7,7 @@ specifiers:
   bootstrap: ^5.1.3
   gh-pages: ^3.2.3
   jquery: ^3.6.0
+  pigeon-maps: ^0.19.7
   prop-types: ^15.8.1
   react: ^17.0.2
   react-bootstrap: ^2.0.2
@@ -17,6 +18,7 @@ specifiers:
   react-scripts: 4.0.3
   react-simple-maps: ^2.3.0
   react-slick: ^0.28.1
+  react-tabs: ^3.2.3
   slick-carousel: ^1.8.1
   typescript: ^4.5.4
   web-vitals: ^1.1.2
@@ -27,6 +29,7 @@ dependencies:
   axios: 0.24.0
   bootstrap: 5.1.3_@popperjs+core@2.11.0
   jquery: 3.6.0
+  pigeon-maps: 0.19.7_react@17.0.2
   prop-types: 15.8.1
   react: 17.0.2
   react-bootstrap: 2.0.4_react-dom@17.0.2+react@17.0.2
@@ -37,6 +40,7 @@ dependencies:
   react-scripts: 4.0.3_react@17.0.2+typescript@4.5.4
   react-simple-maps: 2.3.0_75cb922c19ee1b7939faae9b4d1f4cf7
   react-slick: 0.28.1_react-dom@17.0.2+react@17.0.2
+  react-tabs: 3.2.3_react@17.0.2
   slick-carousel: 1.8.1_jquery@3.6.0
   typescript: 4.5.4
   web-vitals: 1.1.2
@@ -3778,6 +3782,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 6.2.0
+    dev: false
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
     dev: false
 
   /co/4.6.0:
@@ -8578,6 +8587,14 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /pigeon-maps/0.19.7_react@17.0.2:
+    resolution: {integrity: sha512-8yS5o7lr3mr5674Cfkxrk3EqPiV6WjGBrpVKNn6/40bTdH5qq2NNXK2Iu0fQcDRRZ6mTtXHX0tJAO1tp8ZKBNg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 17.0.2
+    dev: false
+
   /pinkie-promise/2.0.1:
     resolution: {integrity: sha1-ITXW36ejWMBprJsXh3YogihFD/o=}
     engines: {node: '>=0.10.0'}
@@ -9776,6 +9793,16 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resize-observer-polyfill: 1.5.1
+    dev: false
+
+  /react-tabs/3.2.3_react@17.0.2:
+    resolution: {integrity: sha512-jx325RhRVnS9DdFbeF511z0T0WEqEoMl1uCE3LoZ6VaZZm7ytatxbum0B8bCTmaiV0KsU+4TtLGTGevCic7SWg==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0-0
+    dependencies:
+      clsx: 1.1.1
+      prop-types: 15.8.1
+      react: 17.0.2
     dev: false
 
   /react-transition-group/4.4.2_react-dom@17.0.2+react@17.0.2:
