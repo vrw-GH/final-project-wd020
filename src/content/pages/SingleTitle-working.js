@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import "../../loading.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
-  const currentUser = sessionStorage.getItem("currentUser");
   const [recipe, setRecipe] = useState([]);
-  const [error, setError] = useState(null); // TODO: return an error "page"?
+  // eslint-disable-next-line
+  const [error, setError] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
-  const [thisUserLikes, setThisUserLikes] = useState([]);
+  const currentUser = sessionStorage.getItem("currentUser");
 
   useEffect(() => {
     let isLoaded = true;
@@ -21,85 +20,16 @@ const SingleTitle = ({ APPDATA }) => {
       })();
     }
     return () => {
-      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    let isLoaded = true;
-    if (isLoaded) {
-      (async () => {
-        const results = await axios.get(
-          `${APPDATA.BACKEND}/api/users/${currentUser}`
-        );
-        setThisUserLikes(
-          results.data.tuple[0].likes ? results.data.tuple[0].likes : []
-        );
-        // console.log(results.data.tuple[0].likes.find(recipe.slug));
-        // setIsLiked(results.data.tuple[0].likes.find(recipe.slug));
-      })();
-    }
-    return () => {
-      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    let isLoaded = true;
-    if (currentUser) {
-      if (isLoaded) {
-        (async () => {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/users/${currentUser}`
-          );
-          let res2 = results.data.tuple[0].likes
-            ? results.data.tuple[0].likes
-            : [];
-          setThisUserLikes(res2);
-          if (res2.length !== 0) setIsLiked(res2.includes(recipe.slug));
-        })();
-      }
-    }
-    return () => {
       isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
-  }, [recipe]);
+  }, []);
 
-  if (error)
-    return (
-      <div className="loading_container">
-        <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{error}</h4>
-      </div>
-    );
+  if (error) return <div>{error}</div>;
 
-  const handleLikeEdit = (e) => {
+  const handleClick = (e) => {
     if (!currentUser) return alert("You must be logged in");
-
-    if (currentUser !== recipe.username) {
-      if (!isLiked) {
-        thisUserLikes.push(recipe.slug);
-      } else {
-        for (let i = 0; i < thisUserLikes.length; i++) {
-          if (thisUserLikes[i] === recipe.slug) {
-            thisUserLikes.splice(i, 1);
-          }
-        }
-      }
-      (async () => {
-        //   try {
-        await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
-          likes: thisUserLikes,
-        });
-        //  } catch (error) {
-        //    setError("Post User Data " + error);
-        //  }
-      })();
-      return setIsLiked(!isLiked);
-    }
+    if (currentUser !== recipe.username) return setIsLiked(!isLiked);
     if (currentUser === recipe.username) return alert("Edit");
   };
 
@@ -126,7 +56,7 @@ const SingleTitle = ({ APPDATA }) => {
                 borderRadius: "6px",
                 padding: "4px",
               }}
-              onClick={(e) => handleLikeEdit(e)}
+              onClick={(e) => handleClick(e)}
             >
               {recipe.username === currentUser
                 ? "✍ Edit my Recipe "
