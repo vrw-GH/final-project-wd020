@@ -1,11 +1,13 @@
 import "./_Page.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'
+import Itemsrender from "../../components/itemsrender";
 //--------------------------------------------------------------------------------------
 const ShareItems = ({ loading, categories, APPDATA }) => {
   // const [error,setError] = useState("");
   const currentUser = (sessionStorage.getItem("currentUser"));
+  const [posts, setPosts] = useState([]);
   // const currentUser = "abdullah"
   const [info, setInfo] = useState({
 
@@ -15,6 +17,17 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
     location: ""
 
   })
+
+  useEffect(() => {
+    (async () => {
+      const fetchedData = await axios.get(
+        "https://avc-food-blog.herokuapp.com/api/shareitems"
+      );
+      setPosts(fetchedData.data.tuples);
+      console.log(fetchedData.data.tuples)
+    })();
+
+  }, []);
 
 
 
@@ -36,18 +49,18 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
       if (arrayofItems) { sendInfo.arrayofitems = arrayofItems }
       if (info.location) { sendInfo.location = info.location }
       console.log(sendInfo)
-      const { data } = await axios.post(
+      const post = await axios.post(
         `https://avc-food-blog.herokuapp.com/api/shareitems/${currentUser}`, sendInfo
-        // {
-        //   // username: info.username,
-        //   // arrayofitems: arrayofItems,
-        //   // sharestatus: info.sharestatus,
-        //   // message: info.message,
-        //   // location: "1,2"
-        // }
+      //   {
+      //   username: info.username,
+      //   arrayofitems: arrayofItems,
+      //   sharestatus: info.sharestatus,
+      //   message: info.message,
+      //   location: "1,2"
+      // }
 
       ).then(res => console.log(res.data));
-      console.log(data)
+      console.log(post)
 
     } catch (error) {
       console.log(error)
@@ -69,22 +82,26 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
 
   return (
     <>
-      <h2 className="h22">test sharing</h2>
+
       <form onSubmit={(e) => handleSubmit(e)} className="form">
+        <h2 className="h22">Update shared items</h2>
+        <br />
         <input className="arrayOfItems" type="text" placeholder="arrayofitems" onChange={(event) => handle(event)} id="arrayofitems" value={info.arrayofitems}></input>
-        <br /><br />
+        <br />
         <input className="category" type="text" placeholder="username" id="username" value={currentUser}>
         </input>
         <br />
-        <br />
-        <br />
-        <textarea cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></textarea>
+        <input cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></input>
         <br />
         <input type="text" placeholder="Location X,Y" onChange={(event) => handle(event)} id="location" value={info.location}></input>
-        <br /> <br />
-        <button className="btns">Submit</button>
-      </form>
 
+        <button className="btns">Update</button>
+      </form>
+      <div className="container mt-5">
+        <div className="row">
+          <Itemsrender />
+        </div>
+      </div>
     </>
 
   );

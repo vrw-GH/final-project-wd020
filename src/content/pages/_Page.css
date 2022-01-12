@@ -49,3 +49,14 @@
     border-radius: 15px;
     
   }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgb(131, 208, 238);
+    width: 400px;
+    border-radius: 20px;
+  }
