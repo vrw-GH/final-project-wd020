@@ -139,7 +139,7 @@ body{
   background-size: cover;
   border-radius: 20px;
   background-position-x: -47px;
-  margin: 20px;
+  margin: 50px;
   box-shadow: 1px 10px 25px rgb(236, 236, 236);
 }
 .aboutimg2 {
@@ -155,7 +155,7 @@ body{
   background-size: cover;
   border-radius: 20px;
   box-shadow: 1px 10px 25px rgb(236, 236, 236);
-  margin: 20px;
+  margin: 50px;
 }
 
 .color-overlay {
@@ -189,6 +189,7 @@ body{
 .cont1 {
   display: flex;
   margin: 50px;
+  
 }
 
 .lorem{
