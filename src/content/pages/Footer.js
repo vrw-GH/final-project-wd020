@@ -32,6 +32,7 @@ const Footer = ({ APPDATA }) => {
           </a>
         </li>
       </ul>
+      */}
       <ul className="ul2">
         <li>Development Team: {APPDATA.DEVTEAM}</li>
         <li>
@@ -48,7 +49,7 @@ const Footer = ({ APPDATA }) => {
         </li>
         <li>Phone: {APPDATA.PHONE}</li>
         <li>{APPDATA.LOCATION}</li>
-      </ul> */}
+      </ul> 
       <ul className="ul3">
        <li>
         <a href="https://www.facebook.com/abdullah.shabk">
@@ -71,7 +72,9 @@ const Footer = ({ APPDATA }) => {
         </a>
         </li>
       </ul>
+      
     </div>
+    
   );
 };
 

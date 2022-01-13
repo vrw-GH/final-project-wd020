@@ -3,9 +3,11 @@
   flex-direction: row;
   align-items:stretch;
   padding-top:3px;
+  justify-content: space-between;
 }
 
 .ftImg {
+  
   width: 100%;
   min-height: 320px;
   max-height: 330px;
@@ -13,24 +15,43 @@
   position: absolute;
 }
 
-.ul1, .ul2, .ul3 {
 
+.ul1, .ul2{
+  background: rgb(10, 0, 70);
+  color: rgb(255, 255, 255);
+  font-family: "Amble LtCn", Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: 1000;
+  opacity: 70%;
+  list-style: none;
+  position: relative;
+  margin-top: 190px;
+  line-height: 20px;
+  padding: 10px;
+  padding-left: 40px;
+  height: 100px;
+  width: 45%;
+  border-radius: 0px 15px 15px 0px;
+  font-size: .8rem;
+  left: 0px;
+}
+
+
+
+.ul3 {
   list-style: none;
   position: relative;
   margin-top: 90px;
   line-height: 40px;
-
-  
-  font-size: .8rem;
-  
-  padding: 25px;
-  
+  font-size: .8rem; 
+  margin-right: 50px;
 }
+
 .ul1 {
-  max-width: 60%;
+  max-width: 50%;
 }
 .ul2 {
-  min-width: 30%;
+  min-width: 20%;
 }
 .ul3 {
   min-width: 90px;
