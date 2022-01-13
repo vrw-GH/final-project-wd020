@@ -20,6 +20,7 @@
     "react-router": "^6.1.1",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-simple-hook-modal": "^1.1.0",
     "react-simple-maps": "^2.3.0",
     "react-slick": "^0.28.1",
     "react-tabs": "^3.2.3",
