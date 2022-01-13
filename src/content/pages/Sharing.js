@@ -1,32 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import { Link } from "react-router-dom";
-// import Itemsrender from "../../components/itemsrender";
-// import Fetched from "../../components/Fetched";
 import "./_Page.css";
 import MapChart2 from "./MapChart2";
 
 //--------------------------------------------------------------------------------------
 const Sharing = ({ APPDATA }) => {
-  // const currentUser = sessionStorage.getItem("currentUser");
   const [shareItems, setShareItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
   const [err, setErr] = useState("");
   const [filterPLZ, setFilterPLZ] = useState("");
-  // const currentUser = "abdullah"
-  // const [info, setInfo] = useState({
-  //   sharestatus: "",
-  //   arrayofitems: [],
-  //   message: "",
-  //   location: "",
-  // });
 
   useEffect(() => {
     const getShareItems = async () => {
       try {
         const results = await axios.get(`${APPDATA.BACKEND}/api/shareitems`);
         if (!results.data.tuples) throw new Error("No Ingredients Data.");
-        setShareItems(results.data.tuples);
+        const filterdData = results.data.tuples.filter(
+          // ({ sharestatus }) => sharestatus !== "D" // only "Active" items (NOT "D")
+          ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing
+        );
+        setShareItems(filterdData);
+        setFilteredItems(filterdData);
         // console.log(results.data.tuples);
       } catch (error) {
         setErr(error.message);
@@ -37,17 +32,32 @@ const Sharing = ({ APPDATA }) => {
   }, []); // get only once
 
   useEffect(() => {
-    const filterdData = shareItems.filter(({ plz }) => (plz = filterPLZ));
-    setShareItems(filterdData);
-    console.log(filterdData);
+    const filterdData = shareItems.filter(({ plz }) =>
+      filterPLZ ? plz === filterPLZ : true
+    );
+    setFilteredItems(filterdData);
+    // console.log(filterdData);
+    // setSelectedItem([
+    //   [filterdData[0].location.y, filterdData[0].location.x],
+    //   filterdData[0].plz,
+    //   filterdData[0].message,
+    //   filterdData[0].username,
+    //   filterdData[0].datetime,
+    // ]);
+    setSelectedItem([]);
     return () => {};
     // eslint-disable-next-line
   }, [filterPLZ]);
 
-  const itemClick = (e, item) => {
-    // const location = Object.values(item.location);
-    const location = [item.location.y, item.location.x];
-    setSelectedItem([location, item.plz]);
+  const itemClick = (item) => {
+    setSelectedItem([
+      [item.location.y, item.location.x],
+      item.plz,
+      item.message,
+      item.username,
+      item.datetime,
+      item.arrayofitems,
+    ]);
   };
 
   const setPLZ = (e) => {
@@ -83,18 +93,20 @@ const Sharing = ({ APPDATA }) => {
           }}
         >
           <div className="row">
-            {/* <strong style={{ color: "black" }}>Filter</strong> */}
             <li>
               <strong>
-                <label htmlFor="categories">Filter by PLZ : &nbsp;</label>
+                <label htmlFor="filter">Filter by PLZ : &nbsp;</label>
               </strong>
               <select value={filterPLZ} onChange={setPLZ}>
                 <option value="">All</option>
-                {shareItems.map((item) => (
-                  <option key={k++} value={item.plz}>
-                    {item.plz}
-                  </option>
-                ))}
+                {filteredItems
+                  // .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+                  .sort()
+                  .map((item) => (
+                    <option key={k++} value={item.plz}>
+                      {item.plz}
+                    </option>
+                  ))}
               </select>
             </li>
 
@@ -108,27 +120,34 @@ const Sharing = ({ APPDATA }) => {
                   <u>Share Basket</u>
                 </h6>
                 <ul style={{ padding: "0px" }}>
-                  {shareItems
+                  {filteredItems
                     .filter((it) => true)
                     .map((item) => (
                       <li
                         key={k++}
-                        onClick={(e) => itemClick(e, item)}
+                        onClick={(e) => itemClick(item)}
                         style={{ cursor: "pointer" }}
                       >
-                        {/* <Link to={`/recipes/${recipe.slug}`} className="link"> */}
                         <pre>
                           {item.arrayofitems}
                           <span style={{ color: "grey", fontSize: "0.8rem" }}>
                             (Shared by {item.username})
                           </span>
                         </pre>
-                        {/* </Link> */}
                       </li>
                     ))}
                 </ul>
               </div>
-              <div className="container col-5" style={{ width: "35vh" }}>
+              <div className="container col-6" style={{ width: "35vh" }}>
+                <strong>{selectedItem[5] || "<Items to share>"}</strong>
+                <br />
+                {selectedItem[2] || "<Message>"}
+                <p style={{ fontSize: "0.5rem" }}>
+                  By: {selectedItem[3]}
+                  <br />
+                  Submitted on:{selectedItem[4]}
+                </p>
+                <button hidden={!selectedItem[1]}>Book Item</button>
                 <MapChart2
                   coordinates={selectedItem[0]}
                   plz={selectedItem[1]}
@@ -143,94 +162,3 @@ const Sharing = ({ APPDATA }) => {
 };
 
 export default Sharing;
-
-// const handleSubmit = async (e) => {
-//   try {
-//     e.preventDefault();
-
-//     let arrayofItems = [];
-//     arrayofItems.push(info.arrayofitems);
-//     let sendInfo = {};
-
-//     if (info.sharestatus) {
-//       sendInfo.sharestatus = info.sharestatus;
-//     }
-//     if (info.message) {
-//       sendInfo.message = info.message;
-//     }
-//     if (arrayofItems) {
-//       sendInfo.arrayofitems = arrayofItems;
-//     }
-//     if (info.location) {
-//       sendInfo.location = info.location;
-//     }
-//     console.log(sendInfo);
-//     const post = await axios
-//       .post(
-//         `${APPDATA.BACKEND}/api/shareitems/${currentUser}`,
-//         sendInfo
-//         //   {
-//         //   username: info.username,
-//         //   arrayofitems: arrayofItems,
-//         //   sharestatus: info.sharestatus,
-//         //   message: info.message,
-//         //   location: "1,2"
-//         // }
-//       )
-//       .then((res) => console.log(res.data));
-//     console.log(post);
-//   } catch (error) {
-//     console.log(error);
-//     // setError("Created")
-//   }
-// };
-
-// function handle(event) {
-//   event.preventDefault();
-//   const newInfo = { ...info };
-//   newInfo[event.target.id] = event.target.value;
-//   setInfo(newInfo);
-//   console.log(newInfo);
-// }
-
-//   {/* <form onSubmit={(e) => handleSubmit(e)} className="form">
-//         <h2 className="h22">Update shared items</h2>
-//         <br />
-//         <input
-//           className="arrayOfItems"
-//           type="text"
-//           placeholder="arrayofitems"
-//           onChange={(event) => handle(event)}
-//           id="arrayofitems"
-//           value={info.arrayofitems}
-//         ></input>
-//         <br />
-//         <input
-//           className="category"
-//           type="text"
-//           placeholder="username"
-//           id="username"
-//           value={currentUser}
-//         ></input>
-//         <br />
-//         <input
-//           cols="40"
-//           rows="8"
-//           className="ingredients"
-//           type="text"
-//           placeholder="message"
-//           onChange={(event) => handle(event)}
-//           id="message"
-//           value={info.message}
-//         ></input>
-//         <br />
-//         <input
-//           type="text"
-//           placeholder="Share status"
-//           onChange={(event) => handle(event)}
-//           id="sharestatus"
-//           value={info.sharestatus}
-//         ></input>
-
-//         <button className="btns">Update</button>
-//       </form> */}
