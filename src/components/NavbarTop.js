@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import * as ReactBootStrap from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Background from "./Background.png"
+import Background from "./Background.png";
 
 const NavbarTop = ({
   APPDATA,
@@ -14,15 +14,13 @@ const NavbarTop = ({
   categories,
   currentUser,
 }) => {
-  // let key = 0;
   return (
     <>
-      <Navbar id="nav" collapseOnSelect expand="md" >
+      <Navbar id="nav" collapseOnSelect expand="md">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img
             src={Background}
-
             alt="logo"
             width="50"
             height="50"
@@ -48,35 +46,22 @@ const NavbarTop = ({
             >
               Recipes
             </ReactBootStrap.NavLink>
-
-            {/* <NavDropdown title="Recipes" id="collapsible-nav-dropdown">
-              <ul>
-                {categories.map((item) => (
-                  <li key={key++}>
-                    <NavLink
-                      to={`categories/${item.name}`}
-                      href={item.name}
-                      onClick={handleClearQry}
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </NavDropdown> */}
           </Nav>
 
           <Nav className="me-auto">
             {currentUser ? (
               <>
-                <Navbar.Brand>{currentUser}:</Navbar.Brand>
-                <NavDropdown  title="My Food" id="collapsible-nav-dropdown">
+                <Navbar.Brand style={{ fontSize: "1.2rem" }}>
+                  {currentUser}:
+                </Navbar.Brand>
+                <NavDropdown title="My Food" id="collapsible-nav-dropdown">
                   <ul>
                     <li>
                       <NavLink
                         to="/myshare"
                         href="/myshare"
                         onClick={handleClearQry}
+                        style={{ color: "black" }}
                       >
                         My Sharing
                       </NavLink>
@@ -86,6 +71,7 @@ const NavbarTop = ({
                         to="/mytitles"
                         href="/mytitles"
                         onClick={handleClearQry}
+                        style={{ color: "black" }}
                       >
                         My Recipes
                       </NavLink>
@@ -95,6 +81,7 @@ const NavbarTop = ({
                         to="/newtitle"
                         href="/newtitle"
                         onClick={handleClearQry}
+                        style={{ color: "black" }}
                       >
                         New Recipe
                       </NavLink>
@@ -135,10 +122,6 @@ const NavbarTop = ({
                 </ReactBootStrap.NavLink>
               </>
             )}
-
-            {/* <ReactBootStrap.NavLink to="/" href="/" onClick={handleClearQry}>
-              About
-            </ReactBootStrap.NavLink> */}
           </Nav>
 
           <ReactBootStrap.Form className="d-flex">

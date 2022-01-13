@@ -34,30 +34,6 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   let isLoaded = true;
-  //   if (isLoaded) {
-  //     const getUser = async () => {
-  //       try {
-  //         const results = await axios.get(
-  //           `${APPDATA.BACKEND}/api/users/${currentUser}`
-  //         );
-  //         if (!results.data.tuple[0]) throw new Error("No User Data.");
-  //         setThisUserLikes(
-  //           results.data.tuple[0].likes ? results.data.tuple[0].likes : []
-  //         );
-  //       } catch (error) {
-  //         setErr(error.message);
-  //       }
-  //     };
-  //     getUser();
-  //   }
-  //   return () => {
-  //     isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
-  //   };
-  //   // eslint-disable-next-line
-  // }, []);
-
   useEffect(() => {
     let isLoaded = true;
     if (currentUser) {
@@ -83,6 +59,7 @@ const SingleTitle = ({ APPDATA }) => {
     return () => {
       isLoaded = false;
     };
+    // eslint-disable-next-line
   }, [recipe]);
 
   if (err)

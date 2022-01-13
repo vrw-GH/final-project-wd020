@@ -90,11 +90,13 @@ const MyRecipes = ({ APPDATA }) => {
         <div className="col-11">
           <Tabs>
             <TabList>
-              <Tab style={{ backgroundColor: "orange" }}>✍ By me</Tab>
-              <Tab style={{ backgroundColor: "lightgreen" }}>✅ Favourites</Tab>
+              <Tab style={{ backgroundColor: "orange" }}>✍ My Submissions</Tab>
+              <Tab style={{ backgroundColor: "lightgreen" }}>
+                ✅ My Favourites
+              </Tab>
             </TabList>
 
-            <TabPanel>
+            <TabPanel style={{ backgroundColor: "#fcf1d3" }}>
               <ul
                 style={{
                   listStyle: "none",
@@ -114,16 +116,16 @@ const MyRecipes = ({ APPDATA }) => {
                             title={k + 1}
                           />
                           {"  "}
-                          <text style={{ fontSize: "1.5rem" }}>
+                          <span style={{ fontSize: "1.5rem" }}>
                             {recipe.title}
-                          </text>
+                          </span>
                         </pre>
                       </Link>
                     </li>
                   ))}
               </ul>
             </TabPanel>
-            <TabPanel>
+            <TabPanel style={{ backgroundColor: "#cdfdc9" }}>
               <ul
                 style={{
                   listStyle: "none",
@@ -143,9 +145,9 @@ const MyRecipes = ({ APPDATA }) => {
                             title={k2 + 1}
                           />
                           {"  "}
-                          <text style={{ fontSize: "1.5rem" }}>
+                          <span style={{ fontSize: "1.5rem" }}>
                             {recipe.title}
-                          </text>
+                          </span>
                         </pre>
                       </Link>
                     </li>
