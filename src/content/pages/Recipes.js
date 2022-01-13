@@ -129,10 +129,11 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         className="page-container"
         style={{
           backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+          marginBottom: "0",
         }}
       >
         <div className="page-title">
-          <h2>-·≡ Recipes Home ≡·-</h2>
+          <h2>-‧≡ Recipes Home ≡‧-</h2>
         </div>
         <div
           className="page-box col-8"
@@ -196,7 +197,12 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   .map((ingr) => (
                     <span
                       key={ingr.ingredient_name}
-                      style={{ color: "white", fontSize: "0.8rem" }}
+                      style={{
+                        color: "red",
+                        backgroundColor: "lightgrey",
+                        colorAdjust: "economy",
+                        fontSize: "0.8rem",
+                      }}
                     >
                       &nbsp;
                       {ingr.ingredient_name
@@ -206,19 +212,20 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                     </span>
                   ))}
               </i>
-
               <br />
-              {ingredients.map((ingr) => (
-                <label key={key++}>
-                  <input
-                    type="checkbox"
-                    value={ingr.ingredient_id}
-                    checked={ingr.checked}
-                    onChange={selectIng}
-                  />
-                  {ingr.ingredient_name} &nbsp;&nbsp;
-                </label>
-              ))}
+              <div style={{ height: "100px", overflowY: "scroll" }}>
+                {ingredients.map((ingr) => (
+                  <label key={key++}>
+                    <input
+                      type="checkbox"
+                      value={ingr.ingredient_id}
+                      checked={ingr.checked}
+                      onChange={selectIng}
+                    />
+                    {ingr.ingredient_name} &nbsp;&nbsp;
+                  </label>
+                ))}
+              </div>
             </li>
           </ul>
         </div>

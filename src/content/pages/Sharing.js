@@ -1,119 +1,175 @@
-import "./_Page.css";
-
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
-import Itemsrender from "../../components/itemsrender";
-import { Container } from "react-bootstrap";
-import Selecteduser from "../../components/Selecteduser";
+import axios from "axios";
+import "./_Page.css";
+import MapChart2 from "./MapChart2";
 
 //--------------------------------------------------------------------------------------
-const ShareItems = ({ loading, categories, APPDATA }) => {
-  // const [error,setError] = useState("");
-  const currentUser = (sessionStorage.getItem("currentUser"));
-  // eslint-disable-next-line
-  const [posts, setPosts] = useState([]);
-  // const currentUser = "abdullah"
-  const [info, setInfo] = useState({
-
-    sharestatus: "",
-    arrayofitems: [],
-    message: "",
-    location: ""
-
-  })
+const Sharing = ({ APPDATA }) => {
+  const [shareItems, setShareItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
+  const [err, setErr] = useState("");
+  const [filterPLZ, setFilterPLZ] = useState("");
+  const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
 
   useEffect(() => {
-    (async () => {
-      const fetchedData = await axios.get(
-        "https://avc-food-blog.herokuapp.com/api/shareitems"
-      );
-      setPosts(fetchedData.data.tuples);
-      console.log(fetchedData.data.tuples)
-    })();
+    const getShareItems = async () => {
+      try {
+        const results = await axios.get(`${APPDATA.BACKEND}/api/shareitems`);
+        if (!results.data.tuples) throw new Error("No Ingredients Data.");
+        const filterdData = results.data.tuples.filter(
+          // ({ sharestatus }) => sharestatus !== "D" // only "Active" items (NOT "D")
+          ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing
+        );
+        setShareItems(filterdData);
+        setFilteredItems(filterdData);
+        // console.log(filterdData);
+      } catch (error) {
+        setErr(error.message);
+      }
+    };
+    getShareItems();
+    // eslint-disable-next-line
+  }, []); // get only once
 
-  }, []);
+  useEffect(() => {
+    const filterdData = shareItems.filter(({ plz }) =>
+      filterPLZ ? plz === filterPLZ : true
+    );
+    setFilteredItems(filterdData);
+    // console.log(filterdData);
+    // setSelectedItem([
+    //   [filterdData[0].location.y, filterdData[0].location.x],
+    //   filterdData[0].plz,
+    //   filterdData[0].message,
+    //   filterdData[0].username,
+    //   filterdData[0].datetime,
+    // ]);
+    setSelectedItem([]);
+    return () => {};
+    // eslint-disable-next-line
+  }, [filterPLZ]);
 
-
-
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-
-      let arrayofItems = []
-      arrayofItems.push(info.arrayofitems)
-      let sendInfo = {
-
-      };
-
-
-      if (info.sharestatus) { sendInfo.sharestatus = info.sharestatus }
-      if (info.message) { sendInfo.message = info.message }
-      if (arrayofItems) { sendInfo.arrayofitems = arrayofItems }
-      if (info.location) { sendInfo.location = info.location }
-      console.log(sendInfo)
-      const post = await axios.post(
-        `https://avc-food-blog.herokuapp.com/api/shareitems/${currentUser}`, sendInfo
-        //   {
-        //   username: info.username,
-        //   arrayofitems: arrayofItems,
-        //   sharestatus: info.sharestatus,
-        //   message: info.message,
-        //   location: "1,2"
-        // }
-
-      ).then(res => console.log(res.data));
-      console.log(post)
-
-    } catch (error) {
-      console.log(error)
-      // setError("Created")
-    }
-
-
+  const itemClick = (item) => {
+    setSelectedItem([
+      [item.location.y, item.location.x],
+      item.plz,
+      item.message,
+      item.username,
+      item.datetime,
+      item.arrayofitems,
+      item.sharestatus,
+    ]);
   };
-  function handle(event) {
-    event.preventDefault()
-    const newInfo = { ...info }
-    newInfo[event.target.id] = event.target.value
-    setInfo(newInfo)
-    console.log(newInfo)
-  }
 
+  const handleBooking = (e) => {
+    // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B"));
+    alert("Item Booked");
+  };
 
+  const setPLZ = (e) => {
+    setFilterPLZ(e.target.value);
+  };
 
+  if (err)
+    return (
+      <div className="loading_container">
+        <div className="loading"></div>
+        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
+      </div>
+    );
+
+  let k = 0;
 
   return (
     <>
-     
-        
-          <form onSubmit={(e) => handleSubmit(e)} className="form">
-            <h2 className="h22">Update shared items</h2>
-            <br />
-            <input className="arrayOfItems" type="text" placeholder="arrayofitems" onChange={(event) => handle(event)} id="arrayofitems" value={info.arrayofitems}></input>
-            <br />
-            <input className="category" type="text" placeholder="username" id="username" value={currentUser}>
-            </input>
-            <br />
-            <input cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></input>
-            <br />
-            <input type="text" placeholder="Share status" onChange={(event) => handle(event)} id="sharestatus" value={info.sharestatus}></input>
-
-            <button className="btns">Update</button>
-          </form>
-        
-          <div className="container mt-5">
-            <div className="row">
-              
-              <Itemsrender />
-            </div>
-          
+      <div
+        className="page-container"
+        style={{
+          backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+          marginBottom: "0",
+        }}
+      >
+        <div className="page-title">
+          <h2>-‧≡ Sharing Page ≡‧-</h2>
         </div>
-      
-    </>
+        <div
+          className="page-box "
+          style={{
+            width: "98%",
+          }}
+        >
+          <div className="row">
+            <li>
+              <strong>
+                <label htmlFor="filter">Filter by PLZ : &nbsp;</label>
+              </strong>
+              <select value={filterPLZ} onChange={setPLZ}>
+                <option value="">All</option>
+                {filteredItems
+                  // .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+                  .sort()
+                  .map((item) => (
+                    <option key={k++} value={item.plz}>
+                      {item.plz}
+                    </option>
+                  ))}
+              </select>
+            </li>
 
+            <div className="row" style={{ width: "100%" }}>
+              <div
+                className="col-6"
+                style={{ width: "50%", color: "red", overflowY: "scroll" }}
+              >
+                {/* <Itemsrender shareItems={getShareItems}/> */}
+                <h6>
+                  <u>Share Basket</u>
+                </h6>
+                <ul style={{ padding: "0px" }}>
+                  {filteredItems
+                    .filter((it) => true)
+                    .map((item) => (
+                      <li
+                        key={k++}
+                        onClick={(e) => itemClick(item)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <pre>
+                          {item.arrayofitems}
+                          <span style={{ color: "grey", fontSize: "0.8rem" }}>
+                            (Shared by {item.username})
+                          </span>
+                        </pre>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              <div className="col-6" style={{ width: "50%" }}>
+                <strong>{selectedItem[5] || "<Items to share>"}</strong>
+                <br />
+                {selectedItem[2] || "<Message>"}
+                <br />
+                <i>{shareStatus[selectedItem[6]] || "<Status>"}</i>
+                <p style={{ fontSize: "0.5rem" }}>
+                  By: {selectedItem[3]}
+                  <br />
+                  Submitted on:{selectedItem[4]}
+                </p>
+                <button hidden={!selectedItem[1]} onClick={handleBooking}>
+                  Book this Share
+                </button>
+                <MapChart2
+                  coordinates={selectedItem[0]}
+                  plz={selectedItem[1]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
-export default ShareItems;
+export default Sharing;

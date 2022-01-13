@@ -62,7 +62,7 @@ const About = ({ APPDATA }) => {
           <div className="page-box col" onClick={closeModal}>
             <span className="page-title-sm">About Us</span>
 
-            <Firework />
+            
           </div>
         </Modal>
       </ModalProvider>
