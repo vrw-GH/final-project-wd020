@@ -16,6 +16,7 @@ specifiers:
   react-router: ^6.1.1
   react-router-dom: ^6.0.2
   react-scripts: 4.0.3
+  react-simple-hook-modal: ^1.1.0
   react-simple-maps: ^2.3.0
   react-slick: ^0.28.1
   react-tabs: ^3.2.3
@@ -38,6 +39,7 @@ dependencies:
   react-router: 6.2.1_react@17.0.2
   react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
   react-scripts: 4.0.3_react@17.0.2+typescript@4.5.4
+  react-simple-hook-modal: 1.1.0_react-dom@17.0.2+react@17.0.2
   react-simple-maps: 2.3.0_75cb922c19ee1b7939faae9b4d1f4cf7
   react-slick: 0.28.1_react-dom@17.0.2+react@17.0.2
   react-tabs: 3.2.3_react@17.0.2
@@ -6041,6 +6043,11 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: false
 
+  /hooks/0.3.2:
+    resolution: {integrity: sha1-ox8GDCAmzqbPHKPrF4Qw5xjhxKM=}
+    engines: {node: '>=0.4.0'}
+    dev: false
+
   /hoopy/0.1.4:
     resolution: {integrity: sha512-HRcs+2mr52W0K+x8RzcLzuPPmVIKMSv97RGHy0Ea9y/mpcaK+xTrjICA04KAHi4GRzxliNqNJEFYWHghy3rSfQ==}
     engines: {node: '>= 6.0.0'}
@@ -9764,6 +9771,19 @@ packages:
       - webpack-plugin-serve
     dev: false
 
+  /react-simple-hook-modal/1.1.0_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-sA/amC1l6nvrcsdPBzJR7HSMV7OnoScS5vlSDcEOxV8tfmEK/PpxoFP/DHnAdFNusMLpZm3SsM0cMJ/PmZ6oJA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      hooks: 0.3.2
+      react: 17.0.2
+      react-spring: 8.0.27_react-dom@17.0.2+react@17.0.2
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
   /react-simple-maps/2.3.0_75cb922c19ee1b7939faae9b4d1f4cf7:
     resolution: {integrity: sha512-IZVeiPSRZKwD6I/2NvXpQ2uENYGDGZp8DvZjkapcxuJ/LQHTfl+Byb+KNgY7s+iatRA2ad8LnZ3AgqcjziCCsw==}
     peerDependencies:
@@ -9793,6 +9813,18 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resize-observer-polyfill: 1.5.1
+    dev: false
+
+  /react-spring/8.0.27_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-nDpWBe3ZVezukNRandTeLSPcwwTMjNVu1IDq9qA/AMiUqHuRN4BeSWvKr3eIxxg1vtiYiOLy4FqdfCP5IoP77g==}
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+    dependencies:
+      '@babel/runtime': 7.16.5
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /react-tabs/3.2.3_react@17.0.2:

@@ -32,6 +32,8 @@
     box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165);
     background-color: whitesmoke;
     padding: 2rem;
+    margin: 0.5rem 0 2rem;
+    
     border-radius: 40px;
   }
 
