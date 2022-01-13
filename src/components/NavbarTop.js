@@ -16,7 +16,7 @@ const NavbarTop = ({
 }) => {
   return (
     <>
-      <Navbar id="nav" collapseOnSelect expand="md">
+      <Navbar sticky="top" id="nav" collapseOnSelect expand="md">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img id="LOGO"
