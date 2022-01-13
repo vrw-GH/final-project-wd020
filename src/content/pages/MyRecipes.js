@@ -78,7 +78,7 @@ const MyRecipes = ({ APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-·≡ My Recipes ≡·- </span>
+          <span>-‧≡ My Recipes ≡‧- </span>
         </h2>
       </div>
       <div

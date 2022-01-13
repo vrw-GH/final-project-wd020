@@ -108,7 +108,7 @@ const SingleTitle = ({ APPDATA }) => {
       >
         {/* <div className="single_title_container"> */}
         <div className="single_title_title">
-          <h2>-·≡ {recipe.title} ≡·-</h2>
+          <h2>-‧≡ {recipe.title} ≡‧-</h2>
         </div>
         <div className="col">
           <div className="single_title_info col">

@@ -127,7 +127,7 @@ const NavbarTop = ({
           <ReactBootStrap.Form className="d-flex">
             <ReactBootStrap.FormControl
               type="search"
-              placeholder="Keyword search (in Title)"
+              placeholder="Recipe search (in Title)"
               autoFocus
               className="me-2"
               aria-label="Search"

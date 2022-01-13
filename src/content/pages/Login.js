@@ -69,7 +69,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       }}
     >
       <div className="page-title">
-        <h2>-·≡ User Login / Registration ≡·-</h2>
+        <h2>-‧≡ User Login / Registration ≡‧-</h2>
       </div>
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (

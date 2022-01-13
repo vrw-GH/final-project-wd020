@@ -147,120 +147,146 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
       {published ? (
         <Navigate to={`/recipes/${newInfo.title}`} replace={true} />
       ) : (
-        <div className="create_title_container">
-          <h2>Create a new recipe</h2>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              className="create_title_title"
-              type="text"
-              placeholder="title"
-              id="title"
-              size="50"
-              value={newInfo.title}
-              onChange={(e) => handle(e)}
-            ></input>
-            <div className="inline">
-              Select a Category:
-              <select
-                className="create_title_category"
-                type="text"
-                placeholder="category"
-                id="category"
-                value={newInfo.category}
-                onChange={(e) => handle(e)}
-              >
-                {categories.map((ctg) => (
-                  <option key={k++} value={ctg.category_id}>
-                    {ctg.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="row">
-              <div className="col">
-                <object
-                  data={newInfo.title_img}
-                  type="image/jpg,png"
-                  className="create_title_img row"
-                >
-                  <input
-                    type="file"
-                    encType="multipart/form-data"
-                    accept="image/png, .jpeg, .jpg, image/gif"
-                    id="title_img"
-                    name="title_img"
-                    onChange={(e) => handleImgInput(e)}
-                  />
-                  {/* <img src="default.img" alt="recipe" /> */}
-                  {/* <img src={newInfo.image} alt="recipe" /> */}
-                  <img
-                    src={newInfo.title_img}
-                    className="create_title_img row"
-                    alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
-                  />
-                </object>
-              </div>
-              <div className="create_title_ingredients col">
-                <h5>
-                  <u>INGREDIENTS</u>
-                </h5>
-                <div className="form-group">
-                  <input
-                    list="datalist_item"
-                    placeholder="select ingredient"
-                    id="ingredient"
-                    tabIndex="1"
-                    value={ingredient[0]}
-                  />
-                  <input
-                    size="5"
-                    placeholder="quantity"
-                    id="quantity"
-                    tabIndex="2"
-                    value={ingredient[1]}
-                  />
-                  <button onClick={addIngredient}>Add</button>
-
-                  <datalist id="datalist_item">
-                    {ingredients.map((el) => (
-                      <option
-                        key={k++}
-                        value={
-                          el.ingredient_name + " (" + el.ingredient_unit + ")"
-                        }
-                      />
+        <div
+          className="page-container"
+          style={{
+            backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+            marginBottom: "0",
+          }}
+        >
+          <div className="page-title">
+            <h2>-‧≡ Create a new recipe ≡‧- </h2>
+          </div>
+          <div
+            className="page-box col-11"
+            style={{
+              width: "90%",
+            }}
+          >
+            <div className="create_title_container">
+              {/* <h2>-‧≡ Create a new recipe ≡‧- </h2> */}
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <input
+                  className="create_title_title"
+                  type="text"
+                  required
+                  placeholder="please enter a title here"
+                  id="title"
+                  size="50"
+                  value={newInfo.title}
+                  onChange={(e) => handle(e)}
+                  style={{ backgroundColor: "#eed5be" }}
+                  autoFocus
+                ></input>
+                <div className="inline">
+                  Select a Category:
+                  <select
+                    className="create_title_category"
+                    type="text"
+                    placeholder="category"
+                    id="category"
+                    value={newInfo.category}
+                    onChange={(e) => handle(e)}
+                  >
+                    {categories.map((ctg) => (
+                      <option key={k++} value={ctg.category_id}>
+                        {ctg.name}
+                      </option>
                     ))}
-                  </datalist>
+                  </select>
                 </div>
-                <div
-                  placeholder="ingredients"
-                  id="ingredients"
-                  // readOnly
-                  dangerouslySetInnerHTML={{
-                    __html: formatIngredients(newInfo.ingredients),
-                  }}
-                ></div>
-              </div>
+                <div className="row">
+                  <div className="col">
+                    <object
+                      data={newInfo.title_img}
+                      type="image/jpg,png"
+                      className="create_title_img row"
+                    >
+                      <input
+                        type="file"
+                        encType="multipart/form-data"
+                        accept="image/png, .jpeg, .jpg, image/gif"
+                        id="title_img"
+                        name="title_img"
+                        onChange={(e) => handleImgInput(e)}
+                      />
+                      {/* <img src="default.img" alt="recipe" /> */}
+                      {/* <img src={newInfo.image} alt="recipe" /> */}
+                      <img
+                        src={newInfo.title_img}
+                        className="create_title_img row"
+                        alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                      />
+                    </object>
+                  </div>
+                  <div className="create_title_ingredients col">
+                    <h5>
+                      <u>INGREDIENTS</u>
+                    </h5>
+                    <div className="form-group">
+                      <input
+                        list="datalist_item"
+                        placeholder="select ingredient"
+                        id="ingredient"
+                        tabIndex="1"
+                        value={ingredient[0]}
+                      />
+                      <input
+                        size="5"
+                        placeholder="quantity"
+                        id="quantity"
+                        tabIndex="2"
+                        value={ingredient[1]}
+                      />
+                      <button onClick={addIngredient}>Add</button>
+
+                      <datalist id="datalist_item">
+                        {ingredients.map((el) => (
+                          <option
+                            key={k++}
+                            value={
+                              el.ingredient_name +
+                              " (" +
+                              el.ingredient_unit +
+                              ")"
+                            }
+                          />
+                        ))}
+                      </datalist>
+                    </div>
+                    <div
+                      placeholder="ingredients"
+                      id="ingredients"
+                      required
+                      // readOnly
+                      dangerouslySetInnerHTML={{
+                        __html: formatIngredients(newInfo.ingredients),
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                {/* //!                              set HTML IDE */}
+                <div className="create_title_method">
+                  <h5>
+                    <u>METHOD</u>
+                  </h5>
+                  <textarea
+                    cols="40"
+                    rows="6"
+                    type="text"
+                    placeholder="enter the recipe here"
+                    id="recipe"
+                    value={newInfo.recipe}
+                    onChange={(e) => handle(e)}
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" className="btns">
+                  Submit by {currentUser}
+                </button>
+              </form>
             </div>
-            {/* //!                              set HTML IDE */}
-            <div className="create_title_method">
-              <h5>
-                <u>METHOD</u>
-              </h5>
-              <textarea
-                cols="40"
-                rows="6"
-                type="text"
-                placeholder="enter the recipe here"
-                id="recipe"
-                value={newInfo.recipe}
-                onChange={(e) => handle(e)}
-              ></textarea>
-            </div>
-            <button type="submit" className="btns">
-              Submit by {currentUser}
-            </button>
-          </form>
+          </div>
         </div>
       )}
     </>

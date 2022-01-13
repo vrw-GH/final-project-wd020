@@ -19,8 +19,8 @@ function Selecteduser({ itemSelector, datas }) {
       <div>Share status: {itemSelector.sharestatus}</div>
       <div>Message: {itemSelector.message}</div>
       <div>PLZ: {itemSelector.plz}</div>
-      <div>location: {itemSelector?.location?.x}</div>
-      <div>location: {itemSelector?.location?.y}</div>
+      {/* <div>location: {itemSelector?.location?.x}</div> */}
+      {/* <div>location: {itemSelector?.location?.y}</div> */}
       {/* {!itemSelector.location ? null :
                 
             } */}

@@ -126,7 +126,7 @@ const MyProfile = ({ APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-·≡ My Profile ≡·- </span>
+          <span>-‧≡ My Profile ≡‧- </span>
         </h2>
       </div>
       <div className="page-box" style={{ width: "90%" }}>

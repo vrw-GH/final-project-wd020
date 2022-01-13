@@ -128,8 +128,8 @@ function App() {
                 exact
                 element={
                   <Sharing
-                    loading={loading}
-                    categories={categories}
+                    // loading={loading}
+                    // categories={categories}
                     APPDATA={APPDATA}
                   />
                 }
@@ -157,8 +157,8 @@ function App() {
                 exact
                 element={
                   <Sharing
-                    loading={loading}
-                    categories={categories}
+                    // loading={loading}
+                    // categories={categories}
                     APPDATA={APPDATA}
                   />
                 }

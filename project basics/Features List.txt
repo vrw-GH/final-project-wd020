@@ -1,0 +1,19 @@
+Feature					Status
+
+Share Page				Done
+Recipe Page				Done
+Main Search (Recipes)		Done
+Recipe Filter: Category		Done
+Recipe Filter: Ingredients	Done
+
+User Login				Done
+Authentication				  - Stage2
+User - Create Recipe		Done
+User - Like Recipe			Done
+User - My Recipes Page		Done
+User - My Share Page			  -UC
+User - Reserve ShareItem		-(concepting)
+User - ShareItem Maintenance		  -TODO
+
+Landing Page					  -UC
+About Page					  -UC
