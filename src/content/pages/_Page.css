@@ -47,6 +47,7 @@
     margin-top: 10px;
     line-height: 34px;
     border-radius: 15px;
+    box-shadow: 1px 10px 25px rgb(206, 206, 206);
     
   }
 
@@ -59,4 +60,26 @@
     background-color: rgb(131, 208, 238);
     width: 400px;
     border-radius: 20px;
+    box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  }
+
+  .h22{
+    font-family: "lora", serif;
+  font-size: 2rem;
+  color: white;
+    text-align: center;
+    
+    box-shadow: 1px 1px 10px rgb(255, 255, 255);
+    border-radius: 15px 15px 0px 0px;
+
+  }
+
+  .arrayItems{
+    background-color: rgb(131, 208, 238);
+    margin-top: 20px;
+    align-content: center;
+     width:220;
+     padding:20px;
+     border-radius: 51px 15px 15px 0px;
+     cursor: pointer;
   }
