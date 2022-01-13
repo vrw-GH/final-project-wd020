@@ -51,9 +51,7 @@ const NavbarTop = ({
           <Nav className="me-auto">
             {currentUser ? (
               <>
-                <Navbar.Brand style={{ fontSize: "1.2rem" }}>
-                  {currentUser}:
-                </Navbar.Brand>
+               
                 <NavDropdown title="My Food" id="collapsible-nav-dropdown">
                   <ul>
                     <li>
@@ -102,6 +100,9 @@ const NavbarTop = ({
                 >
                   Logout
                 </ReactBootStrap.NavLink>
+                <Navbar.Brand style={{ marginLeft:"30px", marginTop:"2px"}}>
+                  {currentUser}:
+                </Navbar.Brand>
               </>
             ) : (
               <>
