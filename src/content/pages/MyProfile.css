@@ -1,8 +1,9 @@
 .myprofile_container {
+
   display: flex;  
   flex-direction: row;
   /* align-items:stretch; */
-  font-family: "lora", serif;
+ font-family: 'Amble LtCn', sans-serif;
   color: rgb(48, 51, 3);
     /* padding-top:3px; */  
 }

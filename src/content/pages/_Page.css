@@ -15,12 +15,12 @@
   flex-direction: column;
   align-items: center;
   color: rgb(59, 59, 59);
-  font-family: "lora", serif;
+  font-family: 'Amble LtCn', sans-serif;
   margin: 100px;
 }
 
 .page-title {
-  font-family: "lora", serif;
+  font-family: 'Amble LtCn', sans-serif;
   font-size: 2rem;
 }
 
@@ -64,7 +64,7 @@
   }
 
   .h22{
-    font-family: "lora", serif;
+    font-family: 'Amble LtCn', sans-serif;
   font-size: 2rem;
   color: rgb(49, 49, 49);
     text-align: center;
@@ -82,4 +82,14 @@
      padding:20px;
      border-radius: 51px 15px 15px 0px;
      cursor: pointer;
+  }
+
+  #nav{
+    font-family: 'Amble LtCn', sans-serif;
+    background-color: rgb(23, 36, 48);
+    color: white;
+  }
+
+  #nav li a{
+    color: white;
   }

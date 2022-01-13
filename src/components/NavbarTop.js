@@ -17,7 +17,7 @@ const NavbarTop = ({
   // let key = 0;
   return (
     <>
-      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+      <Navbar id="nav" collapseOnSelect expand="md"  variant="dark">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img
