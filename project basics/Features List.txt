@@ -1,6 +1,7 @@
 Feature					Status
 
 Share Page				Done
+   (set booked?)
 Recipe Page				Done
 Main Search (Recipes)		Done
 Recipe Filter: Category		Done

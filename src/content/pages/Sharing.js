@@ -10,6 +10,7 @@ const Sharing = ({ APPDATA }) => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [err, setErr] = useState("");
   const [filterPLZ, setFilterPLZ] = useState("");
+  const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
 
   useEffect(() => {
     const getShareItems = async () => {
@@ -22,7 +23,7 @@ const Sharing = ({ APPDATA }) => {
         );
         setShareItems(filterdData);
         setFilteredItems(filterdData);
-        // console.log(results.data.tuples);
+        // console.log(filterdData);
       } catch (error) {
         setErr(error.message);
       }
@@ -57,7 +58,13 @@ const Sharing = ({ APPDATA }) => {
       item.username,
       item.datetime,
       item.arrayofitems,
+      item.sharestatus,
     ]);
+  };
+
+  const handleBooking = (e) => {
+    // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B"));
+    alert("Item Booked");
   };
 
   const setPLZ = (e) => {
@@ -110,10 +117,10 @@ const Sharing = ({ APPDATA }) => {
               </select>
             </li>
 
-            <div className="row">
+            <div className="row" style={{ width: "100%" }}>
               <div
                 className="col-6"
-                style={{ color: "red", overflowY: "scroll" }}
+                style={{ width: "50%", color: "red", overflowY: "scroll" }}
               >
                 {/* <Itemsrender shareItems={getShareItems}/> */}
                 <h6>
@@ -138,16 +145,20 @@ const Sharing = ({ APPDATA }) => {
                     ))}
                 </ul>
               </div>
-              <div className="container col-6" style={{ width: "35vh" }}>
+              <div className="col-6" style={{ width: "50%" }}>
                 <strong>{selectedItem[5] || "<Items to share>"}</strong>
                 <br />
                 {selectedItem[2] || "<Message>"}
+                <br />
+                <i>{shareStatus[selectedItem[6]] || "<Status>"}</i>
                 <p style={{ fontSize: "0.5rem" }}>
                   By: {selectedItem[3]}
                   <br />
                   Submitted on:{selectedItem[4]}
                 </p>
-                <button hidden={!selectedItem[1]}>Book Item</button>
+                <button hidden={!selectedItem[1]} onClick={handleBooking}>
+                  Book this Share
+                </button>
                 <MapChart2
                   coordinates={selectedItem[0]}
                   plz={selectedItem[1]}
