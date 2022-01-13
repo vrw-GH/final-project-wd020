@@ -6,8 +6,8 @@ import {
 } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
-import about from "./about.jpeg";
-import Firework from "./Firework.js";
+// import about from "./about.jpeg";
+// import Firework from "./Firework.js";
 import { Link } from "react-router-dom";
 
 const About = ({ APPDATA }) => {

@@ -41,6 +41,7 @@ const Sharing = ({ APPDATA }) => {
     setShareItems(filterdData);
     console.log(filterdData);
     return () => {};
+    // eslint-disable-next-line
   }, [filterPLZ]);
 
   const itemClick = (e, item) => {
