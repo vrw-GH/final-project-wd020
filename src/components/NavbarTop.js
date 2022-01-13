@@ -17,7 +17,7 @@ const NavbarTop = ({
   // let key = 0;
   return (
     <>
-      <Navbar id="nav" collapseOnSelect expand="md"  variant="dark">
+      <Navbar id="nav" collapseOnSelect expand="md" >
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img
@@ -70,7 +70,7 @@ const NavbarTop = ({
             {currentUser ? (
               <>
                 <Navbar.Brand>{currentUser}:</Navbar.Brand>
-                <NavDropdown title="My Food" id="collapsible-nav-dropdown">
+                <NavDropdown  title="My Food" id="collapsible-nav-dropdown">
                   <ul>
                     <li>
                       <NavLink

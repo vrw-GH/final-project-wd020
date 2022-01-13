@@ -86,8 +86,9 @@
 
   #nav{
     font-family: 'Amble LtCn', sans-serif;
-    background-color: rgb(23, 36, 48);
+    background-color: #b2e2f8;
     color: white;
+    box-shadow: 1px 10px 25px rgb(236, 236, 236);
   }
 
   #nav li a{
