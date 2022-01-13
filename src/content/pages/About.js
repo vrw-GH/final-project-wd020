@@ -27,9 +27,9 @@ const About = ({ APPDATA }) => {
       }}
     >
       <div className="page-title">
-        <h2>
-        {/* <Firework/> */}
-          <span onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
+        <h2 className="home-title">
+        
+          <span  onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
         </h2>
       </div>
 
@@ -59,6 +59,7 @@ const About = ({ APPDATA }) => {
           <div className="page-box col" onClick={closeModal}>
             <span className="page-title-sm">About Us</span>
             
+            <Firework/>
           </div>
         </Modal>
       </ModalProvider>

@@ -22,6 +22,8 @@ body{
 .page-title {
   font-family: "Amble LtCn", sans-serif;
   font-size: 2rem;
+  position: relative;
+  padding: 10px;
 }
 
 .page-box {
@@ -217,5 +219,28 @@ body{
 
 .lorem:hover:before,
 .lorem:focus::before{
+transform: scaleX(1);
+}
+.home-title::before{
+  
+  position: absolute;
+  content: '';
+  color: white;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #FCD8D4;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: top;
+  transition: transform 500ms ease-in-out;
+  /* border: rgba(180, 180, 180, 0.288) 0.3px solid; */
+ 
+
+} 
+
+.home-title:hover:before,
+.home-title:focus::before{
 transform: scaleX(1);
 }
