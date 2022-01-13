@@ -50,6 +50,7 @@ const About = ({ APPDATA }) => {
         <br />
         <span >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!</span>
       </div>
+      <br/>
       <h1 >sharing... why Sharing?</h1>
       
       <ModalProvider>
