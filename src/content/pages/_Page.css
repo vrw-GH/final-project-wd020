@@ -2,6 +2,9 @@
   box-sizing: border-box;
   list-style: none;
 }
+body{
+  background: white;
+}
 
 #LOGO{
   margin-right: 20px;
@@ -82,14 +85,44 @@
 
 #nav {
   font-family: "Amble LtCn", sans-serif;
-  background-color: #b2e2f8;
+  background-color: white;
   color: white;
-  box-shadow: 1px 10px 25px rgb(236, 236, 236);
+  
 }
 
 #nav li a {
   color: black;
 }
+#nav-sharing{
+  position: relative;
+}
+#nav-sharing:hover{
+  align-content: center;
+  align-items: center;
+  background-color: #FCD8D4;
+  
+  box-sizing: border-box;
+}
+#nav-user:hover{
+  align-content: center;
+  align-items: center;
+  background-color: #FCD8D4;
+  width: 120px;
+  box-sizing: border-box;
+}
+
+#nav-find{
+  background-color: #FCD8D4;
+}
+
+.nav-drop:hover{
+  align-content: center;
+  align-items: center;
+  background-color: #FCD8D4;
+  box-sizing: border-box;
+  
+}
+
 
 .aboutimg1 {
   background-image: url(https://images.pexels.com/photos/4651196/pexels-photo-4651196.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
