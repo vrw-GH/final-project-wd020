@@ -8,7 +8,7 @@ function Selecteduser({ itemSelector, datas }) {
 
 
     return (
-        <div style={{ padding: "25px", borderRadius: "35px", backgroundColor: "rgb(255, 203, 89)", display: "flex", flexDirection: "column", alignItems: "center", width:"250px", boxShadow: "1px 10px 25px rgb(206, 206, 206)"}}>
+        <div style={{ padding: "25px", borderRadius: "35px", backgroundColor: "#FFFED2", display: "flex", flexDirection: "column", alignItems: "center", width:"250px", boxShadow: "1px 10px 25px rgb(206, 206, 206)"}}>
             <div>Username: {itemSelector.username}</div>
             <div>Share status: {itemSelector.sharestatus}</div>
             <div>Message: {itemSelector.message}</div>

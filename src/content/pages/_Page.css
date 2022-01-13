@@ -57,7 +57,7 @@
     align-items: center;
     margin-top: 20px;
     padding: 20px;
-    background-color: rgb(131, 208, 238);
+    background-color: #C5FAD5;
     width: 400px;
     border-radius: 20px;
     box-shadow: 1px 10px 25px rgb(206, 206, 206);
@@ -66,16 +66,16 @@
   .h22{
     font-family: "lora", serif;
   font-size: 2rem;
-  color: white;
+  color: rgb(49, 49, 49);
     text-align: center;
     
-    box-shadow: 1px 1px 10px rgb(255, 255, 255);
+    
     border-radius: 15px 15px 0px 0px;
 
   }
 
   .arrayItems{
-    background-color: rgb(131, 208, 238);
+    background-color: #AA96DA;
     margin-top: 20px;
     align-content: center;
      width:220;
