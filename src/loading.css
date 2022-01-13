@@ -6,6 +6,7 @@
   height: 200px;
   border-radius: 150px;
   background-color: rgb(255, 203, 89);
+  margin-bottom: 120px;
  }
  .loading {
   position: relative;
@@ -24,10 +25,12 @@
    }
  }
  .loading_container > h4 {
+  font-family: 'Amble LtCn', sans-serif;
    color: black;
    position: absolute;
    text-align: center;
    left: 50%;
    top: 50%;
    transform: translate(-50%,-50%);
+   
  }

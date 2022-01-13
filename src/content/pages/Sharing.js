@@ -3,6 +3,9 @@ import "./_Page.css";
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import Itemsrender from "../../components/itemsrender";
+import { Container } from "react-bootstrap";
+import Selecteduser from "../../components/Selecteduser";
+
 //--------------------------------------------------------------------------------------
 const ShareItems = ({ loading, categories, APPDATA }) => {
   // const [error,setError] = useState("");
@@ -52,13 +55,13 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
       console.log(sendInfo)
       const post = await axios.post(
         `https://avc-food-blog.herokuapp.com/api/shareitems/${currentUser}`, sendInfo
-      //   {
-      //   username: info.username,
-      //   arrayofitems: arrayofItems,
-      //   sharestatus: info.sharestatus,
-      //   message: info.message,
-      //   location: "1,2"
-      // }
+        //   {
+        //   username: info.username,
+        //   arrayofitems: arrayofItems,
+        //   sharestatus: info.sharestatus,
+        //   message: info.message,
+        //   location: "1,2"
+        // }
 
       ).then(res => console.log(res.data));
       console.log(post)
@@ -83,26 +86,31 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
 
   return (
     <>
+     
+        
+          <form onSubmit={(e) => handleSubmit(e)} className="form">
+            <h2 className="h22">Update shared items</h2>
+            <br />
+            <input className="arrayOfItems" type="text" placeholder="arrayofitems" onChange={(event) => handle(event)} id="arrayofitems" value={info.arrayofitems}></input>
+            <br />
+            <input className="category" type="text" placeholder="username" id="username" value={currentUser}>
+            </input>
+            <br />
+            <input cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></input>
+            <br />
+            <input type="text" placeholder="Share status" onChange={(event) => handle(event)} id="sharestatus" value={info.sharestatus}></input>
 
-      <form onSubmit={(e) => handleSubmit(e)} className="form">
-        <h2 className="h22">Update shared items</h2>
-        <br />
-        <input className="arrayOfItems" type="text" placeholder="arrayofitems" onChange={(event) => handle(event)} id="arrayofitems" value={info.arrayofitems}></input>
-        <br />
-        <input className="category" type="text" placeholder="username" id="username" value={currentUser}>
-        </input>
-        <br />
-        <input cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></input>
-        <br />
-        <input type="text" placeholder="Share status" onChange={(event) => handle(event)} id="sharestatus" value={info.sharestatus}></input>
-
-        <button className="btns">Update</button>
-      </form>
-      <div className="container mt-5">
-        <div className="row">
-          <Itemsrender />
+            <button className="btns">Update</button>
+          </form>
+        
+          <div className="container mt-5">
+            <div className="row">
+              
+              <Itemsrender />
+            </div>
+          
         </div>
-      </div>
+      
     </>
 
   );

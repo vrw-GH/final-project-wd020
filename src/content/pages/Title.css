@@ -14,7 +14,10 @@
 
 .title_container > a:any-link, a:visited {
   text-decoration: none;
-  color: tomato;
+  color: white;
+}
+a:hover{
+  color: rgb(58, 58, 58);
 }
 
 .title_container > a:hover {

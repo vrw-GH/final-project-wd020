@@ -6,7 +6,7 @@ const Itemsrender = () => {
   const [itemSelector,setItemSelector] = useState({})
   return (
     <>
-      <Selecteduser itemSelector={itemSelector}/>
+      {/* <Selecteduser itemSelector={itemSelector}/> */}
       <Fetched setItemSelector={setItemSelector}/>
     </>
   )

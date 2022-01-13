@@ -19,7 +19,7 @@ const NavbarTop = ({
       <Navbar id="nav" collapseOnSelect expand="md">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
-          <img
+          <img id="LOGO"
             src={Background}
             alt="logo"
             width="50"
