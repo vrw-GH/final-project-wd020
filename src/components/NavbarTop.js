@@ -5,6 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import * as ReactBootStrap from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Background from "./Background.png"
 
 const NavbarTop = ({
   APPDATA,
@@ -20,7 +21,7 @@ const NavbarTop = ({
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img
-            src="/foodshare_313x383.png"
+            src={Background}
 
             alt="logo"
             width="50"

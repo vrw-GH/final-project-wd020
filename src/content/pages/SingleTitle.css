@@ -9,17 +9,20 @@
   /* box-shadow: 2px 25px 40px rgb(165, 165, 165); */
   box-shadow: 2px 25px 80px rgba(255, 200, 79, 0.712);
   padding: 5px; 
+  
 }
 .single_title_title {
-  font-family:  "lora", serif;    
-  font-style: oblique;
+  font-family:  "lora", serif;  
+  background-color: aliceblue;  
+  font-style: Arial;
   font-size: 2rem;
-  color: rgb(173, 2, 2);
+  color: black;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 2px 2px 5px  brown;
   margin: 10px;
   cursor:auto;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .single_title_img {
@@ -29,13 +32,16 @@
   object-fit:cover;
   padding: 0;
   margin-bottom: 0.2rem;
+  box-shadow: 1px 10px 25px rgb(94, 91, 91);
 }
 
 .single_title_ingredients {
-  background-color: rgb(151, 199, 119); 
-  padding: 0.2rem; 
+  background-color: #C5FAD5;
+  padding: 1rem; 
   color: rgb(0, 0, 0);
-  margin: 0 10px 5px 5px ; 
+  margin: 10px 10px 5px 5px ; 
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  border-radius: 30px;
 }
 
 .single_title_ingredients > div {
@@ -52,14 +58,20 @@
   text-align: left;
 }
 .single_title_method {
-  background-color: rgb(45, 148, 216); 
+  background-color: #AA96DA;
   padding: .2rem; 
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  border-radius: 30px;
+
 }
 .single_title_method > div {
-  background-color: rgba(133, 240, 225, 0.767); 
+  background-color: #FFFED2; 
   color: rgb(0, 0, 0);
   padding: 5px;
   text-align: left;
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  border-radius: 30px;
+  
 }
 .single_title_method > h5, .single_title_details > h5 {
   /* background-color: rgba(173, 226, 142, 0.795); */
@@ -67,10 +79,13 @@
   margin:0;
 }
 .single_title_info {
-  background-color: rgba(248, 149, 83, 0.795);
+  background-color: rgba(130, 222, 250, 0.822);
   font-style: italic;
   font-size: .7rem;
   color: black;
   padding: 0.2rem;
   margin:2px;
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  border-radius: 30px;
+  
 }

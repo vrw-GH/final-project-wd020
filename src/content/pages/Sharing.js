@@ -7,11 +7,12 @@ import Itemsrender from "../../components/itemsrender";
 const ShareItems = ({ loading, categories, APPDATA }) => {
   // const [error,setError] = useState("");
   const currentUser = (sessionStorage.getItem("currentUser"));
+  // eslint-disable-next-line
   const [posts, setPosts] = useState([]);
   // const currentUser = "abdullah"
   const [info, setInfo] = useState({
 
-    sharestatus: "D",
+    sharestatus: "",
     arrayofitems: [],
     message: "",
     location: ""
@@ -93,7 +94,7 @@ const ShareItems = ({ loading, categories, APPDATA }) => {
         <br />
         <input cols="40" rows="8" className="ingredients" type="text" placeholder="message" onChange={(event) => handle(event)} id="message" value={info.message} ></input>
         <br />
-        <input type="text" placeholder="Location X,Y" onChange={(event) => handle(event)} id="location" value={info.location}></input>
+        <input type="text" placeholder="Share status" onChange={(event) => handle(event)} id="sharestatus" value={info.sharestatus}></input>
 
         <button className="btns">Update</button>
       </form>

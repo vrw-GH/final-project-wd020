@@ -12,50 +12,47 @@ import MapChart2 from '../content/pages/MapChart2';
 const Fetched = ({ setItemSelector }) => {
     //   const {username} = useParams
     const [data, setData] = useState([])
+    const [selectedPlz, setSelectedPlz] = useState("")
     const handleSelect = items => setItemSelector(items)
 
     useEffect(() => {
         (async () => {
-            const recipes = await axios.get(
+            const shareItems = await axios.get(
                 `https://avc-food-blog.herokuapp.com/api/shareitems`
             );
-            console.log("Fetched data ::::", recipes.data.tuples)
-            setData(recipes.data.tuples);
+            console.log("Fetched data ::::", shareItems.data.tuples)
+            setData(shareItems.data.tuples);
         })();
     }, []);
+    const handleChange = (e) => {
 
-    //   const arr = data.map((datas, index)=>{
+        e.preventDefault()
 
-    //     return (
-    //       <div className='sharedCont'>
-    //         <div className='userName'>{datas.username}</div>
-    //         <div>{datas.arrayofitems}</div>
-    //         <div>{datas.datetime}</div>
-    //         <div>{datas.plz}</div>
-    //         <div>{datas.location.x}</div>
-    //         <div>{datas.location.y}</div>
-    //         <div>{datas.sharestatus}</div>
-    //         <div>{datas.message}</div>
-    //       </div>
-    //     )
-    //   })
+
+
+
+    }
+
 
     return (
         <>
-           
-           
+            <form style={{textAlign:"center",marginTop:"20px"}}onSubmit={handleChange}>
+                
+                <input placeholder='Enter you PLZ here' type="text" onChange={(e) => setSelectedPlz(e.target.value)} value={selectedPlz} id="plz"></input>
+            </form>
             {data
-            .map(datas => (
-                <>
-                    <div style={{ display: "flex", width: "350px" }} >
-                        <Datas key={datas.username} datas={datas} handleSelect={handleSelect} />
-                        
-                            {/* <MapChart2 coordinates={[datas.location.y, datas.location.x]} plz={datas.plz} /> */}
-                    
-                    </div>
+                .filter(x => x.plz === selectedPlz)
+                .map(datas => (
+                    <>
+                        <div style={{ width: "350px" }} >
+                            <Datas key={datas.username} datas={datas} handleSelect={handleSelect} />
+                            <MapChart2 coordinates={[datas.location.y, datas.location.x]} plz={datas.plz} />
+                        </div>
 
-                </>
-            ))}
+
+
+                    </>
+                ))}
 
         </>
     )

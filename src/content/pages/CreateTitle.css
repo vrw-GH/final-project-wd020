@@ -5,7 +5,7 @@
   text-align: center;
   width: 90%;  
   margin-top: 10px;
-  background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
+  background: linear-gradient(rgba(255, 255, 255, 0.444), rgba(255, 255, 255, 0.2));
   box-shadow: 2px 25px 40px rgb(165, 165, 165);
   padding: 5px; 
 }
@@ -25,13 +25,15 @@
   width: 200px;
 }
 .create_title_img {
-  background: rgba(255, 255, 255, 0.144);  
+  background: rgba(130, 222, 250, 0.822);  
   display: flex;
   margin: 2px 1px 5px 0;
   object-fit:contain;
   width: 100%;
   padding:2px;
   min-height: 20vh;
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
+  border-radius: 15px;
 }
 
 textarea {
@@ -44,9 +46,11 @@ textarea {
 }
 
 .create_title_ingredients {
-  background-color: rgb(151, 199, 119); 
+  background-color: #C5FAD5; 
+  border-radius: 15px;
   padding: 0.2rem; 
   margin: 0 10px 5px 5px ; 
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
 }
 
 .create_title_ingredients > div {
@@ -59,11 +63,13 @@ textarea {
 }
 
 .create_title_method {
-  background-color: rgb(45, 148, 216); 
-  padding: .2rem; 
+  background-color: rgb(255, 244, 195); 
+  padding: .4rem; 
+  border-radius: 15px;
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
 }
 .create_title_method > textarea {
-  background-color: rgba(133, 240, 225, 0.767); 
+  background-color: rgba(254, 255, 255, 0.767); 
   color: rgb(0, 0, 0);
   padding: 5px;
 }
@@ -77,19 +83,20 @@ textarea {
   background-color: rgba(193, 238, 168, 0.795);
   font-style: italic;
   font-size: .7rem;
-  padding: .2rem;
+  padding: .4rem;
 }
 
 form button.btns {
   width: 150px;
   height: 70px;
   margin: 10px;
-  border-radius: 80px;
-  color: coral;
-  background-color: white;
+  border-radius: 10px;
+  color: rgb(59, 59, 59);
+  background-color: rgb(255, 255, 255);
+  
 }
 .btns:hover {
-  background-color: coral;
+  background-color:#C5FAD5;
   color: white;
 }
 

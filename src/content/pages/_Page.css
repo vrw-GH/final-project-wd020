@@ -30,7 +30,7 @@
     align-items: center;    
     max-width: 98%;
     box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165);
-    background-color: rgb(255, 203, 89);
+    background-color: whitesmoke;
     padding: 2rem;
     border-radius: 40px;
   }
@@ -42,7 +42,7 @@
   }
 
   .itemsList{
-    background-color: rgb(131, 208, 238);
+    background-color: #C5FAD5;
     padding: 25px;
     margin-top: 10px;
     line-height: 34px;

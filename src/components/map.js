@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Map, Marker } from "pigeon-maps"
-import axios from 'axios';
 
-export function MyMap({ datas }) {
+export function MyMap({ itemSelector }) {
 
 
   // const [location, setLocation] = useState([{}])
   const [hue, setHue] = useState(0)
   const color = `hsl(${hue % 360}deg 39% 70%)`
-  // const [data, setData] = useState([])
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const recipes = await axios.get(
-  //       `https://avc-food-blog.herokuapp.com/api/shareitems`
-  //     );
-  //     console.log("Fetched data ::::", recipes.data.tuples)
-  //     setData(recipes.data.tuples);
-  //   })();
-  // }, []);
+  
 
   return (
     <Map height={300} defaultCenter={[52.522748, 13.455567]} defaultZoom={11}>
