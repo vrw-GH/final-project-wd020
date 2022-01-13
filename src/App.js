@@ -127,11 +127,12 @@ function App() {
                 path="/"
                 exact
                 element={
-                  <Sharing
-                    // loading={loading}
-                    // categories={categories}
-                    APPDATA={APPDATA}
-                  />
+                  <About APPDATA={APPDATA} />
+                  // <Sharing
+                  //   // loading={loading}
+                  //   // categories={categories}
+                  //   APPDATA={APPDATA}
+                  // />
                 }
               />
               <Route
