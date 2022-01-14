@@ -10,6 +10,8 @@ const Sharing = ({ APPDATA }) => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [err, setErr] = useState("");
   const [filterPLZ, setFilterPLZ] = useState("");
+  const [filterKeyword, setFilterKeyword] = useState("");
+
   const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
 
   useEffect(() => {
@@ -23,7 +25,6 @@ const Sharing = ({ APPDATA }) => {
         );
         setShareItems(filterdData);
         setFilteredItems(filterdData);
-        // console.log(filterdData);
       } catch (error) {
         setErr(error.message);
       }
@@ -36,19 +37,16 @@ const Sharing = ({ APPDATA }) => {
     const filterdData = shareItems.filter(({ plz }) =>
       filterPLZ ? plz === filterPLZ : true
     );
-    setFilteredItems(filterdData);
-    // console.log(filterdData);
-    // setSelectedItem([
-    //   [filterdData[0].location.y, filterdData[0].location.x],
-    //   filterdData[0].plz,
-    //   filterdData[0].message,
-    //   filterdData[0].username,
-    //   filterdData[0].datetime,
-    // ]);
+    const newFilteredItems = filterdData.filter(({ arrayofitems }) =>
+      filterKeyword
+        ? arrayofitems.toString().toLowerCase().indexOf(filterKeyword) !== -1
+        : true
+    );
+    setFilteredItems(newFilteredItems);
     setSelectedItem([]);
     return () => {};
     // eslint-disable-next-line
-  }, [filterPLZ]);
+  }, [filterPLZ, filterKeyword]);
 
   const itemClick = (item) => {
     setSelectedItem([
@@ -63,12 +61,16 @@ const Sharing = ({ APPDATA }) => {
   };
 
   const handleBooking = (e) => {
-    // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B"));
+    // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B")); // TODO
     alert("Item Booked");
   };
 
   const setPLZ = (e) => {
     setFilterPLZ(e.target.value);
+  };
+
+  const setKeyword = (e) => {
+    setFilterKeyword(e.target.value.toLowerCase());
   };
 
   if (err)
@@ -80,7 +82,6 @@ const Sharing = ({ APPDATA }) => {
     );
 
   let k = 0;
-
   return (
     <>
       <div
@@ -115,6 +116,13 @@ const Sharing = ({ APPDATA }) => {
                     </option>
                   ))}
               </select>
+              &nbsp;
+              <input
+                id="searchText"
+                placeholder="search with keyword"
+                width={15}
+                onChange={setKeyword}
+              ></input>
             </li>
 
             <div className="row" style={{ width: "100%" }}>
@@ -122,7 +130,6 @@ const Sharing = ({ APPDATA }) => {
                 className="col-6"
                 style={{ width: "50%", color: "red", overflowY: "scroll" }}
               >
-                {/* <Itemsrender shareItems={getShareItems}/> */}
                 <h6>
                   <u>Share Basket</u>
                 </h6>
@@ -146,7 +153,9 @@ const Sharing = ({ APPDATA }) => {
                 </ul>
               </div>
               <div className="col-6" style={{ width: "50%" }}>
-                <strong>{selectedItem[5] || "<Items to share>"}</strong>
+                <strong style={{ color: "red" }}>
+                  {selectedItem[5] || "<Items to share>"}
+                </strong>
                 <br />
                 {selectedItem[2] || "<Message>"}
                 <br />
