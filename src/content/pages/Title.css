@@ -7,9 +7,9 @@
   margin-top: 20px;
   padding: 5px; 
   text-align: center;
-  background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
-  /* box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165); */
-  box-shadow: 2.5px 2.5px 80px rgba(255, 200, 79, 0.712);
+  background-color: #c5fad5;
+  border-radius: 20px;
+  box-shadow: 1px 10px 25px rgb(206, 206, 206);
 }
 
 .title_container > a:any-link, a:visited {
@@ -33,7 +33,7 @@ a:hover{
 }
 
 .title_title {
-  color: tomato;
+  color: gray;
   font-family: 'Amble LtCn', sans-serif;
   font-size: 2rem;
   font-weight:bold;

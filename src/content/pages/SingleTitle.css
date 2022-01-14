@@ -58,7 +58,8 @@
   text-align: left;
 }
 .single_title_method {
-  background-color: #AA96DA;
+  margin-top: 30px;
+  background-color: #eddbfd;
   padding: .2rem; 
   box-shadow: 1px 10px 25px rgb(206, 206, 206);
   border-radius: 30px;
@@ -70,7 +71,7 @@
   padding: 5px;
   text-align: left;
   box-shadow: 1px 10px 25px rgb(206, 206, 206);
-  border-radius: 30px;
+  border-radius: 10px;
   
 }
 .single_title_method > h5, .single_title_details > h5 {
