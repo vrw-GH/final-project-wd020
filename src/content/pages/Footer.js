@@ -32,6 +32,7 @@ const Footer = ({ APPDATA }) => {
           </a>
         </li>
       </ul>
+      */}
       <ul className="ul2">
         <li>Development Team: {APPDATA.DEVTEAM}</li>
         <li>
@@ -48,22 +49,32 @@ const Footer = ({ APPDATA }) => {
         </li>
         <li>Phone: {APPDATA.PHONE}</li>
         <li>{APPDATA.LOCATION}</li>
-      </ul>
+      </ul> 
       <ul className="ul3">
-        <li>
+       <li>
+        <a href="https://www.facebook.com/abdullah.shabk">
           <FaFacebook size="2.5em" />
+        </a>
         </li>
         <li>
+        <a href="https://github.com/vrw-GH/final-project-wd020">
           <FaGithub size="2.5em" />
+        </a>
         </li>
         <li>
+        <a href="https://www.instagram.com/a.shabk/">
           <FaInstagram size="2.5em" />
+        </a>
         </li>
         <li>
+        <a href="https://www.facebook.com/abdullah.shabk">
           <FaDiscord size="2.5em" />
+        </a>
         </li>
-      </ul> */}
+      </ul>
+      
     </div>
+    
   );
 };
 
