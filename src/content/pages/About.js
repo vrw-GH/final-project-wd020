@@ -38,6 +38,7 @@ const About = ({ APPDATA }) => {
           <h1 className=" aboutt"><Link to={'/sharing'}>Sharing</Link></h1>
           <div className='color-overlay'></div>
         </div>
+         
         <div className='aboutimg2'>
           <h1 className=" aboutt"><Link to={'/recipes'}>Recipes</Link></h1>
           <div className='color-overlay'></div>
@@ -62,7 +63,7 @@ const About = ({ APPDATA }) => {
           <div className="page-box col" onClick={closeModal}>
             <span className="page-title-sm">About Us</span>
 
-            <Firework />
+            
           </div>
         </Modal>
       </ModalProvider>
