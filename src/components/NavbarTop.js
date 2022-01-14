@@ -16,7 +16,7 @@ const NavbarTop = ({
 }) => {
   return (
     <>
-      <Navbar id="nav" collapseOnSelect expand="md">
+      <Navbar sticky="top" id="nav" collapseOnSelect expand="md">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
           <img id="LOGO"
@@ -35,6 +35,7 @@ const NavbarTop = ({
               to="/sharing"
               href="/sharing"
               onClick={handleClearQry}
+              id="nav-sharing"
             >
               Sharing
             </ReactBootStrap.NavLink>
@@ -43,6 +44,7 @@ const NavbarTop = ({
               to="/recipes"
               href="/recipes"
               onClick={handleClearQry}
+              id="nav-sharing"
             >
               Recipes
             </ReactBootStrap.NavLink>
@@ -51,10 +53,8 @@ const NavbarTop = ({
           <Nav className="me-auto">
             {currentUser ? (
               <>
-                <Navbar.Brand style={{ fontSize: "1.2rem" }}>
-                  {currentUser}:
-                </Navbar.Brand>
-                <NavDropdown title="My Food" id="collapsible-nav-dropdown">
+               
+                <NavDropdown title="My Food" className="nav-drop" id="collapsible-nav-dropdown">
                   <ul>
                     <li>
                       <NavLink
@@ -62,6 +62,7 @@ const NavbarTop = ({
                         href="/myshare"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
+                        id="nav-sharing"
                       >
                         My Sharing
                       </NavLink>
@@ -72,6 +73,7 @@ const NavbarTop = ({
                         href="/mytitles"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
+                        id="nav-sharing"
                       >
                         My Recipes
                       </NavLink>
@@ -82,6 +84,7 @@ const NavbarTop = ({
                         href="/newtitle"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
+                        id="nav-sharing"
                       >
                         New Recipe
                       </NavLink>
@@ -92,6 +95,7 @@ const NavbarTop = ({
                   to="/profile"
                   href="/profile"
                   onClick={handleClearQry}
+                  id="nav-sharing"
                 >
                   Profile
                 </ReactBootStrap.NavLink>
@@ -99,9 +103,13 @@ const NavbarTop = ({
                   to="/login"
                   href="/login"
                   onClick={handleClearQry}
+                  id="nav-sharing"
                 >
                   Logout
                 </ReactBootStrap.NavLink>
+                <Navbar.Brand  id="nav-user" style={{ marginLeft:"30px", marginTop:"2px"}}>
+                  {currentUser}:
+                </Navbar.Brand>
               </>
             ) : (
               <>
@@ -109,6 +117,7 @@ const NavbarTop = ({
                   to="/login"
                   href="/login"
                   onClick={handleClearQry}
+                  id="nav-sharing"
                 >
                   Login
                 </ReactBootStrap.NavLink>
@@ -117,6 +126,7 @@ const NavbarTop = ({
                   href="/about"
                   onClick={handleClearQry}
                   title="About Us"
+                  id="nav-sharing"
                 >
                   About
                 </ReactBootStrap.NavLink>
@@ -134,8 +144,9 @@ const NavbarTop = ({
             />
             <ReactBootStrap.Button
               type="submit"
-              variant="warning"
+              variant="light"
               onClick={(e) => handleSearchClick(e)}
+              id="nav-find"
             >
               Find
             </ReactBootStrap.Button>
