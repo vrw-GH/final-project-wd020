@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import Fetched from './Fetched'
-import Selecteduser from './Selecteduser'
+import React, { useState } from "react";
+// import Fetched from "./Fetched";
+import Selecteduser from "./Selecteduser";
 
-const Itemsrender = () => {
-  const [itemSelector,setItemSelector] = useState({})
+const Itemsrender = ({ shareItems }) => {
+  const [itemSelector, setItemSelector] = useState({});
   return (
     <>
-      {/* <Selecteduser itemSelector={itemSelector}/> */}
-      <Fetched setItemSelector={setItemSelector}/>
+      {/* <Fetched setItemSelector={setItemSelector} /> */}
+      <Selecteduser itemSelector={itemSelector} />
     </>
-  )
-}
+  );
+};
 
-export default Itemsrender
+export default Itemsrender;
