@@ -116,7 +116,7 @@ const MyRecipes = ({ APPDATA }) => {
                             title={k + 1}
                           />
                           {"  "}
-                          <span style={{ fontSize: "1.5rem" }}>
+                          <span style={{ fontSize: "1.5rem", color: "black" }}>
                             {recipe.title}
                           </span>
                         </pre>
@@ -145,7 +145,7 @@ const MyRecipes = ({ APPDATA }) => {
                             title={k2 + 1}
                           />
                           {"  "}
-                          <span style={{ fontSize: "1.5rem" }}>
+                          <span style={{ fontSize: "1.5rem", color: "black" }}>
                             {recipe.title}
                           </span>
                         </pre>

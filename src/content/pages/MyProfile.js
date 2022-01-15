@@ -181,7 +181,7 @@ const MyProfile = ({ APPDATA }) => {
               />
               <input
                 type="button"
-                value="Get Lon/Lat"
+                value="Get Long/Lat"
                 onClick={HandleGetLatLon}
               ></input>
               <br />
@@ -199,14 +199,14 @@ const MyProfile = ({ APPDATA }) => {
                 defaultValue="10"
                 placeholder="Longitude in Decimal"
                 title="Decimal Notation"
-                style={{ width: "5rem" }}
+                style={{ width: "5rem", textAlign: "right" }}
                 id="long"
                 onChange={handleLocInput}
                 maxLength="6"
               />
               °
               <br />
-              Lat:
+              Lat:&nbsp;&nbsp;
               <input
                 // value={thisUser?.location?.y}
                 value={userCoord[1]}
@@ -215,7 +215,7 @@ const MyProfile = ({ APPDATA }) => {
                 defaultValue="51"
                 placeholder="Latitude in Decimal"
                 title="Decimal Notation"
-                style={{ width: "5rem" }}
+                style={{ width: "5rem", textAlign: "right" }}
                 id="lat"
                 onChange={handleLocInput}
                 maxLength="6"

@@ -1,37 +1,69 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./_Page.css";
 import MapChart2 from "./MapChart2";
+import { datify } from "../../components/formatting";
+import "./_Page.css";
 
 //--------------------------------------------------------------------------------------
 const Sharing = ({ APPDATA }) => {
+  const currentUser = sessionStorage.getItem("currentUser");
+  const [getData, setGetData] = useState(true);
+  const [err, setErr] = useState("");
   const [shareItems, setShareItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
-  const [err, setErr] = useState("");
   const [filterPLZ, setFilterPLZ] = useState("");
   const [filterKeyword, setFilterKeyword] = useState("");
-
+  const [listPLZ, setListPLZ] = useState([]);
   const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
+  const statusColor = { A: "green", B: "red", C: "grey", D: "lightgrey" };
 
   useEffect(() => {
-    const getShareItems = async () => {
-      try {
-        const results = await axios.get(`${APPDATA.BACKEND}/api/shareitems`);
-        if (!results.data.tuples) throw new Error("No Ingredients Data.");
-        const filterdData = results.data.tuples.filter(
-          // ({ sharestatus }) => sharestatus !== "D" // only "Active" items (NOT "D")
-          ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing
-        );
-        setShareItems(filterdData);
-        setFilteredItems(filterdData);
-      } catch (error) {
-        setErr(error.message);
-      }
+    if (getData) {
+      const getShareItems = async () => {
+        try {
+          const results = await axios.get(`${APPDATA.BACKEND}/api/shareitems`);
+          if (!results.data.tuples) throw new Error("No Ingredients Data.");
+          let x = [];
+          results.data.tuples.map((i) => x.push(i.plz));
+          let x2 = x.filter((item, pos, ar) => ar.indexOf(item) === pos);
+          x2.sort();
+          setListPLZ(x2);
+          let filterdData = results.data.tuples.filter(
+            // ({ sharestatus }) => sharestatus !== "D" // only "Active/Booked/Closed" items - NOT "Deleted")
+            ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing ?
+          );
+          if (currentUser)
+            filterdData = filterdData.filter(
+              ({ username }) => username !== currentUser
+            );
+          filterdData.sort((a, b) => {
+            if (
+              a.arrayofitems.toString().toUpperCase() <
+              b.arrayofitems.toString().toUpperCase()
+            )
+              return -1;
+            if (
+              a.arrayofitems.toString().toUpperCase() >
+              b.arrayofitems.toString().toUpperCase()
+            )
+              return 1;
+            return 0;
+          });
+          setShareItems(filterdData);
+          setFilteredItems(filterdData);
+        } catch (error) {
+          setErr(error.message);
+        }
+      };
+      getShareItems();
+      setGetData(false);
+    }
+    return () => {
+      setGetData(false);
     };
-    getShareItems();
     // eslint-disable-next-line
-  }, []); // get only once
+  }, [getData]); // get only once
 
   useEffect(() => {
     const filterdData = shareItems.filter(({ plz }) =>
@@ -57,12 +89,41 @@ const Sharing = ({ APPDATA }) => {
       item.datetime,
       item.arrayofitems,
       item.sharestatus,
+      item.id,
     ]);
   };
 
-  const handleBooking = (e) => {
-    // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B")); // TODO
-    alert("Item Booked");
+  const handleBooking = async (e) => {
+    if (!currentUser) return alert("Please Log In to do this!");
+    // console.log(selectedItem);
+    const confirmBook = window.confirm(
+      `Do you want to book share of:\n
+       ${selectedItem[5]} by ${selectedItem[3].toUpperCase()}`
+    );
+    if (confirmBook) {
+      // TODO show connect user window!
+      try {
+        const post = await axios.post(
+          `${APPDATA.BACKEND}/api/shareitems/${currentUser}/${selectedItem[7]}`,
+          { sharestatus: "B", bookedby: currentUser }
+        );
+        if (post) {
+          console.log(post);
+          alert(
+            `${
+              selectedItem[5]
+            } successfully RESERVED,\n please contact ${selectedItem[3].toUpperCase()}`
+          );
+          setFilterKeyword("");
+          setSelectedItem([]);
+        }
+        // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B"));
+        setGetData(true);
+      } catch (error) {
+        console.log(error.message);
+        setErr("Post" + error.message);
+      }
+    }
   };
 
   const setPLZ = (e) => {
@@ -98,6 +159,7 @@ const Sharing = ({ APPDATA }) => {
           className="page-box "
           style={{
             width: "98%",
+            height: "auto",
           }}
         >
           <div className="row">
@@ -107,14 +169,11 @@ const Sharing = ({ APPDATA }) => {
               </strong>
               <select value={filterPLZ} onChange={setPLZ}>
                 <option value="">All</option>
-                {filteredItems
-                  // .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
-                  .sort()
-                  .map((item) => (
-                    <option key={k++} value={item.plz}>
-                      {item.plz}
-                    </option>
-                  ))}
+                {listPLZ.map((item) => (
+                  <option key={k++} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
               &nbsp;
               <input
@@ -128,24 +187,38 @@ const Sharing = ({ APPDATA }) => {
             <div className="row" style={{ width: "100%" }}>
               <div
                 className="col-6"
-                style={{ width: "50%", color: "red", overflowY: "scroll" }}
+                style={{
+                  height: "70vh",
+                  width: "50%",
+                  color: "red",
+                  overflowY: "scroll",
+                }}
               >
                 <h6>
                   <u>Share Basket</u>
                 </h6>
                 <ul style={{ padding: "0px" }}>
                   {filteredItems
-                    .filter((it) => true)
+                    // .filter((it) => true)
                     .map((item) => (
                       <li
                         key={k++}
                         onClick={(e) => itemClick(item)}
-                        style={{ cursor: "pointer" }}
+                        style={{
+                          cursor: "pointer",
+                          color: statusColor[item.sharestatus],
+                          textDecorationLine:
+                            item.sharestatus === "D" ? "line-through" : "",
+                          backgroundColor:
+                            item.arrayofitems === selectedItem[5]
+                              ? "#dee7fd"
+                              : "",
+                        }}
                       >
                         <pre>
-                          {item.arrayofitems}
+                          {item.arrayofitems.toString()}
                           <span style={{ color: "grey", fontSize: "0.8rem" }}>
-                            (Shared by {item.username})
+                            &nbsp;({item.username}-PLZ:{item.plz})
                           </span>
                         </pre>
                       </li>
@@ -153,19 +226,33 @@ const Sharing = ({ APPDATA }) => {
                 </ul>
               </div>
               <div className="col-6" style={{ width: "50%" }}>
-                <strong style={{ color: "red" }}>
-                  {selectedItem[5] || "<Items to share>"}
-                </strong>
+                <b
+                  style={{
+                    color: statusColor[selectedItem[6]],
+                    textDecorationLine:
+                      selectedItem[6] === "D" ? "line-through" : "",
+                    fontVariantCaps: "petite-caps",
+                  }}
+                >
+                  {selectedItem[5]
+                    ? selectedItem[5].toString()
+                    : "<Items to share>"}
+                </b>
                 <br />
                 {selectedItem[2] || "<Message>"}
                 <br />
-                <i>{shareStatus[selectedItem[6]] || "<Status>"}</i>
+                <i style={{ color: statusColor[selectedItem[6]] }}>
+                  {shareStatus[selectedItem[6]] || "<Status>"}
+                </i>
                 <p style={{ fontSize: "0.5rem" }}>
                   By: {selectedItem[3]}
                   <br />
-                  Submitted on:{selectedItem[4]}
+                  Submitted on:{datify(selectedItem[4])}
                 </p>
-                <button hidden={!selectedItem[1]} onClick={handleBooking}>
+                <button
+                  hidden={!selectedItem[1] || selectedItem[6] !== "A"}
+                  onClick={handleBooking}
+                >
                   Book this Share
                 </button>
                 <MapChart2
