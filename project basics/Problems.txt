@@ -9,12 +9,11 @@
 
 6. Page-refresh occuring even with routing??
 
-7 LOGOUT: Warning: Cannot update a component (`App`) while rendering a different component (`Login`). To locate the bad setState() call inside `Login`, follow the stack trace as
-
-
 
 SOLVED!!!
 
 7. Mixed Content: The page at 'https://61e0087c7bcada13e105f218--vrwgh-finalprojectwd020.netlify.app/profile' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.cdnfonts.com/css/amble'. This request has been blocked; the content must be served over HTTPS.
 
 3. PROFILE: Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the componen
+
+8 LOGOUT: Warning: Cannot update a component (`App`) while rendering a different component (`Login`). To locate the bad setState() call inside `Login`, follow the stack trace as

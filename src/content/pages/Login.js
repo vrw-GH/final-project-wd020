@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./_Page.css";
@@ -8,11 +8,21 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   let navigate = useNavigate();
   let username = "";
 
-  if (sessionStorage.getItem("currentUser")) {
-    sessionStorage.removeItem("currentUser");
-    setCurrentUser("");
-    return;
-  }
+  useEffect(() => {
+    if (sessionStorage.getItem("currentUser")) {
+      sessionStorage.removeItem("currentUser");
+      setCurrentUser("");
+      return null;
+    }
+    return () => {};
+    //eslint-disable-next-line
+  }, []);
+
+  // if (sessionStorage.getItem("currentUser")) {
+  //   sessionStorage.removeItem("currentUser");
+  //   setCurrentUser("");
+  //   return null;
+  // }
 
   const doLogin = async (e) => {
     try {
@@ -57,9 +67,9 @@ const Login = ({ setCurrentUser, APPDATA }) => {
     }
   };
 
-  function goHome() {
+  const goHome = () => {
     navigate("/");
-  }
+  };
 
   return (
     <div
