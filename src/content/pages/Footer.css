@@ -29,7 +29,7 @@
   line-height: 20px;
   padding: 10px;
   padding-left: 40px;
-  height: 100px;
+  height: auto;
   width: 45%;
   border-radius: 0px 15px 15px 0px;
   font-size: .8rem;
@@ -56,7 +56,7 @@
 .ul3 {
   min-width: 90px;
 }
-.ul1:hover, .ul2:hover{}
+/* .ul1:hover, .ul2:hover{} */
 
 
 

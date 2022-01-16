@@ -190,7 +190,6 @@ body{
 .cont1 {
   display: flex;
   margin: 50px;
-  
 }
 
 .lorem{
@@ -285,4 +284,16 @@ transform: scaleX(1);
   text-align: center;
   border: 1px solid #999;
   font-size: 20px;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-container {
+  position: absolute;
+  width: 60%;
+  background: #ffffff;
+  left: 25%;
+  top: 30%;
+  padding: 20px;
 }

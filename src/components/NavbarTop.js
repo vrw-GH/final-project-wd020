@@ -15,7 +15,11 @@ const NavbarTop = ({
   return (
     <>
       <Navbar sticky="top" id="nav" collapseOnSelect expand="md">
-        <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
+        <Navbar.Brand
+          href="/about"
+          onClick={handleClearQry}
+          title={APPDATA.NAME + " ver: " + APPDATA.VER}
+        >
           &nbsp;
           <img
             id="LOGO"
@@ -23,10 +27,11 @@ const NavbarTop = ({
             alt="logo"
             width="50"
             height="50"
-            title={APPDATA.NAME}
+            title={APPDATA.NAME + " ver: " + APPDATA.VER}
           />
           &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
+
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">

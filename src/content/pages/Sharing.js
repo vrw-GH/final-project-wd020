@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MapChart from "./MapChart";
 import { datify } from "../../components/formatting";
+import MapChart from "../../components/MapChart";
 import "./_Page.css";
 
 //--------------------------------------------------------------------------------------
@@ -9,6 +9,7 @@ const Sharing = ({ APPDATA }) => {
   const currentUser = sessionStorage.getItem("currentUser");
   const [getData, setGetData] = useState(true);
   const [err, setErr] = useState("");
+  const [modal, setModal] = useState("");
   const [shareItems, setShareItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
@@ -93,36 +94,83 @@ const Sharing = ({ APPDATA }) => {
     ]);
   };
 
-  const handleBooking = async (e) => {
+  const handleBooking = (e) => {
     if (!currentUser) return alert("Please Log In to do this!");
-    // console.log(selectedItem);
-    const confirmBook = window.confirm(
-      `Do you want to book share of:\n
-       ${selectedItem[5]} by ${selectedItem[3].toUpperCase()}`
+    setModal(
+      <>
+        <h2>PLEASE CONFIRM RESERVATION</h2>
+        <div>
+          <br />
+          Shared items:
+          <br />
+          <strong>
+            {selectedItem[5]
+              ? selectedItem[5].toString().toUpperCase()
+              : "<Items to share>"}
+          </strong>
+          <br />
+          <br />
+          <p> by {selectedItem[3] && selectedItem[3].toUpperCase()}</p>
+          <br />
+          <br />
+          <p>(Instructions will be shown on Confirming below)</p>
+          <br />
+        </div>
+        <div className="form-group">
+          <button onClick={confirmBooking}>Confirm</button>
+          &nbsp;
+          <button onClick={() => setModal("")}>Cancel</button>
+        </div>
+      </>
     );
-    if (confirmBook) {
-      // TODO show connect user window!
-      try {
-        const post = await axios.post(
-          `${APPDATA.BACKEND}/api/shareitems/${currentUser}/${selectedItem[7]}`,
-          { sharestatus: "B", bookedby: currentUser }
+  };
+
+  const confirmBooking = async () => {
+    setModal("");
+    try {
+      const post = await axios.post(
+        `${APPDATA.BACKEND}/api/shareitems/${currentUser}/${selectedItem[7]}`,
+        { sharestatus: "B", bookedby: currentUser }
+      );
+      if (post) {
+        let shareEmail = await axios.get(
+          `${APPDATA.BACKEND}/api/users/${selectedItem[3]}`
         );
-        if (post) {
-          console.log(post);
-          alert(
-            `${
-              selectedItem[5]
-            } successfully RESERVED,\n please contact ${selectedItem[3].toUpperCase()}`
-          );
-          setFilterKeyword("");
-          setSelectedItem([]);
-        }
-        // setSelectedItem(...selectedItem, (selectedItem.sharestatus = "B"));
-        setGetData(true);
-      } catch (error) {
-        console.log(error.message);
-        setErr("Post" + error.message);
+        setModal(
+          <>
+            <h2>RESERVATION CONFIRMED</h2>
+            <pre>
+              Please use this email to contact the sharer:
+              <br />
+              <strong>{shareEmail.data.tuple[0].username}</strong>
+              <br />
+              <br />
+              <h5>
+                <a
+                  href={`mailto:${
+                    shareEmail.data.tuple[0].email
+                  }?subject=Inquiry:%20${selectedItem[5].toString()}
+&body=I%20am%20interested%20in%20your%20shares: ${selectedItem[5].toString()}.                                                                   \n Please kindly respond to this email.`}
+                >
+                  {shareEmail.data.tuple[0].email}
+                </a>
+              </h5>
+              <br />
+              <i>(Clicking this Email will open your email app)</i>
+              <br />
+            </pre>
+            <div className="form-group">
+              <button onClick={() => setModal("")}>OK</button>
+            </div>
+          </>
+        );
+        setFilterKeyword("");
+        setSelectedItem([]);
       }
+      setGetData(true);
+    } catch (error) {
+      console.log(error.message);
+      setErr("Post" + error.message);
     }
   };
 
@@ -245,9 +293,8 @@ const Sharing = ({ APPDATA }) => {
                   {shareStatus[selectedItem[6]] || "<Status>"}
                 </i>
                 <p style={{ fontSize: "0.5rem" }}>
-                  By: {selectedItem[3]}
-                  <br />
-                  Submitted on:{datify(selectedItem[4])}
+                  Submitted on:{datify(selectedItem[4])} &nbsp;&nbsp; By:{" "}
+                  {selectedItem[3]}
                 </p>
                 <button
                   hidden={!selectedItem[1] || selectedItem[6] !== "A"}
@@ -260,6 +307,14 @@ const Sharing = ({ APPDATA }) => {
             </div>
           </div>
         </div>
+
+        {/* ---------------MODAL---------- */}
+        <div className={modal ? "modal d-block" : "modal d-none"}>
+          <div className="modal-container">
+            <div style={{ overflowY: "auto" }}>{modal}</div>
+          </div>
+        </div>
+        {/* ---------End of MODAL---------- */}
       </div>
     </>
   );

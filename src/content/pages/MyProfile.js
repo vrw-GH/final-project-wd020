@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MapChart from "./MapChart";
+import MapChart from "../../components/MapChart";
 import "../../loading.css";
 import "./_Page.css";
 import "./MyProfile.css";
