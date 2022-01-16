@@ -90,74 +90,76 @@ const MyRecipes = ({ APPDATA }) => {
         <div className="col-11">
           <Tabs>
             <TabList>
-              <Tab style={{ backgroundColor: "orange" }}>✍ My Submissions</Tab>
-              <Tab style={{ backgroundColor: "lightgreen" }}>
+              <Tab style={{ backgroundColor: "#FCD8D4" }}>✍ My Submissions</Tab>
+              <Tab style={{ backgroundColor: "#FCD8D4" }}>
                 ✅ My Favourites
               </Tab>
             </TabList>
 
-            <TabPanel style={{ backgroundColor: "#fcf1d3" }}>
+            <TabPanel >
               <ul
                 style={{
                   listStyle: "none",
                   paddingLeft: "0",
+                  
                 }}
               >
-                {recipes
-                  .filter((it) => it.username === currentUser)
-                  .map((recipe) => (
-                    <li key={k++}>
-                      <Link to={`/recipes/${recipe.slug}`} className="link">
-                        <pre>
-                          <img
-                            src={recipe.title_img || recipe.image}
-                            style={{ height: "60px" }}
-                            alt={k + 1}
-                            title={k + 1}
-                          />
-                          {"  "}
-                          <span style={{ fontSize: "1.5rem" }}>
-                            {recipe.title}
-                          </span>
-                        </pre>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </TabPanel>
-            <TabPanel style={{ backgroundColor: "#cdfdc9" }}>
-              <ul
-                style={{
-                  listStyle: "none",
-                  paddingLeft: "0",
-                }}
-              >
-                {recipes
-                  .filter((it) => thisUserLikes.includes(it.slug))
-                  .map((recipe) => (
-                    <li key={k2++}>
-                      <Link to={`/recipes/${recipe.slug}`} className="link">
-                        <pre>
-                          <img
-                            src={recipe.title_img || recipe.image}
-                            style={{ height: "60px" }}
-                            alt={k2 + 1}
-                            title={k2 + 1}
-                          />
-                          {"  "}
-                          <span style={{ fontSize: "1.5rem" }}>
-                            {recipe.title}
-                          </span>
-                        </pre>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </TabPanel>
-          </Tabs>
-        </div>
+              {recipes
+                .filter((it) => it.username === currentUser)
+                .map((recipe) => (
+                  <li key={k++}>
+                    <Link to={`/recipes/${recipe.slug}`} className="link">
+                      <pre>
+                        <img
+                          src={recipe.title_img || recipe.image}
+                          style={{ height: "60px" }}
+                          alt={k + 1}
+                          title={k + 1}
+                        />
+                        {"  "}
+                        <span style={{ textDecoration: "inherit",
+                  direction: "none", fontSize: "1.5rem" }}>
+                          {recipe.title}
+                        </span>
+                      </pre>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </TabPanel>
+          <TabPanel style={{ backgroundColor: "#cdfdc9" }}>
+            <ul
+              style={{
+                listStyle: "none",
+                paddingLeft: "0",
+              }}
+            >
+              {recipes
+                .filter((it) => thisUserLikes.includes(it.slug))
+                .map((recipe) => (
+                  <li key={k2++}>
+                    <Link to={`/recipes/${recipe.slug}`} className="link">
+                      <pre>
+                        <img
+                          src={recipe.title_img || recipe.image}
+                          style={{ height: "60px" }}
+                          alt={k2 + 1}
+                          title={k2 + 1}
+                        />
+                        {"  "}
+                        <span style={{ fontSize: "1.5rem" }}>
+                          {recipe.title}
+                        </span>
+                      </pre>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </TabPanel>
+        </Tabs>
       </div>
     </div>
+    </div >
   );
 };
 export default MyRecipes;
