@@ -27,7 +27,7 @@ const NavbarTop = ({
           />
           &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
-        {/* <Navbar.Toggle /> */}
+        <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">
             {/* <ReactBootStrap.NavLink

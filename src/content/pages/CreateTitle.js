@@ -172,10 +172,12 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                   required
                   placeholder="please enter a title here"
                   id="title"
-                  size="50"
+                  minLength={10}
+                  maxLength={60}
+                  // size="50"
                   value={newInfo.title}
                   onChange={(e) => handle(e)}
-                  style={{ backgroundColor: "#eed5be" }}
+                  style={{ backgroundColor: "#eed5be", width: "50vw" }}
                   autoFocus
                 ></input>
                 <div className="inline">
