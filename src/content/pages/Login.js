@@ -6,8 +6,8 @@ import "./_Page.css";
 const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
   let navigate = useNavigate();
-
   let username = "";
+
   if (sessionStorage.getItem("currentUser")) {
     sessionStorage.removeItem("currentUser");
     setCurrentUser("");

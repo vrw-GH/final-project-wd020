@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
-import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Background from "./Background.png";
 
@@ -19,7 +17,8 @@ const NavbarTop = ({
       <Navbar sticky="top" id="nav" collapseOnSelect expand="md">
         <Navbar.Brand href="/about" onClick={handleClearQry} title="About Us">
           &nbsp;
-          <img id="LOGO"
+          <img
+            id="LOGO"
             src={Background}
             alt="logo"
             width="50"
@@ -28,108 +27,122 @@ const NavbarTop = ({
           />
           &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
-        <Navbar.Toggle />
+        {/* <Navbar.Toggle /> */}
         <Navbar.Collapse>
           <Nav className="ms-auto">
-            <ReactBootStrap.NavLink
+            {/* <ReactBootStrap.NavLink
               to="/sharing"
               href="/sharing"
               onClick={handleClearQry}
               id="nav-sharing"
             >
               Sharing
-            </ReactBootStrap.NavLink>
-
-            <ReactBootStrap.NavLink
-              to="/recipes"
-              href="/recipes"
+            </ReactBootStrap.NavLink> */}
+            <Link
+              to="/sharing"
               onClick={handleClearQry}
               id="nav-sharing"
+              className="nav-link"
+            >
+              Sharing
+            </Link>
+            <Link
+              to="/recipes"
+              onClick={handleClearQry}
+              id="nav-sharing"
+              className="nav-link"
             >
               Recipes
-            </ReactBootStrap.NavLink>
+            </Link>
           </Nav>
 
           <Nav className="me-auto">
             {currentUser ? (
               <>
-               
-                <NavDropdown title="My Food" className="nav-drop" id="collapsible-nav-dropdown">
+                <NavDropdown
+                  title="My Food"
+                  className="nav-drop"
+                  id="collapsible-nav-dropdown"
+                >
                   <ul>
                     <li>
-                      <NavLink
+                      <Link
                         to="/myshare"
-                        href="/myshare"
+                        // href="/myshare"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
                         id="nav-sharing"
                       >
                         My Sharing
-                      </NavLink>
+                      </Link>
                     </li>
                     <li>
-                      <NavLink
+                      <Link
                         to="/mytitles"
-                        href="/mytitles"
+                        // href="/mytitles"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
                         id="nav-sharing"
                       >
                         My Recipes
-                      </NavLink>
+                      </Link>
                     </li>
                     <li>
-                      <NavLink
+                      <Link
                         to="/newtitle"
-                        href="/newtitle"
+                        // href="/newtitle"
                         onClick={handleClearQry}
                         style={{ color: "black" }}
                         id="nav-sharing"
                       >
                         New Recipe
-                      </NavLink>
+                      </Link>
                     </li>
                   </ul>
                 </NavDropdown>
-                <ReactBootStrap.NavLink
+                <Link
                   to="/profile"
-                  href="/profile"
                   onClick={handleClearQry}
                   id="nav-sharing"
+                  className="nav-link"
                 >
                   Profile
-                </ReactBootStrap.NavLink>
-                <ReactBootStrap.NavLink
+                </Link>
+                <Link
                   to="/login"
-                  href="/login"
                   onClick={handleClearQry}
                   id="nav-sharing"
+                  className="nav-link"
                 >
                   Logout
-                </ReactBootStrap.NavLink>
-                <Navbar.Brand  id="nav-user" style={{ marginLeft:"30px", marginTop:"2px"}}>
-                  {currentUser}:
+                </Link>
+
+                <Navbar.Brand
+                  id="nav-user"
+                  style={{ marginLeft: "30px", marginTop: "2px" }}
+                >
+                  {currentUser}
                 </Navbar.Brand>
               </>
             ) : (
               <>
-                <ReactBootStrap.NavLink
+                <Link
                   to="/login"
-                  href="/login"
                   onClick={handleClearQry}
                   id="nav-sharing"
+                  className="nav-link"
                 >
                   Login
-                </ReactBootStrap.NavLink>
-                <ReactBootStrap.NavLink
+                </Link>
+                <Link
                   to="/about"
-                  href="/about"
                   onClick={handleClearQry}
                   title="About Us"
                   id="nav-sharing"
+                  className="nav-link"
                 >
                   About
-                </ReactBootStrap.NavLink>
+                </Link>
               </>
             )}
           </Nav>

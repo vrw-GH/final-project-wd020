@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MapChart2 from "./MapChart2";
+import MapChart from "./MapChart";
 import { datify } from "../../components/formatting";
 import "./_Page.css";
 
@@ -255,10 +255,7 @@ const Sharing = ({ APPDATA }) => {
                 >
                   Book this Share
                 </button>
-                <MapChart2
-                  coordinates={selectedItem[0]}
-                  plz={selectedItem[1]}
-                />
+                <MapChart coordinates={selectedItem[0]} plz={selectedItem[1]} />
               </div>
             </div>
           </div>

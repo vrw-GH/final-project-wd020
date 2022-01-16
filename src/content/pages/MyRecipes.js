@@ -95,8 +95,13 @@ const MyRecipes = ({ APPDATA }) => {
                 ✅ My Favourites
               </Tab>
             </TabList>
-
-            <TabPanel style={{ backgroundColor: "#fcf1d3" }}>
+            <TabPanel
+              style={{
+                backgroundColor: "#fcf1d3",
+                height: "50vh",
+                overflowY: "auto",
+              }}
+            >
               <ul
                 style={{
                   listStyle: "none",
@@ -125,7 +130,13 @@ const MyRecipes = ({ APPDATA }) => {
                   ))}
               </ul>
             </TabPanel>
-            <TabPanel style={{ backgroundColor: "#cdfdc9" }}>
+            <TabPanel
+              style={{
+                backgroundColor: "#cdfdc9",
+                height: "50vh",
+                overflowY: "auto",
+              }}
+            >
               <ul
                 style={{
                   listStyle: "none",

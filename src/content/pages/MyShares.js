@@ -74,6 +74,10 @@ const MyShares = ({ APPDATA }) => {
   };
 
   const editItem = (item) => {
+    if (!userPLZ || !userLoc.current) {
+      alert("Please update PLZ/Location in your Profile");
+      return;
+    }
     let toEdit = { ...item };
     toEdit.arrayofitems = item.arrayofitems.toString();
     setSelectedInfo(toEdit);
@@ -81,6 +85,10 @@ const MyShares = ({ APPDATA }) => {
   };
 
   const addItem = () => {
+    if (!userPLZ || !userLoc.current) {
+      alert("Please update PLZ/Location in your Profile");
+      return;
+    }
     const newInfo = {
       username: currentUser,
       sharestatus: "A",
@@ -174,7 +182,7 @@ const MyShares = ({ APPDATA }) => {
               <input
                 type="text"
                 id="arrayofitems"
-                value={selectedInfo.arrayofitems}
+                value={selectedInfo.arrayofitems || ""}
                 required
                 autoFocus
                 placeholder="Items to Share"
@@ -185,7 +193,7 @@ const MyShares = ({ APPDATA }) => {
               <input
                 type="text"
                 id="message"
-                value={selectedInfo.message}
+                value={selectedInfo.message || ""}
                 required
                 placeholder="Please enter a message"
                 style={{ width: "100%" }}
@@ -195,7 +203,7 @@ const MyShares = ({ APPDATA }) => {
               <select
                 type="text"
                 id="sharestatus"
-                value={selectedInfo.sharestatus}
+                value={selectedInfo.sharestatus || "A"}
                 required
                 placeholder="Share Status"
                 onChange={handleChange}

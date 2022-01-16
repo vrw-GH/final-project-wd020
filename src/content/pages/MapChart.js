@@ -12,6 +12,9 @@ const geoUrl =
 const markerOffset = -15;
 
 const MapChart = ({ coordinates, plz }) => {
+  if (coordinates === undefined) coordinates = [10, 51];
+  if (plz === undefined || plz === "" || plz === [10, 51])
+    plz = "Somewhere in Germany";
   const markers = [
     { markerOffset, name: "Berlin", coordinates: [13.41053, 52.52437] },
     { markerOffset, name: "Hamburg", coordinates: [9.99302, 53.55073] },

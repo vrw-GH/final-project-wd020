@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   ModalProvider,
   Modal,
@@ -8,7 +9,6 @@ import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
 // import about from './about.jpeg'
 // import Firework from "./Firework.js"
-import { Link } from "react-router-dom";
 
 const About = ({ APPDATA }) => {
   const { isModalOpen, openModal, closeModal } = useModal();

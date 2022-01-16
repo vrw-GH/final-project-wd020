@@ -7,10 +7,10 @@ import "./MyProfile.css";
 
 const MyProfile = ({ APPDATA }) => {
   const currentUser = sessionStorage.getItem("currentUser");
+  const [err, setErr] = useState(null);
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
-  const [err, setErr] = useState(null);
   const maxAllowedSize = 1024 * 50; //kb
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const MyProfile = ({ APPDATA }) => {
         if (!results.data.tuple[0]) throw new Error("No User Data.");
         setThisUser(results.data.tuple[0]);
         setUserCoord([
-          results.data.tuple[0].location.x,
-          results.data.tuple[0].location.y,
+          results.data.tuple[0].location?.x || "10",
+          results.data.tuple[0].location?.y || "51",
         ]);
       } catch (error) {
         // alert("User Data - Get " + error);
@@ -37,16 +37,18 @@ const MyProfile = ({ APPDATA }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!thisUser.profilepic) delete thisUser.profilepic;
     delete thisUser.username;
     delete thisUser.create_time;
     delete thisUser.password;
     delete thisUser.likes;
     delete thisUser.likes2;
-    // remove currentUser submission (-- depends if blanks should be allowe?? ! )
     Object.keys(thisUser).reduce((acc, k) => !thisUser[k] && delete acc[k]);
     const info = { ...thisUser };
-    info.location = userCoord[0] + "," + userCoord[1];
-    // console.log(info);
+    if (userCoord[0]) {
+      info.location = userCoord[0] + "," + userCoord[1];
+    } else delete info.location;
+
     try {
       for (const key in info) {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
@@ -57,19 +59,24 @@ const MyProfile = ({ APPDATA }) => {
       );
       alert("Updated");
     } catch (error) {
+      // setErr(error.message);
       window.alert(error);
     }
   };
 
   const HandleGetLatLon = async () => {
+    if (!thisUser.plz) return;
     try {
       const res = await axios.get(
         `${APPDATA.BACKEND}/api/plz-de/${thisUser.plz}`
       );
+      if (!res.data.tuple[0]) return setCityName("No data found :(");
       setUserCoord([res.data.tuple[0].longitude, res.data.tuple[0].latitude]);
-      setCityName(res.data.tuple[0].place_name);
+      setCityName(
+        res.data.tuple[0].place_name + " (" + res.data.tuple[0].code1 + ")"
+      );
     } catch (error) {
-      window.alert(error);
+      setCityName("No data found!");
     }
   };
 
@@ -80,13 +87,14 @@ const MyProfile = ({ APPDATA }) => {
   };
 
   const handleLocInput = (e) => {
-    let x = [];
-    if (e.target.id === "long") x = [Number(e.target.value), userCoord[1]];
-    if (e.target.id === "lat") x = [userCoord[0], Number(e.target.value)];
-    setUserCoord(x);
+    let xy = [];
+    if (e.target.id === "long") xy = [Number(e.target.value), userCoord[1]];
+    if (e.target.id === "lat") xy = [userCoord[0], Number(e.target.value)];
+    setUserCoord(xy);
     const info = { ...thisUser };
-    info.location.x = x[0];
-    info.location.y = x[1];
+    if (!info.location) info.location = {};
+    info.location.x = xy[0];
+    info.location.y = xy[1];
     setThisUser(info);
   };
 
@@ -163,7 +171,7 @@ const MyProfile = ({ APPDATA }) => {
                 placeholder="email"
                 id="email"
                 required
-                value={thisUser.email}
+                value={thisUser.email || ""}
                 onChange={handleInput}
               />
               {/* <br /> */}
@@ -176,7 +184,7 @@ const MyProfile = ({ APPDATA }) => {
                 placeholder="Post Code"
                 id="plz"
                 required
-                value={thisUser.plz}
+                value={thisUser.plz || ""}
                 onChange={handleInput}
               />
               <input
@@ -193,10 +201,10 @@ const MyProfile = ({ APPDATA }) => {
               Long:
               <input
                 // value={thisUser?.location?.x}
-                value={userCoord[0]}
+                value={userCoord[0] || ""}
                 type="number"
                 step="0.0001"
-                defaultValue="10"
+                // defaultValue="10"
                 placeholder="Longitude in Decimal"
                 title="Decimal Notation"
                 style={{ width: "5rem", textAlign: "right" }}
@@ -209,10 +217,10 @@ const MyProfile = ({ APPDATA }) => {
               Lat:&nbsp;&nbsp;
               <input
                 // value={thisUser?.location?.y}
-                value={userCoord[1]}
+                value={userCoord[1] || ""}
                 type="number"
                 step="0.0001"
-                defaultValue="51"
+                // defaultValue="51"
                 placeholder="Latitude in Decimal"
                 title="Decimal Notation"
                 style={{ width: "5rem", textAlign: "right" }}
