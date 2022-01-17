@@ -14,11 +14,13 @@ body{
 .page-container {
   display: flex;
   flex-direction: column;
+  
   align-items: center;
   color: rgb(59, 59, 59);
   font-family: 'Amble LtCn', sans-serif;
-  
 }
+
+
 
 .page-title {
   font-family: "Amble LtCn", sans-serif;
@@ -199,16 +201,18 @@ body{
   color: rgb(66, 66, 66);
 }
 
-.cont1 {
-  display: flex;
-  flex-wrap: wrap;
-}
 
-@media (min-width: 1000px) {
+
+@media (min-width: 600px) {
   .cont1 {
-    
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+@media (min-width: 601px) {
+  .cont1 {
+    display: flex;
+    flex-direction: row;
   }
 }
 
@@ -217,7 +221,7 @@ body{
   text-align: center;
   border:none;
   /* z-index: 1; */
-  margin-top: 40px;
+  margin: 80px;
   padding: 50px;
 }
 
