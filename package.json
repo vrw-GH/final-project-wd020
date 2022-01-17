@@ -7,6 +7,8 @@
   "type": "module",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.10.0",
+    "@ionic/angular": "^6.0.0",
+    "@ionic/angular-server": "^6.0.2",
     "@popperjs/core": "^2.11.0",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
@@ -14,6 +16,7 @@
     "jquery": "^3.6.0",
     "pigeon-maps": "^0.19.7",
     "prop-types": "^15.8.1",
+    "randomcolor": "^0.6.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
