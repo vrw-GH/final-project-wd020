@@ -7,7 +7,7 @@ import {
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
 
-import Firework from "./Firework.js"
+
 import { Link } from "react-router-dom";
 import easteregg from './easteregg.jpg'
 
@@ -62,6 +62,7 @@ const About = ({ APPDATA }) => {
           transition={ModalTransition.BOTTOM_UP}
         >
           <div className="page-box col" onClick={closeModal}>
+           
             <span className="page-title-sm"><img className="easteregg-img" src={easteregg} alt=""/></span>
 
             

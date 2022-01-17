@@ -24,7 +24,8 @@
   font-size: .7rem;
   text-align: left;
   padding: .2rem;
-  width: 200px;
+  min-width: 50px;
+  max-width: 200px;
 }
 .create_title_img {
   background: rgba(130, 222, 250, 0.822);  

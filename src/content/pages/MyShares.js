@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { datify } from "../../components/formatting";
 import "../../loading.css";
 import "./_Page.css";
 
@@ -7,83 +8,131 @@ const MyShares = ({ APPDATA }) => {
   const currentUser = sessionStorage.getItem("currentUser");
   const [err, setErr] = useState(null);
   const [shareItems, setShareItems] = useState([]);
-  const [info, setInfo] = useState({
-    sharestatus: "",
-    arrayofitems: [],
-    message: "",
-    location: "",
-  });
+  const [formIsShown, setFormIsShown] = useState(false);
+  const [selectedInfo, setSelectedInfo] = useState({});
+  const [getData, setGetData] = useState(true);
+  const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
+  const shareExplain = {
+    A: "This share is available for collection.",
+    B: " has reserved this item.",
+    C: "Item is not avaliable anymore.",
+    D: "Item will be removed from listing.",
+  };
+  const userPLZ = useRef("");
+  const userLoc = useRef("");
 
   useEffect(() => {
-    let isLoaded = true;
     if (currentUser) {
-      if (isLoaded) {
+      if (getData) {
         const getShareItems = async () => {
           try {
+            const results1 = await axios.get(
+              `${APPDATA.BACKEND}/api/users/${currentUser}`
+            );
+            if (!results1.data.tuple) throw new Error("No User Data.");
+            userPLZ.current = results1.data.tuple[0].plz;
+            userLoc.current = results1.data.tuple[0].location;
             const results = await axios.get(
               `${APPDATA.BACKEND}/api/shareitems/${currentUser}`
             );
-            if (!results.data.tuple) throw new Error("No Sharing Data.");
-            setShareItems(results.data.tuple[0]);
+            // if (!results.data.tuple) throw new Error("No Sharing Data.");
+            if (results.data.tuples) {
+              // let sorted = JSON.parse(JSON.stringify(results.data.tuples));
+              let sorted = results.data.tuples;
+              sorted.sort((a, b) => {
+                if (a.sharestatus === "B") return -1;
+                if (a.sharestatus < b.sharestatus) return 1;
+                if (a.sharestatus === b.sharestatus && a.datetime > b.datetime)
+                  return -1;
+                return 0;
+              });
+              setShareItems(sorted);
+            }
           } catch (error) {
-            setErr(error.message);
+            if (!error.response.data.info.result === false) {
+              setErr(error.message);
+            } else {
+              // ! go on - asummes no tuple for this user
+            }
           }
         };
         getShareItems();
+        setGetData(false);
       }
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      setGetData(false); //  avoids a mem leak (of the promise) on unloaded component
     };
     // eslint-disable-next-line
-  }, []);
+  }, [getData]);
 
-  function handle(event) {
+  const handleChange = (event) => {
     event.preventDefault();
-    const newInfo = { ...info };
+    const newInfo = { ...selectedInfo };
     newInfo[event.target.id] = event.target.value;
-    setInfo(newInfo);
-    console.log(newInfo);
-  }
+    setSelectedInfo(newInfo);
+  };
+
+  const editItem = (item) => {
+    if (!userPLZ || !userLoc.current) {
+      alert("Please update PLZ/Location in your Profile");
+      return;
+    }
+    let toEdit = { ...item };
+    toEdit.arrayofitems = item.arrayofitems.toString();
+    setSelectedInfo(toEdit);
+    setFormIsShown(true);
+  };
+
+  const addItem = () => {
+    if (!userPLZ || !userLoc.current) {
+      alert("Please update PLZ/Location in your Profile");
+      return;
+    }
+    const newInfo = {
+      username: currentUser,
+      sharestatus: "A",
+      arrayofitems: "",
+      message: "",
+      location: `${userLoc.current.x},${userLoc.current.y}`,
+      plz: userPLZ.current.trim(),
+      bookedby: "",
+    };
+    setSelectedInfo(newInfo);
+    setFormIsShown(true);
+  };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    let submitInfo = { ...selectedInfo };
+    let postAPI = selectedInfo.id ? `/${currentUser}/${selectedInfo.id}` : "";
+    if (selectedInfo.id) {
+      // existing item (EDIT)
+      delete submitInfo.id;
+      delete submitInfo.username;
+    } else {
+    }
+    delete submitInfo.datetime;
+    submitInfo.arrayofitems = submitInfo.arrayofitems
+      .replace(/, /g, ",")
+      .split(",");
+    submitInfo.location = `${userLoc.current.x},${userLoc.current.y}`;
+    if (submitInfo.sharestatus !== "B") submitInfo.bookedby = "";
+    submitInfo.plz = submitInfo.plz.trim();
+    submitInfo.message = submitInfo.message.trim();
     try {
-      e.preventDefault();
-
-      let arrayofItems = [];
-      arrayofItems.push(info.arrayofitems);
-      let sendInfo = {};
-
-      if (info.sharestatus) {
-        sendInfo.sharestatus = info.sharestatus;
+      const post = await axios.post(
+        `${APPDATA.BACKEND}/api/shareitems${postAPI}`,
+        submitInfo
+      );
+      if (!post) {
+        throw Error(`Update Un-successfull!`);
       }
-      if (info.message) {
-        sendInfo.message = info.message;
-      }
-      if (arrayofItems) {
-        sendInfo.arrayofitems = arrayofItems;
-      }
-      if (info.location) {
-        sendInfo.location = info.location;
-      }
-      console.log(sendInfo);
-      const post = await axios
-        .post(
-          `${APPDATA.BACKEND}/api/shareitems/${currentUser}`,
-          sendInfo
-          //   {
-          //   username: info.username,
-          //   arrayofitems: arrayofItems,
-          //   sharestatus: info.sharestatus,
-          //   message: info.message,
-          //   location: "1,2"
-          // }
-        )
-        .then((res) => console.log(res.data));
-      console.log(post);
+      setFormIsShown(false);
+      setGetData(true);
     } catch (error) {
-      console.log(error);
-      // setError("Created")
+      console.log(error.message);
+      setErr("Post" + error.message);
     }
   };
 
@@ -95,7 +144,8 @@ const MyShares = ({ APPDATA }) => {
       </div>
     );
 
-  // let k = 0;
+  let k = 0;
+  let k2 = 0;
   return (
     <div
       className="page-container"
@@ -114,61 +164,114 @@ const MyShares = ({ APPDATA }) => {
           width: "90%",
         }}
       >
-        <div className="row">
-          <div className="col-6">
-            <form onSubmit={(e) => handleSubmit(e)} className="form">
-              <h2 className="h22">My shared items</h2>
-              <br />
+        <div className="row" style={{ justifyContent: "center" }}>
+          <button
+            className="btns"
+            onClick={addItem}
+            style={{ width: "auto", backgroundColor: "lightgreen" }}
+          >
+            CREATE NEW SHARE
+          </button>
+          <div className="col-10" style={{ alignSelf: "center" }}>
+            <form
+              onSubmit={handleSubmit}
+              className="form"
+              hidden={!formIsShown}
+              style={{ width: "auto" }}
+            >
               <input
-                className="arrayOfItems"
                 type="text"
-                placeholder="arrayofitems"
-                onChange={(event) => handle(event)}
                 id="arrayofitems"
-                value={info.arrayofitems}
+                value={selectedInfo.arrayofitems || ""}
+                required
+                autoFocus
+                placeholder="Items to Share"
+                style={{ width: "100%" }}
+                onChange={handleChange}
               ></input>
               <br />
               <input
-                className="category"
                 type="text"
-                placeholder="username"
-                id="username"
-                value={currentUser}
-              ></input>
-              <br />
-              <input
-                cols="40"
-                rows="8"
-                className="ingredients"
-                type="text"
-                placeholder="message"
-                onChange={(event) => handle(event)}
                 id="message"
-                value={info.message}
+                value={selectedInfo.message || ""}
+                required
+                placeholder="Please enter a message"
+                style={{ width: "100%" }}
+                onChange={handleChange}
               ></input>
               <br />
-              <input
+              <select
                 type="text"
-                placeholder="Share status"
-                onChange={(event) => handle(event)}
                 id="sharestatus"
-                value={info.sharestatus}
-              ></input>
-
+                value={selectedInfo.sharestatus || "A"}
+                required
+                placeholder="Share Status"
+                onChange={handleChange}
+              >
+                {Object.keys(shareStatus).map((opt) => (
+                  <option key={k++} value={opt}>
+                    {shareStatus[opt]}
+                  </option>
+                ))}
+              </select>
+              {selectedInfo.sharestatus === "B"
+                ? selectedInfo.bookedby
+                  ? selectedInfo.bookedby.toUpperCase()
+                  : "Someone"
+                : ""}
+              {shareExplain[selectedInfo.sharestatus]}
               <button className="btns">Update</button>
             </form>
           </div>
-          <div className="col-5">
-            Posted: <b>{Date(shareItems.datetime)}</b>
-            <br />
-            Message: <b>{shareItems.message}</b>
-            <br />
-            Status: <b>{shareItems.sharestatus}</b>
-            <br />
-            Items:<b>{shareItems.arrayofitems}</b>
-            {/* {shareItems.arrayofitems.map((item) => (
-          <div key={k++}>{item}</div>
-        ))} */}
+          <div className="row" style={{ height: "50vh", overflowY: "auto" }}>
+            {shareItems.length === 0
+              ? "There are no shared items .. yet"
+              : null}
+            <ol>
+              {shareItems.length === 0
+                ? null
+                : shareItems.map((each) => (
+                    // <>
+                    <li
+                      onClick={() => editItem(each)}
+                      key={k2++}
+                      title={
+                        (each.bookedby
+                          ? `Booked by: ${each.bookedby.toUpperCase()} - `
+                          : "") + "click to edit"
+                      }
+                      style={{
+                        backgroundColor:
+                          each.sharestatus === "D" || each.sharestatus === "C"
+                            ? "lightgrey"
+                            : each.sharestatus === "B"
+                            ? "limegreen"
+                            : k2 % 2 === 0
+                            ? "#ddf3fc"
+                            : "#d4f7db",
+                        textDecorationLine:
+                          each.sharestatus === "D" ? "line-through" : "",
+                        cursor: "pointer",
+                        margin: "10px",
+                      }}
+                    >
+                      {k2 + 1}. -{" "}
+                      <strong style={{ color: "red" }}>{each.message}</strong>
+                      <i style={{ fontSize: "0.8rem" }}>
+                        &nbsp;** Status: {shareStatus[each.sharestatus]} **
+                        Posted: {datify(each.datetime)}
+                      </i>
+                      <ul style={{ cursor: "pointer" }}>
+                        {each.arrayofitems.map((item) => (
+                          <li key={k2 + "-" + k++} style={{ padding: 0 }}>
+                            <strong>{item}</strong>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                    // </>
+                  ))}
+            </ol>
           </div>
         </div>
       </div>
