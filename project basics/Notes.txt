@@ -1,8 +1,54 @@
+INTRO: (Abdu, Victor) 1min x 2
+- Who am I...
+- Background...
+- Why coding...
 
 
-processing in front end
+PRESENTATION
+------------
+
+PROJECT PREAMBLE
+
+- Idea
+- Why
+- Usefulness (Personal Recipe Book)
+
+
+CORE- FEATURES 
+
+- Sharing
+- Recipe Book
+- MVP features for Proof Of Concept
+
+
+NEXT-FEATURES
+
+- 1st! Real Authentication
+- Chat-mode
+- Share Location
+- Set reminder?
+- Drag-drop of image
+
+
+
+TECHNICAL:
+
+- Stack: P.E.R.N.
+- All processing in front end
+- Backend only data- server (no queries)
+- Styling
+
+
+
+THE LITTLE THINGS!
+
+- Sorting... and color coding data
+- A very simple modal/popup
 
 
 
 
+
+
+SURPRISE!!
 Jorge: very caring and sharing. he shook us ...
