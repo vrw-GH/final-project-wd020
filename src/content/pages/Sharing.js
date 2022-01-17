@@ -4,7 +4,7 @@ import { datify } from "../../components/formatting";
 import MapChart from "../../components/MapChart";
 import "./_Page.css";
 
-//--------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
 const Sharing = ({ APPDATA }) => {
   const currentUser = sessionStorage.getItem("currentUser");
   const [getData, setGetData] = useState(true);
@@ -24,7 +24,7 @@ const Sharing = ({ APPDATA }) => {
       const getShareItems = async () => {
         try {
           const results = await axios.get(`${APPDATA.BACKEND}/api/shareitems`);
-          if (!results.data.tuples) throw new Error("No Ingredients Data.");
+          if (!results.data.tuples) throw new Error("No sharing Data.");
           let x = [];
           results.data.tuples.map((i) => x.push(i.plz));
           let x2 = x.filter((item, pos, ar) => ar.indexOf(item) === pos);
@@ -100,7 +100,6 @@ const Sharing = ({ APPDATA }) => {
       <>
         <h2>PLEASE CONFIRM RESERVATION</h2>
         <div>
-          <br />
           Shared items:
           <br />
           <strong>
@@ -109,14 +108,21 @@ const Sharing = ({ APPDATA }) => {
               : "<Items to share>"}
           </strong>
           <br />
-          <br />
-          <p> by {selectedItem[3] && selectedItem[3].toUpperCase()}</p>
-          <br />
-          <br />
-          <p>(Instructions will be shown on Confirming below)</p>
-          <br />
+          <p> - by {selectedItem[3] && selectedItem[3].toUpperCase()}</p>
+          <p>(Sharer's email will be shown on clicking Confirm.)</p>
         </div>
         <div className="form-group">
+          <input
+            id="message"
+            autoFocus
+            maxLength="50"
+            style={{ width: "40vh", border: "solid" }}
+            type="text"
+            placeholder="type message here"
+          ></input>
+          <br />
+          You can enter a message to the sharer above.
+          <br />
           <button onClick={confirmBooking}>Confirm</button>
           &nbsp;
           <button onClick={() => setModal("")}>Cancel</button>
@@ -125,12 +131,19 @@ const Sharing = ({ APPDATA }) => {
     );
   };
 
-  const confirmBooking = async () => {
+  const confirmBooking = async (e) => {
     setModal("");
+    const info = {
+      sharestatus: "B",
+      bookedby: currentUser,
+    };
+    const msg = e.target.parentNode.childNodes[0].value.trim(); // check the actual childNode
+    if (msg) info.messages = { msg, read: false };
+
     try {
       const post = await axios.post(
         `${APPDATA.BACKEND}/api/shareitems/${currentUser}/${selectedItem[7]}`,
-        { sharestatus: "B", bookedby: currentUser }
+        info
       );
       if (post) {
         let shareEmail = await axios.get(
@@ -140,11 +153,17 @@ const Sharing = ({ APPDATA }) => {
           <>
             <h2>RESERVATION CONFIRMED</h2>
             <pre>
-              Please use this email to contact the sharer:
+              <br />
+              {msg ? (
+                <>
+                  Your message:<h4>{msg}</h4>is sent.
+                </>
+              ) : null}
+              <br />
+              <br />
+              You can use this email to contact the sharer:
               <br />
               <strong>{shareEmail.data.tuple[0].username}</strong>
-              <br />
-              <br />
               <h5>
                 <a
                   href={`mailto:${
@@ -155,8 +174,8 @@ const Sharing = ({ APPDATA }) => {
                   {shareEmail.data.tuple[0].email}
                 </a>
               </h5>
-              <br />
               <i>(Clicking this Email will open your email app)</i>
+              <br />
               <br />
             </pre>
             <div className="form-group">
@@ -236,7 +255,7 @@ const Sharing = ({ APPDATA }) => {
               <div
                 className="col-6"
                 style={{
-                  height: "70vh",
+                  height: "50vh",
                   width: "50%",
                   color: "red",
                   overflowY: "scroll",
