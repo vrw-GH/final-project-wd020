@@ -8,45 +8,38 @@
   background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
   /* box-shadow: 2px 25px 40px rgb(165, 165, 165); */
   box-shadow: 2px 25px 80px rgba(255, 200, 79, 0.712);
-  padding: 5px; 
-  
+  padding: 5px;
 }
 .single_title_title {
-  font-family: 'Amble LtCn', sans-serif;
-  background-color: aliceblue;  
+  font-family: "Amble LtCn", sans-serif;
+  background-color: aliceblue;
   font-style: Arial;
   font-size: 2rem;
   color: black;
   text-align: center;
   text-transform: uppercase;
   margin: 10px;
-  cursor:auto;
+  cursor: auto;
   padding: 20px;
   border-radius: 20px;
 }
 
 .single_title_img {
-  background: rgba(255, 255, 255, 0.144);  
   display: flex;
-  border: solid 1px rgba(106, 106, 106, 0.4);
-  object-fit:cover;
+  object-fit: cover;
   padding: 0;
   margin-bottom: 0.2rem;
-  box-shadow: 1px 10px 25px rgb(94, 91, 91);
 }
 
 .single_title_ingredients {
-  background-color: #C5FAD5;
-  padding: 1rem; 
+  padding: 1rem;
   color: rgb(0, 0, 0);
-  margin: 10px 10px 5px 5px ; 
-  box-shadow: 1px 10px 25px rgb(206, 206, 206);
-  border-radius: 30px;
+  margin: 10px 10px 5px 5px;
 }
 
 .single_title_ingredients > div {
-  background: rgba(255, 255, 255, 0.315);  
-  width: 100%;  
+  background: rgba(255, 255, 255, 0.315);
+  width: 100%;
   border: solid 1px rgba(106, 106, 106, 0.4);
   padding: 5px;
   margin: 0px;
@@ -54,39 +47,30 @@
 }
 
 .single_title_details {
-  padding: .5rem;
+  padding: 0.5rem;
   text-align: left;
 }
 .single_title_method {
-  margin-top: 30px;
-  background-color: #eddbfd;
-  padding: .2rem; 
-  box-shadow: 1px 10px 25px rgb(206, 206, 206);
-  border-radius: 30px;
+  margin: 50px;
 
+  padding: 0.2rem;
 }
 .single_title_method > div {
-  background-color: #FFFED2; 
   color: rgb(0, 0, 0);
   padding: 5px;
+  margin: 50px;
   text-align: left;
-  box-shadow: 1px 10px 25px rgb(206, 206, 206);
-  border-radius: 10px;
-  
 }
-.single_title_method > h5, .single_title_details > h5 {
+.single_title_method > h5,
+.single_title_details > h5 {
   /* background-color: rgba(173, 226, 142, 0.795); */
   padding: 5px;
-  margin:0;
+  margin: 0;
 }
 .single_title_info {
-  background-color: rgba(130, 222, 250, 0.822);
   font-style: italic;
-  font-size: .7rem;
+  font-size: 0.7rem;
   color: black;
   padding: 0.2rem;
-  margin:2px;
-  box-shadow: 1px 10px 25px rgb(206, 206, 206);
-  border-radius: 30px;
-  
+  margin: 2px;
 }

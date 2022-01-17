@@ -3,44 +3,42 @@
   flex-direction: column;
   margin: auto;
   text-align: center;
-  width: 90%;  
+  width: 90%;
   margin-top: 10px;
   border-radius: 20px;
-  
+
   box-shadow: 2px 2px 15px rgb(233, 232, 232);
-  padding: 5px; 
+  padding: 5px;
   padding: 50px;
 }
 .create_title_title {
-  padding: .2rem;
+  padding: 0.2rem;
   text-transform: uppercase;
-  text-shadow:blue;
+  text-shadow: blue;
   font-size: 1.2rem;
-  cursor:auto;
+  cursor: auto;
 }
 .create_title_category {
-  margin: .5rem;
+  margin: 0.5rem;
   font-style: italic;
-  font-size: .7rem;
+  font-size: 0.7rem;
   text-align: left;
-  padding: .2rem;
+  padding: 0.2rem;
   min-width: 50px;
   max-width: 200px;
 }
 .create_title_img {
-  background: rgba(130, 222, 250, 0.822);  
   display: flex;
-  margin: 2px 1px 5px 0;
-  object-fit:contain;
+  margin: 45px 20px;
+  object-fit: contain;
   width: 100%;
-  padding:2px;
+  padding: 2px;
   min-height: 20vh;
-  
   border-radius: 15px;
 }
 
 textarea {
-  background: rgba(255, 255, 255, 0.315);  
+  background: rgba(255, 255, 255, 0.315);
   width: 100%;
   height: 20vh;
   border: solid 1px rgba(106, 106, 106, 0.4);
@@ -50,16 +48,16 @@ textarea {
 }
 
 .create_title_ingredients {
-  background-color: #C5FAD5; 
+  background-color: #c5fad5;
   border-radius: 15px;
-  padding: 0.2rem; 
-  margin: 0 10px 5px 5px ; 
+  padding: 0.2rem;
+  margin: 0 10px 5px 5px;
   box-shadow: 2px 2px 15px rgb(233, 232, 232);
 }
 
 .create_title_ingredients > div {
-  background: rgba(255, 255, 255, 0.315);  
-  width: 100%;  
+  background: rgba(255, 255, 255, 0.315);
+  width: 100%;
   border: solid 1px rgba(106, 106, 106, 0.4);
   padding: 5px;
   margin: 0px;
@@ -68,27 +66,28 @@ textarea {
 
 .create_title_method {
   margin-top: 20px;
-  background-color: rgb(255, 244, 195); 
-  padding: .4rem; 
+  background-color: rgb(255, 244, 195);
+  padding: 0.4rem;
   border-radius: 15px;
   box-shadow: 2px 2px 15px rgb(233, 232, 232);
 }
 .create_title_method > textarea {
-  background-color: rgba(254, 255, 255, 0.767); 
+  background-color: rgba(254, 255, 255, 0.767);
   color: rgb(0, 0, 0);
   padding: 5px;
 }
 
-.create_title_method > h5, .create_title_details > h5 {
+.create_title_method > h5,
+.create_title_details > h5 {
   /* background-color: rgba(72, 126, 41, 0.411); */
   padding: 5px;
-  margin:0;
+  margin: 0;
 }
 .create_title_info {
   background-color: rgba(193, 238, 168, 0.795);
   font-style: italic;
-  font-size: .7rem;
-  padding: .4rem;
+  font-size: 0.7rem;
+  padding: 0.4rem;
 }
 
 form button.btns {
@@ -98,10 +97,9 @@ form button.btns {
   border-radius: 10px;
   color: rgb(59, 59, 59);
   background-color: rgb(255, 255, 255);
-  
 }
 .btns:hover {
-  background-color:#C5FAD5;
+  background-color: #c5fad5;
   color: white;
 }
 

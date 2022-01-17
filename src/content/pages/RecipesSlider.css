@@ -27,9 +27,9 @@
 .recipesSlider_img {
     margin: auto;
     padding: auto;
-    border-radius: 20px;
-    width: 75%;
-    height: 200px;
+    border-radius: 5px;
+    width: 85%;
+    height: 250px;
     object-fit: cover;
     padding-top:0.1rem;
     cursor:grab;    
