@@ -57,7 +57,8 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
       {total > 0 ? (
         <>
           <h5>
-            We found {total} entries containing the word "{searchQry}"{" "}
+            We found {total} {total > 1 ? "entries" : "entry"} containing the
+            word "{searchQry}"{" "}
           </h5>
           {titles.map((title) => (
             <Title

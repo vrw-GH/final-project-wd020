@@ -210,6 +210,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                         accept="image/png, .jpeg, .jpg, image/gif"
                         id="title_img"
                         name="title_img"
+                        required
                         onChange={(e) => handleImgInput(e)}
                       />
                       {/* <img src="default.img" alt="recipe" /> */}
@@ -231,6 +232,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                         placeholder="select ingredient"
                         id="ingredient"
                         tabIndex="1"
+                        required
                         value={ingredient[0]}
                       />
                       <input
@@ -238,6 +240,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                         placeholder="quantity"
                         id="quantity"
                         tabIndex="2"
+                        required
                         value={ingredient[1]}
                       />
                       <button onClick={addIngredient}>Add</button>

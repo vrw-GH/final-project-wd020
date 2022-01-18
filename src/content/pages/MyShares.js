@@ -136,6 +136,13 @@ const MyShares = ({ APPDATA }) => {
     }
   };
 
+  const popMessages = (messages) => {
+    if (!messages) return "";
+    console.log(messages);
+    let msgHist = "sdfsdfsdsd";
+    return msgHist;
+  };
+
   if (err)
     return (
       <div className="loading_container">
@@ -146,6 +153,7 @@ const MyShares = ({ APPDATA }) => {
 
   let k = 0;
   let k2 = 0;
+  console.log(shareItems);
   return (
     <div
       className="page-container"
@@ -220,6 +228,12 @@ const MyShares = ({ APPDATA }) => {
                   : "Someone"
                 : ""}
               {shareExplain[selectedInfo.sharestatus]}
+              <br />
+              {selectedInfo.sharestatus === "B" ? (
+                <>
+                  {"Messages: "} {selectedInfo.messages?.msg}
+                </>
+              ) : null}
               <button className="btns">Update</button>
             </form>
           </div>
@@ -237,7 +251,7 @@ const MyShares = ({ APPDATA }) => {
                       key={k2++}
                       title={
                         (each.bookedby
-                          ? `Booked by: ${each.bookedby.toUpperCase()} - `
+                          ? `Booked by: ${each.bookedby.toUpperCase()} \n Messages: - `
                           : "") + "click to edit"
                       }
                       style={{

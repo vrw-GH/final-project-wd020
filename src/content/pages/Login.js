@@ -7,6 +7,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
   let navigate = useNavigate();
   let username = "";
+  let navigateTo = "/";
 
   useEffect(() => {
     if (sessionStorage.getItem("currentUser")) {
@@ -17,12 +18,6 @@ const Login = ({ setCurrentUser, APPDATA }) => {
     return () => {};
     //eslint-disable-next-line
   }, []);
-
-  // if (sessionStorage.getItem("currentUser")) {
-  //   sessionStorage.removeItem("currentUser");
-  //   setCurrentUser("");
-  //   return null;
-  // }
 
   const doLogin = async (e) => {
     try {
@@ -42,6 +37,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       sessionStorage.setItem("currentUser", username);
     } catch (error) {
       setLoginMsg(error + " Please try again.");
+      navigateTo = "/login";
     }
   };
 
@@ -64,11 +60,13 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       username = "";
     } catch (error) {
       setLoginMsg(error + " Please try again.");
+      navigateTo = -1;
     }
   };
 
   const goHome = () => {
-    navigate("/");
+    console.log(navigateTo);
+    navigate(navigateTo);
   };
 
   return (
@@ -101,7 +99,9 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <input
               id="username"
               default={true}
+              maxLength={16}
               type="text"
+              required
               autoFocus={true}
               placeholder="username"
               className="form-control"
@@ -110,6 +110,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <input
               id="password"
               type="password"
+              required
               placeholder="password"
               className="form-control"
             />
@@ -121,15 +122,17 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             >
               Login
             </button>
-
             <br />
             <br />
             <input
               type="text"
               id="email"
               placeholder="email"
+              required={true}
+              title="Your email will be shown to other logged-in members"
               className="form-control"
             />
+            <i>Your email will be shown to logged-in members when sharing</i>
             <button onClick={doCreateUser} className="btn btn-warning">
               Create User
             </button>

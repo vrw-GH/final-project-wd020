@@ -50,7 +50,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
       const getrecipes = async () => {
         try {
           const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-          if (!results.data.tuples[0]) throw new Error("No Ingredients Data.");
+          if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
           const filterdData = await results.data.tuples.filter(filterItems);
           setRecipes(filterdData);
         } catch (error) {
@@ -222,6 +222,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                       checked={ingr.checked}
                       onChange={selectIng}
                     />
+                    &nbsp;
                     {ingr.ingredient_name} &nbsp;&nbsp;
                   </label>
                 ))}
