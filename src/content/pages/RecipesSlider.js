@@ -13,13 +13,6 @@ export default function HomeSlider({ sliderData }) {
         try *And/Or* button above
       </div>
     );
-  var settings = {
-    dots: true,
-    infinite: sliderData.length > 3,
-    speed: 800,
-    slidesToShow: window.innerWidth / 300,
-    slidesToScroll: 3,
-  };
   const ctgType = {
     B: "Breakfast",
     L: "Lunch",
@@ -35,11 +28,24 @@ export default function HomeSlider({ sliderData }) {
     return str;
   };
 
+  var settings = {
+    dots: true,
+    infinite: sliderData.length > 3,
+    speed: 800,
+    slidesToShow: window.innerWidth / 300,
+    slidesToScroll: 3,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    adaptiveHeight: true,
+    focusOnSelect: true,
+  };
+
   let key = 0;
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
-        <i>Drag slider ◄ or ►. Click Title for Recipe Page</i>
+      <div style={{ marginBottom: "0.8rem", textAlign: "center" }}>
+        <i>Drag slider ◄ or ►. Click each Title to open the Recipe Page</i>
         <br />
       </div>
       <Slider {...settings}>
@@ -69,7 +75,7 @@ export default function HomeSlider({ sliderData }) {
           </div>
         ))}
       </Slider>
-      <div>Pages (Slider)</div>
+      <div>Slider Pages:</div>
     </div>
   );
 }

@@ -11,6 +11,8 @@ const MyShares = ({ APPDATA }) => {
   const [formIsShown, setFormIsShown] = useState(false);
   const [selectedInfo, setSelectedInfo] = useState({});
   const [getData, setGetData] = useState(true);
+  const [shareMessages, setShareMessages] = useState([]);
+  // const [unread, setUnread] = useState(false);
   const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
   const shareExplain = {
     A: "This share is available for collection.",
@@ -47,6 +49,18 @@ const MyShares = ({ APPDATA }) => {
                 return 0;
               });
               setShareItems(sorted);
+              let tArr = [];
+              for (let index = 0; index < sorted.length; index++) {
+                if (sorted[index].messages) {
+                  tArr.push([
+                    sorted[index].bookedby,
+                    sorted[index].messages.msg,
+                    sorted[index].messages.read,
+                    sorted[index].arrayofitems,
+                  ]);
+                }
+              }
+              setShareMessages(tArr);
             }
           } catch (error) {
             if (!error.response.data.info.result === false) {
@@ -102,6 +116,13 @@ const MyShares = ({ APPDATA }) => {
     setFormIsShown(true);
   };
 
+  const setRead = (e) => {
+    e.preventDefault();
+    const newInfo = { ...selectedInfo };
+    newInfo.messages.read = true;
+    setSelectedInfo(newInfo);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let submitInfo = { ...selectedInfo };
@@ -116,7 +137,7 @@ const MyShares = ({ APPDATA }) => {
     submitInfo.arrayofitems = submitInfo.arrayofitems
       .replace(/, /g, ",")
       .split(",");
-    submitInfo.location = `${userLoc.current.x},${userLoc.current.y}`;
+    submitInfo.location = `${userLoc.current.y},${userLoc.current.x}`;
     if (submitInfo.sharestatus !== "B") submitInfo.bookedby = "";
     submitInfo.plz = submitInfo.plz.trim();
     submitInfo.message = submitInfo.message.trim();
@@ -136,12 +157,12 @@ const MyShares = ({ APPDATA }) => {
     }
   };
 
-  const popMessages = (messages) => {
-    if (!messages) return "";
-    console.log(messages);
-    let msgHist = "sdfsdfsdsd";
-    return msgHist;
-  };
+  // const popMessages = (messages) => {
+  //   if (!messages) return "";
+  //   console.log(messages);
+  //   let msgHist = "sdfsdfsdsd";
+  //   return msgHist;
+  // };
 
   if (err)
     return (
@@ -153,7 +174,6 @@ const MyShares = ({ APPDATA }) => {
 
   let k = 0;
   let k2 = 0;
-  console.log(shareItems);
   return (
     <div
       className="page-container"
@@ -172,6 +192,18 @@ const MyShares = ({ APPDATA }) => {
           width: "90%",
         }}
       >
+        New Messages:
+        {shareMessages.map((i) =>
+          !i[2] ? (
+            <div key={k++} style={{ backgroundColor: "yellow" }}>
+              <span style={{ fontSize: "1.2rem" }}>{i[1]}</span> -{" "}
+              <i>
+                from {i[0]}, (Re: {i[3]})
+              </i>
+            </div>
+          ) : null
+        )}
+        <hr />
         <div className="row" style={{ justifyContent: "center" }}>
           <button
             className="btns"
@@ -231,7 +263,24 @@ const MyShares = ({ APPDATA }) => {
               <br />
               {selectedInfo.sharestatus === "B" ? (
                 <>
-                  {"Messages: "} {selectedInfo.messages?.msg}
+                  <div>
+                    {"Message: "}{" "}
+                    <b style={{ backgroundColor: "yellow" }}>
+                      {selectedInfo.messages?.msg}
+                    </b>
+                    &nbsp;&nbsp;&nbsp;
+                    {selectedInfo.messages && !selectedInfo.messages.read ? (
+                      <input
+                        type="button"
+                        placeholder="Mark as read"
+                        value="I have seen this ✅"
+                        title="Click here to acknowledge this message."
+                        onClick={setRead}
+                      ></input>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </>
               ) : null}
               <button className="btns">Update</button>
@@ -250,9 +299,13 @@ const MyShares = ({ APPDATA }) => {
                       onClick={() => editItem(each)}
                       key={k2++}
                       title={
+                        "click to edit" +
                         (each.bookedby
-                          ? `Booked by: ${each.bookedby.toUpperCase()} \n Messages: - `
-                          : "") + "click to edit"
+                          ? "\nBooked by: " + each.bookedby.toUpperCase()
+                          : "") +
+                        (each.messages?.msg
+                          ? "\nMessages: - " + each.messages.msg
+                          : "")
                       }
                       style={{
                         backgroundColor:
@@ -260,9 +313,7 @@ const MyShares = ({ APPDATA }) => {
                             ? "lightgrey"
                             : each.sharestatus === "B"
                             ? "limegreen"
-                            : k2 % 2 === 0
-                            ? "#ddf3fc"
-                            : "#d4f7db",
+                            : "#ddf3fc",
                         textDecorationLine:
                           each.sharestatus === "D" ? "line-through" : "",
                         cursor: "pointer",

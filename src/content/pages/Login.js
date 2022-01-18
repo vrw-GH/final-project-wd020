@@ -5,9 +5,8 @@ import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   let username = "";
-  let navigateTo = "/";
 
   useEffect(() => {
     if (sessionStorage.getItem("currentUser")) {
@@ -35,9 +34,9 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setCurrentUser(result.data.tuple[0].username);
       setLoginMsg(`"${username}" - succesfully logged in!`);
       sessionStorage.setItem("currentUser", username);
+      navigate("/myshare");
     } catch (error) {
       setLoginMsg(error + " Please try again.");
-      navigateTo = "/login";
     }
   };
 
@@ -58,15 +57,15 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setLoginMsg(result.data.info.message);
       sessionStorage.setItem("currentUser", item.username);
       username = "";
+      navigate(-1);
     } catch (error) {
       setLoginMsg(error + " Please try again.");
-      navigateTo = -1;
     }
   };
 
-  const goHome = () => {
-    console.log(navigateTo);
-    navigate(navigateTo);
+  const goBack = () => {
+    setLoginMsg("");
+    navigate("/login");
   };
 
   return (
@@ -86,10 +85,10 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <br />
             <br />
             <button
-              onClick={goHome}
+              onClick={goBack}
               className="btn btn-light"
               autoFocus
-              onKeyDown={(keyCode) => (keyCode === 13 ? goHome : false)}
+              onKeyDown={(keyCode) => (keyCode === 13 ? () => goBack : false)}
             >
               Ok
             </button>
@@ -125,6 +124,9 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               Login
             </button>
             <br />
+            <i>
+              New User? Please enter above and additionally the email below..
+            </i>
             <br />
             <input
               type="text"

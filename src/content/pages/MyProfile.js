@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import MapChart from "../../components/MapChart";
 import "../../loading.css";
 import "./_Page.css";
@@ -12,6 +13,7 @@ const MyProfile = ({ APPDATA }) => {
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
   const maxAllowedSize = 1024 * 50; //kb
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async () => {
@@ -57,7 +59,8 @@ const MyProfile = ({ APPDATA }) => {
         `${APPDATA.BACKEND}/api/users/${currentUser.toLowerCase()}`,
         info
       );
-      alert("Updated");
+      alert("Profile Info Saved.");
+      navigate("/");
     } catch (error) {
       // setErr(error.message);
       window.alert(error);
@@ -237,7 +240,7 @@ const MyProfile = ({ APPDATA }) => {
             {/* </div> */}
           </div>
           <button type="submit" className="btns">
-            Update
+            Save Profile
           </button>
           {/* <button type="cancel" className="btns">
             Reset

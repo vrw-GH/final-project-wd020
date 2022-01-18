@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../loading.css";
 import "./SingleTitle.css";
@@ -11,6 +12,7 @@ const SingleTitle = ({ APPDATA }) => {
   const [err, setErr] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [thisUserLikes, setThisUserLikes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isLoaded = true;
@@ -71,7 +73,11 @@ const SingleTitle = ({ APPDATA }) => {
     );
 
   const handleLikeEdit = (e) => {
-    if (!currentUser) return alert("You must be logged in");
+    if (!currentUser) {
+      alert("You must be logged in");
+      navigate("/login");
+      return;
+    }
 
     if (currentUser !== recipe.username) {
       if (!isLiked) {

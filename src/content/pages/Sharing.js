@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { datify } from "../../components/formatting";
 import MapChart from "../../components/MapChart";
 import "./_Page.css";
@@ -18,6 +19,7 @@ const Sharing = ({ APPDATA }) => {
   const [listPLZ, setListPLZ] = useState([]);
   const shareStatus = { A: "Active", B: "Reserved", C: "Closed", D: "Deleted" };
   const statusColor = { A: "green", B: "red", C: "grey", D: "lightgrey" };
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (getData) {
@@ -118,6 +120,7 @@ const Sharing = ({ APPDATA }) => {
             maxLength="50"
             style={{ width: "40vh", border: "solid" }}
             type="text"
+            required
             placeholder="type message here"
           ></input>
           <br />
@@ -250,7 +253,6 @@ const Sharing = ({ APPDATA }) => {
                 onChange={setKeyword}
               ></input>
             </li>
-
             <div className="row" style={{ width: "100%" }}>
               <div
                 className="col-6"
@@ -264,6 +266,7 @@ const Sharing = ({ APPDATA }) => {
                 <h6>
                   <u>Share Basket</u>
                 </h6>
+
                 <ul style={{ padding: "0px" }}>
                   {filteredItems
                     // .filter((it) => true)
@@ -325,6 +328,13 @@ const Sharing = ({ APPDATA }) => {
               </div>
             </div>
           </div>
+          {currentUser ? (
+            <div>
+              <button onClick={() => navigate("/myshare")}>
+                Go to My Shares
+              </button>
+            </div>
+          ) : null}
         </div>
 
         {/* ---------------MODAL---------- */}
