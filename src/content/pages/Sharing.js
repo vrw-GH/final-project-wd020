@@ -33,8 +33,8 @@ const Sharing = ({ APPDATA }) => {
           x2.sort();
           setListPLZ(x2);
           let filterdData = results.data.tuples.filter(
-            // ({ sharestatus }) => sharestatus !== "D" // only "Active/Booked/Closed" items - NOT "Deleted")
-            ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing ?
+            ({ sharestatus }) => sharestatus !== "D" // only "Active/Booked/Closed" items - NOT "Deleted")
+            // ({ sharestatus }) => true // ! REMOVE AFTER DEV C.R.U.D. in mysharing ?
           );
           if (currentUser)
             filterdData = filterdData.filter(
