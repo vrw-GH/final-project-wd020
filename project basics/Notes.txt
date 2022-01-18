@@ -1,3 +1,5 @@
+!! audience can be tech or non-tech*
+
 INTRO: (Abdu, Victor) 1min x 2
 - Who am I...
 - Background...
@@ -9,9 +11,9 @@ PRESENTATION
 
 PROJECT PREAMBLE
 
-- Idea
+- Idea -Sharing
 - Why
-- Usefulness (Personal Recipe Book)
+- Usefulness (Share food, Personal Recipe Book)
 
 
 CORE- FEATURES 
@@ -52,3 +54,4 @@ THE LITTLE THINGS!
 
 SURPRISE!!
 Jorge: very caring and sharing. he shook us ...
+

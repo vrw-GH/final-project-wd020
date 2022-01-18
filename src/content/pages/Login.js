@@ -87,7 +87,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <br />
             <button
               onClick={goHome}
-              className="btn btn-primary"
+              className="btn btn-light"
               autoFocus
               onKeyDown={(keyCode) => (keyCode === 13 ? goHome : false)}
             >
@@ -115,9 +115,11 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               className="form-control"
             />
             <button
+              style={{ marginTop: "20px" }}
               type="submit"
               onClick={doLogin}
-              className="btn btn-primary"
+              className="btn btn-light"
+              id="nav-find"
               onKeyDown={(keyCode) => (keyCode === 13 ? doLogin : false)}
             >
               Login
@@ -133,7 +135,12 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               className="form-control"
             />
             <i>Your email will be shown to logged-in members when sharing</i>
-            <button onClick={doCreateUser} className="btn btn-warning">
+            <button
+              style={{ marginTop: "20px" }}
+              onClick={doCreateUser}
+              id="nav-find"
+              className="btn btn-light"
+            >
               Create User
             </button>
           </>

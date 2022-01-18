@@ -9,8 +9,7 @@
     margin: auto;
     margin-top: 10px;
     padding: 5px; 
-    background: linear-gradient(rgba(219, 106, 0, 0.444), rgba(142, 151, 8, 0.2));
-    box-shadow: 2.5px 2.5px 80px rgba(255, 200, 79, 0.712);
+    
 }
 
 .recipesSlider_container > a:any-link, a:visited {
@@ -28,9 +27,9 @@
 .recipesSlider_img {
     margin: auto;
     padding: auto;
-    border-radius: 20px;
-    width: 75%;
-    height: 200px;
+    border-radius: 5px;
+    width: 85%;
+    height: 250px;
     object-fit: cover;
     padding-top:0.1rem;
     cursor:grab;    
