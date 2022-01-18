@@ -34,12 +34,10 @@ body{
   flex-direction: column;
   align-items: center;
   max-width: 98%;
-  /* box-shadow: 2.5px 2.5px 40px rgb(165, 165, 165); */
-  background-color: whitesmoke;
+  box-shadow: 2px 4px 25px rgb(240, 237, 237);
+  background-color: rgb(255, 255, 255);
   padding: 2rem;
   margin: 0.5rem 0 2rem;
-
-  border-radius: 40px;
 }
 
 .itemsCont {
@@ -51,9 +49,17 @@ body{
 .itemsList {
   background-color: #c5fad5;
   padding: 25px;
-  margin-top: 10px;
+  margin-top: 20px;
   line-height: 34px;
   border-radius: 15px;
+  
+}
+
+.itemsList:hover{
+  transition: 0.7s 0.8s ease-in-out;
+  background-color: rgb(133, 212, 212);
+  color: white;
+  padding-bottom: 50px;
 }
 
 .form {
@@ -224,13 +230,13 @@ body{
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #fdf1b8;
+  background-color: #fffed4;
   z-index: -1;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 500ms ease-in-out;
   /* border: rgba(180, 180, 180, 0.288) 0.3px solid; */
-  box-shadow: 1px 15px 25px rgb(236, 236, 236);
+  /* box-shadow: 1px 15px 200px rgb(236, 236, 236); */
 
 } 
 

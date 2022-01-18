@@ -195,7 +195,7 @@ const MyShares = ({ APPDATA }) => {
         New Messages:
         {shareMessages.map((i) =>
           !i[2] ? (
-            <div key={k++} style={{ backgroundColor: "yellow" }}>
+            <div key={k++} style={{ backgroundColor: "white" }}>
               <span style={{ fontSize: "1.2rem" }}>{i[1]}</span> -{" "}
               <i>
                 from {i[0]}, (Re: {i[3]})
@@ -208,7 +208,7 @@ const MyShares = ({ APPDATA }) => {
           <button
             className="btns"
             onClick={addItem}
-            style={{ width: "auto", backgroundColor: "lightgreen" }}
+            style={{ width: "auto",height: "auto",marginTop:"21px", backgroundColor: "white", borderRadius:"20px"}}
           >
             CREATE NEW SHARE
           </button>
@@ -310,10 +310,10 @@ const MyShares = ({ APPDATA }) => {
                       style={{
                         backgroundColor:
                           each.sharestatus === "D" || each.sharestatus === "C"
-                            ? "lightgrey"
+                            ? "#c2fffa"
                             : each.sharestatus === "B"
-                            ? "limegreen"
-                            : "#ddf3fc",
+                            ? "#c5fad5"
+                            : "#FCD8D4",
                         textDecorationLine:
                           each.sharestatus === "D" ? "line-through" : "",
                         cursor: "pointer",
