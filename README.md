@@ -19,6 +19,4 @@ View GH Page: https://github.com/vrw-GH/final-project-wd020
 Backend repo: https://github.com/vrw-GH/contentful_backend
 <br />
 <br />
-Snapshot:
-<br />
-![HomePage](https://github.com/vrw-GH/final-project-wd020/blob/17e7c9d311bfb4efde27405fdb1ab2a57b0fe5fc/project%20basics/Screenshot%20(252).png)
+![](https://github.com/vrw-GH/final-project-wd020/blob/3c916b4384a61836672d8d8cc7049efdc6914ec4/project%20basics/Screenshot%20(252).png)
