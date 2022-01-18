@@ -21,4 +21,4 @@ Backend repo: https://github.com/vrw-GH/contentful_backend
 <br />
 Snapshot:
 <br />
-![HomePage](https://github.com/vrw-GH/final-project-wd020/blob/9c770ddcf94a979f4c41b7015e9c6cf79007d156/project%20basics/Screenshot%20(252).png)
+![HomePage](https://github.com/vrw-GH/final-project-wd020/blob/17e7c9d311bfb4efde27405fdb1ab2a57b0fe5fc/project%20basics/Screenshot%20(252).png)
