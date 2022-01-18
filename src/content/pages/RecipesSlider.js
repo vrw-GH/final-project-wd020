@@ -37,8 +37,6 @@ export default function HomeSlider({ sliderData }) {
     arrows: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    adaptiveHeight: true,
-    focusOnSelect: true,
   };
 
   let key = 0;

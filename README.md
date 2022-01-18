@@ -17,8 +17,3 @@ Continous Deployment on Netlify -https://vrwgh-finalprojectwd020.netlify.app/
 View GH Page: https://github.com/vrw-GH/final-project-wd020
 <br />
 Backend repo: https://github.com/vrw-GH/contentful_backend
-
-
-
-
-[![Feature List](https://github.com/vrw-GH/final-project-wd020/blob/57c161bd81c696853accb6e21177473691d4ea20/project%20basics/Features%20List.txt)
