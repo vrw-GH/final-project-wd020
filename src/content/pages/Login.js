@@ -5,7 +5,7 @@ import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
   const [loginMsg, setLoginMsg] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   let username = "";
 
   useEffect(() => {
@@ -17,12 +17,6 @@ const Login = ({ setCurrentUser, APPDATA }) => {
     return () => {};
     //eslint-disable-next-line
   }, []);
-
-  // if (sessionStorage.getItem("currentUser")) {
-  //   sessionStorage.removeItem("currentUser");
-  //   setCurrentUser("");
-  //   return null;
-  // }
 
   const doLogin = async (e) => {
     try {
@@ -40,6 +34,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setCurrentUser(result.data.tuple[0].username);
       setLoginMsg(`"${username}" - succesfully logged in!`);
       sessionStorage.setItem("currentUser", username);
+      navigate("/myshare");
     } catch (error) {
       setLoginMsg(error + " Please try again.");
     }
@@ -62,13 +57,15 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setLoginMsg(result.data.info.message);
       sessionStorage.setItem("currentUser", item.username);
       username = "";
+      navigate(-1);
     } catch (error) {
       setLoginMsg(error + " Please try again.");
     }
   };
 
-  const goHome = () => {
-    navigate("/");
+  const goBack = () => {
+    setLoginMsg("");
+    navigate("/login");
   };
 
   return (
@@ -88,10 +85,10 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <br />
             <br />
             <button
-              onClick={goHome}
+              onClick={goBack}
               className="btn btn-light"
               autoFocus
-              onKeyDown={(keyCode) => (keyCode === 13 ? goHome : false)}
+              onKeyDown={(keyCode) => (keyCode === 13 ? () => goBack : false)}
             >
               Ok
             </button>
@@ -101,16 +98,18 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             <input
               id="username"
               default={true}
+              maxLength={16}
               type="text"
+              required
               autoFocus={true}
               placeholder="username"
               className="form-control"
-
             />
 
             <input
               id="password"
               type="password"
+              required
               placeholder="password"
               className="form-control"
             />
@@ -124,16 +123,26 @@ const Login = ({ setCurrentUser, APPDATA }) => {
             >
               Login
             </button>
-
             <br />
+            <i>
+              New User? Please enter above and additionally the email below..
+            </i>
             <br />
             <input
               type="text"
               id="email"
               placeholder="email"
+              required={true}
+              title="Your email will be shown to other logged-in members"
               className="form-control"
             />
-            <button style={{marginTop:"20px"}} onClick={doCreateUser} id="nav-find" className="btn btn-light">
+            <i>Your email will be shown to logged-in members when sharing</i>
+            <button
+              style={{ marginTop: "20px" }}
+              onClick={doCreateUser}
+              id="nav-find"
+              className="btn btn-light"
+            >
               Create User
             </button>
           </>

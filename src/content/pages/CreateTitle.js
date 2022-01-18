@@ -38,8 +38,8 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
             ...obj,
           }));
           const sortedData = finalData.sort((a, b) => {
-            let nameA = a.ingredient_name.toUpperCase(); // ignore upper and lowercase
-            let nameB = b.ingredient_name.toUpperCase(); // ignore upper and lowercase
+            let nameA = a.ingredient_name.toUpperCase();
+            let nameB = b.ingredient_name.toUpperCase();
             if (nameA < nameB) return -1; //nameA comes first
             if (nameA > nameB) return 1; // nameB comes first
             return 0; // names must be equal
@@ -69,8 +69,8 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
       await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
       setPublished(true);
     } catch (error) {
-      // alert(error);
-      setErr(error.message);
+      alert(error);
+      // setErr(error.message);
     }
   };
 
@@ -141,6 +141,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
         <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
       </div>
     );
+
   let k = 0;
   return (
     <>
@@ -210,6 +211,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                         accept="image/png, .jpeg, .jpg, image/gif"
                         id="title_img"
                         name="title_img"
+                        required
                         onChange={(e) => handleImgInput(e)}
                       />
                       {/* <img src="default.img" alt="recipe" /> */}

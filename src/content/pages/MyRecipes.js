@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../../loading.css";
@@ -11,6 +12,7 @@ const MyRecipes = ({ APPDATA }) => {
   const [recipes, setRecipes] = useState([]);
   const [thisUserLikes, setThisUserLikes] = useState([]);
   const [err, setErr] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isLoaded = true;
@@ -167,6 +169,14 @@ const MyRecipes = ({ APPDATA }) => {
             </TabPanel>
           </Tabs>
         </div>
+
+        {currentUser ? (
+          <div>
+            <button onClick={() => navigate("/newtitle")}>
+              Create a New Recipe
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

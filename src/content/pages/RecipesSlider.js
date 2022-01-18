@@ -6,12 +6,19 @@ import "slick-carousel/slick/slick-theme.css";
 import "./RecipesSlider.css";
 
 export default function HomeSlider({ sliderData }) {
-  var settings = {
-    dots: true,
-    infinite: sliderData.length > 3,
-    speed: 800,
-    slidesToShow: 4,
-    slidesToScroll: 2,
+  if (sliderData.length < 1)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <h3>😬 Sorry, we did not find any recipes ..</h3>
+        try *And/Or* button above
+      </div>
+    );
+  const ctgType = {
+    B: "Breakfast",
+    L: "Lunch",
+    D: "Dinner",
+    S: "Dessert",
+    X: "Xmas",
   };
 
   const toPlain = (html) => {
@@ -21,9 +28,26 @@ export default function HomeSlider({ sliderData }) {
     return str;
   };
 
+  var settings = {
+    dots: true,
+    infinite: sliderData.length > 3,
+    speed: 800,
+    slidesToShow: window.innerWidth / 300,
+    slidesToScroll: 3,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    adaptiveHeight: true,
+    focusOnSelect: true,
+  };
+
   let key = 0;
   return (
     <div>
+      <div style={{ marginBottom: "0.8rem", textAlign: "center" }}>
+        <i>Drag slider ◄ or ►. Click each Title to open the Recipe Page</i>
+        <br />
+      </div>
       <Slider {...settings}>
         {sliderData.map((data) => (
           <div key={key++}>
@@ -38,16 +62,20 @@ export default function HomeSlider({ sliderData }) {
                 title={toPlain(data.ingredients)}
               />
             </object>
-            <div className="recipesSlider_description">
-              by: {data.username} ({data.category})
-            </div>
-            <Link to={`/recipes/${data.slug}`} className="link">
+            <Link
+              to={`/recipes/${data.slug}`}
+              className="link"
+              title="Click here to go to recipe page"
+            >
+              <div className="recipesSlider_description">
+                by: {data.username} ({ctgType[data.category]})
+              </div>
               <div className="recipesSlider_title">{data.title}</div>
             </Link>
           </div>
         ))}
       </Slider>
-    
+      <div>Slider Pages:</div>
     </div>
   );
 }
