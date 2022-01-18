@@ -166,7 +166,7 @@ body{
 .color-overlay {
   width: 100%;
   height: 100%;
-  background: #c5fad5;
+  background: #c2fffa;
   opacity: 0;
   position: absolute;
   transition: 0.5s ease;
@@ -194,13 +194,13 @@ body{
 
 
 
-@media (min-width: 600px) {
+@media (min-width: 896px) {
   .cont1 {
     display: flex;
     flex-direction: column;
   }
 }
-@media (min-width: 601px) {
+@media (min-width: 897px) {
   .cont1 {
     display: flex;
     flex-direction: row;
