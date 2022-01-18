@@ -44,7 +44,7 @@ export default function HomeSlider({ sliderData }) {
     <div>
       <div style={{ marginBottom: "0.8rem", textAlign: "center" }}>
         <i>Drag slider ◄ or ►. Click each Title to open the Recipe Page</i>
-        <br />
+        <br /><br/>
       </div>
       <Slider {...settings}>
         {sliderData.map((data) => (
@@ -73,7 +73,7 @@ export default function HomeSlider({ sliderData }) {
           </div>
         ))}
       </Slider>
-      <div>Slider Pages:</div>
+      <div className="slider-page">Slider Pages:</div>
     </div>
   );
 }

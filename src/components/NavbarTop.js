@@ -14,7 +14,7 @@ const NavbarTop = ({
 }) => {
   return (
     <>
-      <Navbar sticky="top" id="nav" collapseOnSelect expand="md">
+      <Navbar sticky="top" id="nav" Collapse expand="md">
         <Navbar.Brand
           href="/about"
           onClick={handleClearQry}
