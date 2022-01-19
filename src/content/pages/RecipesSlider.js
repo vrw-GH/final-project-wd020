@@ -33,6 +33,7 @@ export default function HomeSlider({ sliderData }) {
     infinite: sliderData.length > 3,
     speed: 800,
     slidesToShow: window.innerWidth / 300,
+    slidesToShow: 4,
     slidesToScroll: 3,
     arrows: true,
     autoplay: true,
@@ -44,7 +45,8 @@ export default function HomeSlider({ sliderData }) {
     <div>
       <div style={{ marginBottom: "0.8rem", textAlign: "center" }}>
         <i>Drag slider ◄ or ►. Click each Title to open the Recipe Page</i>
-        <br /><br/>
+        <br />
+        <br />
       </div>
       <Slider {...settings}>
         {sliderData.map((data) => (
