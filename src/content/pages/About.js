@@ -6,6 +6,7 @@ import {
 } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
+import "./confetti.css";
 
 
 import { Link } from "react-router-dom";
@@ -35,17 +36,17 @@ const About = ({ APPDATA }) => {
       </div>
 
       <div className="cont1">
-      <Link to={'/sharing'}>
-        <div className='aboutimg1'>
-          <h1 className=" aboutt">Sharing</h1>
-          <div className='color-overlay'></div>
-        </div>
+        <Link to={'/sharing'}>
+          <div className='aboutimg1'>
+            <h1 className=" aboutt">Sharing</h1>
+            <div className='color-overlay'></div>
+          </div>
         </Link>
         <Link to={'/recipes'}>
-        <div className='aboutimg2'>
-          <h1 className=" aboutt">Recipes</h1>
-          <div className='color-overlay'></div>
-        </div>
+          <div className='aboutimg2'>
+            <h1 className=" aboutt">Recipes</h1>
+            <div className='color-overlay'></div>
+          </div>
         </Link>
       </div>
       <div className="lorem">
@@ -55,9 +56,9 @@ const About = ({ APPDATA }) => {
         <br />
         <span >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!</span>
       </div>
-      <br/>
+      <br />
       <h1 >sharing... why Sharing?</h1>
-      
+
       <ModalProvider>
         <Modal
           id="any-unique-identifier"
@@ -65,10 +66,14 @@ const About = ({ APPDATA }) => {
           transition={ModalTransition.BOTTOM_UP}
         >
           <div className="page-box col" onClick={closeModal}>
-           
-            <span className="page-title-sm"><img className="easteregg-img" src={easteregg} alt=""/></span>
+            <div className="pyro">
+              <div className="before"></div>
+              <div className="after"></div>
+            </div>
+            <span className="page-title-sm"><img className="easteregg-img" src={easteregg} alt="" /></span>
 
-            
+
+
           </div>
         </Modal>
       </ModalProvider>

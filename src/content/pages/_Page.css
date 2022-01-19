@@ -173,7 +173,7 @@ body{
   width: 100%;
   height: 100%;
   background: #c2fffa;
-  opacity: 0;
+  opacity: 0%;
   position: absolute;
   transition: 0.5s ease;
   border-radius: 20px;
