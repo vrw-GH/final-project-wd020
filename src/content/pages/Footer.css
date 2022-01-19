@@ -16,8 +16,8 @@
 
 
 .ul1, .ul2{
-  background: rgb(10, 0, 70);
-  color: rgb(255, 255, 255);
+  
+  color: #e9daf1;
   font-family: "Amble LtCn", Arial, Helvetica, sans-serif;
   font-style: italic;
   font-weight: 1000;
@@ -27,12 +27,38 @@
   margin-top: 190px;
   line-height: 20px;
   padding: 10px;
-  padding-left: 40px;
+  padding-left: 20px;
   height: auto;
   width: 45%;
   border-radius: 0px 15px 15px 0px;
   font-size: .8rem;
   left: 0px;
+  
+}
+
+
+.ul2::before {
+  
+  position: absolute;
+  color: white;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 0px 15px 15px 0px;
+  background-color: rgb(10, 0, 70);
+  z-index: -1;
+  transform: scaleX(0.04);
+  transform-origin: left;
+  transition: transform 500ms ease-in-out;
+  /* border: rgba(180, 180, 180, 0.288) 0.3px solid; */
+  /*  */
+}
+
+.ul2:hover:before,
+.ul2:focus::before {
+  transform: scaleX(1);
 }
 
 
@@ -46,7 +72,7 @@
   margin-right: 30px;
   margin-top: 240px;
   display: flex;
-
+  
 }
 
 .ul1 {
@@ -67,6 +93,5 @@
   padding: 0 4px;
 }
 .ul1 > li:hover, .ul2 > li:hover, .ul3 > li:hover {
-  
   padding: 0 4px;
 }

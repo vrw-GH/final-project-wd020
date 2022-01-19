@@ -202,9 +202,11 @@ body {
   opacity: 1;
 }
 .aboutt:hover {
+  transition: 0.5s ease;
   color: rgb(66, 66, 66);
 }
 .aboutt2:hover {
+  transition: 0.5s ease;
   color: #616161;
 }
 
@@ -242,7 +244,7 @@ body {
   z-index: -1;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 500ms ease-in-out;
+  transition: transform 1000ms ease-in-out;
   /* border: rgba(180, 180, 180, 0.288) 0.3px solid; */
   /*  */
 }
