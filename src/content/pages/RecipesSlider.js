@@ -37,6 +37,7 @@ export default function HomeSlider({ sliderData }) {
     arrows: true,
     autoplay: true,
     autoplaySpeed: 3000,
+    variableWidth: true
   };
 
   let key = 0;

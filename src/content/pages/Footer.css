@@ -9,7 +9,7 @@
 .ftImg {
   width: 100%;
   min-height: 320px;
-  max-height: 330px;
+  max-height: 380px;
   object-fit: cover;
   position: absolute;
 }
@@ -21,7 +21,7 @@
   font-family: "Amble LtCn", Arial, Helvetica, sans-serif;
   font-style: italic;
   font-weight: 1000;
-  opacity: 70%;
+  opacity: 0.7;
   list-style: none;
   position: relative;
   margin-top: 190px;
