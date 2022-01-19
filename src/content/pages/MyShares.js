@@ -195,7 +195,8 @@ const MyShares = ({ APPDATA }) => {
         New Messages:
         {shareMessages.map((i) =>
           !i[2] ? (
-            <div key={k++} style={{ backgroundColor: "white" }}>
+            <div key={k++} style={{ backgroundColor: "lightblue", borderRadius:"25px 20px -2px 30px",
+            padding: "10px", marginTop:"10px" }}>
               <span style={{ fontSize: "1.2rem" }}>{i[1]}</span> -{" "}
               <i>
                 from {i[0]}, (Re: {i[3]})
