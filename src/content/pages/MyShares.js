@@ -208,7 +208,7 @@ const MyShares = ({ APPDATA }) => {
           <button
             className="btns"
             onClick={addItem}
-            style={{ width: "auto",height: "auto",marginTop:"21px", backgroundColor: "white", borderRadius:"20px"}}
+            style={{ width: "auto",height: "auto",margin:"21px", backgroundColor: "#FCD8D4", borderRadius:"20px"}}
           >
             CREATE NEW SHARE
           </button>

@@ -56,7 +56,7 @@ body{
 }
 
 .itemsList:hover{
-  transition: 0.7s 0.8s ease-in-out;
+  transition: 0.7s 0.3s ease-in-out;
   background-color: rgb(133, 212, 212);
   color: white;
   padding-bottom: 50px;
@@ -236,7 +236,7 @@ body{
   transform-origin: left;
   transition: transform 500ms ease-in-out;
   /* border: rgba(180, 180, 180, 0.288) 0.3px solid; */
-  /* box-shadow: 1px 15px 200px rgb(236, 236, 236); */
+  /*  */
 
 } 
 
