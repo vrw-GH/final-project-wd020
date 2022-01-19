@@ -215,7 +215,7 @@ const MyShares = ({ APPDATA }) => {
           <div className="col-10" style={{ alignSelf: "center" }}>
             <form
               onSubmit={handleSubmit}
-              className="form"
+              className="form-share"
               hidden={!formIsShown}
               style={{ width: "auto" }}
             >
@@ -265,7 +265,7 @@ const MyShares = ({ APPDATA }) => {
                 <>
                   <div>
                     {"Message: "}{" "}
-                    <b style={{ backgroundColor: "yellow" }}>
+                    <b style={{ backgroundColor: "" }}>
                       {selectedInfo.messages?.msg}
                     </b>
                     &nbsp;&nbsp;&nbsp;
@@ -283,7 +283,7 @@ const MyShares = ({ APPDATA }) => {
                   </div>
                 </>
               ) : null}
-              <button className="btns">Update</button>
+              <button className="btn">Update</button>
             </form>
           </div>
           <div className="row" style={{ height: "50vh", overflowY: "auto" }}>
@@ -310,25 +310,27 @@ const MyShares = ({ APPDATA }) => {
                       style={{
                         backgroundColor:
                           each.sharestatus === "D" || each.sharestatus === "C"
-                            ? "#c2fffa"
+                            ? "#e0e0e0"
                             : each.sharestatus === "B"
-                            ? "#c5fad5"
-                            : "#FCD8D4",
+                            ? "#f3eea4"
+                            : "#73e686",
                         textDecorationLine:
                           each.sharestatus === "D" ? "line-through" : "",
                         cursor: "pointer",
                         margin: "10px",
+                        borderRadius:"0px 15px 25px 20px",
+                        padding: "10px"
                       }}
                     >
                       {k2 + 1}. -{" "}
-                      <strong style={{ color: "red" }}>{each.message}</strong>
+                      <strong style={{ color: "black", fontWeight:"1000" }}>{each.message}</strong>
                       <i style={{ fontSize: "0.8rem" }}>
                         &nbsp;** Status: {shareStatus[each.sharestatus]} **
                         Posted: {datify(each.datetime)}
                       </i>
                       <ul style={{ cursor: "pointer" }}>
                         {each.arrayofitems.map((item) => (
-                          <li key={k2 + "-" + k++} style={{ padding: 0 }}>
+                          <li key={k2 + "-" + k++} style={{ padding: 0, color:"gray" }}>
                             <strong>{item}</strong>
                           </li>
                         ))}

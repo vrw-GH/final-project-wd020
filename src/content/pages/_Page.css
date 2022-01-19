@@ -56,6 +56,7 @@ body {
   margin-top: 20px;
   line-height: 34px;
   border-radius: 15px;
+  transition: 0.7s 0.3s ease-in-out;
 }
 
 .itemsList:hover {
@@ -76,7 +77,33 @@ body {
   border-radius: 20px;
   box-shadow: 1px 10px 25px rgb(206, 206, 206);
 }
-
+.form-share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(238, 238, 238);
+  margin-top: 0px;
+  padding: 30px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 10px 100px rgb(236, 233, 233);
+  transition: 0.7s ease-in-out;
+}
+.form-share:hover {
+  color: white;
+  transition: 0.7s ease-in-out;
+  background-color: #585999 ;
+  padding: 50px;
+}
+.btn{
+  margin-top: 10px;
+  border: black solid 1px;
+}
+.btn:hover{
+  
+  background-color: white;
+}
 .h22 {
   font-family: "Amble LtCn", sans-serif;
   font-size: 2rem;
@@ -112,14 +139,15 @@ body {
   align-content: center;
   align-items: center;
   background-color: #fcd8d4;
-
+  transition: 0.5s ease-in-out;
   box-sizing: border-box;
 }
 #nav-user:hover {
   align-content: center;
   align-items: center;
   background-color: #fcd8d4;
-  width: 120px;
+  width: 100px;
+  transition: 0.5s ease-in-out;
   box-sizing: border-box;
 }
 
