@@ -12,7 +12,8 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   const [ingredient, setIngredient] = useState([]);
   const [newInfo, setNewInfo] = useState({
     title: "",
-    category: categories[0].category_id,
+    // category: categories[0].category_id,
+    category: "",
     title_img: "",
     image: "is from database",
     ingredients: [],
@@ -174,23 +175,25 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                   placeholder="please enter a title here"
                   id="title"
                   minLength={10}
-                  maxLength={60}
+                  maxLength={100}
                   // size="50"
                   value={newInfo.title}
                   onChange={(e) => handle(e)}
                   style={{ backgroundColor: "#eed5be", width: "50vw" }}
                   autoFocus
                 ></input>
-                <div className="inline">
+                <div className="inline" style={{ padding: "20px" }}>
                   Select a Category:
                   <select
                     className="create_title_category"
                     type="text"
+                    required
                     placeholder="category"
                     id="category"
                     value={newInfo.category}
                     onChange={(e) => handle(e)}
                   >
+                    <option key={k++} value=""></option>
                     {categories.map((ctg) => (
                       <option key={k++} value={ctg.category_id}>
                         {ctg.name}

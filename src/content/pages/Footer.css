@@ -14,7 +14,6 @@
   position: absolute;
 }
 
-
 .ul1, .ul2{
   background: rgb(10, 0, 70);
   color: rgb(255, 255, 255);
@@ -34,8 +33,6 @@
   font-size: .8rem;
   left: 0px;
 }
-
-
 
 .ul3 {
   list-style: none;
@@ -61,12 +58,11 @@
 /* .ul1:hover, .ul2:hover{} */
 
 
-
-.ul1 > li, .ul2 > li, .ul3 > li {
+/* .ul1 > li, .ul2 > li, .ul3 > li { */
+.ul1 > li, .ul3 > li {
   cursor: pointer;
   padding: 0 4px;
 }
 .ul1 > li:hover, .ul2 > li:hover, .ul3 > li:hover {
-  
   padding: 0 4px;
 }
