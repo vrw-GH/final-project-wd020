@@ -9,7 +9,7 @@ import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
 
 
-import easteregg from "./easteregg.jpg";
+import easteregg from "./easteregg.png";
 import Confetti from "../../components/confetti";
 
 const About = ({ APPDATA }) => {
