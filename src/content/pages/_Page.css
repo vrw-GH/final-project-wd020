@@ -98,10 +98,10 @@ body {
 #nav li a {
   color: black;
 }
-#nav-sharing {
+.nav-link {
   position: relative;
 }
-#nav-sharing:hover {
+.nav-link:hover {
   align-content: center;
   align-items: center;
   background-color: #fcd8d4;

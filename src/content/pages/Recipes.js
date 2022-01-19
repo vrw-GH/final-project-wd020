@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import RecipesSlider from "./RecipesSlider";
+import HomeSlider from "./RecipesSlider";
+import ctgType from "../../components/ctgType";
 import "../../loading.css";
 import "./_Page.css";
 
@@ -161,7 +162,10 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                   </option>
                 ))}
               </select>
+              &nbsp;&nbsp; Today we have {recipes.length} {ctgType(category)}
+              &nbsp;recipes for you 😊
             </li>
+
             <li className="itemsList">
               <strong>Filter only recipes containing: </strong>
               <i>
@@ -231,7 +235,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
           </ul>
         </div>
       </div>
-      <RecipesSlider sliderData={recipes} />
+      <HomeSlider sliderData={recipes} />
     </>
   );
 };

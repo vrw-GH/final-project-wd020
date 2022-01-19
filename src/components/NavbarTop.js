@@ -14,9 +14,11 @@ const NavbarTop = ({
 }) => {
   return (
     <>
-      <Navbar sticky="top" id="nav" Collapse expand="md">
+      {/* <Navbar sticky="top" id="nav" Collapse expand="md"> */}
+      <Navbar sticky="top" id="nav" collapseOnSelect={true} expand="md">
         <Navbar.Brand
           href="/about"
+          id="nav-about"
           onClick={handleClearQry}
           title={APPDATA.NAME + " ver: " + APPDATA.VER}
         >
@@ -31,21 +33,14 @@ const NavbarTop = ({
           />
           &nbsp;{APPDATA.NAME}&nbsp;
         </Navbar.Brand>
-
         <Navbar.Toggle />
+
         <Navbar.Collapse>
           <Nav className="ms-auto">
-            {/* <ReactBootStrap.NavLink
-              to="/sharing"
-              href="/sharing"
-              onClick={handleClearQry}
-              id="nav-sharing"
-            >
-              Sharing
-            </ReactBootStrap.NavLink> */}
             <Link
               to="/sharing"
               onClick={handleClearQry}
+              // id="Link-sharing"
               id="nav-sharing"
               className="nav-link"
             >
@@ -54,7 +49,7 @@ const NavbarTop = ({
             <Link
               to="/recipes"
               onClick={handleClearQry}
-              id="nav-sharing"
+              id="nav-recipes"
               className="nav-link"
             >
               Recipes
@@ -69,46 +64,41 @@ const NavbarTop = ({
                   className="nav-drop"
                   id="collapsible-nav-dropdown"
                 >
-                  <ul>
-                    <li>
-                      <Link
-                        to="/myshare"
-                        // href="/myshare"
-                        onClick={handleClearQry}
-                        style={{ color: "black" }}
-                        id="nav-sharing"
-                      >
-                        My Sharing
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/mytitles"
-                        // href="/mytitles"
-                        onClick={handleClearQry}
-                        style={{ color: "black" }}
-                        id="nav-sharing"
-                      >
-                        My Recipes
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/newtitle"
-                        // href="/newtitle"
-                        onClick={handleClearQry}
-                        style={{ color: "black" }}
-                        id="nav-sharing"
-                      >
-                        New Recipe
-                      </Link>
-                    </li>
-                  </ul>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/myshare"
+                    onClick={handleClearQry}
+                    style={{ color: "black" }}
+                    id="nav-myshare"
+                    className="nav-link"
+                  >
+                    My Sharing
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/mytitles"
+                    onClick={handleClearQry}
+                    style={{ color: "black" }}
+                    id="nav-mytitles"
+                    className="nav-link"
+                  >
+                    My Recipes
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/newtitle"
+                    onClick={handleClearQry}
+                    style={{ color: "black" }}
+                    id="nav-newtitle"
+                    className="nav-link"
+                  >
+                    New Recipe
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <Link
                   to="/profile"
                   onClick={handleClearQry}
-                  id="nav-sharing"
+                  id="nav-profile"
                   className="nav-link"
                 >
                   Profile
@@ -116,14 +106,14 @@ const NavbarTop = ({
                 <Link
                   to="/login"
                   onClick={handleClearQry}
-                  id="nav-sharing"
+                  id="nav-login"
                   className="nav-link"
                 >
                   Logout
                 </Link>
 
                 <Navbar.Brand
-                  id="nav-user"
+                  id="nav-currentUser"
                   style={{ marginLeft: "30px", marginTop: "2px" }}
                 >
                   {currentUser}
@@ -134,7 +124,7 @@ const NavbarTop = ({
                 <Link
                   to="/login"
                   onClick={handleClearQry}
-                  id="nav-sharing"
+                  id="nav-login"
                   className="nav-link"
                 >
                   Login
@@ -143,7 +133,7 @@ const NavbarTop = ({
                   to="/about"
                   onClick={handleClearQry}
                   title="About Us"
-                  id="nav-sharing"
+                  id="nav-about"
                   className="nav-link"
                 >
                   About
