@@ -37,13 +37,13 @@ const About = ({ APPDATA }) => {
 
       <div className="cont1">
         <Link to={'/sharing'}>
-          <div className='aboutimg1'>
+          <div className='aboutimg'>
             <h1 className=" aboutt">Sharing</h1>
             <div className='color-overlay'></div>
           </div>
         </Link>
         <Link to={'/recipes'}>
-          <div className='aboutimg2'>
+          <div className='aboutimg'>
             <h1 className=" aboutt">Recipes</h1>
             <div className='color-overlay'></div>
           </div>

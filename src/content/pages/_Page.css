@@ -135,7 +135,7 @@ body{
 }
 
 
-.aboutimg1 {
+/* .aboutimg1 {
   background-image: url(https://images.pexels.com/photos/4651196/pexels-photo-4651196.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   color: #fff;
   width: 400px;
@@ -151,8 +151,8 @@ body{
   margin-top: 50px;
   box-shadow: 1px 10px 25px rgb(236, 236, 236);
   margin:40px
-}
-.aboutimg2 {
+} */
+.aboutimg {
   background-image: url(https://images.pexels.com/photos/8175340/pexels-photo-8175340.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
   color: #fff;
   width: 400px;
@@ -188,10 +188,10 @@ body{
   font-style: italic;
 }
 
-.aboutimg1:hover .color-overlay {
+/* .aboutimg1:hover .color-overlay {
   opacity: 100%;
-}
-.aboutimg2:hover .color-overlay {
+} */
+.aboutimg:hover .color-overlay {
   opacity: 100%;
 }
 .aboutt:hover {
