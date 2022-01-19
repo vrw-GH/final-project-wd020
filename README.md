@@ -1,6 +1,7 @@
-# Share Your Food
-
-Final Project - Full Stack App and Web Development Course
+# Share My Food
+![](https://github.com/vrw-GH/final-project-wd020/blob/2c8b82b60e7cc539e8a314ad49c8fdc2a56b4250/project%20basics/Screenshot%20(252).png)
+<br />
+#Final Project - Full Stack App and Web Development Course
 <br />
 <br />
 by Victor and Abdullah
@@ -19,4 +20,4 @@ View GH Page: https://github.com/vrw-GH/final-project-wd020
 Backend repo: https://github.com/vrw-GH/contentful_backend
 <br />
 <br />
-![](https://github.com/vrw-GH/final-project-wd020/blob/3c916b4384a61836672d8d8cc7049efdc6914ec4/project%20basics/Screenshot%20(252).png)
+
