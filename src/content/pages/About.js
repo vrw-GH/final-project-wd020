@@ -77,7 +77,6 @@ const About = ({ APPDATA }) => {
       </div>
       <br />
       <h1>sharing... why Sharing?</h1>
-
       <ModalProvider>
         <Modal
           id="any-unique-identifier"
