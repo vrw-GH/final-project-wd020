@@ -283,7 +283,7 @@ const MyShares = ({ APPDATA }) => {
                   </div>
                 </>
               ) : null}
-              <button className="btn">Update</button>
+              <button className="btn U-btn">Update</button>
             </form>
           </div>
           <div className="row" style={{ height: "50vh", overflowY: "auto" }}>

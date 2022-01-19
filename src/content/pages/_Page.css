@@ -61,7 +61,7 @@ body {
 
 .itemsList:hover {
   transition: 0.7s 0.3s ease-in-out;
-  background-color: rgb(133, 212, 212);
+  background-color: #85d4d4;
   color: white;
   padding-bottom: 50px;
 }
@@ -93,14 +93,15 @@ body {
 .form-share:hover {
   color: white;
   transition: 0.7s ease-in-out;
-  background-color: #585999 ;
+  background-color: #85d4d4 ;
+  opacity: 0,5;
   padding: 50px;
 }
-.btn{
+.U-btn{
   margin-top: 10px;
   border: black solid 1px;
 }
-.btn:hover{
+.U-btn:hover{
   
   background-color: white;
 }
