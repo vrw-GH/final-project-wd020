@@ -9,6 +9,13 @@ body {
 #LOGO {
   margin-right: 20px;
   margin-left: 10px;
+  transition: 0.8 ease-in-out;
+}
+
+#LOGO:hover{
+  background-color: #d1fde3;
+  transition: 0.8 ease-in-out;
+  border-radius: 50%;
 }
 .page-container {
   display: flex;

@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Background from "./Background.png";
+// import Background from "./Background.png";
+import newLogo from "./newLogo.png"
+import newLogo2 from "./newLogo2.png"
+import newLogo1 from "./newLogo1.png"
 
 const NavbarTop = ({
   APPDATA,
@@ -24,8 +27,9 @@ const NavbarTop = ({
         >
           &nbsp;
           <img
+            className="logo-2"
             id="LOGO"
-            src={Background}
+            src={newLogo}
             alt="logo"
             width="50"
             height="50"

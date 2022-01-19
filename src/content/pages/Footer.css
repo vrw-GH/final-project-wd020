@@ -57,7 +57,7 @@
 
 .ul2:hover:before,
 .ul2:focus::before {
-  transform: scaleX(0.75);
+  transform: scaleX(1);
 }
 
 .ul3 {
