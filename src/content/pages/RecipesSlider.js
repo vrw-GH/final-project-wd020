@@ -32,13 +32,13 @@ export default function HomeSlider({ sliderData }) {
     dots: true,
     infinite: sliderData.length > 3,
     speed: 800,
-    slidesToShow: window.innerWidth / 300,
+    // slidesToShow: window.innerWidth / 300,
     slidesToShow: 4,
     slidesToScroll: 3,
     arrows: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    variableWidth: true
+    variableWidth: true,
   };
 
   let key = 0;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   ModalProvider,
   Modal,
@@ -6,12 +7,10 @@ import {
 } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
-import "./confetti.css";
 
 
-import { Link } from "react-router-dom";
-import easteregg from './easteregg.jpg'
-
+import easteregg from "./easteregg.jpg";
+import Confetti from "../../components/confetti";
 
 const About = ({ APPDATA }) => {
   const { isModalOpen, openModal, closeModal } = useModal();
@@ -22,42 +21,62 @@ const About = ({ APPDATA }) => {
   };
 
   return (
+    
     <div
       className="page-container"
       style={{
         backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
       }}
     >
+      
       <div className="page-title">
         <h2 className="home-title">
-
           <span onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
         </h2>
       </div>
 
       <div className="cont1">
-        <Link to={'/sharing'}>
-          <div className='aboutimg1'>
+        <Link to={"/sharing"}>
+          <div className="aboutimg1">
             <h1 className=" aboutt">Sharing</h1>
-            <div className='color-overlay1'></div>
+            <div className="color-overlay1"></div>
           </div>
         </Link>
-        <Link to={'/recipes'}>
-          <div className='aboutimg2'>
+        <Link to={"/recipes"}>
+          <div className="aboutimg2">
             <h1 className=" aboutt2">Recipes</h1>
-            <div className='color-overlay2'></div>
+            <div className="color-overlay2"></div>
           </div>
         </Link>
       </div>
       <div className="lorem">
         <br />
-        <span >{APPDATA.NAME.toUpperCase()}</span>
+        <span>{APPDATA.NAME.toUpperCase()}</span>
         <br />
         <br />
-        <span >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!</span>
+        <span>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste minima,
+          ipsum dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem
+          ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum
+          dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem
+          ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum
+          dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem
+          ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum
+          dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem
+          ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum
+          dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!Lorem
+          ipsum dolor, sit amet consectetur adipisicing elit. Iste minima, ipsum
+          dolorem adipisci delectus tempore veritatis aut totam enim sequi
+          tenetur quasi veniam a? Modi autem quasi nostrum neque possimus!
+        </span>
       </div>
       <br />
-      <h1 >sharing... why Sharing?</h1>
+      <h1>sharing... why Sharing?</h1>
 
       <ModalProvider>
         <Modal
@@ -66,14 +85,10 @@ const About = ({ APPDATA }) => {
           transition={ModalTransition.BOTTOM_UP}
         >
           <div className="page-box col" onClick={closeModal}>
-            <div className="pyro">
-              <div className="before"></div>
-              <div className="after"></div>
-            </div>
-            <span className="page-title-sm"><img className="easteregg-img" src={easteregg} alt="" /></span>
-
-
-
+            <span className="page-title-sm">
+              <img className="easteregg-img" src={easteregg} alt="" />
+              <Confetti/>
+            </span>
           </div>
         </Modal>
       </ModalProvider>
