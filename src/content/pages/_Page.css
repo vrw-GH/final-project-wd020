@@ -388,3 +388,15 @@ body {
   color: rgb(87, 87, 87);
   font-weight: lighter;
 }
+
+.footer-icons{
+  background-color: #65449b91;
+  padding: 13px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+}
+
+.eg-bg{
+  background-color: #20205a;
+  border-radius: 6px;
+}

@@ -330,7 +330,7 @@ const MyShares = ({ APPDATA }) => {
                             ? "#e0e0e0"
                             : each.sharestatus === "B"
                             ? "#f3eea4"
-                            : "#73e686",
+                            : "#d3ffe0",
                         textDecorationLine:
                           each.sharestatus === "D" ? "line-through" : "",
                         cursor: "pointer",
