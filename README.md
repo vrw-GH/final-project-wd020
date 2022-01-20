@@ -23,7 +23,7 @@ Pre-release: (Netlify) -https://vrwgh-finalprojectwd020.netlify.app
 <br />
 View GH Page: https://github.com/vrw-GH/final-project-wd020
 <br />
-Backend repo: https://github.com/vrw-GH/contentful_backend
+Backend repo: https://github.com/vrw-GH/sharemyfood-backend
 <br />
 <br />
 
