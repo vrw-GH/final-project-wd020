@@ -374,3 +374,17 @@ body {
   padding-left: 6px;
   border-radius: 0px 15px 25px 20px;
 }
+
+.Bold-about{
+  font-weight:bolder;
+  color: black;
+}
+
+.normal-about{
+  color: #999;
+}
+
+.about-title{
+  color: rgb(87, 87, 87);
+  font-weight: lighter;
+}

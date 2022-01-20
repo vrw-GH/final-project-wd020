@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaFacebook, FaGithub, FaInstagram, FaDiscord } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagram, FaDiscord} from "react-icons/fa";
 import "./Footer.css";
 import footer from "../pages/footer.png";
 // import footer1 from "../pages/footer1.jpg";
@@ -106,6 +106,7 @@ const Footer = ({ APPDATA }) => {
               <FaDiscord size="2.5em" />
             </a>
           </li>
+         
         </ul>
       </div>
     </>

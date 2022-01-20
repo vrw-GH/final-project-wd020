@@ -216,6 +216,7 @@ const Sharing = ({ APPDATA }) => {
   let k = 0;
   return (
     <>
+      
       <div
         className="page-container"
         style={{
@@ -223,6 +224,13 @@ const Sharing = ({ APPDATA }) => {
           marginBottom: "0",
         }}
       >
+        {currentUser ? (
+            <div>
+              <button className="btn U-btn" onClick={() => navigate("/myshare")}>
+                Go to My Shares
+              </button>
+            </div>
+          ) : null}
         <div className="page-title">
           <h2>-‧≡ Sharing Page ≡‧-</h2>
         </div>
@@ -331,13 +339,7 @@ const Sharing = ({ APPDATA }) => {
               </div>
             </div>
           </div>
-          {currentUser ? (
-            <div>
-              <button onClick={() => navigate("/myshare")}>
-                Go to My Shares
-              </button>
-            </div>
-          ) : null}
+          
         </div>
 
         {/* ---------------MODAL---------- */}
