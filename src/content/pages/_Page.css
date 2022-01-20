@@ -157,6 +157,7 @@ body {
 }
 
 .nav-drop:hover {
+  transition: 0.5s ease-in-out;
   align-content: center;
   align-items: center;
   background-color: #fcd8d4;
@@ -365,4 +366,12 @@ body {
   object-fit: cover;
   width: 600px;
   height: 450px;
+}
+
+.share-list{
+  background-color: lightblue;
+  line-height: 3;
+  padding: 0.001px;
+  padding-left: 6px;
+  border-radius: 0px 15px 25px 20px;
 }

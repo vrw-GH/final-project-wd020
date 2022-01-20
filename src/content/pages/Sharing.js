@@ -257,7 +257,8 @@ const Sharing = ({ APPDATA }) => {
               <div
                 className="col-6"
                 style={{
-                  height: "50vh",
+                  marginTop:"10px",
+                  height: "95vh",
                   width: "50%",
                   color: "red",
                   overflowY: "scroll",
@@ -267,13 +268,14 @@ const Sharing = ({ APPDATA }) => {
                   <u>Share Basket</u>
                 </h6>
 
-                <ul style={{ padding: "0px" }}>
+                <ul style={{ marginTop:"65px" }}>
                   {filteredItems
                     // .filter((it) => true)
                     .map((item) => (
                       <li
                         key={k++}
                         onClick={(e) => itemClick(item)}
+                        className="share-list"
                         style={{
                           cursor: "pointer",
                           color: statusColor[item.sharestatus],
