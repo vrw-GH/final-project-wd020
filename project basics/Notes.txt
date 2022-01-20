@@ -2,21 +2,21 @@
 
 INTRO: 
 
-1(victor) 1min
-- Who am I...
-- Background...
-- Why coding...
+1 victor
+now over to my partner Abdu who worked together to build our final project which we are proud to present you today!
+He had a super idea - now he can tell you more about it...
 
-now over to my partner who ---
+2 Abdullah 
 
-2(Abdu) 1min
-- Who am I...
-- Background...
-- Why coding...
+- about me..
+... and on to ...
 
 
 PRESENTATION
 ------------
+
+(Abdu shares screen on 2nd monitor)
+
 
 PROJECT PREAMBLE
 
@@ -26,22 +26,39 @@ PROJECT PREAMBLE
 
 
 CORE- FEATURES 
+(MVP features for Proof Of Concept)
 
 - Sharing
 - Recipe Book
-- MVP features for Proof Of Concept
+
+then we walk-through...
+(remember - leave the SURPRISE for the last!)
+
+1. Abdu: 
+ - Our App works for guest user.
+ - Show sharing page generally 
+ - Show recipe page generally
+ - Show about page
+ - then show login
+ - Goes automatically to sharing!
+ - show messages
+ - create a share
+ - close/delete something old
+
+2. Vic:
+  - Go to My Recipes menu
+  (Like a personal recipe book)
+  - Show likes and my own recipes
+  - Go to create recipe, make one
+  (we should have a recipe pic ready to upload)
+
+3. Abdu:
+  - ...
+
+  anything to add?
 
 
-NEXT-FEATURES
-
-- 1st! Real Authentication
-- Edit recipe
-- ingredients: Copy Paste & Edit
-- Set reminder?
-- Chat-mode
-- Share Location
-- Drag-drop of image to recipe
-
+4. Vic: technical ?
 
 
 TECHNICAL:
@@ -57,6 +74,20 @@ THE LITTLE THINGS!
 - Sorting... and color coding data
 - A very simple modal/popup
 - Profile pic on menu
+- 
+
+
+NEXT-FEATURES
+
+- 1st! Real Authentication
+- Edit recipe
+- ingredients: Copy Paste & Edit
+- Set reminder?
+- Chat-mode
+- Share Location
+- Drag-drop of image to recipe
+
+
 
 
 
