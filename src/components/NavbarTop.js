@@ -63,7 +63,7 @@ const NavbarTop = ({
           </Nav>
 
           <Nav className="me-auto">
-            {currentUser ? (
+            {currentUser?.userName ? (
               <>
                 <NavDropdown
                   title="My Food"
