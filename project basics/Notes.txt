@@ -2,8 +2,18 @@
 
 INTRO: 
 
+
 1 victor
-now over to my partner Abdu who worked together to build our final project which we are proud to present you today!
+Hi, my name is Victor.
+I come from Sri Lanka and live since 2020 in Germany.
+My background is in Solar Technology  and was a General Manager for over 20 years in that industry. 
+However my passion was always digital technology, and when I first started using PC's the internet was still not even created!!
+It was a big change in my life to migrate to Germany, and so I decided to go on with my passion and thats why i joined this course.
+
+Now let me welcome you all to our presentation for the WBS Coding School final project for
+FS Web and App Developer course.
+
+Over to my partner Abdu who worked together to build our final project which we are proud to present you today!
 He had a super idea - now he can tell you more about it...
 
 2 Abdullah 
@@ -57,6 +67,14 @@ then we walk-through...
 
   anything to add?
 
+  THE LITTLE THINGS!
+
+   - Sorting... and color coding data
+   - A very simple modal/popup
+   - Profile pic on menu
+   - Share items are alphabetic and color coded
+
+
 
 4. Vic: technical ?
 
@@ -69,17 +87,11 @@ TECHNICAL:
 - Styling mix of Vanila, Bootstrap and CSS
 
 
-THE LITTLE THINGS!
-
-- Sorting... and color coding data
-- A very simple modal/popup
-- Profile pic on menu
-- 
 
 
 NEXT-FEATURES
 
-- 1st! Real Authentication
+***- 1st! Real Authentication
 - Edit recipe
 - ingredients: Copy Paste & Edit
 - Set reminder?
@@ -88,9 +100,10 @@ NEXT-FEATURES
 - Drag-drop of image to recipe
 
 
+   (- Video Close here. )
 
 
-
+Before we take some questions....
 
 
 
