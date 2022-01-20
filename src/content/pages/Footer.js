@@ -24,7 +24,7 @@ const Footer = ({ APPDATA }) => {
             <small>Course Instructor: {APPDATA.DEVLEAD}</small>
           </li>
           <li title="Link opens your email app">
-            Contact:{" "}
+            Contact: {""}
             <a
               href={`mailto:${APPDATA.EMAIL}?subject=Inquiry:%20${APPDATA.PROJECT}
 &body=I%20am%20interested%20in%20your%20project!`}
@@ -71,39 +71,39 @@ const Footer = ({ APPDATA }) => {
         </ul>
         <ul className="ul3">
           <li>
-            <a
+            <a className="footer-icons"
               href="https://www.facebook.com/abdullah.shabk"
               target="_blank"
               rel="noreferrer"
             >
-              <FaFacebook size="2.5em" />
+              <FaFacebook className="facebook" size="2.5em" />
             </a>
           </li>
           <li>
-            <a
+            <a className="footer-icons"
               href="https://github.com/vrw-GH/final-project-wd020"
               target="_blank"
               rel="noreferrer"
             >
-              <FaGithub size="2.5em" />
+              <FaGithub className="github" size="2.5em" />
             </a>
           </li>
           <li>
-            <a
+            <a className="footer-icons"
               href="https://www.instagram.com/a.shabk/"
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagram size="2.5em" />
+              <FaInstagram className="insta" size="2.5em" />
             </a>
           </li>
           <li>
-            <a
+            <a className="footer-icons"
               href="https://discord.gg/6rm4j2S2Qq"
               target="_blank"
               rel="noreferrer"
             >
-              <FaDiscord size="2.5em" />
+              <FaDiscord className="discord" size="2.5em" />
             </a>
           </li>
          

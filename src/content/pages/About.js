@@ -81,8 +81,8 @@ const About = ({ APPDATA }) => {
           isOpen={isModalOpen}
           transition={ModalTransition.BOTTOM_UP}
         >
-          <div className="page-box col" onClick={closeModal}>
-            <span className="page-title-sm">
+          <div className="page-box col eg-bg" onClick={closeModal}>
+            <span className="page-title-sm eg-bg">
               <img className="easteregg-img" src={easteregg} alt="" />
               <Confetti />
             </span>
