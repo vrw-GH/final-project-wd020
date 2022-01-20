@@ -390,13 +390,14 @@ body {
 }
 
 .footer-icons{
-  background-color: #65449b91;
+  background-color: #0a0046;
   padding: 13px;
   padding-bottom: 15px;
-  border-radius: 10px;
+  border-radius: 30px;
 }
 
 .eg-bg{
   background-color: #20205a;
   border-radius: 6px;
 }
+
