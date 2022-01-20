@@ -22,4 +22,4 @@ User - ShareItem Maintenance	Done
 User - Reserve ShareItem		Done
 
 Landing Page				Done
-About Page					-UC
+About Page					Done
