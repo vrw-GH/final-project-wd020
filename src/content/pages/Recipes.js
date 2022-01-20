@@ -172,11 +172,13 @@ const Recipes = ({ loading, categories, APPDATA }) => {
               <i>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button
+                  className="btn"
                   style={{
-                    color: "inherit",
+                    color: "black",
                     width: "auto",
-                    backgroundColor: "transparent",
+                    backgroundColor: "white",
                     cursor: "pointer",
+                    borderRadius:"40px"
                   }}
                   value={andOr}
                   onClick={handleAndOr}
@@ -187,11 +189,14 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 </button>
                 &nbsp;&nbsp;
                 <button
+                  className="btn"
                   style={{
-                    color: "inherit",
+
+                    color: "black",
                     width: "auto",
-                    backgroundColor: "transparent",
+                    backgroundColor: "white",
                     cursor: "pointer",
+                    borderRadius:"40px"
                   }}
                   onClick={resetIngredients}
                 >

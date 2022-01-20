@@ -325,6 +325,8 @@ body {
   left: 0;
 }
 
+
+
 .alert-box {
   position: relative;
   width: 70%;
@@ -355,9 +357,7 @@ body {
   font-size: 20px;
 }
 
-.modal {
-  background: rgba(0, 0, 0, 0.6);
-}
+
 .modal-container {
   position: absolute;
   width: 60%;
@@ -395,27 +395,4 @@ body {
   font-weight: lighter;
 }
 
-.footer-icons{
-  background-color: #0a0046;
-  padding: 13px;
-  padding-bottom: 15px;
-  border-radius: 30px;
-  opacity: 0.8;
-  transition: 0.7s ease-in-out;
-}
-
-.footer-icons:hover{
-  opacity: 0.7;
-  padding: 17px;
-  transition: 0.2s ease-in-out;
-}
-
-.facebook,.discord,.insta,.github{
-  color: white ;
-}
-
-.eg-bg{
-  background-color: #20205a;
-  border-radius: 6px;
-}
 

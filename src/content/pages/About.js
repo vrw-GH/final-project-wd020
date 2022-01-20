@@ -7,7 +7,9 @@ import {
 } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
-
+import newLogo from "../../components/newLogo.png";
+// import newLogo2 from "./newLogo2.png"
+// import newLogo1 from "./newLogo1.png"
 import easteregg from "./easteregg.png";
 import Confetti from "../../components/confetti";
 
@@ -69,13 +71,15 @@ const About = ({ APPDATA }) => {
           <br /><br />
           <span className="Bold-about">
             Side story about sharing food…</span>
-            After many years of attending Burning Man (an event in the desert where people practice radical self-reliance) I noticed a pattern: people would pack way more food than they needed, but horde it for the first few days of the week-long event… then begin to offer food liberally towards the end of the week when they realized how much extra food they had. Based upon this observation, the following years I packed only enough food to last the first few days of the event and shared my food with my campmates. Like clockwork, because I had shared early in the week… I was able to enjoy delicious meals throughout the end of the event as those around me began to unload their stashes.
-          
+          After many years of attending Burning Man (an event in the desert where people practice radical self-reliance) I noticed a pattern: people would pack way more food than they needed, but horde it for the first few days of the week-long event… then begin to offer food liberally towards the end of the week when they realized how much extra food they had. Based upon this observation, the following years I packed only enough food to last the first few days of the event and shared my food with my campmates. Like clockwork, because I had shared early in the week… I was able to enjoy delicious meals throughout the end of the event as those around me began to unload their stashes.
+
         </span>
       </div>
       <br />
       <h1 className="normal-about" >sharing... why Sharing?</h1>
-      <ModalProvider>
+      <img style={{marginBottom:"20px"}} width={100} height={100} src={newLogo} alt=""/>
+
+      <ModalProvider >
         <Modal
           id="any-unique-identifier"
           isOpen={isModalOpen}

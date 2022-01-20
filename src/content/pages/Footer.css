@@ -5,6 +5,7 @@
   padding-top:3px;
   justify-content: space-between;
   position: sticky;
+  background-color: #f8edfe;
 }
 
 .ftImg {
@@ -12,7 +13,6 @@
   max-height: 100%;
   object-fit: cover;
   position: absolute;
-  border-image-repeat: repeat;
 }
 
 .ul1, .ul2{
@@ -38,7 +38,7 @@
 
 .footer-email-link{
   color: #f8edfe;
-  text-decoration: inherit;
+  text-decoration: none;
 }
 
 
@@ -97,4 +97,28 @@
 }
 .ul1 > li:hover, .ul2 > li:hover, .ul3 > li:hover {
   padding: 0 4px;
+}
+
+.footer-icons{
+  background-color: #0a0046;
+  padding: 13px;
+  padding-bottom: 15px;
+  border-radius: 30px;
+  opacity: 0.8;
+  transition: 0.7s ease-in-out;
+}
+
+.footer-icons:hover{
+  opacity: 0.7;
+  padding: 17px;
+  transition: 0.2s ease-in-out;
+}
+
+.facebook,.discord,.insta,.github{
+  color: white ;
+}
+
+.eg-bg{
+  background-color: #20205a;
+  border-radius: 6px;
 }
