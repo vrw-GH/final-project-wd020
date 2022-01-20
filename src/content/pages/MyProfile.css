@@ -1,32 +1,46 @@
 .myprofile_container {
-
-  display: flex;  
+  display: flex;
   flex-direction: row;
+
   /* align-items:stretch; */
- font-family: 'Amble LtCn', sans-serif;
+  font-family: "Amble LtCn", sans-serif;
   color: rgb(48, 51, 3);
-    /* padding-top:3px; */  
+  /* padding-top:3px; */
 }
 
 .myprofile_profilepic {
   min-height: 320px;
   max-height: 330px;
-  object-fit: cover;  
+  object-fit: cover;
   font-weight: bold;
-  
+  margin-right: 50px;
 }
 .myprofile_profilepic > object > img {
-  border-radius: 30%;
+  border-radius: 50%;
 }
 
-.myprofile_details  {
- 
+.myprofile_details {
+  padding: 40px;
+  border: black solid 1px;
+  border-radius: 30px;
+  margin-top: 85px;
+  margin-right: 40px;
+  transition: 0.5s ease-in;
+}
+.myprofile_details:hover {
+  transition: 0.5s ease-in;
+  padding: 55px;
+  
+  border-radius: 50px;
+  background-color: lightsteelblue;
 }
 .myprofile_location {
   /* size: 100vh; */
 }
 
 .myprofile_map {
+  
+  margin-top: 85px;
   display: flex;
   /* position:relative; */
   width: 40vh;
