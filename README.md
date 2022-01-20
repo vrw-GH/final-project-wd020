@@ -16,7 +16,7 @@ Continous Deployment :
 Pre-release: (Netlify) -https://vrwgh-finalprojectwd020.netlify.app
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f488c099-1a9a-4daf-81fc-4fe9817e8f3c/deploy-status)](https://app.netlify.com/sites/vrwgh-finalprojectwd020/deploys)
 <br />
-<span style="color:blue">Alpha-release: (Vercel)</span> -https://final-project-wd020.vercel.app
+<span style="color:blue">Stable-release: (Vercel)</span> -https://final-project-wd020.vercel.app
 
 <br />
 
