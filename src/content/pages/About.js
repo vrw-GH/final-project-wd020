@@ -8,12 +8,12 @@ import {
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
 
-
 import easteregg from "./easteregg.png";
 import Confetti from "../../components/confetti";
 
 const About = ({ APPDATA }) => {
   const { isModalOpen, openModal, closeModal } = useModal();
+  window.scrollTo(0, 0);
 
   const handleClick = (e) => {
     e.preventDefault();

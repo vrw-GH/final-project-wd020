@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "../../loading.css";
 import "./Categories.css";
@@ -25,6 +25,7 @@ function CtgList({ ctg, BACKEND }) {
         try {
           const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
           if (!results.data.tuple[0]) throw new Error("No Categories Data.");
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }

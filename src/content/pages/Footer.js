@@ -18,7 +18,7 @@ const Footer = ({ APPDATA }) => {
     <>
       <div className="footer_container">
         <img className="ftImg" src={footer} alt="footer" />
-        <ul className="ul2">
+        <ul className="ul2" style={{ overflowX: "auto" }}>
           <li>Development Team: {APPDATA.DEVTEAM}</li>
           <li>
             <small>Course Instructor: {APPDATA.DEVLEAD}</small>
@@ -28,6 +28,7 @@ const Footer = ({ APPDATA }) => {
             <a
               href={`mailto:${APPDATA.EMAIL}?subject=Inquiry:%20${APPDATA.PROJECT}
 &body=I%20am%20interested%20in%20your%20project!`}
+              style={{ color: "white" }}
             >
               {APPDATA.EMAIL}
             </a>

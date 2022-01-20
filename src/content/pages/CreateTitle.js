@@ -18,7 +18,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
     image: "is from database",
     ingredients: [],
     recipe: "",
-    username: currentUser,
+    username: currentUser.userName,
   });
   const maxAllowedSize = 1024 * 100; //kb
 
@@ -46,6 +46,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
             return 0; // names must be equal
           });
           setIngredients(sortedData);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
@@ -289,7 +290,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
                   ></textarea>
                 </div>
                 <button type="submit" className="btns">
-                  Submit by {currentUser}
+                  Submit by {currentUser.userName}
                 </button>
               </form>
             </div>
