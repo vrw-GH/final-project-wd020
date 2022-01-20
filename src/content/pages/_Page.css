@@ -384,3 +384,8 @@ body {
 .normal-about{
   color: #999;
 }
+
+.about-title{
+  color: rgb(87, 87, 87);
+  font-weight: lighter;
+}

@@ -31,7 +31,7 @@ const About = ({ APPDATA }) => {
 
       <div className="page-title">
         <h2 className="home-title">
-          <span onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
+          <span className="about-title" onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
         </h2>
       </div>
 
@@ -74,7 +74,7 @@ const About = ({ APPDATA }) => {
         </span>
       </div>
       <br />
-      <h1>sharing... why Sharing?</h1>
+      <h1 className="normal-about" >sharing... why Sharing?</h1>
       <ModalProvider>
         <Modal
           id="any-unique-identifier"
