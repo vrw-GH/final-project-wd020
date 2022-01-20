@@ -1,12 +1,13 @@
 import React from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import Background from "./Background.png";
-import newLogo from "./newLogo.png"
-import newLogo2 from "./newLogo2.png"
-import newLogo1 from "./newLogo1.png"
+import newLogo from "./newLogo.png";
+// import newLogo2 from "./newLogo2.png"
+// import newLogo1 from "./newLogo1.png"
 
 const NavbarTop = ({
   APPDATA,
@@ -36,6 +37,7 @@ const NavbarTop = ({
             title={APPDATA.NAME + " ver: " + APPDATA.VER}
           />
           &nbsp;{APPDATA.NAME}&nbsp;
+          <i style={{ fontSize: "0.6rem" }}>{APPDATA.VER}</i>
         </Navbar.Brand>
         <Navbar.Toggle />
 
@@ -120,7 +122,17 @@ const NavbarTop = ({
                   id="nav-currentUser"
                   style={{ marginLeft: "30px", marginTop: "2px" }}
                 >
-                  {currentUser}
+                  <div>
+                    {currentUser.profilePic ? (
+                      <img
+                        src={currentUser.profilePic}
+                        height="32px"
+                        alt="pic"
+                        style={{ padding: 0, margin: 0 }}
+                      />
+                    ) : null}
+                    &nbsp;{currentUser.userName}
+                  </div>
                 </Navbar.Brand>
               </>
             ) : (

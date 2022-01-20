@@ -7,7 +7,7 @@ import "./_Page.css";
 
 //------------------------------------------------------------------------------------
 const Sharing = ({ APPDATA }) => {
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [getData, setGetData] = useState(true);
   const [err, setErr] = useState("");
   const [modal, setModal] = useState("");
@@ -38,7 +38,7 @@ const Sharing = ({ APPDATA }) => {
           );
           if (currentUser)
             filterdData = filterdData.filter(
-              ({ username }) => username !== currentUser
+              ({ username }) => username !== currentUser.userName
             );
           filterdData.sort((a, b) => {
             if (
@@ -55,6 +55,7 @@ const Sharing = ({ APPDATA }) => {
           });
           setShareItems(filterdData);
           setFilteredItems(filterdData);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
@@ -138,14 +139,14 @@ const Sharing = ({ APPDATA }) => {
     setModal("");
     const info = {
       sharestatus: "B",
-      bookedby: currentUser,
+      bookedby: currentUser.userName,
     };
     const msg = e.target.parentNode.childNodes[0].value.trim(); // check the actual childNode
     if (msg) info.messages = { msg, read: false };
 
     try {
       const post = await axios.post(
-        `${APPDATA.BACKEND}/api/shareitems/${currentUser}/${selectedItem[7]}`,
+        `${APPDATA.BACKEND}/api/shareitems/${currentUser.userName}/${selectedItem[7]}`,
         info
       );
       if (post) {
@@ -257,8 +258,8 @@ const Sharing = ({ APPDATA }) => {
               <div
                 className="col-6"
                 style={{
-                  marginTop:"10px",
-                  height: "95vh",
+                  marginTop: "10px",
+                  height: "75vh",
                   width: "50%",
                   color: "red",
                   overflowY: "scroll",
@@ -268,7 +269,7 @@ const Sharing = ({ APPDATA }) => {
                   <u>Share Basket</u>
                 </h6>
 
-                <ul style={{ marginTop:"65px" }}>
+                <ul style={{ marginTop: "65px" }}>
                   {filteredItems
                     // .filter((it) => true)
                     .map((item) => (

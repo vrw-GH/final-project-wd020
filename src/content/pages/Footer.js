@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaFacebook, FaGithub, FaInstagram, FaDiscord } from "react-icons/fa";
 import "./Footer.css";
 import footer from "../pages/footer.png";
-import footer1 from "../pages/footer1.jpg";
+// import footer1 from "../pages/footer1.jpg";
 
 const Footer = ({ APPDATA }) => {
   const [showImp, setShowImp] = useState(false);
@@ -18,7 +18,7 @@ const Footer = ({ APPDATA }) => {
     <>
       <div className="footer_container">
         <img className="ftImg" src={footer} alt="footer" />
-        <ul className="ul2">
+        <ul className="ul2" style={{ overflowX: "auto" }}>
           <li>Development Team: {APPDATA.DEVTEAM}</li>
           <li>
             <small>Course Instructor: {APPDATA.DEVLEAD}</small>
@@ -28,6 +28,7 @@ const Footer = ({ APPDATA }) => {
             <a
               href={`mailto:${APPDATA.EMAIL}?subject=Inquiry:%20${APPDATA.PROJECT}
 &body=I%20am%20interested%20in%20your%20project!`}
+              style={{ color: "white" }}
             >
               {APPDATA.EMAIL}
             </a>

@@ -8,7 +8,7 @@ import "../../loading.css";
 import "./_Page.css";
 
 const MyRecipes = ({ APPDATA }) => {
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [recipes, setRecipes] = useState([]);
   const [thisUserLikes, setThisUserLikes] = useState([]);
   const [err, setErr] = useState(null);
@@ -22,6 +22,7 @@ const MyRecipes = ({ APPDATA }) => {
           const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
           if (!results.data.tuples) throw new Error("No Recipe Data.");
           setRecipes(results.data.tuples);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
@@ -41,7 +42,7 @@ const MyRecipes = ({ APPDATA }) => {
         const getUser = async () => {
           try {
             const results = await axios.get(
-              `${APPDATA.BACKEND}/api/users/${currentUser}`
+              `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
             );
             if (!results.data.tuple) throw new Error("No User Data.");
             let res2 = results.data.tuple[0].likes
@@ -111,7 +112,7 @@ const MyRecipes = ({ APPDATA }) => {
                 }}
               >
                 {recipes
-                  .filter((it) => it.username === currentUser)
+                  .filter((it) => it.username === currentUser.userName)
                   .map((recipe) => (
                     <li key={k++}>
                       <Link to={`/recipes/${recipe.slug}`} className="link">

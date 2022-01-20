@@ -11,7 +11,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   useEffect(() => {
     if (sessionStorage.getItem("currentUser")) {
       sessionStorage.removeItem("currentUser");
-      setCurrentUser("");
+      setCurrentUser({});
       return null;
     }
     return () => {};
@@ -31,9 +31,13 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       ) {
         throw Error("Invalid Credentials - ");
       }
-      setCurrentUser(result.data.tuple[0].username);
-      setLoginMsg(`"${username}" - succesfully logged in!`);
-      sessionStorage.setItem("currentUser", username);
+      const user = {
+        userName: result.data.tuple[0].username,
+        profilePic: result.data.tuple[0].profilepic,
+      };
+      setCurrentUser(user);
+      sessionStorage.setItem("currentUser", JSON.stringify(user));
+      setLoginMsg(`"${user.userName}" - succesfully logged in!`);
       navigate("/myshare");
     } catch (error) {
       setLoginMsg(error + " Please try again.");
@@ -53,9 +57,14 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       if (!item.password) throw Error("Should enter the credentials.");
       let result = await axios.post(`${APPDATA.BACKEND}/api/users`, item);
       if (!result.data.info.result) throw Error(result.data.info.message);
-      setCurrentUser(result.data.tuple[0].username);
+
+      const user = {
+        userName: result.data.tuple[0].username,
+        profilePic: result.data.tuple[0].profilepic,
+      };
+      setCurrentUser(user);
+      sessionStorage.setItem("currentUser", JSON.stringify(user));
       setLoginMsg(result.data.info.message);
-      sessionStorage.setItem("currentUser", item.username);
       username = "";
       navigate(-1);
     } catch (error) {

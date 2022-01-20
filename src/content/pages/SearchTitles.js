@@ -18,6 +18,7 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
           if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
           setTitles(results.data.tuples.filter(filterPosts));
           setTotal(results.data.tuples.filter(filterPosts).length);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }

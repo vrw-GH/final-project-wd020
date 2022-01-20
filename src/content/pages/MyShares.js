@@ -5,7 +5,7 @@ import "../../loading.css";
 import "./_Page.css";
 
 const MyShares = ({ APPDATA }) => {
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [err, setErr] = useState(null);
   const [shareItems, setShareItems] = useState([]);
   const [formIsShown, setFormIsShown] = useState(false);
@@ -29,13 +29,13 @@ const MyShares = ({ APPDATA }) => {
         const getShareItems = async () => {
           try {
             const results1 = await axios.get(
-              `${APPDATA.BACKEND}/api/users/${currentUser}`
+              `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
             );
             if (!results1.data.tuple) throw new Error("No User Data.");
             userPLZ.current = results1.data.tuple[0].plz;
             userLoc.current = results1.data.tuple[0].location;
             const results = await axios.get(
-              `${APPDATA.BACKEND}/api/shareitems/${currentUser}`
+              `${APPDATA.BACKEND}/api/shareitems/${currentUser.userName}`
             );
             // if (!results.data.tuple) throw new Error("No Sharing Data.");
             if (results.data.tuples) {
@@ -62,6 +62,7 @@ const MyShares = ({ APPDATA }) => {
               }
               setShareMessages(tArr);
             }
+            window.scrollTo(0, 0);
           } catch (error) {
             if (!error.response.data.info.result === false) {
               setErr(error.message);
@@ -104,7 +105,7 @@ const MyShares = ({ APPDATA }) => {
       return;
     }
     const newInfo = {
-      username: currentUser,
+      username: currentUser.userName,
       sharestatus: "A",
       arrayofitems: "",
       message: "",
@@ -126,7 +127,9 @@ const MyShares = ({ APPDATA }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let submitInfo = { ...selectedInfo };
-    let postAPI = selectedInfo.id ? `/${currentUser}/${selectedInfo.id}` : "";
+    let postAPI = selectedInfo.id
+      ? `/${currentUser.userName}/${selectedInfo.id}`
+      : "";
     if (selectedInfo.id) {
       // existing item (EDIT)
       delete submitInfo.id;
@@ -195,8 +198,15 @@ const MyShares = ({ APPDATA }) => {
         New Messages:
         {shareMessages.map((i) =>
           !i[2] ? (
-            <div key={k++} style={{ backgroundColor: "lightblue", borderRadius:"25px 20px 0px 30px",
-            padding: "10px", marginTop:"10px" }}>
+            <div
+              key={k++}
+              style={{
+                backgroundColor: "lightblue",
+                borderRadius: "25px 20px 0px 30px",
+                padding: "10px",
+                marginTop: "10px",
+              }}
+            >
               <span style={{ fontSize: "1.2rem" }}>{i[1]}</span> -{" "}
               <i>
                 from {i[0]}, (Re: {i[3]})
@@ -209,7 +219,13 @@ const MyShares = ({ APPDATA }) => {
           <button
             className="btns"
             onClick={addItem}
-            style={{ width: "auto",height: "auto",margin:"21px", backgroundColor: "#FCD8D4", borderRadius:"20px"}}
+            style={{
+              width: "auto",
+              height: "auto",
+              margin: "21px",
+              backgroundColor: "#FCD8D4",
+              borderRadius: "20px",
+            }}
           >
             CREATE NEW SHARE
           </button>
@@ -319,19 +335,24 @@ const MyShares = ({ APPDATA }) => {
                           each.sharestatus === "D" ? "line-through" : "",
                         cursor: "pointer",
                         margin: "10px",
-                        borderRadius:"0px 15px 25px 20px",
-                        padding: "10px"
+                        borderRadius: "0px 15px 25px 20px",
+                        padding: "10px",
                       }}
                     >
                       {k2 + 1}. -{" "}
-                      <strong style={{ color: "black", fontWeight:"1000" }}>{each.message}</strong>
+                      <strong style={{ color: "black", fontWeight: "1000" }}>
+                        {each.message}
+                      </strong>
                       <i style={{ fontSize: "0.8rem" }}>
                         &nbsp;** Status: {shareStatus[each.sharestatus]} **
                         Posted: {datify(each.datetime)}
                       </i>
                       <ul style={{ cursor: "pointer" }}>
                         {each.arrayofitems.map((item) => (
-                          <li key={k2 + "-" + k++} style={{ padding: 0, color:"gray" }}>
+                          <li
+                            key={k2 + "-" + k++}
+                            style={{ padding: 0, color: "gray" }}
+                          >
                             <strong>{item}</strong>
                           </li>
                         ))}

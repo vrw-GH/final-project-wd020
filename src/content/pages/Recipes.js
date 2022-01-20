@@ -33,6 +33,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             return 0;
           });
           setIngredients(sortedData);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }

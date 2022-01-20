@@ -8,12 +8,12 @@ import {
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
 
-
 import easteregg from "./easteregg.png";
 import Confetti from "../../components/confetti";
 
 const About = ({ APPDATA }) => {
   const { isModalOpen, openModal, closeModal } = useModal();
+  window.scrollTo(0, 0);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -21,14 +21,12 @@ const About = ({ APPDATA }) => {
   };
 
   return (
-    
     <div
       className="page-container"
       style={{
         backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
       }}
     >
-      
       <div className="page-title">
         <h2 className="home-title">
           <span onDragEnd={handleClick}>-·≡ {APPDATA.INFO} ≡·-</span>
@@ -86,7 +84,7 @@ const About = ({ APPDATA }) => {
           <div className="page-box col" onClick={closeModal}>
             <span className="page-title-sm">
               <img className="easteregg-img" src={easteregg} alt="" />
-              <Confetti/>
+              <Confetti />
             </span>
           </div>
         </Modal>

@@ -7,7 +7,7 @@ import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [recipe, setRecipe] = useState([]);
   const [err, setErr] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
@@ -24,6 +24,7 @@ const SingleTitle = ({ APPDATA }) => {
           );
           if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
           setRecipe(results.data.tuple[0]);
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
@@ -43,7 +44,7 @@ const SingleTitle = ({ APPDATA }) => {
         const getUser = async () => {
           try {
             const results = await axios.get(
-              `${APPDATA.BACKEND}/api/users/${currentUser}`
+              `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
             );
             if (!results.data.tuple[0]) throw new Error("No User Data.");
             let res2 = results.data.tuple[0].likes
@@ -79,7 +80,7 @@ const SingleTitle = ({ APPDATA }) => {
       return;
     }
 
-    if (currentUser !== recipe.username) {
+    if (currentUser.userName !== recipe.username) {
       if (!isLiked) {
         thisUserLikes.push(recipe.slug);
       } else {
@@ -91,9 +92,12 @@ const SingleTitle = ({ APPDATA }) => {
       }
       const postUser = async () => {
         try {
-          await axios.post(`${APPDATA.BACKEND}/api/users/${currentUser}`, {
-            likes: thisUserLikes,
-          });
+          await axios.post(
+            `${APPDATA.BACKEND}/api/users/${currentUser.userName}`,
+            {
+              likes: thisUserLikes,
+            }
+          );
         } catch (error) {
           setErr("Post User Data " + error);
         }
@@ -101,7 +105,7 @@ const SingleTitle = ({ APPDATA }) => {
       postUser();
       return setIsLiked(!isLiked);
     }
-    if (currentUser === recipe.username) return alert("Edit");
+    if (currentUser.userName === recipe.username) return alert("Edit");
   };
 
   return (
@@ -129,7 +133,7 @@ const SingleTitle = ({ APPDATA }) => {
               }}
               onClick={(e) => handleLikeEdit(e)}
             >
-              {recipe.username === currentUser
+              {currentUser?.userName === recipe.username
                 ? "✍ Edit my Recipe "
                 : isLiked
                 ? "✅ favourite Recipe!"

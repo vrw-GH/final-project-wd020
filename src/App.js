@@ -55,7 +55,8 @@ document.title = "Welcome to " + APPDATA.NAME;
 //-------------------------------------------------
 
 function App() {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+  // const [profilePic, setProfilePic] = useState("");
   const [searchQry, setSearchQry] = useState("");
   const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
@@ -64,19 +65,21 @@ function App() {
 
   useEffect(() => {
     setLoading("Loading ...");
-    setCurrentUser(sessionStorage.getItem("currentUser"));
+    setCurrentUser(JSON.parse(sessionStorage.getItem("currentUser")));
     let isLoaded = true;
     if (isLoaded) {
-      (async () => {
+      const getCategories = async () => {
         try {
           sessionStorage.setItem("APPDATA", APPDATA);
           const results = await axios.get(`${APPDATA.BACKEND}/api/categories/`);
           setCategories(results.data.tuples);
           setLoading("");
+          window.scrollTo(0, 0);
         } catch (error) {
           setLoading(error.message);
         }
-      })();
+      };
+      getCategories();
     }
     return () => {
       isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component

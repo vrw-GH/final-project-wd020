@@ -7,7 +7,7 @@ import "./_Page.css";
 import "./MyProfile.css";
 
 const MyProfile = ({ APPDATA }) => {
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [err, setErr] = useState(null);
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
@@ -19,7 +19,7 @@ const MyProfile = ({ APPDATA }) => {
     const getUser = async () => {
       try {
         const results = await axios.get(
-          `${APPDATA.BACKEND}/api/users/${currentUser}`
+          `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
         );
         if (!results.data.tuple[0]) throw new Error("No User Data.");
         setThisUser(results.data.tuple[0]);
@@ -27,6 +27,7 @@ const MyProfile = ({ APPDATA }) => {
           results.data.tuple[0].location?.x || "10",
           results.data.tuple[0].location?.y || "51",
         ]);
+        window.scrollTo(0, 0);
       } catch (error) {
         // alert("User Data - Get " + error);
         setErr(error.message);
@@ -56,7 +57,7 @@ const MyProfile = ({ APPDATA }) => {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
       await axios.post(
-        `${APPDATA.BACKEND}/api/users/${currentUser.toLowerCase()}`,
+        `${APPDATA.BACKEND}/api/users/${currentUser.userName.toLowerCase()}`,
         info
       );
       alert("Profile Info Saved.");

@@ -22,6 +22,7 @@ const Category = ({ categories, APPDATA }) => {
           const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
           if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
           setPosts(results.data.tuples.filter(filterItems));
+          window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
