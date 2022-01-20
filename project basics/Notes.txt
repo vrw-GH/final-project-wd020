@@ -35,10 +35,10 @@ then we walk-through...
 (remember - leave the SURPRISE for the last!)
 
 1. Abdu: 
+ - Show about page/ Home page
  - Our App works for guest user.
  - Show sharing page generally 
  - Show recipe page generally
- - Show about page
  - then show login
  - Goes automatically to sharing!
  - show messages
