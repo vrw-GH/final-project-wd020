@@ -1,5 +1,9 @@
-Feature					Status
+Feature List:
+Feature					Dev Status
 --------					---------
+
+Landing Page				Done
+About Page				Done
 
 Share Page				Done
 set booked,unbook			Done
@@ -21,5 +25,13 @@ User - ShareItem Maintenance	Done
 
 User - Reserve ShareItem		Done
 
-Landing Page				Done
-About Page					Done
+
+
+FUTURE FEATURES:
+
+1. Real Authentication			
+
+2. Shareitems: pick a validity period, ie 1-3days, 1week,2weeks etc.
+Auto disable items on expiry.
+
+3. 2-way messaging, or chat 

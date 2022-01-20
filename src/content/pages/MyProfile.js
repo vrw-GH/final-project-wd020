@@ -6,7 +6,7 @@ import "../../loading.css";
 import "./_Page.css";
 import "./MyProfile.css";
 
-const MyProfile = ({ APPDATA }) => {
+const MyProfile = ({ setCurrentUser, APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [err, setErr] = useState(null);
   const [thisUser, setThisUser] = useState({}); //to get from database
@@ -51,15 +51,21 @@ const MyProfile = ({ APPDATA }) => {
     if (userCoord[0]) {
       info.location = userCoord[0] + "," + userCoord[1];
     } else delete info.location;
-
     try {
       for (const key in info) {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
-      await axios.post(
+      const result = await axios.post(
         `${APPDATA.BACKEND}/api/users/${currentUser.userName.toLowerCase()}`,
         info
       );
+      const user = {
+        userName: result.data.tuple[0].username,
+        profilePic: result.data.tuple[0].profilepic,
+      };
+      setCurrentUser(user);
+      sessionStorage.setItem("currentUser", JSON.stringify(user));
+
       alert("Profile Info Saved.");
       navigate("/");
     } catch (error) {

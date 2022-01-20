@@ -40,7 +40,8 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setLoginMsg(`"${user.userName}" - succesfully logged in!`);
       navigate("/myshare");
     } catch (error) {
-      setLoginMsg(error + " Please try again.");
+      console.log(error);
+      setLoginMsg(`No such User. Please try again.`);
     }
   };
 
@@ -90,7 +91,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
           <>
-            {loginMsg}
+            <div className="page-error">{loginMsg}</div>
             <br />
             <br />
             <button

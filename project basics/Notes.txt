@@ -35,10 +35,12 @@ CORE- FEATURES
 NEXT-FEATURES
 
 - 1st! Real Authentication
+- Edit recipe
+- ingredients: Copy Paste & Edit
+- Set reminder?
 - Chat-mode
 - Share Location
-- Set reminder?
-- Drag-drop of image
+- Drag-drop of image to recipe
 
 
 
@@ -47,14 +49,14 @@ TECHNICAL:
 - Stack: P.E.R.N.
 - All processing in front end
 - Backend only data- server (no queries)
-- Styling
-
+- Styling mix of Vanila, Bootstrap and CSS
 
 
 THE LITTLE THINGS!
 
 - Sorting... and color coding data
 - A very simple modal/popup
+- Profile pic on menu
 
 
 

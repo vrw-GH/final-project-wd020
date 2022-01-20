@@ -43,6 +43,12 @@ body {
   margin: 0.5rem 0 2rem;
 }
 
+.page-error {
+  color: red;
+  padding: 2px;
+  background-color: rgba(255, 0, 0, 0.308);
+}
+
 .itemsCont {
   display: flex;
   flex-direction: column;

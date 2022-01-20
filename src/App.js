@@ -56,7 +56,6 @@ document.title = "Welcome to " + APPDATA.NAME;
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  // const [profilePic, setProfilePic] = useState("");
   const [searchQry, setSearchQry] = useState("");
   const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
@@ -82,7 +81,7 @@ function App() {
       getCategories();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component
       sessionStorage.clear();
       localStorage.clear();
     };
@@ -126,18 +125,7 @@ function App() {
             />
           ) : (
             <Routes>
-              <Route
-                path="/"
-                exact
-                element={
-                  <About APPDATA={APPDATA} />
-                  // <Sharing
-                  //   // loading={loading}
-                  //   // categories={categories}
-                  //   APPDATA={APPDATA}
-                  // />
-                }
-              />
+              <Route path="/" exact element={<About APPDATA={APPDATA} />} />
               <Route
                 path="/about"
                 exact
@@ -159,13 +147,7 @@ function App() {
               <Route
                 path="/sharing"
                 exact
-                element={
-                  <Sharing
-                    // loading={loading}
-                    // categories={categories}
-                    APPDATA={APPDATA}
-                  />
-                }
+                element={<Sharing APPDATA={APPDATA} />}
               />
 
               <Route
@@ -182,22 +164,14 @@ function App() {
                     exact
                     path="/myshare"
                     element={
-                      <MyShares
-                        currentUser={currentUser}
-                        // categories={categories}
-                        APPDATA={APPDATA}
-                      />
+                      <MyShares currentUser={currentUser} APPDATA={APPDATA} />
                     }
                   />
                   <Route
                     exact
                     path="/mytitles"
                     element={
-                      <MyRecipes
-                        currentUser={currentUser}
-                        // categories={categories}
-                        APPDATA={APPDATA}
-                      />
+                      <MyRecipes currentUser={currentUser} APPDATA={APPDATA} />
                     }
                   />
                   <Route
@@ -215,7 +189,10 @@ function App() {
                     exact
                     path="/profile"
                     element={
-                      <MyProfile currentUser={currentUser} APPDATA={APPDATA} />
+                      <MyProfile
+                        setCurrentUser={setCurrentUser}
+                        APPDATA={APPDATA}
+                      />
                     }
                   />
                 </>
