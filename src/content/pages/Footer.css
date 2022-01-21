@@ -75,6 +75,7 @@
   margin-right: 30px;
   margin-top: 240px;
   display: flex;
+  flex-wrap: wrap;
   color: #f3eea4;
 }
 
@@ -105,7 +106,7 @@
   padding-bottom: 15px;
   border-radius: 30px;
   opacity: 0.8;
-  transition: 0.7s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .footer-icons:hover{

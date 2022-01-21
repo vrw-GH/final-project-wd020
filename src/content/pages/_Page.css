@@ -228,8 +228,10 @@ body {
   z-index: 2;
   font-family: "Amble LtCn", sans-serif;
   font-style: italic;
+  transition: 0.5s ease;
 }
 .aboutt2 {
+  transition: 0.5s ease;
   color: white;
   font-size: 60px;
   z-index: 2;
