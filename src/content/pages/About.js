@@ -7,7 +7,7 @@ import {
 } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 import "./_Page.css";
-import newLogo from "../../components/newLogo.png";
+// import newLogo from "../../components/newLogo.png";
 // import newLogo2 from "./newLogo2.png"
 // import newLogo1 from "./newLogo1.png"
 import easteregg from "./easteregg.png";
@@ -76,8 +76,8 @@ const About = ({ APPDATA }) => {
         </span>
       </div>
       <br />
-      <h1 className="normal-about" >sharing... why Sharing?</h1>
-      <img style={{marginBottom:"20px"}} width={100} height={100} src={newLogo} alt=""/>
+      
+      {/* <img style={{marginBottom:"20px"}} width={100} height={100} src={newLogo} alt=""/> */}
 
       <ModalProvider >
         <Modal

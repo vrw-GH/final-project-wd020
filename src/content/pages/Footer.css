@@ -1,11 +1,13 @@
 .footer_container {
   display: flex;  
   flex-direction: row;
-  align-items:stretch;
+  align-items:center;
+  justify-content: center;
   padding-top:3px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   position: sticky;
-  background-color: #f8edfe;
+  background-color: #e4e2d1;
+  margin:auto;
 }
 
 .ftImg {
@@ -68,12 +70,13 @@
 
 .ul3 {
   list-style: none;
+
   position: relative;
-  margin-top: 90px;
+
   line-height: 40px;
   font-size: .8rem; 
   margin-right: 30px;
-  margin-top: 240px;
+  margin-top: 300px;
   display: flex;
   flex-wrap: wrap;
   color: #f3eea4;
@@ -101,7 +104,7 @@
 }
 
 .footer-icons{
-  background-color: #0a0046;
+  background-color: #38354e;
   padding: 13px;
   padding-bottom: 15px;
   border-radius: 30px;
