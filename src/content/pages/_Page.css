@@ -182,15 +182,15 @@ body {
 .aboutimg1 {
   background-image: url(https://images.pexels.com/photos/4651196/pexels-photo-4651196.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   color: #fff;
-  width: 400px;
-  height: 340px;
+  width: 350px;
+  height: 290px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 20px;
+  border-radius: 25px;
   background-position-x: -47px;
   margin-top: 50px;
   box-shadow: 1px 10px 25px rgb(236, 236, 236);
@@ -199,15 +199,15 @@ body {
 .aboutimg2 {
   background-image: url(https://images.pexels.com/photos/8175340/pexels-photo-8175340.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
   color: #fff;
-  width: 400px;
-  height: 340px;
+  width: 350px;
+  height: 290px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 20px;
+  border-radius: 25px;
   box-shadow: 1px 10px 25px rgb(236, 236, 236);
   margin-top: 50px;
   margin: 40px;
@@ -220,7 +220,7 @@ body {
   opacity: 0;
   position: absolute;
   transition: 0.5s ease;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 .color-overlay2 {
   width: 100%;
@@ -229,7 +229,7 @@ body {
   opacity: 0;
   position: absolute;
   transition: 0.5s ease;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .aboutt {
