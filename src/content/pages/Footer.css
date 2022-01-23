@@ -78,7 +78,7 @@
   margin-right: 30px;
   margin-top: 300px;
   display: flex;
-  flex-wrap: wrap;
+  
   color: #f3eea4;
 }
 
@@ -104,8 +104,8 @@
 }
 
 .footer-icons{
-  background-color: #38354e;
-  padding: 13px;
+  background-color: #191725;
+  padding: 11px;
   padding-bottom: 15px;
   border-radius: 30px;
   opacity: 0.8;
@@ -126,3 +126,4 @@
   background-color: #20205a;
   border-radius: 6px;
 }
+

@@ -6,13 +6,24 @@ body {
   background: white;
 }
 
+@media (min-width: 390px) {
+  body,
+  html {
+    overflow-x: hidden;
+    
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
 #LOGO {
   margin-right: 20px;
   margin-left: 10px;
   transition: 0.8 ease-in-out;
 }
 
-#LOGO:hover{
+#LOGO:hover {
   background-color: #d1fde3;
   transition: 0.8 ease-in-out;
   border-radius: 50%;
@@ -98,16 +109,15 @@ body {
 .form-share:hover {
   color: white;
   transition: 0.7s ease-in-out;
-  background-color: #85d4d4 ;
-  opacity: 0,5;
+  background-color: #85d4d4;
+  opacity: 0, 5;
   padding: 50px;
 }
-.U-btn{
+.U-btn {
   margin-top: 10px;
   border: black solid 1px;
 }
-.U-btn:hover{
-  
+.U-btn:hover {
   background-color: white;
 }
 .h22 {
@@ -259,12 +269,15 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+  
 }
 @media (min-width: 897px) {
   .cont1 {
     display: flex;
     flex-direction: row;
   }
+  
 }
 
 .lorem {
@@ -327,8 +340,6 @@ body {
   left: 0;
 }
 
-
-
 .alert-box {
   position: relative;
   width: 70%;
@@ -359,7 +370,6 @@ body {
   font-size: 20px;
 }
 
-
 .modal-container {
   position: absolute;
   width: 60%;
@@ -375,7 +385,7 @@ body {
   height: 450px;
 }
 
-.share-list{
+.share-list {
   background-color: lightblue;
   line-height: 3;
   padding: 0.001px;
@@ -383,18 +393,16 @@ body {
   border-radius: 0px 15px 25px 20px;
 }
 
-.Bold-about{
-  font-weight:bolder;
+.Bold-about {
+  font-weight: bolder;
   color: black;
 }
 
-.normal-about{
+.normal-about {
   color: #999;
 }
 
-.about-title{
+.about-title {
   color: rgb(87, 87, 87);
   font-weight: lighter;
 }
-
-

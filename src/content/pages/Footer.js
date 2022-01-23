@@ -77,7 +77,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaFacebook className="facebook" size="2.5em" />
+              <FaFacebook className="facebook" size="1.5em" />
             </a>
           </li>
           <li>
@@ -86,7 +86,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaGithub className="github" size="2.5em" />
+              <FaGithub className="github" size="1.5em" />
             </a>
           </li>
           <li>
@@ -95,7 +95,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagram className="insta" size="2.5em" />
+              <FaInstagram className="insta" size="1.5em" />
             </a>
           </li>
           <li>
@@ -104,7 +104,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaLinkedin className="insta" size="2.5em" />
+              <FaLinkedin className="insta" size="1.5em" />
             </a>
           </li>
           <li>
@@ -113,7 +113,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaDiscord className="discord" size="2.5em" />
+              <FaDiscord className="discord" size="1.5em" />
             </a>
           </li>
           <li>
@@ -122,7 +122,7 @@ const Footer = ({ APPDATA }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <GoMail className="discord" size="2.5em" />
+              <GoMail className="discord" size="1.5em" />
             </a>
           </li>
          
