@@ -1,6 +1,12 @@
 // import React, { useState } from "react";
-import { FaFacebook, FaGithub, FaInstagram, FaDiscord, FaLinkedin} from "react-icons/fa";
-import { GoMail, } from "react-icons/go";
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaDiscord,
+  FaLinkedin,
+} from "react-icons/fa";
+import { GoMail } from "react-icons/go";
 import "./Footer.css";
 import footer from "../pages/footer.png";
 // import footer1 from "../pages/footer1.jpg";
@@ -72,7 +78,8 @@ const Footer = ({ APPDATA }) => {
         </ul> */}
         <ul className="ul3">
           <li>
-            <a className="footer-icons"
+            <a
+              className="footer-icons"
               href="https://www.facebook.com/abdullah.shabk"
               target="_blank"
               rel="noreferrer"
@@ -81,7 +88,8 @@ const Footer = ({ APPDATA }) => {
             </a>
           </li>
           <li>
-            <a className="footer-icons"
+            <a
+              className="footer-icons"
               href="https://github.com/vrw-GH/final-project-wd020"
               target="_blank"
               rel="noreferrer"
@@ -90,7 +98,8 @@ const Footer = ({ APPDATA }) => {
             </a>
           </li>
           <li>
-            <a className="footer-icons"
+            <a
+              className="footer-icons"
               href="https://www.instagram.com/a.shabk/"
               target="_blank"
               rel="noreferrer"
@@ -99,7 +108,8 @@ const Footer = ({ APPDATA }) => {
             </a>
           </li>
           <li>
-            <a className="footer-icons"
+            <a
+              className="footer-icons"
               href="https://www.linkedin.com/in/abdullah-al-shabk"
               target="_blank"
               rel="noreferrer"
@@ -108,7 +118,8 @@ const Footer = ({ APPDATA }) => {
             </a>
           </li>
           <li>
-            <a className="footer-icons"
+            <a
+              className="footer-icons"
               href="https://discord.gg/6rm4j2S2Qq"
               target="_blank"
               rel="noreferrer"
@@ -117,15 +128,16 @@ const Footer = ({ APPDATA }) => {
             </a>
           </li>
           <li>
-            <a className="footer-icons"
-              href="https://discord.gg/6rm4j2S2Qq"
+            <a
+              className="footer-icons"
+              href={`mailto:${APPDATA.EMAIL}?subject=Inquiry:%20${APPDATA.PROJECT}
+              &body=I%20am%20interested%20in%20your%20project!`}
               target="_blank"
               rel="noreferrer"
             >
               <GoMail className="discord" size="1.5em" />
             </a>
           </li>
-         
         </ul>
       </div>
     </>

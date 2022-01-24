@@ -143,8 +143,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          <strong style={{ color: "black" }}>Filter</strong>
-
+          {/* <strong style={{ color: "black" }}>Filter</strong> */}
           <ul className="itemsCont">
             <li>
               <strong>
@@ -178,7 +177,7 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                     width: "auto",
                     backgroundColor: "white",
                     cursor: "pointer",
-                    borderRadius:"40px"
+                    borderRadius: "40px",
                   }}
                   value={andOr}
                   onClick={handleAndOr}
@@ -191,12 +190,11 @@ const Recipes = ({ loading, categories, APPDATA }) => {
                 <button
                   className="btn"
                   style={{
-
                     color: "black",
                     width: "auto",
                     backgroundColor: "white",
                     cursor: "pointer",
-                    borderRadius:"40px"
+                    borderRadius: "40px",
                   }}
                   onClick={resetIngredients}
                 >

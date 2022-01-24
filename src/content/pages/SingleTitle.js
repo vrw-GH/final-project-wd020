@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../pages/_Page.css";
 import "../../loading.css";
 import "./SingleTitle.css";
 
@@ -114,13 +115,13 @@ const SingleTitle = ({ APPDATA }) => {
         className="page-container"
         style={{
           backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+          marginBottom: "0",
         }}
       >
-        {/* <div className="single_title_container"> */}
-        <div className="single_title_title">
+        <div className="page-title">
           <h2>-‧≡ {recipe.title} ≡‧-</h2>
         </div>
-        <div className="col">
+        <div className="page-box col-11">
           <div className="single_title_info col">
             Submitted by: {recipe.username} (
             {new Date(recipe.create_time).toLocaleString()}) &nbsp;
@@ -140,36 +141,39 @@ const SingleTitle = ({ APPDATA }) => {
                 : "👍Add to favourites"}
             </button>
           </div>
-        </div>
-        <div className="row">
-          <object
-            data={recipe.title_img || recipe.image}
-            type="image/jpg,jpeg,png"
-            className="col"
-          >
-            <img
-              src={recipe.title_img || recipe.image}
-              alt={recipe.slug}
-              className="create_title_img"
-            />
-          </object>
-          <div className="col">
-            <div className="single_title_ingredients col">
-              <h5>
-                <u>INGREDIENTS</u>
-              </h5>
-              <div
-                dangerouslySetInnerHTML={{ __html: recipe.ingredients }}
-              ></div>
+
+          <div className="row">
+            <div className="row">
+              <object
+                data={recipe.title_img || recipe.image}
+                type="image/jpg,jpeg,png"
+                className="col"
+              >
+                <img
+                  src={recipe.title_img || recipe.image}
+                  alt={recipe.slug}
+                  className="single_title_img"
+                />
+              </object>
+
+              <div className="single_title_ingredients col">
+                <h5>
+                  <u>INGREDIENTS</u>
+                </h5>
+                <div
+                  dangerouslySetInnerHTML={{ __html: recipe.ingredients }}
+                ></div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="single_title_method">
-          <h5>
-            <u>METHOD</u>
-          </h5>
-          <div>
-            <p dangerouslySetInnerHTML={{ __html: recipe.recipe }}></p>
+
+            <div className="single_title_method row">
+              <h5>
+                <u>METHOD</u>
+              </h5>
+              <div>
+                <p dangerouslySetInnerHTML={{ __html: recipe.recipe }}></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
