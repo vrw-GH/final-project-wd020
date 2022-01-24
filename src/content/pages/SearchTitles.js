@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import Title from "./Title";
 import axios from "axios";
+import Title from "./Title";
+
 import "../../loading.css";
 import "./_Page.css";
 

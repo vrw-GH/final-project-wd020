@@ -29,9 +29,11 @@ User - Reserve ShareItem		Done
 
 FUTURE FEATURES:
 
-1. Real Authentication			
-
-2. Shareitems: pick a validity period, ie 1-3days, 1week,2weeks etc.
+- Real Authentication			
+- Shareitems: pick a validity period, ie 1-3days, 1week,2weeks etc.
 Auto disable items on expiry.
-
-3. 2-way messaging, or chat 
+- 2-way messaging, or chat 
+- Edit recipe
+- ingredients: Copy Paste & Edit
+- Share Location
+- Drag-drop of image to recipe

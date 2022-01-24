@@ -77,7 +77,7 @@ const HomeSlider = ({ sliderData }) => {
               title="Click here to go to recipe page"
             >
               <div className="recipesSlider_description">
-                by: {data.username} ({ctgType[data.category]})
+                by: {data.username} ({ctgType(data.category)})
               </div>
               <div className="recipesSlider_title">{data.title}</div>
             </Link>

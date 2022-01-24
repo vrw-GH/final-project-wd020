@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import "./App.css";
 import "./loading.css";
 import NavbarTop from "./components/NavbarTop";
 import About from "./content/pages/About";
@@ -33,7 +32,7 @@ const APPDATA = {
   PROJECT:
     appName.replace(/-/g, " ").toUpperCase() + ` (${appSuffix})` ||
     "Project Not Set",
-  VER: appVer || "App version Not Set",
+  VER: appVer || "0.0.1",
   INFO: appInfo || "App info not Set",
   HOME: "/",
   //---------------------------------------
@@ -48,7 +47,7 @@ const APPDATA = {
   EMAIL: process.env.REACT_APP_DEV_EMAIL || "",
   PHONE: process.env.REACT_APP_DEV_PHONE || "",
   LOCATION: process.env.REACT_APP_DEV_ADDR || "",
-  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "",
+  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "dev",
   DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
 };
 document.title = "Welcome to " + APPDATA.NAME;

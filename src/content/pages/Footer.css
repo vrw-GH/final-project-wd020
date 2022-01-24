@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items:center;
   justify-content: center;
-  padding-top:3px;
+  padding-top:3px;  
   /* justify-content: space-between; */
   position: sticky;
   background-color: #e4e2d1;
@@ -15,10 +15,10 @@
   max-height: 100%;
   object-fit: cover;
   position: absolute;
+ 
 }
 
 .ul1, .ul2{
-  
   color: #f8edfe;
   font-family: "Amble LtCn", Arial, Helvetica, sans-serif;
   font-style: italic;
@@ -70,15 +70,13 @@
 
 .ul3 {
   list-style: none;
-
   position: relative;
-
   line-height: 40px;
   font-size: .8rem; 
   margin-right: 30px;
   margin-top: 300px;
+  margin-bottom: 40px;
   display: flex;
-  
   color: #f3eea4;
 }
 
