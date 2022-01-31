@@ -1,7 +1,7 @@
 {
   "name": "share-my-food",
   "suffix": "final-project-wbs#020",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "info": "Sharing is Caring",
   "private": false,
   "type": "module",
@@ -65,5 +65,5 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "//homepage": "https://vrwgh-finalprojectwd020.netlify.app"
+  "//homepage": "https://final-project-wd020.vercel.app"
 }
