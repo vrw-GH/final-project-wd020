@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HomeSlider from "./RecipesSlider";
 import ctgType from "../../components/ctgType";
@@ -6,11 +7,13 @@ import "../../loading.css";
 import "./_Page.css";
 
 const Recipes = ({ loading, categories, APPDATA }) => {
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [err, setErr] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const [andOr, setAndOr] = useState(false); // false=OR
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isLoaded = true;
@@ -135,8 +138,15 @@ const Recipes = ({ loading, categories, APPDATA }) => {
         }}
       >
         <div className="page-title">
-          <h2>-‧≡ Recipes Home ≡‧-</h2>
+          <h2>-•≡ Recipes Home ≡•-</h2>
         </div>
+        {currentUser ? (
+          <div>
+            <button className="btn U-btn" onClick={() => navigate("/mytitles")}>
+              Go to My Recipes
+            </button>
+          </div>
+        ) : null}
         <div
           className="page-box col-8"
           style={{

@@ -67,7 +67,7 @@ const MyShares = ({ APPDATA }) => {
             if (!error.response.data.info.result === false) {
               setErr(error.message);
             } else {
-              // ! go on - asummes no tuple for this user
+              // ! just go on - there are no tuple for this user
             }
           }
         };
@@ -186,16 +186,24 @@ const MyShares = ({ APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-‧≡ My Sharing ≡‧- </span>
+          <span>-•≡ My Sharing ≡•- </span>
         </h2>
       </div>
+      {currentUser ? (
+        <div>
+          <button className="btn U-btn" onClick={addItem}>
+            Create a New Share
+          </button>
+        </div>
+      ) : null}
+
       <div
         className="page-box col-8"
         style={{
           width: "90%",
         }}
       >
-        New Messages:
+        Your New Messages:
         {shareMessages.map((i) =>
           !i[2] ? (
             <div
@@ -216,19 +224,6 @@ const MyShares = ({ APPDATA }) => {
         )}
         <hr />
         <div className="row" style={{ justifyContent: "center" }}>
-          <button
-            className="btns"
-            onClick={addItem}
-            style={{
-              width: "auto",
-              height: "auto",
-              margin: "21px",
-              backgroundColor: "#FCD8D4",
-              borderRadius: "20px",
-            }}
-          >
-            CREATE NEW SHARE
-          </button>
           <div className="col-10" style={{ alignSelf: "center" }}>
             <form
               onSubmit={handleSubmit}

@@ -144,115 +144,124 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-‧≡ My Profile ≡‧- </span>
+          <span>-•≡ My Profile ≡•- </span>
         </h2>
       </div>
       <div className="page-box" style={{ width: "90%" }}>
-        <form onSubmit={handleSubmit}>
-          <div className="myprofile_container row">
-            <div className="myprofile_profilepic col-4">
-              <object
-                data={thisUser.profilepic}
-                type="image/jpg,png"
-                className="create_title_img row"
-              >
-                <input
-                  type="file"
-                  encType="multipart/form-data"
-                  accept="image/png, .jpeg, .jpg, image/gif"
-                  id="profilepic"
-                  name="profilepic"
-                  onChange={handleImgInput}
-                />
-                <img
-                  src={thisUser.profilepic}
-                  // className="create_title_img row"
-                  alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
-                />
-              </object>
+        <div className="myprofile_container">
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="myprofile_profilepic col">
+                <object
+                  data={thisUser.profilepic}
+                  type="image/jpg,png"
+                  className="create_title_img row"
+                >
+                  <input
+                    type="file"
+                    encType="multipart/form-data"
+                    accept="image/png, .jpeg, .jpg, image/gif"
+                    id="profilepic"
+                    name="profilepic"
+                    onChange={handleImgInput}
+                  />
+                  <img
+                    src={thisUser.profilepic}
+                    // className="create_title_img row"
+                    alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                  />
+                </object>
+              </div>
+              <div className="myprofile_details col">
+                <h6>
+                  <u>My Details</u>
+                </h6>
+                <div>
+                  <label>Email:&nbsp;</label>
+                  <input
+                    style={{ minWidth: "12rem" }}
+                    type="email"
+                    placeholder="email"
+                    id="email"
+                    required
+                    value={thisUser.email || ""}
+                    onChange={handleInput}
+                  />
+                  <br />
+                  <label>Address:&nbsp;</label>
+                  <input style={{ minWidth: "12rem" }} />
+                  <br />
+                  <input type="button" value="Change Password"></input>
+                </div>
+                <hr />
+                <h6>
+                  <u> My Location</u>
+                </h6>
+                <div className="myprofile_form">
+                  <div>
+                    <label>PLZ:&nbsp;</label>
+                    <input
+                      type="text"
+                      placeholder="Post Code"
+                      id="plz"
+                      required
+                      value={thisUser.plz || ""}
+                      onChange={handleInput}
+                    />
+                    &nbsp;
+                    <input
+                      type="button"
+                      value="Get Coord."
+                      onClick={HandleGetLatLon}
+                    ></input>
+                    <br />
+                    <label>Long:&nbsp;</label>
+                    <input
+                      value={userCoord[0] || ""}
+                      type="number"
+                      step="0.0001"
+                      placeholder="Longitude in Decimal"
+                      title="Decimal Notation"
+                      style={{ width: "5rem", textAlign: "right" }}
+                      id="long"
+                      onChange={handleLocInput}
+                      maxLength="6"
+                    />
+                    °
+                    <br />
+                    <label>Lat:&nbsp;</label>
+                    <input
+                      value={userCoord[1] || ""}
+                      type="number"
+                      step="0.0001"
+                      placeholder="Latitude in Decimal"
+                      title="Decimal Notation"
+                      style={{ width: "5rem", textAlign: "right" }}
+                      id="lat"
+                      onChange={handleLocInput}
+                      maxLength="6"
+                    />
+                    °
+                    <span
+                      style={{
+                        display: cityName ? "inherit" : "none",
+                      }}
+                    >
+                      <label>City:&nbsp;</label>
+                      <strong>{cityName}</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="myprofile_map col-2">
+                <MapChart coordinates={userCoord} plz={thisUser.plz} />
+              </div>
             </div>
-            <div className="myprofile_details col-4">
-              <u>Details</u>
-              <br />
-              Email:
-              <input
-                // style={{ minWidth: "5rem" }}
-                type="email"
-                placeholder="email"
-                id="email"
-                required
-                value={thisUser.email || ""}
-                onChange={handleInput}
-              />
-              {/* <br /> */}
-              {/* Address: <input value="  " style={{ width: "5rem" }} /> */}
-              <br />
-              PLZ:
-              <input
-                style={{ width: "5rem" }}
-                type="text"
-                placeholder="Post Code"
-                id="plz"
-                required
-                value={thisUser.plz || ""}
-                onChange={handleInput}
-              />
-              <input
-                type="button"
-                value="Get Long/Lat"
-                onClick={HandleGetLatLon}
-              ></input>
-              <br />
-              <p style={{ opacity: cityName ? "100%" : "0" }}>
-                City: <strong>{cityName}</strong>
-              </p>
-              <u> My Location:</u>
-              <br />
-              Long:
-              <input
-                // value={thisUser?.location?.x}
-                value={userCoord[0] || ""}
-                type="number"
-                step="0.0001"
-                // defaultValue="10"
-                placeholder="Longitude in Decimal"
-                title="Decimal Notation"
-                style={{ width: "5rem", textAlign: "right" }}
-                id="long"
-                onChange={handleLocInput}
-                maxLength="6"
-              />
-              °
-              <br />
-              Lat:&nbsp;&nbsp;
-              <input
-                // value={thisUser?.location?.y}
-                value={userCoord[1] || ""}
-                type="number"
-                step="0.0001"
-                // defaultValue="51"
-                placeholder="Latitude in Decimal"
-                title="Decimal Notation"
-                style={{ width: "5rem", textAlign: "right" }}
-                id="lat"
-                onChange={handleLocInput}
-                maxLength="6"
-              />
-              °
-            </div>
-            {/* <div className="myprofile_location col-3"> */}
-            <div className="myprofile_map col">
-              <MapChart coordinates={userCoord} plz={thisUser.plz} />
-            </div>
-            {/* </div> */}
-          </div>
-          <button type="submit" className="btns">
-            Save Profile
-          </button>
-          {/* <button type="cancel" className="btns">
-            Reset
-          </button> */}
-        </form>
+            <button type="submit" className="btns ">
+              Submit Changes
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ export const genHash = (pwd) => {
     if (!regex.test(pwd)) throw Error(); // .text matches with integers as well
     let salt = bcrypt.genSaltSync(pepper);
     let hash = bcrypt.hashSync(pwd + "", salt);
+    console.log(hash);
     return hash;
   } catch (error) {
     throw Error("Need a stronger password!");

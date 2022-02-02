@@ -158,7 +158,7 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
           }}
         >
           <div className="page-title">
-            <h2>-‧≡ Create a new recipe ≡‧- </h2>
+            <h2>-•≡ Create a new recipe ≡•- </h2>
           </div>
           <div
             className="page-box col-11"

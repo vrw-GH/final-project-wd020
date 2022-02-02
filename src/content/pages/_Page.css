@@ -9,11 +9,10 @@ body {
 @media (min-width: 390px) {
   body,
   html {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     margin: 0;
     padding: 0;
   }
-
 }
 
 #LOGO {
