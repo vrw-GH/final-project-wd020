@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { genHash, checkPwd } from "../../components/security.js";
 import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
@@ -21,16 +22,16 @@ const Login = ({ setCurrentUser, APPDATA }) => {
   const doLogin = async (e) => {
     try {
       username = e.target.parentElement.children["username"].value;
-      if (!username) throw Error("Should enter credentials.");
+      if (!username) throw Error("Enter your credentials and");
       let result = await axios.get(`${APPDATA.BACKEND}/api/users/${username}`);
       if (!result.data.info.result) throw Error(result.data.info.message);
       if (
-        //                                            TODO authentication here
-        result.data.tuple[0].password !==
-        e.target.parentElement.children["password"].value
-      ) {
-        throw Error("Invalid Credentials - ");
-      }
+        !checkPwd(
+          e.target.parentElement.children["password"].value,
+          result.data.tuple[0].password
+        )
+      )
+        throw Error("Invalid Credentials");
       const user = {
         userName: result.data.tuple[0].username,
         profilePic: result.data.tuple[0].profilepic,
@@ -41,24 +42,23 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       navigate("/myshare");
     } catch (error) {
       console.log(error);
-      setLoginMsg(`No such User. Please try again.`);
+      setLoginMsg(`${error} - Please try again.`);
     }
   };
 
   const doCreateUser = async (e) => {
     try {
+      let pwdHash = genHash(e.target.parentElement.children["password"].value);
       let item = {
         username:
           e.target.parentElement.children["username"].value.toLowerCase(),
-        password: e.target.parentElement.children["password"].value,
+        password: pwdHash,
         email: e.target.parentElement.children["email"].value,
       };
-      if (!item.username) throw Error("Should enter the credentials.");
-      if (!item.email) throw Error("Should enter the credentials.");
-      if (!item.password) throw Error("Should enter the credentials.");
+      if (!item.username || !item.email || !item.password)
+        throw Error("Enter valid credentials");
       let result = await axios.post(`${APPDATA.BACKEND}/api/users`, item);
       if (!result.data.info.result) throw Error(result.data.info.message);
-
       const user = {
         userName: result.data.tuple[0].username,
         profilePic: result.data.tuple[0].profilepic,
