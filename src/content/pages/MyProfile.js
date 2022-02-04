@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { genHash, checkPwd, isGoodPWD } from "../../components/security";
 import MapChart from "../../components/MapChart";
 import "../../loading.css";
 import "./_Page.css";
@@ -9,6 +10,7 @@ import "./MyProfile.css";
 const MyProfile = ({ setCurrentUser, APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [err, setErr] = useState(null);
+  const [modal, setModal] = useState("");
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
@@ -65,7 +67,6 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
-
       alert("Profile Info Saved.");
       navigate("/");
     } catch (error) {
@@ -92,7 +93,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
 
   const handleInput = (e) => {
     const info = { ...thisUser };
-    info[e.target.id] = e.target.value;
+    info[e.target.id] = e.target.value.trim();
     setThisUser(info);
   };
 
@@ -125,6 +126,87 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
       setThisUser(info);
     };
     reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const handlePwdSubmit = async (form) => {
+    form.preventDefault();
+    const { pwd1, pwd2, pwdOld } = form.target;
+    try {
+      isGoodPWD(pwd1.value); // will throw error on bad password.
+      if (pwd1.value !== pwd2.value) throw Error("New passwords do not match.");
+      if (!checkPwd(pwdOld.value, thisUser.password))
+        throw Error("Current password invalid.");
+      if (!window.confirm("Do you want to change your password?")) return;
+      let pwdHash = genHash(pwd1.value);
+      const info = { password: pwdHash };
+      let result = await axios.post(
+        `${APPDATA.BACKEND}/api/users/${currentUser.userName.toLowerCase()}`,
+        info
+      );
+      if (!result.data.info.result) throw Error(result.data.info.message);
+      alert("Password Updated");
+      setModal("");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleChangePWD = () => {
+    setModal(
+      <div>
+        <h2>Change Password</h2>
+        <form
+          style={{
+            display: "grid",
+            justifyContent: "center",
+            justifyItems: "center",
+          }}
+          onSubmit={handlePwdSubmit}
+        >
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            name="pwd1"
+            minLength={6}
+            placeholder="New password:"
+            required
+            autoFocus
+          />
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            placeholder="Re-enter new password:"
+            name="pwd2"
+            required
+          />
+          <br />
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            placeholder="Old password"
+            name="pwdOld"
+            required
+          />
+          <br />
+          <div>
+            {/* <button className="btns" type="submit">
+              Update
+            </button> */}
+            {/* <button className="btns" onClick={() => setModal("")}>
+              Cancel
+            </button> */}
+            <input className="btns" type="submit" value="Update" />
+            &nbsp;
+            <input
+              className="btns"
+              onClick={() => setModal("")}
+              type={"button"}
+              value="Cancel"
+            />
+          </div>
+        </form>
+      </div>
+    );
   };
 
   if (err)
@@ -177,7 +259,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                   <u>My Details</u>
                 </h6>
                 <div>
-                  <label>Email:&nbsp;</label>
+                  <label style={{ width: "70px" }}>Email:&nbsp;</label>
                   <input
                     style={{ minWidth: "12rem" }}
                     type="email"
@@ -188,10 +270,8 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                     onChange={handleInput}
                   />
                   <br />
-                  <label>Address:&nbsp;</label>
+                  <label style={{ width: "70px" }}>Address:&nbsp;</label>
                   <input style={{ minWidth: "12rem" }} />
-                  <br />
-                  <input type="button" value="Change Password"></input>
                 </div>
                 <hr />
                 <h6>
@@ -199,11 +279,12 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                 </h6>
                 <div className="myprofile_form">
                   <div>
-                    <label>PLZ:&nbsp;</label>
+                    <label style={{ width: "50px" }}>PLZ:&nbsp;</label>
                     <input
                       type="text"
                       placeholder="Post Code"
                       id="plz"
+                      style={{ width: "4rem", textAlign: "right" }}
                       required
                       value={thisUser.plz || ""}
                       onChange={handleInput}
@@ -215,7 +296,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                       onClick={HandleGetLatLon}
                     ></input>
                     <br />
-                    <label>Long:&nbsp;</label>
+                    <label style={{ width: "50px" }}>Long:&nbsp;</label>
                     <input
                       value={userCoord[0] || ""}
                       type="number"
@@ -229,7 +310,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                     />
                     °
                     <br />
-                    <label>Lat:&nbsp;</label>
+                    <label style={{ width: "50px" }}>Lat:&nbsp;</label>
                     <input
                       value={userCoord[1] || ""}
                       type="number"
@@ -260,8 +341,18 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
             <button type="submit" className="btns ">
               Submit Changes
             </button>
+            <button type="button" className="btns" onClick={handleChangePWD}>
+              Change Password
+            </button>
           </form>
         </div>
+        {/* ---------------MODAL---------- */}
+        <div className={modal ? "modal d-block" : "modal d-none"}>
+          <div className="modal-container">
+            <div style={{ overflowY: "auto" }}>{modal}</div>
+          </div>
+        </div>
+        {/* ---------End of MODAL---------- */}
       </div>
     </div>
   );
