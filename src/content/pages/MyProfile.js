@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { genHash, checkPwd, isGoodPWD } from "../../components/security";
 import MapChart from "../../components/MapChart";
 import "../../loading.css";
 import "./_Page.css";
@@ -9,6 +10,7 @@ import "./MyProfile.css";
 const MyProfile = ({ setCurrentUser, APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [err, setErr] = useState(null);
+  const [modal, setModal] = useState("");
   const [thisUser, setThisUser] = useState({}); //to get from database
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
@@ -65,7 +67,6 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
-
       alert("Profile Info Saved.");
       navigate("/");
     } catch (error) {
@@ -92,7 +93,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
 
   const handleInput = (e) => {
     const info = { ...thisUser };
-    info[e.target.id] = e.target.value;
+    info[e.target.id] = e.target.value.trim();
     setThisUser(info);
   };
 
@@ -127,6 +128,87 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  const handlePwdSubmit = async (form) => {
+    form.preventDefault();
+    const { pwd1, pwd2, pwdOld } = form.target;
+    try {
+      isGoodPWD(pwd1.value); // will throw error on bad password.
+      if (pwd1.value !== pwd2.value) throw Error("New passwords do not match.");
+      if (!checkPwd(pwdOld.value, thisUser.password))
+        throw Error("Current password invalid.");
+      if (!window.confirm("Do you want to change your password?")) return;
+      let pwdHash = genHash(pwd1.value);
+      const info = { password: pwdHash };
+      let result = await axios.post(
+        `${APPDATA.BACKEND}/api/users/${currentUser.userName.toLowerCase()}`,
+        info
+      );
+      if (!result.data.info.result) throw Error(result.data.info.message);
+      alert("Password Updated");
+      setModal("");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleChangePWD = () => {
+    setModal(
+      <div>
+        <h2>Change Password</h2>
+        <form
+          style={{
+            display: "grid",
+            justifyContent: "center",
+            justifyItems: "center",
+          }}
+          onSubmit={handlePwdSubmit}
+        >
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            name="pwd1"
+            minLength={6}
+            placeholder="New password:"
+            required
+            autoFocus
+          />
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            placeholder="Re-enter new password:"
+            name="pwd2"
+            required
+          />
+          <br />
+          <input
+            style={{ width: "12rem", textAlign: "center" }}
+            type="password"
+            placeholder="Old password"
+            name="pwdOld"
+            required
+          />
+          <br />
+          <div>
+            {/* <button className="btns" type="submit">
+              Update
+            </button> */}
+            {/* <button className="btns" onClick={() => setModal("")}>
+              Cancel
+            </button> */}
+            <input className="btns" type="submit" value="Update" />
+            &nbsp;
+            <input
+              className="btns"
+              onClick={() => setModal("")}
+              type={"button"}
+              value="Cancel"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  };
+
   if (err)
     return (
       <div className="loading_container">
@@ -144,115 +226,133 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-‧≡ My Profile ≡‧- </span>
+          <span>-•≡ My Profile ≡•- </span>
         </h2>
       </div>
       <div className="page-box" style={{ width: "90%" }}>
-        <form onSubmit={handleSubmit}>
-          <div className="myprofile_container row">
-            <div className="myprofile_profilepic col-4">
-              <object
-                data={thisUser.profilepic}
-                type="image/jpg,png"
-                className="create_title_img row"
-              >
-                <input
-                  type="file"
-                  encType="multipart/form-data"
-                  accept="image/png, .jpeg, .jpg, image/gif"
-                  id="profilepic"
-                  name="profilepic"
-                  onChange={handleImgInput}
-                />
-                <img
-                  src={thisUser.profilepic}
-                  // className="create_title_img row"
-                  alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
-                />
-              </object>
+        <div className="myprofile_container">
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="myprofile_profilepic col">
+                <object
+                  data={thisUser.profilepic}
+                  type="image/jpg,png"
+                  className="create_title_img row"
+                >
+                  <input
+                    type="file"
+                    encType="multipart/form-data"
+                    accept="image/png, .jpeg, .jpg, image/gif"
+                    id="profilepic"
+                    name="profilepic"
+                    onChange={handleImgInput}
+                  />
+                  <img
+                    src={thisUser.profilepic}
+                    // className="create_title_img row"
+                    alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                  />
+                </object>
+              </div>
+              <div className="myprofile_details col">
+                <h6>
+                  <u>My Details</u>
+                </h6>
+                <div>
+                  <label style={{ width: "70px" }}>Email:&nbsp;</label>
+                  <input
+                    style={{ minWidth: "12rem" }}
+                    type="email"
+                    placeholder="email"
+                    id="email"
+                    required
+                    value={thisUser.email || ""}
+                    onChange={handleInput}
+                  />
+                  <br />
+                  <label style={{ width: "70px" }}>Address:&nbsp;</label>
+                  <input style={{ minWidth: "12rem" }} />
+                </div>
+                <hr />
+                <h6>
+                  <u> My Location</u>
+                </h6>
+                <div className="myprofile_form">
+                  <div>
+                    <label style={{ width: "50px" }}>PLZ:&nbsp;</label>
+                    <input
+                      type="text"
+                      placeholder="Post Code"
+                      id="plz"
+                      style={{ width: "4rem", textAlign: "right" }}
+                      required
+                      value={thisUser.plz || ""}
+                      onChange={handleInput}
+                    />
+                    &nbsp;
+                    <input
+                      type="button"
+                      value="Get Coord."
+                      onClick={HandleGetLatLon}
+                    ></input>
+                    <br />
+                    <label style={{ width: "50px" }}>Long:&nbsp;</label>
+                    <input
+                      value={userCoord[0] || ""}
+                      type="number"
+                      step="0.0001"
+                      placeholder="Longitude in Decimal"
+                      title="Decimal Notation"
+                      style={{ width: "5rem", textAlign: "right" }}
+                      id="long"
+                      onChange={handleLocInput}
+                      maxLength="6"
+                    />
+                    °
+                    <br />
+                    <label style={{ width: "50px" }}>Lat:&nbsp;</label>
+                    <input
+                      value={userCoord[1] || ""}
+                      type="number"
+                      step="0.0001"
+                      placeholder="Latitude in Decimal"
+                      title="Decimal Notation"
+                      style={{ width: "5rem", textAlign: "right" }}
+                      id="lat"
+                      onChange={handleLocInput}
+                      maxLength="6"
+                    />
+                    °
+                    <span
+                      style={{
+                        display: cityName ? "inherit" : "none",
+                      }}
+                    >
+                      <label>City:&nbsp;</label>
+                      <strong>{cityName}</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="myprofile_map col-2">
+                <MapChart coordinates={userCoord} plz={thisUser.plz} />
+              </div>
             </div>
-            <div className="myprofile_details col-4">
-              <u>Details</u>
-              <br />
-              Email:
-              <input
-                // style={{ minWidth: "5rem" }}
-                type="email"
-                placeholder="email"
-                id="email"
-                required
-                value={thisUser.email || ""}
-                onChange={handleInput}
-              />
-              {/* <br /> */}
-              {/* Address: <input value="  " style={{ width: "5rem" }} /> */}
-              <br />
-              PLZ:
-              <input
-                style={{ width: "5rem" }}
-                type="text"
-                placeholder="Post Code"
-                id="plz"
-                required
-                value={thisUser.plz || ""}
-                onChange={handleInput}
-              />
-              <input
-                type="button"
-                value="Get Long/Lat"
-                onClick={HandleGetLatLon}
-              ></input>
-              <br />
-              <p style={{ opacity: cityName ? "100%" : "0" }}>
-                City: <strong>{cityName}</strong>
-              </p>
-              <u> My Location:</u>
-              <br />
-              Long:
-              <input
-                // value={thisUser?.location?.x}
-                value={userCoord[0] || ""}
-                type="number"
-                step="0.0001"
-                // defaultValue="10"
-                placeholder="Longitude in Decimal"
-                title="Decimal Notation"
-                style={{ width: "5rem", textAlign: "right" }}
-                id="long"
-                onChange={handleLocInput}
-                maxLength="6"
-              />
-              °
-              <br />
-              Lat:&nbsp;&nbsp;
-              <input
-                // value={thisUser?.location?.y}
-                value={userCoord[1] || ""}
-                type="number"
-                step="0.0001"
-                // defaultValue="51"
-                placeholder="Latitude in Decimal"
-                title="Decimal Notation"
-                style={{ width: "5rem", textAlign: "right" }}
-                id="lat"
-                onChange={handleLocInput}
-                maxLength="6"
-              />
-              °
-            </div>
-            {/* <div className="myprofile_location col-3"> */}
-            <div className="myprofile_map col">
-              <MapChart coordinates={userCoord} plz={thisUser.plz} />
-            </div>
-            {/* </div> */}
+            <button type="submit" className="btns ">
+              Submit Changes
+            </button>
+            <button type="button" className="btns" onClick={handleChangePWD}>
+              Change Password
+            </button>
+          </form>
+        </div>
+        {/* ---------------MODAL---------- */}
+        <div className={modal ? "modal d-block" : "modal d-none"}>
+          <div className="modal-container">
+            <div style={{ overflowY: "auto" }}>{modal}</div>
           </div>
-          <button type="submit" className="btns">
-            Save Profile
-          </button>
-          {/* <button type="cancel" className="btns">
-            Reset
-          </button> */}
-        </form>
+        </div>
+        {/* ---------End of MODAL---------- */}
       </div>
     </div>
   );

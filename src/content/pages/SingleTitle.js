@@ -119,7 +119,7 @@ const SingleTitle = ({ APPDATA }) => {
         }}
       >
         <div className="page-title">
-          <h2>-‧≡ {recipe.title} ≡‧-</h2>
+          <h2>-•≡ {recipe.title} ≡•-</h2>
         </div>
         <div className="page-box col-11">
           <div className="single_title_info col">

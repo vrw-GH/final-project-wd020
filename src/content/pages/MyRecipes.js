@@ -81,9 +81,16 @@ const MyRecipes = ({ APPDATA }) => {
     >
       <div className="page-title">
         <h2>
-          <span>-‧≡ My Recipes ≡‧- </span>
+          <span>-•≡ My Recipes ≡•- </span>
         </h2>
       </div>
+      {currentUser ? (
+        <div>
+          <button className="btn U-btn" onClick={() => navigate("/newtitle")}>
+            Create a New Recipe
+          </button>
+        </div>
+      ) : null}
       <div
         className="page-box col-10"
         style={{
@@ -170,14 +177,6 @@ const MyRecipes = ({ APPDATA }) => {
             </TabPanel>
           </Tabs>
         </div>
-
-        {currentUser ? (
-          <div>
-            <button onClick={() => navigate("/newtitle")}>
-              Create a New Recipe
-            </button>
-          </div>
-        ) : null}
       </div>
     </div>
   );

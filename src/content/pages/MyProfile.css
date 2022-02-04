@@ -1,47 +1,39 @@
 .myprofile_container {
   display: flex;
-  flex-direction: row;
-
-  /* align-items:stretch; */
-  font-family: "Amble LtCn", sans-serif;
-  color: rgb(48, 51, 3);
-  /* padding-top:3px; */
 }
 
 .myprofile_profilepic {
+  display: flexbox;
+  margin-top: 30px;
   min-height: 320px;
   max-height: 330px;
   object-fit: cover;
   font-weight: bold;
-  margin-right: 50px;
+}
+.myprofile_profilepic > object {
+  margin:0;
 }
 .myprofile_profilepic > object > img {
   border-radius: 50%;
 }
 
 .myprofile_details {
-  padding: 40px;
+  display: flexbox;
+  margin-top: 30px;
+  padding: 30px;
   border: black solid 1px;
   border-radius: 30px;
-  margin-top: 85px;
-  margin-right: 40px;
-  transition: 0.5s ease-in;
+  transition: 0.5s ease-in;  
 }
 .myprofile_details:hover {
-  transition: 0.5s ease-in;
-  padding: 55px;
-  
-  border-radius: 50px;
+  border-radius: 30px;
+  padding: 35px;  
   background-color: lightsteelblue;
-}
-.myprofile_location {
-  /* size: 100vh; */
+  transition: 0.5s ease-in;
 }
 
 .myprofile_map {
-  
-  margin-top: 85px;
-  display: flex;
-  /* position:relative; */
+  display: flexbox;
+  margin-top: 30px;
   width: 40vh;
 }

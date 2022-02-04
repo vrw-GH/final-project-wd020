@@ -216,7 +216,6 @@ const Sharing = ({ APPDATA }) => {
   let k = 0;
   return (
     <>
-      
       <div
         className="page-container"
         style={{
@@ -224,16 +223,17 @@ const Sharing = ({ APPDATA }) => {
           marginBottom: "0",
         }}
       >
-        {currentUser ? (
-            <div>
-              <button className="btn U-btn" onClick={() => navigate("/myshare")}>
-                Go to My Shares
-              </button>
-            </div>
-          ) : null}
         <div className="page-title">
-          <h2>-‧≡ Sharing Page ≡‧-</h2>
+          <h2>-•≡ Sharing Page ≡•-</h2>
         </div>
+        {currentUser ? (
+          <div>
+            <button className="btn U-btn" onClick={() => navigate("/myshare")}>
+              Go to My Shares
+            </button>
+          </div>
+        ) : null}
+
         <div
           className="page-box "
           style={{
@@ -262,6 +262,9 @@ const Sharing = ({ APPDATA }) => {
                 onChange={setKeyword}
               ></input>
             </li>
+            <h6>
+              <u>Share Basket</u>
+            </h6>
             <div className="row" style={{ width: "100%" }}>
               <div
                 className="col-6"
@@ -273,10 +276,6 @@ const Sharing = ({ APPDATA }) => {
                   overflowY: "scroll",
                 }}
               >
-                <h6>
-                  <u>Share Basket</u>
-                </h6>
-
                 <ul style={{ marginTop: "65px" }}>
                   {filteredItems
                     // .filter((it) => true)
@@ -339,7 +338,6 @@ const Sharing = ({ APPDATA }) => {
               </div>
             </div>
           </div>
-          
         </div>
 
         {/* ---------------MODAL---------- */}

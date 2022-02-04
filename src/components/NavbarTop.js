@@ -103,39 +103,45 @@ const NavbarTop = ({
                     New Recipe
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Link
-                  to="/profile"
-                  onClick={handleClearQry}
-                  id="nav-profile"
-                  className="nav-link"
-                >
-                  Profile
-                </Link>
-                <Link
-                  to="/login"
-                  onClick={handleClearQry}
-                  id="nav-login"
-                  className="nav-link"
-                >
-                  Logout
-                </Link>
 
-                <Navbar.Brand
-                  id="nav-currentUser"
-                  style={{ marginLeft: "30px", marginTop: "2px" }}
-                >
-                  <div>
+                <Navbar.Brand id="nav-currentUser" style={{ marginRight: 0 }}>
+                  <div style={{ padding: 0, margin: 0 }}>
                     {currentUser.profilePic ? (
                       <img
                         src={currentUser.profilePic}
-                        height="32px"
+                        height="34px"
                         alt="pic"
-                        style={{ padding: 0, margin: 0 }}
                       />
                     ) : null}
-                    &nbsp;{currentUser.userName}
+                    {/* &nbsp;{currentUser.userName} */}
                   </div>
                 </Navbar.Brand>
+                <NavDropdown
+                  title={currentUser.userName}
+                  className="nav-drop"
+                  id="collapsible-nav-dropdown"
+                  style={{ padding: 0, margin: 0 }}
+                >
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/profile"
+                    onClick={handleClearQry}
+                    style={{ color: "black" }}
+                    id="nav-profile"
+                    className="nav-link"
+                  >
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/login"
+                    onClick={handleClearQry}
+                    id="nav-login"
+                    className="nav-link"
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               </>
             ) : (
               <>
@@ -147,17 +153,18 @@ const NavbarTop = ({
                 >
                   Login
                 </Link>
-                <Link
-                  to="/about"
-                  onClick={handleClearQry}
-                  title="About Us"
-                  id="nav-about"
-                  className="nav-link"
-                >
-                  About
-                </Link>
               </>
             )}
+            <Link
+              to="/about"
+              onClick={handleClearQry}
+              title="About Us"
+              id="nav-about"
+              className="nav-link"
+              style={{ marginLeft: "10px" }}
+            >
+              About
+            </Link>
           </Nav>
 
           <ReactBootStrap.Form className="d-flex">

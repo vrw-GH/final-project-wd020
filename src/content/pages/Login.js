@@ -15,6 +15,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       setCurrentUser({});
       return null;
     }
+    window.scrollTo(0, 0);
     return () => {};
     //eslint-disable-next-line
   }, []);
@@ -56,7 +57,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
         email: e.target.parentElement.children["email"].value,
       };
       if (!item.username || !item.email || !item.password)
-        throw Error("Enter valid credentials");
+        throw Error("Please enter valid credentials");
       let result = await axios.post(`${APPDATA.BACKEND}/api/users`, item);
       if (!result.data.info.result) throw Error(result.data.info.message);
       const user = {
@@ -86,7 +87,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       }}
     >
       <div className="page-title">
-        <h2>-‧≡ User Login / Registration ≡‧-</h2>
+        <h2>-•≡ User Login / Registration ≡•-</h2>
       </div>
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
