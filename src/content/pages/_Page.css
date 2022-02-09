@@ -378,11 +378,19 @@ body {
   background:rgba(250,250,200,0.98) ;
 }
 
+.easteregg-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  border-radius: 6px; 
+  background: linear-gradient(black, #20205a, black); 
+}
 .easteregg-img {
   object-fit: cover;
-  width: 600px;
-  height: 450px;
+  width: auto;
+  height: 500px;
 }
+
 
 .share-list {
   background-color: lightblue;

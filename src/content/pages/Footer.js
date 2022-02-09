@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { GoMail } from "react-icons/go";
 import "./Footer.css";
-import footer from "../pages/footer.png";
+import footer from "../../media/footer.png";
 // import footer1 from "../pages/footer1.jpg";
 
 const Footer = ({ APPDATA }) => {

@@ -59,7 +59,7 @@ function App() {
   const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
 
-  useEffect(() => {}, [loading]); //        to re-render when any loading event occurs
+  useEffect(() => {}, [loading]); //  to re-render when any loading event occurs
 
   useEffect(() => {
     setLoading("Loading ...");
@@ -130,7 +130,6 @@ function App() {
                 exact
                 element={<About APPDATA={APPDATA} />}
               />
-
               <Route
                 path="/recipes"
                 exact
@@ -142,13 +141,11 @@ function App() {
                   />
                 }
               />
-
               <Route
                 path="/sharing"
                 exact
                 element={<Sharing APPDATA={APPDATA} />}
               />
-
               <Route
                 exact
                 path="/login"
@@ -156,7 +153,6 @@ function App() {
                   <Login setCurrentUser={setCurrentUser} APPDATA={APPDATA} />
                 }
               />
-
               {currentUser ? (
                 <>
                   <Route
@@ -201,10 +197,9 @@ function App() {
                 path="/categories/:category"
                 element={<Category categories={categories} APPDATA={APPDATA} />}
               />
-
               <Route
                 exact
-                path="/recipes/:id" //                          TODO: change recipes route to "entry"
+                path="/recipes/:id" //    TODO: change recipes route to "entry"
                 element={
                   <SingleTitle categories={categories} APPDATA={APPDATA} />
                 }

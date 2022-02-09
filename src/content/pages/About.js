@@ -10,7 +10,7 @@ import "./_Page.css";
 // import newLogo from "../../components/newLogo.png";
 // import newLogo2 from "./newLogo2.png"
 // import newLogo1 from "./newLogo1.png"
-import easteregg from "./easteregg.png";
+import easteregg from "../../media/easteregg.png";
 import Confetti from "../../components/confetti";
 
 const About = ({ APPDATA }) => {
@@ -100,8 +100,8 @@ const About = ({ APPDATA }) => {
           isOpen={isModalOpen}
           transition={ModalTransition.BOTTOM_UP}
         >
-          <div className="page-box col eg-bg" onClick={closeModal}>
-            <span className="page-title-sm eg-bg">
+          <div className="easteregg-box" onClick={closeModal}>
+            <span>
               <img className="easteregg-img" src={easteregg} alt="" />
               <Confetti />
             </span>
