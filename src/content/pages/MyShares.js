@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { datify } from "../../components/formatting";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./_Page.css";
 
 const MyShares = ({ APPDATA }) => {

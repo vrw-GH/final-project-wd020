@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Title from "./Title.js";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./Category.css";
 
 const Category = ({ categories, APPDATA }) => {

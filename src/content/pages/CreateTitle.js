@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./CreateTitle.css";
 
 const CreateTitle = ({ currentUser, categories, APPDATA }) => {

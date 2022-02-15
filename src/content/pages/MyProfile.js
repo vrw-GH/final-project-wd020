@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { genHash, checkPwd, isGoodPWD } from "../../components/security";
 import MapChart from "../../components/MapChart";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./_Page.css";
 import "./MyProfile.css";
 

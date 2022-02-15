@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import "./loading.css";
+// Local components
 import NavbarTop from "./components/NavbarTop";
+import "./components/loading.css";
+// Local content
 import About from "./content/pages/About";
 import Footer from "./content/pages/Footer";
 import Recipes from "./content/pages/Recipes";
@@ -22,9 +24,8 @@ import {
   version as appVer,
   info as appInfo,
 } from "../package.json";
-
 const APPDATA = {
-  TITLE: appName || "App Name Not Set",
+  TITLE: appName || "New App Name",
   NAME:
     appName
       .replace(/-/g, " ")
@@ -32,22 +33,25 @@ const APPDATA = {
   PROJECT:
     appName.replace(/-/g, " ").toUpperCase() + ` (${appSuffix})` ||
     "Project Not Set",
-  VER: appVer || "0.0.1",
+  VER: appVer || "0.1.0",
   INFO: appInfo || "App info not Set",
   HOME: "/",
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER || "/img-footer.jpg",
-  BACKEND: process.env.REACT_APP_BACKEND || "localhost:5053",
+  //---------------------------------------
+  BACKEND: process.env.REACT_APP_BACKEND || "http://127.0.0.1:5000",
   FRONTEND:
     process.env.REACT_APP_FRONTEND ||
-    (process.env.HOST || "localhost") + ":" + (process.env.PORT || "3000"),
-  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "-",
+    (process.env.HOST || "https://127.0.0.1") +
+      ":" +
+      (process.env.PORT || "3000"),
+  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "Victor",
   DEVTEAM: process.env.REACT_APP_DEV_TEAM || "",
   EMAIL: process.env.REACT_APP_DEV_EMAIL || "",
   PHONE: process.env.REACT_APP_DEV_PHONE || "",
   LOCATION: process.env.REACT_APP_DEV_ADDR || "",
-  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "dev",
+  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "-dev",
   DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
 };
 document.title = "Welcome to " + APPDATA.NAME;

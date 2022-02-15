@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../pages/_Page.css";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {

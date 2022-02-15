@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Title from "./Title";
 
-import "../../loading.css";
+import "../../components/loading.css";
 import "./_Page.css";
 
 const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {

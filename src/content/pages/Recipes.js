@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HomeSlider from "./RecipesSlider";
 import ctgType from "../../components/ctgType";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./_Page.css";
 
 const Recipes = ({ loading, categories, APPDATA }) => {

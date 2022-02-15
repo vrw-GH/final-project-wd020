@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./_Page.css";
 
 const MyRecipes = ({ APPDATA }) => {
