@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 // Local components
 import NavbarTop from "./components/NavbarTop";
-import "./components/loading.css";
+import Loading from "./components/Loading";
 // Local content
 import About from "./content/pages/About";
 import Footer from "./content/pages/Footer";
@@ -23,6 +23,7 @@ import {
   suffix as appSuffix,
   version as appVer,
   info as appInfo,
+  homepage as appHomepage,
 } from "../package.json";
 const APPDATA = {
   TITLE: appName || "New App Name",
@@ -35,7 +36,7 @@ const APPDATA = {
     "Project Not Set",
   VER: appVer || "0.1.0",
   INFO: appInfo || "App info not Set",
-  HOME: "/",
+  // HOME: "/",
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER || "/img-footer.jpg",
@@ -46,13 +47,17 @@ const APPDATA = {
     (process.env.HOST || "https://127.0.0.1") +
       ":" +
       (process.env.PORT || "3000"),
-  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "Victor",
+  DEVLEAD: process.env.REACT_APP_DEV_LEAD || "Victor Wright",
   DEVTEAM: process.env.REACT_APP_DEV_TEAM || "",
-  EMAIL: process.env.REACT_APP_DEV_EMAIL || "",
-  PHONE: process.env.REACT_APP_DEV_PHONE || "",
-  LOCATION: process.env.REACT_APP_DEV_ADDR || "",
-  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "-dev",
+  EMAIL: process.env.REACT_APP_DEV_EMAIL || "victor.wright@outlook.de",
+  PHONE: process.env.REACT_APP_DEV_PHONE || "+49 176 4677 4278",
+  LOCATION: process.env.REACT_APP_DEV_ADDR || "83707, Germany",
+  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "Dev",
   DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
+  WEBSITE: appHomepage || process.env.HOST || "http://127.0.0.1",
+  HOST: process.env.HOST || appHomepage || "http://127.0.0.1",
+  PORT: process.env.PORT || 5000,
+  ROOT: "/",
 };
 document.title = "Welcome to " + APPDATA.NAME;
 //-------------------------------------------------
@@ -60,7 +65,6 @@ document.title = "Welcome to " + APPDATA.NAME;
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [searchQry, setSearchQry] = useState("");
-  const [categories, setCategories] = useState(["Lunch"]);
   const [loading, setLoading] = useState("");
 
   useEffect(() => {}, [loading]); //  to re-render when any loading event occurs
@@ -68,23 +72,10 @@ function App() {
   useEffect(() => {
     setLoading("Loading ...");
     setCurrentUser(JSON.parse(sessionStorage.getItem("currentUser")));
-    let isLoaded = true;
-    if (isLoaded) {
-      const getCategories = async () => {
-        try {
-          sessionStorage.setItem("APPDATA", APPDATA);
-          const results = await axios.get(`${APPDATA.BACKEND}/api/categories/`);
-          setCategories(results.data.tuples);
-          setLoading("");
-          window.scrollTo(0, 0);
-        } catch (error) {
-          setLoading(error.message);
-        }
-      };
-      getCategories();
-    }
+    sessionStorage.setItem("APPDATA", JSON.stringify(APPDATA));
+    window.scrollTo(0, 0);
+    setLoading("");
     return () => {
-      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component
       sessionStorage.clear();
       localStorage.clear();
     };
@@ -108,16 +99,10 @@ function App() {
         APPDATA={APPDATA}
         handleSearchClick={handleSearchClick}
         handleClearQry={handleClearQry}
-        categories={categories}
         currentUser={currentUser}
       />
       {loading ? (
-        <>
-          <div className="loading_container">
-            <div className="loading"></div>
-            <h4>{loading}</h4>
-          </div>
-        </>
+        <Loading text={loading} />
       ) : (
         <>
           {searchQry ? (
@@ -135,20 +120,20 @@ function App() {
                 element={<About APPDATA={APPDATA} />}
               />
               <Route
+                path="/sharing"
+                exact
+                element={<Sharing APPDATA={APPDATA} />}
+              />
+              <Route
                 path="/recipes"
                 exact
                 element={
                   <Recipes
-                    loading={loading}
-                    categories={categories}
+                    // loading={loading}
+                    // categories={categories}
                     APPDATA={APPDATA}
                   />
                 }
-              />
-              <Route
-                path="/sharing"
-                exact
-                element={<Sharing APPDATA={APPDATA} />}
               />
               <Route
                 exact
@@ -179,7 +164,7 @@ function App() {
                     element={
                       <CreateTitle
                         currentUser={currentUser}
-                        categories={categories}
+                        // categories={categories}
                         APPDATA={APPDATA}
                       />
                     }
@@ -199,14 +184,16 @@ function App() {
               <Route
                 exact
                 path="/categories/:category"
-                element={<Category categories={categories} APPDATA={APPDATA} />}
+                // element={<Category categories={categories} APPDATA={APPDATA} />}
+                element={<Category APPDATA={APPDATA} />}
               />
               <Route
                 exact
                 path="/recipes/:id" //    TODO: change recipes route to "entry"
-                element={
-                  <SingleTitle categories={categories} APPDATA={APPDATA} />
-                }
+                // element={
+                //   <SingleTitle categories={categories} APPDATA={APPDATA} />
+                // }
+                element={<SingleTitle APPDATA={APPDATA} />}
               />
             </Routes>
           )}

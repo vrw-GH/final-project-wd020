@@ -13,7 +13,7 @@ const NavbarTop = ({
   APPDATA,
   handleSearchClick,
   handleClearQry,
-  categories,
+  // categories,
   currentUser,
 }) => {
   return (

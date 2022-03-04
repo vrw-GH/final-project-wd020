@@ -44,9 +44,9 @@ const MyRecipes = ({ APPDATA }) => {
             const results = await axios.get(
               `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
             );
-            if (!results.data.tuple) throw new Error("No User Data.");
-            let res2 = results.data.tuple[0].likes
-              ? results.data.tuple[0].likes
+            if (!results.data.tuples) throw new Error("No User Data.");
+            let res2 = results.data.tuples[0].likes
+              ? results.data.tuples[0].likes
               : [];
             setThisUserLikes(res2);
           } catch (error) {

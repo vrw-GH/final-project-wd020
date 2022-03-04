@@ -3,21 +3,15 @@
   "suffix": "final-project-wbs#020",
   "version": "0.2.0",
   "info": "Sharing is Caring",
+  "description": "The Final Project for the Full Stack Web & App Development Bootcamp course. Data provided by ElephantSQL. Backend API at sharemyfood-backend.herokuapp.com.",
   "private": false,
   "type": "module",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.10.0",
-    "@ionic/angular": "^6.0.0",
-    "@ionic/angular-server": "^6.0.2",
-    "@popperjs/core": "^2.11.0",
-    "add": "^2.0.6",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.1.3",
-    "global": "^4.4.0",
-    "jquery": "^3.6.0",
-    "pigeon-maps": "^0.19.7",
-    "prop-types": "^15.8.1",
+    "js-cookie": "^3.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
@@ -29,12 +23,21 @@
     "react-simple-maps": "^2.3.0",
     "react-slick": "^0.28.1",
     "react-tabs": "^3.2.3",
-    "serve": "^13.0.2",
-    "slick-carousel": "^1.8.1",
-    "typescript": "^4.5.4",
-    "web-vitals": "^1.1.2"
+    "react-use": "^17.3.2",
+    "slick-carousel": "^1.8.1"
   },
   "//dependencies": {
+    "global": "^4.4.0",
+    "jquery": "^3.6.0",
+    "serve": "^13.0.2",
+    "add": "^2.0.6",
+    "@popperjs/core": "^2.11.0",
+    "@ionic/angular": "^6.0.0",
+    "@ionic/angular-server": "^6.0.2",
+    "prop-types": "^15.8.1",
+    "pigeon-maps": "^0.19.7",
+    "typescript": "^4.5.4",
+    "web-vitals": "^1.1.2",
     "randomcolor": "^0.6.2",
     "fireworks": "^2.2.7"
   },
@@ -68,5 +71,6 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "//homepage": "https://final-project-wd020.vercel.app"
+  "//homepage": "https://final-project-wd020.vercel.app",
+  "homepage": "https://final-project-wd020.vercel.app"
 }

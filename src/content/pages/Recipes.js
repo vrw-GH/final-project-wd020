@@ -1,50 +1,41 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import HomeSlider from "./RecipesSlider";
 import ctgType from "../../components/ctgType";
-import "../../components/loading.css";
+import {
+  getCategories,
+  getIngredients,
+  getRecipes,
+} from "../../components/dataHandling";
+import Loading from "../../components/Loading";
 import "./_Page.css";
 
-const Recipes = ({ loading, categories, APPDATA }) => {
+const Recipes = ({ APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  const [andOr, setAndOr] = useState(false); // false=OR
+  const [err, setErr] = useState("loading...");
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
-  const [err, setErr] = useState(null);
   const [ingredients, setIngredients] = useState([]);
-  const [andOr, setAndOr] = useState(false); // false=OR
+  const [categories, setCategories] = useState(["Lunch", "Breakfast"]);
   const navigate = useNavigate();
 
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      const getIngr = async () => {
+      (async () => {
         try {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/ingredients/`
-          );
-          if (!results.data.tuples[0]) throw new Error("No Ingredients Data.");
-          const finalData = await results.data.tuples.map((obj) => ({
-            checked: false,
-            ...obj,
-          }));
-          const sortedData = finalData.sort((a, b) => {
-            let nameA = a.ingredient_name.toUpperCase();
-            let nameB = b.ingredient_name.toUpperCase();
-            if (nameA < nameB) return -1;
-            if (nameA > nameB) return 1;
-            return 0;
-          });
-          setIngredients(sortedData);
+          setCategories(await getCategories());
+          setIngredients(await getIngredients());
+          setErr("");
           window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
-      };
-      getIngr();
+      })();
     }
     return () => {
-      isLoaded = false; //    avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; // avoids a mem leak on unloaded component
     };
     // eslint-disable-next-line
   }, []);
@@ -52,17 +43,14 @@ const Recipes = ({ loading, categories, APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      const getrecipes = async () => {
+      (async () => {
         try {
-          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-          if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
-          const filterdData = await results.data.tuples.filter(filterItems);
-          setRecipes(filterdData);
+          setRecipes(await getRecipes(filterItems));
+          setErr("");
         } catch (error) {
           setErr(error.message);
         }
-      };
-      getrecipes();
+      })();
     }
     return () => {
       isLoaded = false;
@@ -72,7 +60,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
 
   const filterItems = (items) => {
     if (category && items.category !== category) return false;
-
     // else continue search with ingredient base
     let string = items.title + " " + items.ingredients;
     string = string.toLowerCase();
@@ -119,14 +106,6 @@ const Recipes = ({ loading, categories, APPDATA }) => {
     setAndOr(!andOr);
   };
 
-  if (err)
-    return (
-      <div className="loading_container">
-        <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
-      </div>
-    );
-
   let key = 0;
   return (
     <>
@@ -153,100 +132,109 @@ const Recipes = ({ loading, categories, APPDATA }) => {
             width: "90%",
           }}
         >
-          {/* <strong style={{ color: "black" }}>Filter</strong> */}
-          <ul className="itemsCont">
-            <li>
-              <strong>
-                <label htmlFor="categories">Select by Category : &nbsp;</label>
-              </strong>
-              <select
-                value={category}
-                onChange={selectCtg}
-                name="ctgList"
-                id="categories"
-              >
-                <option value="">All</option>
-                {categories.map((ctg) => (
-                  <option key={key++} value={ctg.category_id}>
-                    {ctg.name}
-                  </option>
-                ))}
-              </select>
-              &nbsp;&nbsp; Today we have {recipes.length} {ctgType(category)}
-              &nbsp;recipes for you 😊
-            </li>
+          {err ? (
+            <Loading text={err} />
+          ) : (
+            <>
+              <ul className="itemsCont">
+                <li>
+                  <strong>
+                    <label htmlFor="categories">
+                      Select by Category : &nbsp;
+                    </label>
+                  </strong>
+                  <select
+                    value={category}
+                    onChange={selectCtg}
+                    name="ctgList"
+                    id="categories"
+                  >
+                    <option value="">All</option>
+                    {categories.map((ctg) => (
+                      <option key={key++} value={ctg.category_id}>
+                        {ctg.name}
+                      </option>
+                    ))}
+                  </select>
+                  &nbsp;&nbsp; Today we have {recipes.length}{" "}
+                  {ctgType(category)}
+                  &nbsp;recipes for you 😊
+                </li>
 
-            <li className="itemsList">
-              <strong>Filter only recipes containing: </strong>
-              <i>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button
-                  className="btn"
-                  style={{
-                    color: "black",
-                    width: "auto",
-                    backgroundColor: "white",
-                    cursor: "pointer",
-                    borderRadius: "40px",
-                  }}
-                  value={andOr}
-                  onClick={handleAndOr}
-                >
-                  &nbsp;And{" "}
-                  <span style={{ color: "red" }}>{andOr ? "◄" : "►"}</span>{" "}
-                  Or&nbsp;
-                </button>
-                &nbsp;&nbsp;
-                <button
-                  className="btn"
-                  style={{
-                    color: "black",
-                    width: "auto",
-                    backgroundColor: "white",
-                    cursor: "pointer",
-                    borderRadius: "40px",
-                  }}
-                  onClick={resetIngredients}
-                >
-                  &nbsp;Clear all&nbsp;
-                </button>
-                {ingredients
-                  .filter((i) => i.checked)
-                  .map((ingr) => (
-                    <span
-                      key={ingr.ingredient_name}
+                <li className="itemsList">
+                  <strong>Filter only recipes containing: </strong>
+                  <i>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                      className="btn"
                       style={{
-                        color: "red",
-                        backgroundColor: "lightgrey",
-                        colorAdjust: "economy",
-                        fontSize: "0.8rem",
+                        color: "black",
+                        width: "auto",
+                        backgroundColor: "white",
+                        cursor: "pointer",
+                        borderRadius: "40px",
                       }}
+                      value={andOr}
+                      onClick={handleAndOr}
                     >
-                      &nbsp;
-                      {ingr.ingredient_name
-                        .replace(/ .*/, "")
-                        .replace(/s+$/, "")}
-                      {andOr ? " +" : ","}
-                    </span>
-                  ))}
-              </i>
-              <br />
-              <div style={{ height: "100px", overflowY: "scroll" }}>
-                {ingredients.map((ingr) => (
-                  <label key={key++}>
-                    <input
-                      type="checkbox"
-                      value={ingr.ingredient_id}
-                      checked={ingr.checked}
-                      onChange={selectIng}
-                    />
+                      &nbsp;And{" "}
+                      <span style={{ color: "red" }}>{andOr ? "◄" : "►"}</span>{" "}
+                      Or&nbsp;
+                    </button>
+                    &nbsp;&nbsp;
+                    <button
+                      className="btn"
+                      style={{
+                        color: "black",
+                        width: "auto",
+                        backgroundColor: "white",
+                        cursor: "pointer",
+                        borderRadius: "40px",
+                      }}
+                      onClick={resetIngredients}
+                    >
+                      &nbsp;Clear all&nbsp;
+                    </button>
                     &nbsp;
-                    {ingr.ingredient_name} &nbsp;&nbsp;
-                  </label>
-                ))}
-              </div>
-            </li>
-          </ul>
+                    {ingredients
+                      .filter((i) => i.checked)
+                      .map((ingr) => (
+                        <span
+                          key={ingr.ingredient_name}
+                          style={{
+                            color: "red",
+                            backgroundColor: "lightgrey",
+                            colorAdjust: "economy",
+                            fontSize: "0.8rem",
+                          }}
+                        >
+                          &nbsp;
+                          {ingr.ingredient_name
+                            .replace(/ .*/, "")
+                            .replace(/s+$/, "")}
+                          {andOr ? " +" : ","}
+                        </span>
+                      ))}
+                  </i>
+                  <br />
+                  <div style={{ height: "100px", overflowY: "scroll" }}>
+                    {ingredients.map((ingr) => (
+                      <label key={key++}>
+                        <input
+                          type="checkbox"
+                          value={ingr.ingredient_id}
+                          checked={ingr.checked}
+                          onChange={selectIng}
+                        />
+                        &nbsp;
+                        {ingr.ingredient_name} &nbsp;&nbsp;
+                      </label>
+                    ))}
+                  </div>
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
       <HomeSlider sliderData={recipes} />

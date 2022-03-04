@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../pages/_Page.css";
-import "../../components/loading.css";
+import { useParams, useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
+import {
+  get1Recipe,
+  getUserLikes,
+  postUserLike,
+} from "../../components/dataHandling";
+import "./_Page.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
   const { id } = useParams();
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [recipe, setRecipe] = useState([]);
-  const [err, setErr] = useState(null);
+  const [err, setErr] = useState("Loading recipe...");
   const [isLiked, setIsLiked] = useState(false);
   const [thisUserLikes, setThisUserLikes] = useState([]);
   const navigate = useNavigate();
@@ -18,22 +21,18 @@ const SingleTitle = ({ APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      const getRecipe = async () => {
+      (async () => {
         try {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/recipes/${id}`
-          );
-          if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
-          setRecipe(results.data.tuple[0]);
+          setRecipe(await get1Recipe(id));
+          setErr("");
           window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
-      };
-      getRecipe();
+      })();
     }
     return () => {
-      isLoaded = false; //  avoids a mem leak (of the promise) on unloaded component??
+      isLoaded = false; //  avoids a mem leak on unloaded component??
     };
     // eslint-disable-next-line
   }, []);
@@ -42,22 +41,16 @@ const SingleTitle = ({ APPDATA }) => {
     let isLoaded = true;
     if (currentUser) {
       if (isLoaded) {
-        const getUser = async () => {
+        (async () => {
           try {
-            const results = await axios.get(
-              `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
-            );
-            if (!results.data.tuple[0]) throw new Error("No User Data.");
-            let res2 = results.data.tuple[0].likes
-              ? results.data.tuple[0].likes
-              : [];
-            setThisUserLikes(res2);
-            if (res2.length !== 0) setIsLiked(res2.includes(recipe.slug));
+            const likes = await getUserLikes(currentUser.userName);
+            setThisUserLikes(likes);
+            if (likes.length !== 0) setIsLiked(likes.includes(recipe.slug));
+            setErr("");
           } catch (error) {
             setErr(error.message);
           }
-        };
-        getUser();
+        })();
       }
     }
     return () => {
@@ -66,18 +59,9 @@ const SingleTitle = ({ APPDATA }) => {
     // eslint-disable-next-line
   }, [recipe]);
 
-  if (err)
-    return (
-      <div className="loading_container">
-        <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
-      </div>
-    );
-
   const handleLikeEdit = (e) => {
     if (!currentUser) {
-      alert("You must be logged in");
-      navigate("/login");
+      if (window.confirm("Log In now?")) navigate("/login");
       return;
     }
 
@@ -93,14 +77,9 @@ const SingleTitle = ({ APPDATA }) => {
       }
       const postUser = async () => {
         try {
-          await axios.post(
-            `${APPDATA.BACKEND}/api/users/${currentUser.userName}`,
-            {
-              likes: thisUserLikes,
-            }
-          );
+          await postUserLike(currentUser.userName, thisUserLikes);
         } catch (error) {
-          setErr("Post User Data " + error);
+          setErr(error.message);
         }
       };
       postUser();
@@ -122,59 +101,65 @@ const SingleTitle = ({ APPDATA }) => {
           <h2>-•≡ {recipe.title} ≡•-</h2>
         </div>
         <div className="page-box col-11">
-          <div className="single_title_info col">
-            Submitted by: {recipe.username} (
-            {new Date(recipe.create_time).toLocaleString()}) &nbsp;
-            <button
-              style={{
-                background: "rgba(100, 200, 200, 1)",
-                border: "1px single",
-                borderRadius: "6px",
-                padding: "4px",
-              }}
-              onClick={(e) => handleLikeEdit(e)}
-            >
-              {currentUser?.userName === recipe.username
-                ? "✍ Edit my Recipe "
-                : isLiked
-                ? "✅ favourite Recipe!"
-                : "👍Add to favourites"}
-            </button>
-          </div>
-
-          <div className="row">
-            <div className="row">
-              <object
-                data={recipe.title_img || recipe.image}
-                type="image/jpg,jpeg,png"
-                className="col"
-              >
-                <img
-                  src={recipe.title_img || recipe.image}
-                  alt={recipe.slug}
-                  className="single_title_img"
-                />
-              </object>
-
-              <div className="single_title_ingredients col">
-                <h5>
-                  <u>INGREDIENTS</u>
-                </h5>
-                <div
-                  dangerouslySetInnerHTML={{ __html: recipe.ingredients }}
-                ></div>
+          {err ? (
+            <Loading text={err} />
+          ) : (
+            <>
+              <div className="single_title_info col">
+                Submitted by: {recipe.username} (
+                {new Date(recipe.create_time).toLocaleString()}) &nbsp;
+                <button
+                  style={{
+                    background: "rgba(100, 200, 200, 1)",
+                    border: "1px single",
+                    borderRadius: "6px",
+                    padding: "4px",
+                  }}
+                  onClick={(e) => handleLikeEdit(e)}
+                >
+                  {currentUser?.userName === recipe.username
+                    ? "✍ Edit my Recipe "
+                    : isLiked
+                    ? "✅ favourite Recipe!"
+                    : "👍Add to favourites"}
+                </button>
               </div>
-            </div>
 
-            <div className="single_title_method row">
-              <h5>
-                <u>METHOD</u>
-              </h5>
-              <div>
-                <p dangerouslySetInnerHTML={{ __html: recipe.recipe }}></p>
+              <div className="row">
+                <div className="row">
+                  <object
+                    data={recipe.title_img || recipe.image}
+                    type="image/jpg,jpeg,png"
+                    className="col"
+                  >
+                    <img
+                      src={recipe.title_img || recipe.image}
+                      alt={recipe.slug}
+                      className="single_title_img"
+                    />
+                  </object>
+
+                  <div className="single_title_ingredients col">
+                    <h5>
+                      <u>INGREDIENTS</u>
+                    </h5>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: recipe.ingredients }}
+                    ></div>
+                  </div>
+                </div>
+
+                <div className="single_title_method row">
+                  <h5>
+                    <u>METHOD</u>
+                  </h5>
+                  <div>
+                    <p dangerouslySetInnerHTML={{ __html: recipe.recipe }}></p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </>

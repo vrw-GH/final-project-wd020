@@ -24,7 +24,7 @@ function CtgList({ ctg, BACKEND }) {
       const getCat = async () => {
         try {
           const results = await axios.get(`${BACKEND}/api/categories/${ctg}`);
-          if (!results.data.tuple[0]) throw new Error("No Categories Data.");
+          if (!results.data.tuples[0]) throw new Error("No Categories Data.");
           window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);

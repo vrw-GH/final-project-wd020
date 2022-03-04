@@ -31,13 +31,13 @@ const MyShares = ({ APPDATA }) => {
             const results1 = await axios.get(
               `${APPDATA.BACKEND}/api/users/${currentUser.userName}`
             );
-            if (!results1.data.tuple) throw new Error("No User Data.");
-            userPLZ.current = results1.data.tuple[0].plz;
-            userLoc.current = results1.data.tuple[0].location;
+            if (!results1.data.tuples) throw new Error("No User Data.");
+            userPLZ.current = results1.data.tuples[0].plz;
+            userLoc.current = results1.data.tuples[0].location;
             const results = await axios.get(
               `${APPDATA.BACKEND}/api/shareitems/${currentUser.userName}`
             );
-            // if (!results.data.tuple) throw new Error("No Sharing Data.");
+            // if (!results.data.tuples) throw new Error("No Sharing Data.");
             if (results.data.tuples) {
               // let sorted = JSON.parse(JSON.stringify(results.data.tuples));
               let sorted = results.data.tuples;
