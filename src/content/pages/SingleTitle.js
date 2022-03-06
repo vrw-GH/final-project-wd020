@@ -75,14 +75,13 @@ const SingleTitle = ({ APPDATA }) => {
           }
         }
       }
-      const postUser = async () => {
+      (async () => {
         try {
           await postUserLike(currentUser.userName, thisUserLikes);
         } catch (error) {
           setErr(error.message);
         }
-      };
-      postUser();
+      })();
       return setIsLiked(!isLiked);
     }
     if (currentUser.userName === recipe.username) return alert("Edit");

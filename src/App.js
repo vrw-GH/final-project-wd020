@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-// import axios from "axios";
+import Marquee from "react-easy-marquee";
 // Local components
 import NavbarTop from "./components/NavbarTop";
 import Loading from "./components/Loading";
 // Local content
-import About from "./content/pages/About";
+import Header from "./content/pages/Header";
 import Footer from "./content/pages/Footer";
+import About from "./content/pages/About";
 import Recipes from "./content/pages/Recipes";
 import Sharing from "./content/pages/Sharing";
 import Login from "./content/pages/Login";
@@ -25,6 +26,7 @@ import {
   info as appInfo,
   homepage as appHomepage,
 } from "../package.json";
+
 const APPDATA = {
   TITLE: appName || "New App Name",
   NAME:
@@ -95,6 +97,20 @@ function App() {
 
   return (
     <>
+      {APPDATA.FLIGHT.substring(0, 4).toUpperCase() !== "PROD" ? (
+        <Marquee
+          duration="20000"
+          height="1rem"
+          background="red"
+          pauseOnHover={true}
+        >
+          <div style={{ fontSize: 10 }} title="Change FLIGHT in process.env">
+            App is in {APPDATA.FLIGHT} Mode (this will not show in poduction
+            mode)
+          </div>
+        </Marquee>
+      ) : null}
+      <Header APPDATA={APPDATA} />
       <NavbarTop
         APPDATA={APPDATA}
         handleSearchClick={handleSearchClick}
@@ -189,11 +205,22 @@ function App() {
               />
               <Route
                 exact
-                path="/recipes/:id" //    TODO: change recipes route to "entry"
-                // element={
-                //   <SingleTitle categories={categories} APPDATA={APPDATA} />
-                // }
+                path="/recipes/:id"
                 element={<SingleTitle APPDATA={APPDATA} />}
+              />
+              <Route
+                path="/*"
+                element={
+                  <div
+                    style={{
+                      margin: "8rem",
+                      color: "red",
+                      textAlign: "center",
+                    }}
+                  >
+                    🤫 Page Not Found!
+                  </div>
+                }
               />
             </Routes>
           )}

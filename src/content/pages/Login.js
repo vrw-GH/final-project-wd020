@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { genHash, checkPwd } from "../../components/security.js";
 import { userCreate, userLogin } from "../../components/dataHandling.js";
+import Loading from "../../components/Loading";
 import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
@@ -75,11 +76,6 @@ const Login = ({ setCurrentUser, APPDATA }) => {
     }
   };
 
-  const goBack = () => {
-    setLoginMsg("");
-    navigate("/login");
-  };
-
   return (
     <div
       className="page-container"
@@ -93,17 +89,15 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
           <>
-            <div className="page-error">{loginMsg}</div>
-            <br />
-            <br />
-            <button
+            <Loading text={loginMsg} back={-1} />
+            {/* <button
               onClick={goBack}
               className="btn btn-light"
               autoFocus
               onKeyDown={(keyCode) => (keyCode === 13 ? () => goBack : false)}
             >
               Ok
-            </button>
+            </button> */}
           </>
         ) : (
           <>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ModalProvider,
@@ -5,17 +6,22 @@ import {
   useModal,
   ModalTransition,
 } from "react-simple-hook-modal";
-import "react-simple-hook-modal/dist/styles.css";
-import "./_Page.css";
-// import newLogo from "../../components/newLogo.png";
-// import newLogo2 from "./newLogo2.png"
-// import newLogo1 from "./newLogo1.png"
+import Loading from "../../components/Loading";
 import easteregg from "../../media/easteregg.png";
 import Confetti from "../../components/confetti";
+import "react-simple-hook-modal/dist/styles.css";
+import "./_Page.css";
 
 const About = ({ APPDATA }) => {
   const { isModalOpen, openModal, closeModal } = useModal();
+  const [err, setErr] = useState("Site is Loading...");
+
   window.scrollTo(0, 0);
+
+  useEffect(() => {
+    setErr("");
+    return () => {};
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -27,6 +33,7 @@ const About = ({ APPDATA }) => {
       className="page-container"
       style={{
         backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+        marginBottom: "0",
       }}
     >
       <div className="page-title">
@@ -36,20 +43,30 @@ const About = ({ APPDATA }) => {
           </span>
         </h2>
       </div>
-
-      <div className="cont1">
-        <Link to={"/sharing"}>
-          <div className="aboutimg1">
-            <h1 className=" aboutt">Sharing</h1>
-            <div className="color-overlay1"></div>
+      <div
+        className="page-box col-8"
+        style={{
+          width: "90%",
+        }}
+      >
+        {err ? (
+          <Loading text={err} />
+        ) : (
+          <div className="cont1">
+            <Link to={"/sharing"}>
+              <div className="aboutimg1">
+                <h1 className=" aboutt">Sharing</h1>
+                <div className="color-overlay1"></div>
+              </div>
+            </Link>
+            <Link to={"/recipes"}>
+              <div className="aboutimg2">
+                <h1 className=" aboutt2">Recipes</h1>
+                <div className="color-overlay2"></div>
+              </div>
+            </Link>
           </div>
-        </Link>
-        <Link to={"/recipes"}>
-          <div className="aboutimg2">
-            <h1 className=" aboutt2">Recipes</h1>
-            <div className="color-overlay2"></div>
-          </div>
-        </Link>
+        )}
       </div>
       <div className="lorem">
         <br />

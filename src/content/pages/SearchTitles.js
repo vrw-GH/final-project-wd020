@@ -8,9 +8,11 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   const [titles, setTitles] = useState([]);
   const [total, setTotal] = useState(0);
   const [err, setErr] = useState("Searching...");
+  searchQry = searchQry.replace(/[sS]$/, "");
 
   useEffect(() => {
     let isLoaded = true;
+
     if (isLoaded) {
       (async () => {
         try {

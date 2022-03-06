@@ -13,7 +13,7 @@ import "./_Page.css";
 const Recipes = ({ APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [andOr, setAndOr] = useState(false); // false=OR
-  const [err, setErr] = useState("loading...");
+  const [err, setErr] = useState("Loading...");
   const [category, setCategory] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);

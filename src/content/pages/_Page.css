@@ -26,6 +26,7 @@ body {
   transition: 0.8 ease-in-out;
   border-radius: 50%;
 }
+
 .page-container {
   display: flex;
   flex-direction: column;

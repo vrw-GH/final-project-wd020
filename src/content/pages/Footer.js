@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import {
   FaFacebook,
   FaGithub,
@@ -9,7 +8,6 @@ import {
 import { GoMail } from "react-icons/go";
 import "./Footer.css";
 import footer from "../../media/footer.png";
-// import footer1 from "../pages/footer1.jpg";
 
 const Footer = ({ APPDATA }) => {
   // const [showImp, setShowImp] = useState(false);

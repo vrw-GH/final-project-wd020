@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { genHash, checkPwd, isGoodPWD } from "../../components/security";
 import MapChart from "../../components/MapChart";
@@ -15,6 +14,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
   const [thisUser, setThisUser] = useState({});
   const [userCoord, setUserCoord] = useState([]);
   const [cityName, setCityName] = useState("");
+  const [isChanged, setIsChanged] = useState(false);
   const maxAllowedSize = 1024 * 50; // kb
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!window.confirm("Update now?")) return;
     if (!thisUser.profilepic) delete thisUser.profilepic;
     delete thisUser.username;
     delete thisUser.create_time;
@@ -50,13 +51,11 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
       for (const key in info) {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
-      const result = await axios.post(
-        `${APPDATA.BACKEND}/api/users/${currentUser.userName.toLowerCase()}`,
-        info
-      );
+      const result = await updateUser(currentUser.userName, info);
       const user = {
-        userName: result.data.tuples[0].username,
-        profilePic: result.data.tuples[0].profilepic,
+        userName: result.username,
+        profilePic: result.profilepic,
+        token: currentUser.token,
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
@@ -69,6 +68,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
 
   const HandleGetLatLon = async () => {
     if (!thisUser.plz) return;
+    setIsChanged(true);
     try {
       const result = await getCity(thisUser.plz);
       setUserCoord([result.longitude, result.latitude]);
@@ -82,9 +82,11 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
     const info = { ...thisUser };
     info[e.target.id] = e.target.value.trim();
     setThisUser(info);
+    setIsChanged(true);
   };
 
   const handleLocInput = (e) => {
+    setIsChanged(true);
     let xy = [];
     if (e.target.id === "long") xy = [Number(e.target.value), userCoord[1]];
     if (e.target.id === "lat") xy = [userCoord[0], Number(e.target.value)];
@@ -106,6 +108,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
       e.target.value = "";
       return;
     }
+    setIsChanged(true);
     const info = { ...thisUser };
     var reader = new FileReader();
     reader.onloadend = (event) => {
@@ -120,6 +123,8 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
     const { pwd1, pwd2, pwdOld } = form.target;
     try {
       if (pwd1.value !== pwd2.value) throw Error("New passwords do not match.");
+      if (pwd1.value === pwdOld.value)
+        throw Error("New password cannot be similar to old.");
       isGoodPWD(pwd1.value); // will throw error on bad password.
       checkPwd(pwdOld.value, thisUser.password);
       if (!window.confirm("Do you want to change your password?")) return;
@@ -316,7 +321,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                     <MapChart coordinates={userCoord} plz={thisUser.plz} />
                   </div>
                 </div>
-                <button type="submit" className="btns ">
+                <button type="submit" className="btns " disabled={!isChanged}>
                   Submit Changes
                 </button>
                 <button

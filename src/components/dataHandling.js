@@ -9,7 +9,10 @@ const errorHandler = (error, message) => {
   }
   throw new Error(
     `${message}.\n ${
-      error?.response?.statusText || error?.response?.data?.error
+      error?.response?.data?.info?.message ||
+      error?.response?.statusText ||
+      error?.response?.data?.error ||
+      error
     }`
   );
 };
@@ -58,10 +61,12 @@ export const getIngredients = async () => {
 export const getRecipes = async (filterItems) => {
   const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
   try {
-    const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
+    let results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
     if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
-    const filterdData = await results.data.tuples.filter(filterItems);
-    return filterdData;
+    if (filterItems) {
+      results = await results.data.tuples.filter(filterItems);
+    }
+    return results;
   } catch (error) {
     alert("Data Error: Recipes \n" + error.message);
     return [];
@@ -73,6 +78,18 @@ export const get1Recipe = async (id) => {
   try {
     const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/${id}`);
     if (!results.data.tuples[0]) throw new Error("No Recipe Data.");
+    return results.data.tuples[0];
+  } catch (error) {
+    errorHandler(error, "Data Error: Cannot load this Recipe");
+  }
+};
+
+// await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
+export const postRecipe = async (info) => {
+  const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
+  try {
+    const results = await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
+    if (!results.data.tuples[0]) throw new Error("Error posting recipe.");
     return results.data.tuples[0];
   } catch (error) {
     errorHandler(error, "Data Error: Cannot load this Recipe");
@@ -102,9 +119,10 @@ export const getUserLikes = async (user) => {
 export const postUserLike = async (id, likes) => {
   const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-  const headers = { headers: { authorization: currentUser.token } };
+  const options = { headers: { authorization: currentUser.token } };
+  const body = { likes };
   try {
-    await axios.post(`${APPDATA.BACKEND}/api/users/${id}`, { headers, likes });
+    await axios.post(`${APPDATA.BACKEND}/api/users/${id}`, body, options);
     return;
   } catch (error) {
     errorHandler(error, "Data Error: Cannot post likes");
@@ -151,6 +169,33 @@ export const getSharedata = async () => {
   }
 };
 
+export const getShareitems = async (user) => {
+  const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
+  try {
+    const results = await axios.get(
+      `${APPDATA.BACKEND}/api/shareitems/${user}`
+    );
+    if (!results.data.tuples) return null;
+    return results.data.tuples;
+  } catch (error) {
+    errorHandler(error, "Data Error: Cannot load sharing data");
+  }
+};
+
+export const setShareitems = async (postAPI, submitInfo) => {
+  const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
+
+  try {
+    await axios.post(
+      `${APPDATA.BACKEND}/api/shareitems${postAPI}`, // postAPI has "/" or ""
+      submitInfo
+    );
+    return;
+  } catch (error) {
+    errorHandler(error, "Data Error: Likes update un-successfull.");
+  }
+};
+
 export const getUser = async (userName) => {
   const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -189,9 +234,8 @@ export const updateUser = async (userName, info) => {
       info,
       headers
     );
-    console.log(results);
     if (!results.data.info.result) throw new Error(results.data.info.message);
-    return results.data.info.result;
+    return results.data.tuples[0];
   } catch (error) {
     errorHandler(error, "Data Error: Did not update");
   }
