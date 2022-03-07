@@ -95,9 +95,9 @@ const CreateTitle = ({ currentUser, APPDATA }) => {
     e.preventDefault();
     if (!e.target.form.elements["ingredient"].value) return;
     let qty = "";
-    qty = e.target.form.elements["ingredient"].value.match(/([0-9,.]+)/g);
+    let unit = "";
+    // qty = e.target.form.elements["ingredient"].value.match(/([0-9,.]+)/g);
     // ||      e.target.form.elements["quantity"].value.match(/([0-9,.]+)/g);
-    // let unit = "";
     // unit = e.target.form.elements["quantity"].value
     //   .replace(qty, "")
     //   .trim();
@@ -105,7 +105,7 @@ const CreateTitle = ({ currentUser, APPDATA }) => {
     info["ingredients"] = [
       ...info["ingredients"],
       // [e.target.form.elements["ingredient"].value, qty + " " + unit],
-      [e.target.form.elements["ingredient"].value],
+      [e.target.form.elements["ingredient"].value, qty + " " + unit],
     ];
     setNewInfo(info);
     // e.target.form.elements["quantity"].value = "";
