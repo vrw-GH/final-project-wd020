@@ -14,7 +14,6 @@ WBS Coding School: WD#020 (Jan,2022)
 <br />
 Deployments :
 <br />
-
 <h3><u>V2</u></h3>
 Pre-release: <a href="https://sharemyfood-alpha.vercel.app">-sharemyfood-alpha.vercel.app</a>
 <br />
