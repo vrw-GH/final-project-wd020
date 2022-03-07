@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Navigate } from "react-router";
-import "../../loading.css";
+import {
+  getCategories,
+  getIngredients,
+  postRecipe,
+} from "../../components/dataHandling";
+import Loading from "../../components/Loading";
 import "./CreateTitle.css";
 
-const CreateTitle = ({ currentUser, categories, APPDATA }) => {
+const CreateTitle = ({ currentUser, APPDATA }) => {
   const [published, setPublished] = useState(false);
-  const [err, setErr] = useState(null);
+  const [err, setErr] = useState("Get ready...");
   const [ingredients, setIngredients] = useState([]);
+  const [categories, setCategories] = useState([]);
   // eslint-disable-next-line
-  const [ingredient, setIngredient] = useState([]);
+  const [ingredient, setIngredient] = useState([]); // ie: [0]name (unit), [1]999
   const [newInfo, setNewInfo] = useState({
     title: "",
     // category: categories[0].category_id,
@@ -25,36 +30,21 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   useEffect(() => {
     let isLoaded = true;
     if (isLoaded) {
-      const getIngr = async () => {
+      (async () => {
         try {
-          const results = await axios.get(
-            `${APPDATA.BACKEND}/api/ingredients/`
-          );
-          if (!results.data.tuples) {
-            throw new Error("No Ingredients Data.");
-          }
-
-          const finalData = await results.data.tuples.map((obj) => ({
-            checked: false,
-            ...obj,
-          }));
-          const sortedData = finalData.sort((a, b) => {
-            let nameA = a.ingredient_name.toUpperCase();
-            let nameB = b.ingredient_name.toUpperCase();
-            if (nameA < nameB) return -1; //nameA comes first
-            if (nameA > nameB) return 1; // nameB comes first
-            return 0; // names must be equal
-          });
-          setIngredients(sortedData);
+          let ingredients = await getIngredients();
+          let categories = await getCategories();
+          setCategories(categories);
+          setIngredients(ingredients);
+          setErr("");
           window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
-      };
-      getIngr();
+      })();
     }
     return () => {
-      isLoaded = false; //           avoids a mem leak (of the promise) on unloaded component
+      isLoaded = false; // avoids a mem leak on unloaded component
     };
     // eslint-disable-next-line
   }, []);
@@ -68,15 +58,15 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
       for (const key in info) {
         if (!info[key]) throw Error(key + " is empty. All fields required.");
       }
-      await axios.post(`${APPDATA.BACKEND}/api/recipes`, info);
+      await postRecipe(info);
       setPublished(true);
     } catch (error) {
       alert(error);
-      // setErr(error.message);
+      setErr(error.message);
     }
   };
 
-  function handle(e) {
+  function handleChange(e) {
     const info = { ...newInfo };
     info[e.target.id] = e.target.value;
     setNewInfo(info);
@@ -104,18 +94,21 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
   const addIngredient = (e) => {
     e.preventDefault();
     if (!e.target.form.elements["ingredient"].value) return;
-    let qty = e.target.form.elements["quantity"].value.match(/([0-9,.]+)/g);
-    qty = qty ? qty : "";
-    const unit = e.target.form.elements["quantity"].value
-      .replace(qty, "")
-      .trim();
+    let qty = "";
+    qty = e.target.form.elements["ingredient"].value.match(/([0-9,.]+)/g);
+    // ||      e.target.form.elements["quantity"].value.match(/([0-9,.]+)/g);
+    // let unit = "";
+    // unit = e.target.form.elements["quantity"].value
+    //   .replace(qty, "")
+    //   .trim();
     const info = { ...newInfo };
     info["ingredients"] = [
       ...info["ingredients"],
-      [e.target.form.elements["ingredient"].value, qty + " " + unit],
+      // [e.target.form.elements["ingredient"].value, qty + " " + unit],
+      [e.target.form.elements["ingredient"].value],
     ];
     setNewInfo(info);
-    e.target.form.elements["quantity"].value = "";
+    // e.target.form.elements["quantity"].value = "";
     e.target.form.elements["ingredient"].value = "";
     e.target.form.elements["ingredient"].focus();
   };
@@ -135,14 +128,6 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
     data = data.replace("<p></p>", "");
     return data;
   };
-
-  if (err)
-    return (
-      <div className="loading_container">
-        <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
-      </div>
-    );
 
   let k = 0;
   return (
@@ -166,134 +151,138 @@ const CreateTitle = ({ currentUser, categories, APPDATA }) => {
               width: "90%",
             }}
           >
-            <div className="create_title_container">
-              {/* <h2>-‧≡ Create a new recipe ≡‧- </h2> */}
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <input
-                  className="create_title_title"
-                  type="text"
-                  required
-                  placeholder="please enter a title here"
-                  id="title"
-                  minLength={10}
-                  maxLength={100}
-                  // size="50"
-                  value={newInfo.title}
-                  onChange={(e) => handle(e)}
-                  style={{ backgroundColor: "#eed5be", width: "50vw" }}
-                  autoFocus
-                ></input>
-                <div className="inline" style={{ padding: "20px" }}>
-                  Select a Category:
-                  <select
-                    className="create_title_category"
-                    type="text"
-                    required
-                    placeholder="category"
-                    id="category"
-                    value={newInfo.category}
-                    onChange={(e) => handle(e)}
-                  >
-                    <option key={k++} value=""></option>
-                    {categories.map((ctg) => (
-                      <option key={k++} value={ctg.category_id}>
-                        {ctg.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <object
-                      data={newInfo.title_img}
-                      type="image/jpg,png"
-                      className="create_title_img row"
-                    >
-                      <input
-                        type="file"
-                        encType="multipart/form-data"
-                        accept="image/png, .jpeg, .jpg, image/gif"
-                        id="title_img"
-                        name="title_img"
-                        required
-                        onChange={(e) => handleImgInput(e)}
-                      />
-                      {/* <img src="default.img" alt="recipe" /> */}
-                      {/* <img src={newInfo.image} alt="recipe" /> */}
-                      <img
-                        src={newInfo.title_img}
-                        className="create_title_img row"
-                        alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
-                      />
-                    </object>
-                  </div>
-                  <div className="create_title_ingredients col">
-                    <h5>
-                      <u>INGREDIENTS</u>
-                    </h5>
-                    <div className="form-group">
-                      <input
-                        list="datalist_item"
-                        placeholder="select ingredient"
-                        id="ingredient"
-                        tabIndex="1"
-                        value={ingredient[0]}
-                      />
-                      <input
-                        size="5"
-                        placeholder="quantity"
-                        id="quantity"
-                        tabIndex="2"
-                        value={ingredient[1]}
-                      />
-                      <button onClick={addIngredient}>Add</button>
-
-                      <datalist id="datalist_item">
-                        {ingredients.map((el) => (
-                          <option
-                            key={k++}
-                            value={
-                              el.ingredient_name +
-                              " (" +
-                              el.ingredient_unit +
-                              ")"
-                            }
-                          />
-                        ))}
-                      </datalist>
-                    </div>
-                    <div
-                      placeholder="ingredients"
-                      id="ingredients"
+            {err ? (
+              <Loading text={err} />
+            ) : (
+              <>
+                <div className="create_title_container">
+                  {/* <h2>-‧≡ Create a new recipe ≡‧- </h2> */}
+                  <form onSubmit={(e) => handleSubmit(e)}>
+                    <input
+                      className="create_title_title"
+                      type="text"
                       required
-                      // readOnly
-                      dangerouslySetInnerHTML={{
-                        __html: formatIngredients(newInfo.ingredients),
-                      }}
-                    ></div>
-                  </div>
+                      placeholder="please enter a title here"
+                      id="title"
+                      minLength={6}
+                      maxLength={75}
+                      value={newInfo.title}
+                      onChange={(e) => handleChange(e)}
+                      style={{ backgroundColor: "#eed5be", width: "50vw" }}
+                      autoFocus
+                    ></input>
+                    <div className="inline" style={{ padding: "20px" }}>
+                      Select a Category:
+                      <select
+                        className="create_title_category"
+                        type="text"
+                        required
+                        placeholder="category"
+                        id="category"
+                        value={newInfo.category}
+                        onChange={(e) => handleChange(e)}
+                      >
+                        <option key={k++} value=""></option>
+                        {categories.map((ctg) => (
+                          <option key={k++} value={ctg.category_id}>
+                            {ctg.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <object
+                          data={newInfo.title_img}
+                          type="image/jpg,png"
+                          className="create_title_img row"
+                        >
+                          <input
+                            type="file"
+                            encType="multipart/form-data"
+                            accept="image/png, .jpeg, .jpg, image/gif"
+                            id="title_img"
+                            name="title_img"
+                            required
+                            onChange={(e) => handleImgInput(e)}
+                          />
+                          <img
+                            src={newInfo.title_img}
+                            className="create_title_img row"
+                            alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                          />
+                        </object>
+                      </div>
+                      <div className="create_title_ingredients col">
+                        <h5>
+                          <u>INGREDIENTS</u>
+                        </h5>
+                        <div className="form-group">
+                          <input
+                            list="datalist_item"
+                            placeholder="select ingredient"
+                            id="ingredient"
+                            tabIndex="1"
+                            value={ingredient[0]}
+                            title="Select or type an ingredient, with quantity (ie: Apple (nos) 2"
+                          />
+                          {/* <input
+                            size="5"
+                            placeholder="quantity"
+                            id="quantity"
+                            tabIndex="2"
+                            value={ingredient[1]}
+                          /> */}
+                          <button onClick={addIngredient}>Add</button>
+
+                          <datalist id="datalist_item">
+                            {ingredients.map((el) => (
+                              <option
+                                key={k++}
+                                value={
+                                  el.ingredient_name +
+                                  " (" +
+                                  el.ingredient_unit +
+                                  ")"
+                                }
+                              />
+                            ))}
+                          </datalist>
+                        </div>
+                        <div
+                          placeholder="ingredients"
+                          id="ingredients"
+                          required
+                          // readOnly
+                          dangerouslySetInnerHTML={{
+                            __html: formatIngredients(newInfo.ingredients),
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    {/* //!                              set HTML IDE */}
+                    <div className="create_title_method">
+                      <h5>
+                        <u>METHOD</u>
+                      </h5>
+                      <textarea
+                        cols="40"
+                        rows="6"
+                        type="text"
+                        placeholder="enter the recipe here"
+                        id="recipe"
+                        value={newInfo.recipe}
+                        onChange={(e) => handleChange(e)}
+                        required
+                      ></textarea>
+                    </div>
+                    <button type="submit" className="btns">
+                      Submit by {currentUser.userName}
+                    </button>
+                  </form>
                 </div>
-                {/* //!                              set HTML IDE */}
-                <div className="create_title_method">
-                  <h5>
-                    <u>METHOD</u>
-                  </h5>
-                  <textarea
-                    cols="40"
-                    rows="6"
-                    type="text"
-                    placeholder="enter the recipe here"
-                    id="recipe"
-                    value={newInfo.recipe}
-                    onChange={(e) => handle(e)}
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" className="btns">
-                  Submit by {currentUser.userName}
-                </button>
-              </form>
-            </div>
+              </>
+            )}
           </div>
         </div>
       )}

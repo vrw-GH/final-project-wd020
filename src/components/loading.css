@@ -1,5 +1,6 @@
 .loading_container {
   margin: auto;
+  cursor: pointer;
   position: relative; 
   margin-top: 5rem;
   width: 200px;

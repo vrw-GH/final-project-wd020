@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Title from "./Title.js";
-import "../../loading.css";
+import "../../components/loading.css";
 import "./Category.css";
 
 const Category = ({ categories, APPDATA }) => {
@@ -20,7 +20,7 @@ const Category = ({ categories, APPDATA }) => {
       const getRecipes = async () => {
         try {
           const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-          if (!results.data.tuple[0]) throw new Error("No Recipe Data.");
+          if (!results.data.tuples[0]) throw new Error("No Recipe Data.");
           setPosts(results.data.tuples.filter(filterItems));
           window.scrollTo(0, 0);
         } catch (error) {

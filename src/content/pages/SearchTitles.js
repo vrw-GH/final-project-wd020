@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Title from "./Title";
-
-import "../../loading.css";
+import Loading from "../../components/Loading";
+import { getRecipes } from "../../components/dataHandling";
 import "./_Page.css";
 
 const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   const [titles, setTitles] = useState([]);
   const [total, setTotal] = useState(0);
-  const [err, setErr] = useState(null);
+  const [err, setErr] = useState("Searching...");
+  searchQry = searchQry.replace(/[sS]$/, "");
 
   useEffect(() => {
     let isLoaded = true;
+
     if (isLoaded) {
-      const getRecipes = async () => {
+      (async () => {
         try {
-          const results = await axios.get(`${APPDATA.BACKEND}/api/recipes/`);
-          if (!results.data.tuples[0]) throw new Error("No Recipes Data.");
-          setTitles(results.data.tuples.filter(filterPosts));
-          setTotal(results.data.tuples.filter(filterPosts).length);
+          const recipes = await getRecipes(filterPosts);
+          setTitles(recipes);
+          setTotal(recipes.length);
+          setErr("");
           window.scrollTo(0, 0);
         } catch (error) {
           setErr(error.message);
         }
-      };
-      getRecipes();
+      })();
     }
     return () => {
       isLoaded = false; //   avoids a mem leak (of the promise) on unloaded component
@@ -41,38 +41,50 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
     }
   };
 
-  if (err)
-    return (
-      <div className="loading_container">
-        <div className="loading"></div>
-        <h4 style={{ fontSize: "0.8rem" }}>{err}</h4>
-      </div>
-    );
-
   return (
     <div
       className="page-container"
       style={{
         backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
+        marginBottom: "0",
       }}
     >
-      {total > 0 ? (
-        <>
-          <h5>
-            We found {total} {total > 1 ? "entries" : "entry"} containing the
-            word "{searchQry}"{" "}
-          </h5>
-          {titles.map((title) => (
-            <Title
-              key={title.slug}
-              title={title}
-              handleClearQry={handleClearQry}
-            />
-          ))}
-        </>
-      ) : (
-        <h5>`We found NO entries containing the word "{searchQry}"`</h5>
-      )}
+      <div className="page-title">
+        <h2>-•≡ Search Results ≡•-</h2>
+      </div>
+      <div
+        className="page-box col-8"
+        style={{
+          width: "90%",
+        }}
+      >
+        {err ? (
+          <Loading text={err} />
+        ) : (
+          <>
+            {total > 0 ? (
+              <>
+                <h6>
+                  We found {total} {total > 1 ? "entries" : "entry"} containing
+                </h6>
+                <h5 style={{ color: "red" }}>"{searchQry}"</h5>
+                {titles.map((title) => (
+                  <Title
+                    key={title.slug}
+                    title={title}
+                    handleClearQry={handleClearQry}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                <h6>We found NO entries containing:</h6>
+                <h5 style={{ color: "red" }}>"{searchQry}"</h5>
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

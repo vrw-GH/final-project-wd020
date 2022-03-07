@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { genHash, checkPwd } from "../../components/security.js";
+import { userCreate, userLogin } from "../../components/dataHandling.js";
+import Loading from "../../components/Loading";
 import "./_Page.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
-  const [loginMsg, setLoginMsg] = useState("");
   const navigate = useNavigate();
+  const [loginMsg, setLoginMsg] = useState("");
+  const loginSuccess = () => navigate(-1); //    "/sharing"  ?
+  const createSuccess = () => navigate("/profile");
   let username = "";
 
   useEffect(() => {
     if (sessionStorage.getItem("currentUser")) {
       sessionStorage.removeItem("currentUser");
       setCurrentUser({});
+      navigate("/");
       return null;
     }
     window.scrollTo(0, 0);
@@ -24,33 +28,31 @@ const Login = ({ setCurrentUser, APPDATA }) => {
     try {
       username = e.target.parentElement.children["username"].value;
       if (!username) throw Error("Enter your credentials and");
-      let result = await axios.get(`${APPDATA.BACKEND}/api/users/${username}`);
-      if (!result.data.info.result) throw Error(result.data.info.message);
-      if (
-        !checkPwd(
-          e.target.parentElement.children["password"].value,
-          result.data.tuple[0].password
-        )
-      )
-        throw Error("Invalid Credentials");
+      const gotUser = await userLogin(username);
+      checkPwd(
+        e.target.parentElement.children["password"].value,
+        gotUser.password
+      );
       const user = {
-        userName: result.data.tuple[0].username,
-        profilePic: result.data.tuple[0].profilepic,
+        userName: gotUser.username,
+        token: gotUser.token,
+        profilePic: gotUser.profilepic,
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
       setLoginMsg(`"${user.userName}" - succesfully logged in!`);
-      navigate("/myshare");
+      loginSuccess();
     } catch (error) {
-      console.log(error);
-      setLoginMsg(`${error} - Please try again.`);
+      setLoginMsg(error + " - Please try again.");
     }
   };
 
   const doCreateUser = async (e) => {
     try {
-      let pwdHash = genHash(e.target.parentElement.children["password"].value);
-      let item = {
+      const pwdHash = await genHash(
+        e.target.parentElement.children["password"].value
+      );
+      const item = {
         username:
           e.target.parentElement.children["username"].value.toLowerCase(),
         password: pwdHash,
@@ -58,25 +60,20 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       };
       if (!item.username || !item.email || !item.password)
         throw Error("Please enter valid credentials");
-      let result = await axios.post(`${APPDATA.BACKEND}/api/users`, item);
-      if (!result.data.info.result) throw Error(result.data.info.message);
+      const result = await userCreate(item);
       const user = {
-        userName: result.data.tuple[0].username,
-        profilePic: result.data.tuple[0].profilepic,
+        userName: result.username,
+        token: result.token,
+        profilePic: result.profilepic,
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
-      setLoginMsg(result.data.info.message);
+      setLoginMsg(result.message);
       username = "";
-      navigate(-1);
+      createSuccess();
     } catch (error) {
-      setLoginMsg(error + " Please try again.");
+      setLoginMsg(error.message);
     }
-  };
-
-  const goBack = () => {
-    setLoginMsg("");
-    navigate("/login");
   };
 
   return (
@@ -92,17 +89,15 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
           <>
-            <div className="page-error">{loginMsg}</div>
-            <br />
-            <br />
-            <button
+            <Loading text={loginMsg} back={-1} />
+            {/* <button
               onClick={goBack}
               className="btn btn-light"
               autoFocus
               onKeyDown={(keyCode) => (keyCode === 13 ? () => goBack : false)}
             >
               Ok
-            </button>
+            </button> */}
           </>
         ) : (
           <>
