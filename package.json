@@ -75,6 +75,6 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "//homepage": "https://final-project-wd020.vercel.app",
-  "homepage": "https://final-project-wd020.vercel.app"
+  "//homepage": "https://sharemyfood-prerelease.vercel.app",
+  "homepage": "https://sharemyfood.vercel.app"
 }
