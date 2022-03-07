@@ -16,7 +16,7 @@ Deployments :
 <br />
 
 <h3><u>V2</u></h3>
-Pre-release: <a href="https://sharemyfood-alpha.vercel.app">-sharemyfood-alpha.vercel.app</a>
+Pre-release: <a href="https://sharemyfood-prerelease.vercel.app">-sharemyfood-prerelease.vercel.app</a>
 <br />
 <span style="color:blue">Stable-release: <a href="https://sharemyfood.vercel.app">-sharemyfood.vercel.app</span>
 <br />
