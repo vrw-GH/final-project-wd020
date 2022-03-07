@@ -38,7 +38,10 @@ const NavbarTop = ({
           />
           &nbsp;{APPDATA.NAME}&nbsp;
           <i style={{ fontSize: "0.6rem" }}>
-            {APPDATA.VER} {APPDATA.MODE}
+            {APPDATA.VER}{" "}
+            {APPDATA.MODE.substring(0, 4).toUpperCase() === "PROD"
+              ? ""
+              : APPDATA.MODE}
           </i>
         </Navbar.Brand>
         <Navbar.Toggle />
