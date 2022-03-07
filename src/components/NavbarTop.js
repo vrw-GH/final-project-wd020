@@ -24,7 +24,7 @@ const NavbarTop = ({
           href="/about"
           id="nav-about"
           onClick={handleClearQry}
-          title={`${APPDATA.NAME} ver: ${APPDATA.VER} ${APPDATA.FLIGHT}`}
+          title={`${APPDATA.NAME} ver: ${APPDATA.VER} ${APPDATA.MODE}`}
         >
           &nbsp;
           <img
@@ -38,7 +38,7 @@ const NavbarTop = ({
           />
           &nbsp;{APPDATA.NAME}&nbsp;
           <i style={{ fontSize: "0.6rem" }}>
-            {APPDATA.VER} {APPDATA.FLIGHT}
+            {APPDATA.VER} {APPDATA.MODE}
           </i>
         </Navbar.Brand>
         <Navbar.Toggle />

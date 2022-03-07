@@ -36,7 +36,7 @@ const MyShares = ({ APPDATA }) => {
             userLoc.current = results1.location;
             let results = await getShareitems(currentUser.userName);
             if (results) {
-              if (APPDATA.FLIGHT.substring(0, 3).toUpperCase() !== "DEV") {
+              if (APPDATA.MODE.substring(0, 3).toUpperCase() !== "DEV") {
                 results = results.filter((e) => e.sharestatus !== "D");
               }
               let sorted = results;
