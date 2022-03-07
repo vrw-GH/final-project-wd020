@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const errorHandler = (error, message) => {
   const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
-  if (APPDATA.FLIGHT.substring(0, 3).toUpperCase() === "DEV") {
+  if (APPDATA.MODE.substring(0, 3).toUpperCase() === "DEV") {
     console.log(error.response);
     console.log("Orig. " + (JSON.stringify(error?.response) || error));
   }

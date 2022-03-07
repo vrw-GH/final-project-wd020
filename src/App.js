@@ -54,7 +54,7 @@ const APPDATA = {
   EMAIL: process.env.REACT_APP_DEV_EMAIL || "victor.wright@outlook.de",
   PHONE: process.env.REACT_APP_DEV_PHONE || "+49 176 4677 4278",
   LOCATION: process.env.REACT_APP_DEV_ADDR || "83707, Germany",
-  FLIGHT: process.env.REACT_APP_PROJECT_FLIGHT || "Dev",
+  MODE: process.env.REACT_APP_PROJECT_MODE || process.env.NODE_ENV || "Dev",
   DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
   WEBSITE: appHomepage || process.env.HOST || "http://127.0.0.1",
   HOST: process.env.HOST || appHomepage || "http://127.0.0.1",
@@ -97,16 +97,15 @@ function App() {
 
   return (
     <>
-      {APPDATA.FLIGHT.substring(0, 4).toUpperCase() !== "PROD" ? (
+      {APPDATA.MODE.substring(0, 4).toUpperCase() !== "PROD" ? (
         <Marquee
           duration="20000"
           height="1rem"
           background="red"
           pauseOnHover={true}
         >
-          <div style={{ fontSize: 10 }} title="Change FLIGHT in process.env">
-            App is in {APPDATA.FLIGHT} Mode (this will not show in poduction
-            mode)
+          <div style={{ fontSize: 10 }} title="Change MODE in process.env">
+            App is in {APPDATA.MODE} Mode (this will not show in poduction mode)
           </div>
         </Marquee>
       ) : null}
