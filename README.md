@@ -1,19 +1,14 @@
 # Share My Food
 
 <h2>Final Project - <strong>Full Stack App and Web Development Course</strong></h2>
-<img src="https://github.com/vrw-GH/final-project-wd020/blob/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png">
-<br />
-<br />
-<br />
+<img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png">
 by Victor and Abdullah
 <br />
 WBS Coding School: WD#020 (Jan,2022)
 <br />
-<br />
-<br />
+<hr />
 Deployments :
 <br />
-
 <h3><u>V2</u></h3>
 Pre-release: <a href="https://sharemyfood-prerelease.vercel.app">-sharemyfood-prerelease.vercel.app</a>
 <br />
