@@ -1,17 +1,12 @@
 # Share My Food
-
-![](<https://github.com/vrw-GH/final-project-wd020/blob/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png>)
-<img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png">
-<br />
 #Final Project - Full Stack App and Web Development Course
 <br />
-<br />
+<img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png">
 by Victor and Abdullah
 <br />
 WBS Coding School: WD#020 (Jan,2022)
 <br />
-<br />
-<br />
+<hr />
 Deployments :
 <br />
 <h3><u>V2</u></h3>
