@@ -1,6 +1,6 @@
 # Share My Food
-#Final Project - Full Stack App and Web Development Course
-<br />
+
+<h2>Final Project - <strong>Full Stack App and Web Development Course</strong></h2>
 <img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png">
 by Victor and Abdullah
 <br />
