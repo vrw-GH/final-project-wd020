@@ -21,7 +21,7 @@ const NavbarTop = ({
       {/* <Navbar sticky="top" id="nav" Collapse expand="md"> */}
       <Navbar sticky="top" id="nav" collapseOnSelect={true} expand="md">
         <Navbar.Brand
-          href="/about"
+          href="/"
           id="nav-about"
           onClick={handleClearQry}
           title={`${APPDATA.NAME} ver: ${APPDATA.VER} ${APPDATA.MODE}`}
