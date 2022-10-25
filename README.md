@@ -25,12 +25,13 @@
 <br />
    🎥 Making Of...
    <br />
-   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project basics/SMF Presentation – Mit Clipchamp erstellt.mp4" height="350" width="auto"></iframe>
+   <div style="width:100%;">
+   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project basics/SMF Presentation – Mit Clipchamp erstellt.mp4" width="600" height="auto"></iframe>
    <br />
+   </div>
    <a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
 </div>
 <br />
-♣ TECHNOLOGIES:<br />
 <h2>Javascript Full-Stack App - P.E.R.N Stack</h2>
 
 - Frontend: REACT v17.0.2
@@ -51,34 +52,7 @@
 
 <!-- - Other:
    - xxx -->
-
-♣ FEATURES LIST:
-
-- Landing Page
-- About Page
-- Share Page
-- set booked,unbook
-- Recipe Page
-- Main Search (Recipes)
-- Recipe Filter: Category
-- Recipe Filter: Ingredients
-- User Login
-- Authentication
-- User - Create Recipe
-- User - Like Recipe
-- User - My Recipes Page
-- User - My Share Page
-- User - ShareItem Maintenance
-- User - Reserve ShareItem
-
-♣ FUTURE FEATURES:
-
-- Shareitems: pick a validity period, ie 1-3days, 1week/weeks etc.
-- Auto disable items on expiry.
-- 2-way messaging, or chat
-- Edit recipe
-- ingredients: Editing, Copy Paste
-- Share Location
-- Drag-drop of image to recipe
-
-<iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project basics/Features List.txt" height="350" width="auto"></iframe>
+<br />
+<div style="width:100%;">
+<iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project basics/Features List.txt" width="100%" height="auto" ></iframe>
+</div>

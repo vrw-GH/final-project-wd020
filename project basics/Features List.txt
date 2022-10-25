@@ -1,39 +1,29 @@
-Feature List:
-Feature					Dev Status
---------					---------
 
-Landing Page				Done
-About Page				Done
+♣ FEATURES LIST:
 
-Share Page				Done
-set booked,unbook			Done
+- Landing Page
+- About Page
+- Share Page
+- set booked,unbook
+- Recipe Page
+- Main Search (Recipes)
+- Recipe Filter: Category
+- Recipe Filter: Ingredients
+- User Login
+- Authentication
+- User - Create Recipe
+- User - Like Recipe
+- User - My Recipes Page
+- User - My Share Page
+- User - ShareItem Maintenance
+- User - Reserve ShareItem
 
-Recipe Page				Done
-Main Search (Recipes)		Done
-Recipe Filter: Category		Done
-Recipe Filter: Ingredients	Done
+♣ FUTURE FEATURES:
 
-User Login				Done
-Real Authentication			 - Stage2
-
-User - Create Recipe		Done
-User - Like Recipe			Done
-User - My Recipes Page		Done
-
-User - My Share Page		Done
-User - ShareItem Maintenance	Done
-
-User - Reserve ShareItem		Done
-
-
-
-FUTURE FEATURES:
-
-- Real Authentication			
-- Shareitems: pick a validity period, ie 1-3days, 1week,2weeks etc.
-Auto disable items on expiry.
-- 2-way messaging, or chat 
+- Shareitems: pick a validity period, ie 1-3days, 1week/weeks etc.
+- Auto disable items on expiry.
+- 2-way messaging, or chat
 - Edit recipe
-- ingredients: Copy Paste & Edit
+- ingredients: Editing, Copy Paste
 - Share Location
 - Drag-drop of image to recipe
