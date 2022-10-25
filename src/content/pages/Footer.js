@@ -88,7 +88,7 @@ const Footer = ({ APPDATA }) => {
           <li>
             <a
               className="footer-icons"
-              href="https://github.com/vrw-GH/final-project-wd020"
+              href="https://vrw-gh.github.io/final-project-wd020"
               target="_blank"
               rel="noreferrer"
             >

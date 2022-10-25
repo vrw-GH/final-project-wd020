@@ -47,8 +47,8 @@ const APPDATA = {
   FRONTEND:
     process.env.REACT_APP_FRONTEND ||
     (process.env.HOST || "https://127.0.0.1") +
-      ":" +
-      (process.env.PORT || "3000"),
+    ":" +
+    (process.env.PORT || "3000"),
   DEVLEAD: process.env.REACT_APP_DEV_LEAD || "Victor Wright",
   DEVTEAM: process.env.REACT_APP_DEV_TEAM || "",
   EMAIL: process.env.REACT_APP_DEV_EMAIL || "victor.wright@outlook.de",
@@ -68,10 +68,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [searchQry, setSearchQry] = useState("");
   const [loading, setLoading] = useState("");
+  const [spinUp, setSpinUp] = useState(0);
 
-  useEffect(() => {}, [loading]); //  to re-render when any loading event occurs
+  useEffect(() => { }, [loading]); //  to re-render when any loading event occurs
 
-  useEffect(() => {
+  useEffect(() => { //loading
     setLoading("Loading ...");
     setCurrentUser(JSON.parse(sessionStorage.getItem("currentUser")));
     sessionStorage.setItem("APPDATA", JSON.stringify(APPDATA));
@@ -81,6 +82,28 @@ function App() {
       sessionStorage.clear();
       localStorage.clear();
     };
+  }, []);
+
+  useEffect(() => {  //backend-spinup   
+    let s = 0;
+    const elapsed = setInterval(() => setSpinUp(`Backend is still spinning-up... (${s++})`), 1000);
+    const getBackend = async () => {
+      await fetch(`${APPDATA.BACKEND}/api/users`)
+        .then(response => {
+          if (!response || !response.ok) {
+            throw new Error('Server/Api no response.');
+          } else {
+            setSpinUp(false);
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+          setSpinUp("We ran into trouble - Backend did NOT spin-up 😓");
+        });
+      clearInterval(elapsed);
+    };
+    getBackend();
+    return () => clearInterval(elapsed);
   }, []);
 
   const handleSearchClick = (e) => {
@@ -109,6 +132,7 @@ function App() {
           </div>
         </Marquee>
       ) : null}
+      {spinUp ? spinUp : null}
       <Header APPDATA={APPDATA} />
       <NavbarTop
         APPDATA={APPDATA}
