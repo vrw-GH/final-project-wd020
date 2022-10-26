@@ -1,6 +1,6 @@
 # Share My Food
 
-<a href="https://sharemyfood-prerelease.vercel.app"><img src="./project-basics/Screenshot.png"></a> <!-- "https://vrw-gh.github.io/final-project-wd020/project-basics/Screenshot.png" -->
+<a href="https://sharemyfood.vercel.app"><img src="./project-basics/Screenshot.png"></a>
 <br />
 <h3>Final Project by Victor and Abdullah</h3>
 <h5><strong>Full Stack App and Web Development Course</strong>
@@ -9,29 +9,23 @@
 <hr />
 <strong>Deployments :</strong>
 <br />
-<u>V2</u>
+&emsp;<u>V2</u>
 <br />
-<span style="color: orange">• Test-release: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-test-v2</a></span>
+&emsp;<span style="color: orange">• Test-release: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-test-v2</a></span>
 <br />
-<span style="color: red">• Stable-release: <a href="https://sharemyfood.vercel.app">(vercel) sharemyfood-v2</a></span>
+&emsp;<span style="color: red">• Stable-release: <a href="https://sharemyfood.vercel.app">(vercel) sharemyfood-v2</a></span>
 <br />
-<u>V1</u>
+&emsp;<u>V1</u>
 <br />
-<span style="color: green">• Pre-release: <a href="https://vrwgh-finalprojectwd020.netlify.app">(netlify) sharemyfood-v1</a></span>
-<br />
+&emsp;<span style="color: green">• Pre-release: <a href="https://vrwgh-finalprojectwd020.netlify.app">(netlify) sharemyfood-v1</a></span>
 <br />
 <strong>Sources:</strong><small> &emsp;<a href="https://vrw-gh.github.io/final-project-wd020">GH Page</a>&emsp;•&emsp;<a href="https://github.com/vrw-GH/final-project-wd020">GH Repo</a>&emsp;•&emsp;<a href="https://vrw-gh.github.io/sharemyfood-backend/">Backend</a></small>
-<div style="position:relative;width:fit-content;height:fit-content;">
 <br />
-   🎥 Making Of...
-   <br />
-   <div style="width:100%;">
-   <!-- <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></iframe> -->
-   <object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></object>
-   <br />
-   </div>
-   <a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
-</div>
+<h3>🎥 Making Of...</h3>
+<br />
+<object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="800" height="300"></object>
+<br />
+<a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
 <hr />
 <h2>Javascript Full-Stack App - P.E.R.N Stack</h2>
 
@@ -49,12 +43,9 @@
 - Backend: Node
   - REST Api (hosted on Render/~~Heroku~~)
   - With German Postcode lookup endpoint
-  - Database: PostgreSQL (ElephantSQL online) or MySQL (local server)  
-
-<!-- - Other:
-   - xxx -->
-<br />
-<div style="width:100%;">
-<!-- <iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto" ></iframe> -->
-<object data="./project-basics/app-features.txt" width="100%" height="auto"></object><!-- "https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" -->
-</div>
+  - Database: PostgreSQL (ElephantSQL online) or MySQL (local server
+<!-- 
+ - Other:
+   - xxx  
+-->
+<object data="./project-basics/app-features.txt" width="100%" height="auto"></object>
