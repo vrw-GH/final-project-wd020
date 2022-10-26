@@ -1,6 +1,6 @@
 # Share My Food
 
-<a href="https://sharemyfood-prerelease.vercel.app"><img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project%20basics/Screenshot%20(252).png"></a>
+<a href="https://sharemyfood-prerelease.vercel.app"><img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project-basics/Screenshot%20(252).png"></a>
 <br />
 <h3>Final Project by Victor and Abdullah</h3>
 <h5><strong>Full Stack App and Web Development Course</strong>
@@ -26,7 +26,7 @@
    🎥 Making Of...
    <br />
    <div style="width:100%;">
-   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project basics/SMF Presentation – Mit Clipchamp erstellt.mp4" width="600" height="auto"></iframe>
+   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF_Presentation.mp4" width="600" height="auto"></iframe>
    <br />
    </div>
    <a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
@@ -54,5 +54,5 @@
    - xxx -->
 <br />
 <div style="width:100%;">
-<iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project basics/Features List.txt" width="100%" height="auto" ></iframe>
+<iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto" ></iframe>
 </div>
