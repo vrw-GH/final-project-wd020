@@ -21,9 +21,8 @@
 <h2></h2>
 <strong>Sources:</strong><small> &emsp;<a href="https://vrw-gh.github.io/final-project-wd020">GH Page</a>&emsp;•&emsp;<a href="https://github.com/vrw-GH/final-project-wd020">GH Repo</a>&emsp;•&emsp;<a href="https://vrw-gh.github.io/sharemyfood-backend/">Backend</a></small>
 <br />
-&emsp;<span style="color: green">• Pre-release: <a href="https://vrwgh-finalprojectwd020.netlify.app">(netlify) sharemyfood-v1</a></span>
-<br />
-<strong>🎥 Making Of...</strong><a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(Watch on ClipChamp)</a>
+<h2></h2>
+<strong>🎥 Making Of: ...</strong><a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(Watch on ClipChamp)</a>
 <br />
 <object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="800" height="300"></object>
 <br />
