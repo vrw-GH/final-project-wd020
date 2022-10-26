@@ -1,6 +1,6 @@
 # Share My Food
 
-<a href="https://sharemyfood-prerelease.vercel.app"><img src="https://raw.githubusercontent.com/vrw-GH/final-project-wd020/0f30e27180ba56cd0ae5abcd38c6e77f99c52aac/project-basics/Screenshot%20(252).png"></a>
+<a href="https://sharemyfood-prerelease.vercel.app"><img src="./project-basics/Screenshot.png"></a> <!-- "https://vrw-gh.github.io/final-project-wd020/project-basics/Screenshot.png" -->
 <br />
 <h3>Final Project by Victor and Abdullah</h3>
 <h5><strong>Full Stack App and Web Development Course</strong>
@@ -26,13 +26,13 @@
    🎥 Making Of...
    <br />
    <div style="width:100%;">
-   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></iframe>
+   <!-- <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></iframe> -->
    <object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></object>
    <br />
    </div>
    <a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
 </div>
-<br />
+<hr />
 <h2>Javascript Full-Stack App - P.E.R.N Stack</h2>
 
 - Frontend: REACT v17.0.2
@@ -55,6 +55,6 @@
    - xxx -->
 <br />
 <div style="width:100%;">
-<iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto" ></iframe>
-<object data="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto"></object>
+<!-- <iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto" ></iframe> -->
+<object data="./project-basics/app-features.txt" width="100%" height="auto"></object><!-- "https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" -->
 </div>
