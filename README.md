@@ -26,7 +26,8 @@
    🎥 Making Of...
    <br />
    <div style="width:100%;">
-   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF_Presentation.mp4" width="600" height="auto"></iframe>
+   <iframe allowfullscreen style="border:groove" src="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></iframe>
+   <object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="600" height="auto"></object>
    <br />
    </div>
    <a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(On ClipChamp)</a>
@@ -55,4 +56,5 @@
 <br />
 <div style="width:100%;">
 <iframe style="border:none" src="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto" ></iframe>
+<object data="https://vrw-gh.github.io/final-project-wd020/project-basics/app-features.txt" width="100%" height="auto"></object>
 </div>
