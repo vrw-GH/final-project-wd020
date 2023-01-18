@@ -24,7 +24,7 @@
 <h2></h2>
 <strong>🎥 Making Of: ...</strong><a href="https://clipchamp.com/watch/mT0F1UjGS6m?utm_source=embed&utm_medium=embed&utm_campaign=watch" target="_blank">(Watch on ClipChamp)</a>
 <br />
-<object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="800" height="300"></object>
+<object data="https://vrw-gh.github.io/final-project-wd020/project-basics/SMF-Presentation.mp4" width="400" height="300"></object>
 <br />
 <hr />
 <h2>Javascript Full-Stack App - P.E.R.N Stack</h2>
@@ -44,8 +44,17 @@
   - REST Api (hosted on Render/~~Heroku~~)
   - With German Postcode lookup endpoint
   - Database: PostgreSQL (ElephantSQL online) or MySQL (local server
-<!-- 
- - Other:
-   - xxx  
--->
-<object data="./project-basics/app-features.txt" width="100%" height="auto"></object>
+<!-- - Other:
+  - xxx -->
+<object data="./project-basics/app-features.txt" width="100%" height="auto" style="margin: 0"></object>
+
+---
+
+<pre>
+Developer:   Team: Victor Wright / Abdullah
+Project:     WBS WD#020 Group - Jan 2022
+Instructor:  Jorge Paul (WBS Coding School)
+Date:        30 Dec 2021
+Deployed V1: <a href="https://sharemyfood.vercel.app">https://sharemyfood.vercel.app</a>
+GH Page:     <a href="https://vrw-gh.github.io/final-project-wd020/">vrw-gh.github.io/final-project-wd020</a>
+</pre>
