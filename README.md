@@ -47,3 +47,14 @@
 <!-- - Other:
   - xxx -->
 <object data="./project-basics/app-features.txt" width="100%" height="auto" style="margin: 0"></object>
+
+---
+
+<pre>
+Developer:   Team: Victor Wright / Abdullah
+Project:     WBS WD#020 Group - Jan 2022
+Instructor:  Jorge Paul (WBS Coding School)
+Date:        30 Dec 2021
+Deployed V1: <a href="https://sharemyfood.vercel.app">https://sharemyfood.vercel.app</a>
+GH Page:     <a href="https://vrw-gh.github.io/final-project-wd020/">vrw-gh.github.io/final-project-wd020</a>
+</pre>
