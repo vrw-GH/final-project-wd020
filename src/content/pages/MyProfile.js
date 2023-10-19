@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { genHash, checkPwd, isGoodPWD } from "../../components/security";
-import MapChart from "../../components/MapChart";
-import Loading from "../../components/Loading";
-import { getUser, getCity, updateUser } from "../../components/dataHandling";
-import "./_Page.css";
+import { genHash, checkPwd, isGoodPWD } from "../../components/security.js";
+import MapChart from "../../components/MapChart.js";
+import Loading from "../../components/Loading.js";
+import { getUser, getCity, updateUser } from "../../components/dataHandling.js";
+import PageTitle from "../../components/PageTitle.js"
+import "./_General.css";
 import "./MyProfile.css";
 
 const MyProfile = ({ setCurrentUser, APPDATA }) => {
@@ -29,7 +30,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
         setErr(error.message);
       }
     })();
-    return () => {};
+    return () => { };
     //eslint-disable-next-line
   }, []);
 
@@ -101,8 +102,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
   const handleImgInput = (e) => {
     if (e.target.files[0].size > maxAllowedSize) {
       alert(
-        `File too big (${Math.round(e.target.files[0].size / 1024)}kb) - max ${
-          maxAllowedSize / 1024
+        `File too big (${Math.round(e.target.files[0].size / 1024)}kb) - max ${maxAllowedSize / 1024
         }kb`
       );
       e.target.value = "";
@@ -197,17 +197,8 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
   };
 
   return (
-    <div
-      className="page-container"
-      style={{
-        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-      }}
-    >
-      <div className="page-title">
-        <h2>
-          <span>-•≡ My Profile ≡•- </span>
-        </h2>
-      </div>
+    <div className="page-container">
+      <PageTitle titleText="My Profile" />
       <div className="page-box" style={{ width: "90%" }}>
         {err ? (
           <Loading text={err} />
@@ -275,7 +266,7 @@ const MyProfile = ({ setCurrentUser, APPDATA }) => {
                         &nbsp;
                         <input
                           type="button"
-                          value="Get Coord."
+                          value="Show PLZ city"
                           onClick={HandleGetLatLon}
                         ></input>
                         <br />

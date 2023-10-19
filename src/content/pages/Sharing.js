@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { datify } from "../../components/formatting";
-import MapChart from "../../components/MapChart";
-import Loading from "../../components/Loading";
-import { getSharedata } from "../../components/dataHandling";
-import "./_Page.css";
+import { datify } from "../../components/formatting.js";
+import MapChart from "../../components/MapChart.js";
+import Loading from "../../components/Loading.js";
+import PageTitle from "../../components/PageTitle.js";
+import { getSharedata } from "../../components/dataHandling.js";
+import "./_General.css";
 
 //------------------------------------------------------------------------------------
 const Sharing = ({ APPDATA }) => {
@@ -73,7 +74,7 @@ const Sharing = ({ APPDATA }) => {
     );
     setFilteredItems(newFilteredItems);
     setSelectedItem([]);
-    return () => {};
+    return () => { };
     // eslint-disable-next-line
   }, [filterPLZ, filterKeyword]);
 
@@ -165,9 +166,8 @@ const Sharing = ({ APPDATA }) => {
               <strong>{shareEmail.data.tuples[0].username}</strong>
               <h5>
                 <a
-                  href={`mailto:${
-                    shareEmail.data.tuples[0].email
-                  }?subject=Inquiry:%20${selectedItem[5].toString()}
+                  href={`mailto:${shareEmail.data.tuples[0].email
+                    }?subject=Inquiry:%20${selectedItem[5].toString()}
 &body=I%20am%20interested%20in%20your%20shares: ${selectedItem[5].toString()}.                                                                   \n Please kindly respond to this email.`}
                 >
                   {shareEmail.data.tuples[0].email}
@@ -204,16 +204,8 @@ const Sharing = ({ APPDATA }) => {
   return (
     <>
       <>
-        <div
-          className="page-container"
-          style={{
-            backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-            marginBottom: "0",
-          }}
-        >
-          <div className="page-title">
-            <h2>-•≡ Sharing Page ≡•-</h2>
-          </div>
+        <div className="page-container">
+          <PageTitle titleText="Sharing Home" />
           {currentUser ? (
             <div>
               <button
@@ -264,7 +256,8 @@ const Sharing = ({ APPDATA }) => {
                     style={{
                       marginTop: "10px",
                       height: "75vh",
-                      width: "50%",
+                      maxWidth: "45vw",
+                      minWidth: "max( 40vw, 300px )",
                       color: "red",
                       overflowY: "scroll",
                     }}
@@ -300,7 +293,7 @@ const Sharing = ({ APPDATA }) => {
                         ))}
                     </ul>
                   </div>
-                  <div className="col-6" style={{ width: "50%" }}>
+                  <div className="col-6" style={{ maxWidth: "45vw", minWidth: "max( 40vw, 300px )" }}>
                     <b
                       style={{
                         color: statusColor[selectedItem[6]],

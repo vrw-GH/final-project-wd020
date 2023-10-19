@@ -1,0 +1,60 @@
+.form {
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  margin-top      : 20px;
+  padding         : 20px;
+  background-color: #c5fad5;
+  width           : 400px;
+  border-radius   : 20px;
+  box-shadow      : 1px 10px 25px rgb(206, 206, 206);
+}
+
+.form-share {
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  text-align      : center;
+  background-color: rgb(238, 238, 238);
+  margin-top      : 0px;
+  padding         : 30px;
+  margin-bottom   : 20px;
+  border-radius   : 5px;
+  box-shadow      : 1px 10px 100px rgb(236, 233, 233);
+  transition      : 0.7s ease-in-out;
+}
+
+.form-share:hover {
+  color           : white;
+  transition      : 0.7s ease-in-out;
+  background-color: #85d4d4;
+  opacity         : 0, 5;
+  padding         : 50px;
+}
+
+.U-btn {
+  margin-top: 10px;
+  border    : black solid 1px;
+}
+
+.U-btn:hover {
+  background-color: white;
+}
+
+/* .arrayItems {
+  background-color: #aa96da;
+  margin-top      : 20px;
+  align-content   : center;
+  width           : 220;
+  padding         : 20px;
+  border-radius   : 51px 15px 15px 0px;
+  cursor          : pointer;
+} */
+
+.share-list {
+  background-color: lightblue;
+  line-height     : 3;
+  padding         : 0.001px;
+  padding-left    : 6px;
+  border-radius   : 0px 15px 25px 20px;
+}

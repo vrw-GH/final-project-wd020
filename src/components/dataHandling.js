@@ -8,11 +8,10 @@ const errorHandler = (error, message) => {
     console.log("Orig. " + (JSON.stringify(error?.response) || error));
   }
   throw new Error(
-    `${message}.\n ${
-      error?.response?.data?.info?.message ||
-      error?.response?.statusText ||
-      error?.response?.data?.error ||
-      error
+    `${message}.\n ${error?.response?.data?.info?.message ||
+    error?.response?.statusText ||
+    error?.response?.data?.error ||
+    error
     }`
   );
 };
@@ -199,6 +198,7 @@ export const setShareitems = async (postAPI, submitInfo) => {
 export const getUser = async (userName) => {
   const APPDATA = JSON.parse(sessionStorage.getItem("APPDATA"));
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  console.log(APPDATA);
   const headers = { headers: { authorization: currentUser.token } };
   try {
     const results = await axios.get(

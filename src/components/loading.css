@@ -1,37 +1,42 @@
 .loading_container {
-  margin: auto;
-  cursor: pointer;
-  position: relative; 
-  margin-top: 5rem;
-  width: 200px;
-  height: 200px;
-  border-radius: 150px;
-  background-color: rgb(255, 203, 89);
-  margin-bottom: 120px;
- }
- .loading {
-  position: relative;
-  width: 100%;
-   height: 100%;
-   border-radius: 150px;
-   border-right: 0.3rem solid rgb(131, 208, 238);
-   animation: animate 2s linear infinite;
- }
- @keyframes animate {
-   0% {
-      transform: rotate(0deg);
-   }
-   100% {
-      transform: rotate(360deg);
-   }
- }
- .loading_container > h4 {
+  padding         : 0 !important;
+  cursor          : pointer;
+  position        : relative;
+  margin-top      : 2rem !important;
+  margin-bottom   : 2rem !important;
+  width           : 200px;
+  height          : 200px;
+  border-radius   : 50%;
+  background-color: rgb(230, 189, 107) !important;
+
+}
+
+.loading {
+  position     : relative;
+  width        : 100%;
+  height       : 100%;
+  border-radius: 50%;
+  box-shadow   : 1px 5px 20px 1px rgba(233, 127, 6, 0.92);
+  animation    : animate 2s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading_container>p {
   font-family: 'Amble LtCn', sans-serif;
-   color: black;
-   position: absolute;
-   text-align: center;
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%,-50%);
-   
- }
+  color      : black;
+  position   : absolute;
+  text-align : center;
+  left       : 50%;
+  top        : 50%;
+  transform  : translate(-50%, -50%);
+
+}

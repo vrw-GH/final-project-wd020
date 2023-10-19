@@ -1,16 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
+import App from "./App.js";
 
-ReactDOM.render(
+let urlBase = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/") + 1);
+
+const root = createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={urlBase} >
       {/* <HashRouter> */}
-      <App />
+      <App tab="about" />
       {/* </HashRouter> */}
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  </React.StrictMode>
+)
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <BrowserRouter basename={urlBase} >
+//       {/* <HashRouter> */}
+//       <App />
+//       {/* </HashRouter> */}
+//     </BrowserRouter>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
