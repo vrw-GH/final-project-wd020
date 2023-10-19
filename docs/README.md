@@ -9,15 +9,10 @@
 <hr />
 <strong>Deployments :</strong>
 <br />
-&emsp;<u>V2</u>
+&emsp;<h2 style="color: orange">• Current-Beta: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-v2.6</a></h2>
+&emsp;<span style="color: red">• Stable-release: <a href="https://sharemyfood.vercel.app">(vercel) sharemyfood-v2.1</a></span>
 <br />
-&emsp;<span style="color: orange">• Test-release: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-test-v2.6</a></span>
-<br />
-&emsp;<span style="color: red">• Stable-release: <a href="https://sharemyfood.vercel.app">(vercel) sharemyfood-v2</a></span>
-<br />
-&emsp;<u>V1</u>
-<br />
-&emsp;<span style="color: green">• Pre-release: <a href="https://vrwgh-finalprojectwd020.netlify.app">(netlify) sharemyfood-v1</a></span>
+&emsp;<span style="color: green">• Initial-release: <a href="https://vrwgh-finalprojectwd020.netlify.app">(netlify) sharemyfood-v1</a></span>
 <h2></h2>
 <strong>Sources:</strong><small> &emsp;<a href="https://vrw-gh.github.io/final-project-wd020">GH Page</a>&emsp;•&emsp;<a href="https://github.com/vrw-GH/final-project-wd020">GH Repo</a>&emsp;•&emsp;<a href="https://vrw-gh.github.io/sharemyfood-backend/">Backend</a></small>
 <br />
