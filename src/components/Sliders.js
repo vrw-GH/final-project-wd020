@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import ctgType from "./ctgType.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,18 +34,18 @@ const Slider1 = ({ sliderData }) => {
     return str;
   };
 
-  var settings = {
-    dots: true,
-    infinite: sliderData.length > 3,
-    speed: 800,
-    // slidesToShow: window.innerWidth / 300,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    // variableWidth: true,
-  };
+  // var settings = {
+  //   dots: true,
+  //   infinite: sliderData.length > 3,
+  //   speed: 800,
+  //   // slidesToShow: window.innerWidth / 300,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 2,
+  //   arrows: true,
+  //   autoplay: true,
+  //   autoplaySpeed: 3000,
+  //   // variableWidth: true,
+  // };
 
   return (
     <>
