@@ -1,0 +1,35 @@
+
+2. PROFILE: MAPCHART:
+ Error: <g> attribute transform: Expected number, "translate(NaN, NaN)".
+
+4. PROFILE:
+ No routes matched location "/profile" - 
+(occurs on refresh)
+
+6: on page refresh:
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function
+
+
+-------------------------------
+
+SOLVED!!!
+
+1. RECIPES: SINGLETITLE:
+ Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+
+3. PROFILE:
+ Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the componen
+
+5. MY FOOD:
+ Sub-Menu stays open
+
+7. Mixed Content:
+ The page at 'https://61e0087c7bcada13e105f218--vrwgh-finalprojectwd020.netlify.app/profile' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.cdnfonts.com/css/amble'. This request has been blocked; the content must be served over HTTPS.
+
+8 LOGOUT:
+ Warning: Cannot update a component (`App`) while rendering a different component (`Login`). To locate the bad setState() call inside `Login`, follow the stack trace as
+
+9. ABOUT: NAVBAR: 
+Warning: React does not recognize the `Collapse` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `collapse` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+
+10. Is a Page-refresh occuring even with routing??

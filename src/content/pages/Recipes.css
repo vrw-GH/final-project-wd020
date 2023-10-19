@@ -1,0 +1,21 @@
+.itemsCont {
+  display       : flex;
+  flex-direction: column;
+  padding       : 20px;
+}
+
+.itemsList {
+  background-color: #c5fad5;
+  padding         : 25px;
+  margin-top      : 20px;
+  line-height     : 34px;
+  border-radius   : 15px;
+  transition      : 0.7s 0.3s ease-in-out;
+}
+
+.itemsList:hover {
+  transition         : 0.2s 0.2s ease-in-out;
+  background-color   : #85d4d4;
+  color              : white;
+  /* padding-bottom  : 50px; */
+}

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/app.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#76b68a" />
@@ -25,7 +26,15 @@
   </head>
   <!-- ----------------------------------------- -->
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+
+    <div id="root">
+      <div style="display: flexbox; padding: 50px; ">
+        <h2>PAGE IS LOADING ... </h2>
+        <h6><i>Please wait a moment.</i></h6>
+          
+        <p style="font-size: 0.8rem;">⏲ <i>You may initially experience startup delay upto 120seconds, which is due to spin-up delay in the back-end "Dyno" - since this is only a demo site.</i></p>
+      </div>
+    </div>
   </body>
 </html>

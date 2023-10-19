@@ -1,0 +1,118 @@
+!! audience can be tech or non-tech*
+
+INTRO: 
+
+********
+1 victor
+Hi, my name is Victor.
+I come from Sri Lanka and live in Bavaria since 2020.
+
+I was the General Manager for a Solar Technology company for over 20 years up until i moved to Germany.
+
+I was always very interested in future7sci-fi and digital tech, and discovered the allure of programming - i like the logic, and the immediate output you get from coding. When I first began to use PC's and to "code" - even the internet wasnt yet born!
+
+So, I decided to start anew since moving here, and so thats why i joined this bootcamp.
+
+
+Now let me welcome you all to our presentation for the WBS Coding School final project for
+FS Web and App Developer course.
+
+So. My partner Abdu and I worked together to build this project which we are proud to present you today!
+He had a wonderful idea - now over to Abdu, to tell you all about it...
+
+***********
+2 Abdullah 
+- about me..
+... and on to ...
+
+
+PRESENTATION
+------------
+(Abdu shares screen on 2nd monitor)
+
+
+PROJECT PREAMBLE
+- Idea -Sharing
+- Why
+- Usefulness (Share food, Personal Recipe Book)
+
+
+CORE- FEATURES 
+(MVP features for Proof Of Concept)
+
+- Sharing
+- Recipe Book
+
+then we walk-through...
+(remember - leave the SURPRISE for the last!)
+
+1. Abdu: 
+ - Show about page/ Home page
+ - Our App works for guest user.
+ - Show sharing page generally 
+ - Show recipe page generally
+ - then show login
+ - Goes automatically to sharing!
+ - show messages
+ - create a share
+ - close/delete something old
+
+
+2. Vic:
+  - Go to My Recipes menu
+  (Like a personal recipe book)
+  - Show likes and my own recipes  
+  - Go to create recipe, make one
+  (we should have a recipe pic ready to upload)
+
+  - some of THE LITTLE THINGS!
+
+   - Profile (get lon/lat with plz)
+   - Profile pic on menu
+   - Sorting and color coding:
+    #sharing - alphabetic/color
+??  #my sharing - reserved at top
+   - A very simple modal/popup
+   - Search feature
+
+  - our TECHNICAL data:
+
+   - Stack: P.E.R.N.
+   - Styling Vanila,Bootstrap,CSS
+   - All processing in front end
+   - Backend only data- server (no advanced queries)
+
+
+  - NEXT-FEATURES
+
+    X***- 1st! Real Authentication
+   - Edit recipe
+   - Advanced search
+   - ingredients: Copy Paste & Edit
+   - Set reminder?
+   - Chat-mode
+   - Share Location
+   - Drag-drop of image to recipe
+
+   Thats is from me, thanks and ..
+   - over to abdulla
+
+  ( did i miss anything ? )
+
+
+3. Abdu:
+
+  - anything ...
+
+  (video only - WrapUp)
+  (Video Close here. )
+
+
+
+4. Before we take some questions....
+
+!!!  SURPRISE  !!
+
+Jorge ! :
+-very caring and sharing. he shook us ...
+

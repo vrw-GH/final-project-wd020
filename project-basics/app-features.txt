@@ -1,0 +1,28 @@
+♣ FEATURES LIST:
+
+- Landing Page
+- About Page
+- Share Page
+- set booked,unbook
+- Recipe Page
+- Main Search (Recipes)
+- Recipe Filter: Category
+- Recipe Filter: Ingredients
+- User Login
+- Authentication
+- User - Create Recipe
+- User - Like Recipe
+- User - My Recipes Page
+- User - My Share Page
+- User - ShareItem Maintenance
+- User - Reserve ShareItem
+
+♣ FUTURE FEATURES:
+
+- Shareitems: pick a validity period, ie 1-3days, 1week/weeks etc.
+- Auto disable items on expiry.
+- 2-way messaging, or chat
+- Edit recipe
+- ingredients: Editing, Copy Paste
+- Share Location
+- Drag-drop of image to recipe

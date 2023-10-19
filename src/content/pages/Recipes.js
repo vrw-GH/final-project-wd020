@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import HomeSlider from "./RecipesSlider";
-import ctgType from "../../components/ctgType";
+import Slider1 from "../../components/Sliders.js";
+import ctgType from "../../components/ctgType.js";
+import PageTitle from "../../components/PageTitle.js";
 import {
   getCategories,
   getIngredients,
   getRecipes,
-} from "../../components/dataHandling";
-import Loading from "../../components/Loading";
-import "./_Page.css";
+} from "../../components/dataHandling.js";
+import Loading from "../../components/Loading.js";
+import "./_General.css";
+import "./Recipes.css";
 
 const Recipes = ({ APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -48,6 +50,7 @@ const Recipes = ({ APPDATA }) => {
           setRecipes(await getRecipes(filterItems));
           setErr("");
         } catch (error) {
+          console.log("Error:001 getRecipes");
           setErr(error.message);
         }
       })();
@@ -109,16 +112,8 @@ const Recipes = ({ APPDATA }) => {
   let key = 0;
   return (
     <>
-      <div
-        className="page-container"
-        style={{
-          backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-          marginBottom: "0",
-        }}
-      >
-        <div className="page-title">
-          <h2>-•≡ Recipes Home ≡•-</h2>
-        </div>
+      <div className="page-container">
+        <PageTitle titleText="Recepies Home" />
         {currentUser ? (
           <div>
             <button className="btn U-btn" onClick={() => navigate("/mytitles")}>
@@ -237,7 +232,7 @@ const Recipes = ({ APPDATA }) => {
           )}
         </div>
       </div>
-      <HomeSlider sliderData={recipes} />
+      <Slider1 sliderData={recipes} />
     </>
   );
 };

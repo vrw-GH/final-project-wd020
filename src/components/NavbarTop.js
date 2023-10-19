@@ -1,13 +1,10 @@
 import React from "react";
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Background from "./Background.png";
-import newLogo from "../media/newLogo.png";
-// import newLogo2 from "./newLogo2.png"
-// import newLogo1 from "./newLogo1.png"
+import "../components/Nav.css"
+import newLogo from "../media/footer.png";
 
 const NavbarTop = ({
   APPDATA,
@@ -21,28 +18,33 @@ const NavbarTop = ({
       {/* <Navbar sticky="top" id="nav" Collapse expand="md"> */}
       <Navbar sticky="top" id="nav" collapseOnSelect={true} expand="md">
         <Navbar.Brand
-          href="/about"
-          id="nav-about"
+          id="nav-home"
           onClick={handleClearQry}
           title={`${APPDATA.NAME} ver: ${APPDATA.VER} ${APPDATA.MODE}`}
         >
-          &nbsp;
-          <img
-            className="logo-2"
-            id="LOGO"
-            src={newLogo}
-            alt="logo"
-            width="50"
-            height="50"
-            title={`${APPDATA.NAME} - Home `}
-          />
-          &nbsp;{APPDATA.NAME}&nbsp;
-          <i style={{ fontSize: "0.6rem" }}>
-            {APPDATA.VER}{" "}
-            {APPDATA.MODE.substring(0, 4).toUpperCase() === "PROD"
-              ? ""
-              : APPDATA.MODE}
-          </i>
+          <Link
+            to="/home"
+            id="nav-home"
+            style={{ color: "brown" }}
+          >
+            &nbsp;
+            <img
+              className="logo-2"
+              id="LOGO"
+              src={newLogo}
+              alt="logo"
+              width="50"
+              height="50"
+              title={`${APPDATA.NAME} - Home `}
+            />
+            &nbsp;{APPDATA.NAME}&nbsp;
+            <i style={{ fontSize: "0.6rem" }}>
+              {APPDATA.VER}{" "}
+              {APPDATA.MODE.substring(0, 4).toUpperCase() === "PROD"
+                ? ""
+                : APPDATA.MODE}
+            </i>
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
 
@@ -139,7 +141,7 @@ const NavbarTop = ({
                     as={Link}
                     to="/login"
                     onClick={handleClearQry}
-                    id="nav-login"
+                    id="nav-logout"
                     className="nav-link"
                   >
                     Logout
@@ -168,6 +170,13 @@ const NavbarTop = ({
             >
               About
             </Link>
+            <Link
+              to="/home"
+              id="nav-home"
+              className="nav-link"
+            >
+              &nbsp;🏡&nbsp;
+            </Link>
           </Nav>
 
           <ReactBootStrap.Form className="d-flex">
@@ -188,7 +197,7 @@ const NavbarTop = ({
             </ReactBootStrap.Button>
           </ReactBootStrap.Form>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar >
     </>
   );
 };

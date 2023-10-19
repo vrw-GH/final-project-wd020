@@ -1,0 +1,94 @@
+.sliderPortal {
+  /* fallback */
+  display        : flex;
+  flex-direction : row;
+  flex-wrap      : wrap;
+  gap            : 5px;
+  flex           : 1 1 auto;
+  align-items    : center;
+  justify-content: space-between;
+  justify-content: center;
+  text-align     : center;
+}
+
+.recipesSlider_container {
+  display        : flex;
+  flex-direction : row;
+  align-items    : center;
+  justify-content: space-between;
+  text-align     : center;
+  width          : 100%;
+  /* margin      : auto;
+  margin-top     : 10px;
+  padding        : 5px; */
+}
+
+.recipesSlider_container>a:any-link,
+a:visited {
+  text-decoration: none;
+}
+
+.recipesSlider_container>a:hover {
+  text-decoration: none;
+  color          : rgb(110, 17, 0);
+}
+
+.recipesSlider_img {
+  margin       : auto;
+  padding      : auto;
+  border-radius: 5px;
+  width        : 85%;
+  height       : 120px;
+  object-fit   : cover;
+  padding-top  : 0.1rem;
+  cursor       : grab;
+}
+
+
+@media (min-width: 750px) {
+  .recipesSlider_img {
+    margin       : auto;
+    padding      : auto;
+    border-radius: 5px;
+    width        : 85%;
+    height       : 250px;
+    object-fit   : cover;
+    padding-top  : 0.1rem;
+    cursor       : grab;
+  }
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.recipesSlider_title {
+  color          : black;
+  font-family    : "Amble LtCn", sans-serif;
+  font-size      : 1rem;
+  font-weight    : bold;
+  margin-bottom  : 100px;
+  cursor         : pointer;
+  text-decoration: inherit;
+  direction      : inherit;
+  text-align     : center;
+}
+
+.recipesSlider_description {
+  /* background-color: rgba(255, 255, 255, 0.623); */
+  font-family  : "Amble LtCn", sans-serif;
+  font-size    : 0.6rem;
+  font-style   : italic;
+  color        : #444;
+  line-height  : 24px;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+
+  padding   : 2px;
+  text-align: center;
+}
+
+.slider-page {
+  color        : white;
+  margin-bottom: 40px;
+}
