@@ -11,7 +11,7 @@
 <br />
 &emsp;<u>V2</u>
 <br />
-&emsp;<span style="color: orange">• Test-release: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-test-v2</a></span>
+&emsp;<span style="color: orange">• Test-release: <a href="https://sharemyfood-prerelease.vercel.app">(vercel) sharemyfood-test-v2.6</a></span>
 <br />
 &emsp;<span style="color: red">• Stable-release: <a href="https://sharemyfood.vercel.app">(vercel) sharemyfood-v2</a></span>
 <br />
