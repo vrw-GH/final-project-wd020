@@ -1,6 +1,6 @@
 # Share My Food
 
-<a href="https://sharemyfood.vercel.app"><img src="./project-basics/Screenshot.png"></a>
+<a href="https://sharemyfood.vercel.app"><img src="https://raw.githubusercontent.com/vrw-GH/assets/main/repo-media/share-my-food/Screenshot.png"></a>
 <br />
 <h3>Final Project by Victor and Abdullah</h3>
 <h5><strong>Full Stack App and Web Development Course</strong>

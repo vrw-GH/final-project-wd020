@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useMount } from "react-use";
 import { genHash, checkPwd } from "../../components/security.js";
 import { userCreate, userLogin } from "../../components/dataHandling.js";
-import Loading from "../../components/Loading";
-import "./_Page.css";
+import Loading from "../../components/Loading.js";
+import PageTitle from "../../components/PageTitle.js";
+import "./_General.css";
 
 const Login = ({ setCurrentUser, APPDATA }) => {
-  const navigate = useNavigate();
   const [loginMsg, setLoginMsg] = useState("");
-  const loginSuccess = () => navigate(-1); //    "/sharing"  ?
-  const createSuccess = () => navigate("/profile");
+  const [goBack, setGoBack] = useState(-1);
   let username = "";
 
-  useEffect(() => {
+  useMount(() => {
+    // logs out if logged in
     if (sessionStorage.getItem("currentUser")) {
       sessionStorage.removeItem("currentUser");
       setCurrentUser({});
-      navigate("/");
-      return null;
+      return;
     }
     window.scrollTo(0, 0);
-    return () => {};
-    //eslint-disable-next-line
-  }, []);
+  });
 
   const doLogin = async (e) => {
+    e.preventDefault();
     try {
       username = e.target.parentElement.children["username"].value;
       if (!username) throw Error("Enter your credentials and");
@@ -39,15 +37,18 @@ const Login = ({ setCurrentUser, APPDATA }) => {
         profilePic: gotUser.profilepic,
       };
       setCurrentUser(user);
+      console.log(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
+      setGoBack("/profile");
       setLoginMsg(`"${user.userName}" - succesfully logged in!`);
-      loginSuccess();
     } catch (error) {
+      setGoBack("/");
       setLoginMsg(error + " - Please try again.");
     }
   };
 
   const doCreateUser = async (e) => {
+    e.preventDefault();
     try {
       const pwdHash = await genHash(
         e.target.parentElement.children["password"].value
@@ -68,39 +69,25 @@ const Login = ({ setCurrentUser, APPDATA }) => {
       };
       setCurrentUser(user);
       sessionStorage.setItem("currentUser", JSON.stringify(user));
-      setLoginMsg(result.message);
       username = "";
-      createSuccess();
+      setGoBack("/profile");
+      setLoginMsg(result.message);
     } catch (error) {
+      setGoBack(-1);
       setLoginMsg(error.message);
     }
   };
 
   return (
-    <div
-      className="page-container"
-      style={{
-        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-      }}
-    >
-      <div className="page-title">
-        <h2>-•≡ User Login / Registration ≡•-</h2>
-      </div>
+    <div className="page-container">
+      <PageTitle titleText="User Portal" />
       <div className="page-box col-8" style={{ minWidth: "300px" }}>
         {loginMsg ? (
           <>
-            <Loading text={loginMsg} back={-1} />
-            {/* <button
-              onClick={goBack}
-              className="btn btn-light"
-              autoFocus
-              onKeyDown={(keyCode) => (keyCode === 13 ? () => goBack : false)}
-            >
-              Ok
-            </button> */}
+            <Loading text={loginMsg} where={goBack} timeout={3} />
           </>
         ) : (
-          <>
+          <form>
             <input
               id="username"
               default={true}
@@ -109,6 +96,7 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               required
               autoFocus={true}
               placeholder="username"
+              autoComplete="username"
               className="form-control"
             />
 
@@ -117,15 +105,16 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               type="password"
               required
               placeholder="password"
+              autoComplete="current-password"
               className="form-control"
+              onKeyDown={(keyCode) => (keyCode === 13 ? doLogin : false)}
             />
             <button
               style={{ marginTop: "20px" }}
-              type="submit"
+              // type="submit"
               onClick={doLogin}
               className="btn btn-light"
-              id="nav-find"
-              onKeyDown={(keyCode) => (keyCode === 13 ? doLogin : false)}
+            // id="nav-find"
             >
               Login
             </button>
@@ -141,17 +130,19 @@ const Login = ({ setCurrentUser, APPDATA }) => {
               required={true}
               title="Your email will be shown to other logged-in members"
               className="form-control"
+              autoComplete="email"
+              onKeyDown={(keyCode) => (keyCode === 13 ? doCreateUser : false)}
             />
             <i>Your email will be shown to logged-in members when sharing</i>
             <button
               style={{ marginTop: "20px" }}
               onClick={doCreateUser}
-              id="nav-find"
+              // id="nav-find"
               className="btn btn-light"
             >
               Create User
             </button>
-          </>
+          </form>
         )}
       </div>
     </div>

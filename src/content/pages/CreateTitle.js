@@ -4,8 +4,9 @@ import {
   getCategories,
   getIngredients,
   postRecipe,
-} from "../../components/dataHandling";
-import Loading from "../../components/Loading";
+} from "../../components/dataHandling.js";
+import PageTitle from "../../components/PageTitle.js";
+import Loading from "../../components/Loading.js";
 import "./CreateTitle.css";
 
 const CreateTitle = ({ currentUser, APPDATA }) => {
@@ -75,8 +76,7 @@ const CreateTitle = ({ currentUser, APPDATA }) => {
   function handleImgInput(e) {
     if (e.target.files[0].size > maxAllowedSize) {
       alert(
-        `File too big (${Math.round(e.target.files[0].size / 1024)}kb) - max ${
-          maxAllowedSize / 1024
+        `File too big (${Math.round(e.target.files[0].size / 1024)}kb) - max ${maxAllowedSize / 1024
         }kb`
       );
       e.target.value = "";
@@ -135,16 +135,8 @@ const CreateTitle = ({ currentUser, APPDATA }) => {
       {published ? (
         <Navigate to={`/recipes/${newInfo.title}`} replace={true} />
       ) : (
-        <div
-          className="page-container"
-          style={{
-            backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-            marginBottom: "0",
-          }}
-        >
-          <div className="page-title">
-            <h2>-•≡ Create a new recipe ≡•- </h2>
-          </div>
+        <div className="page-container" >
+          <PageTitle titleText="Create a New Recepie" />
           <div
             className="page-box col-11"
             style={{
@@ -209,7 +201,7 @@ const CreateTitle = ({ currentUser, APPDATA }) => {
                           <img
                             src={newInfo.title_img}
                             className="create_title_img row"
-                            alt={`upload (max size ${maxAllowedSize / 1024}kb)`}
+                            alt={`200x140 px w/h (max ${maxAllowedSize / 1024}kb)`}
                           />
                         </object>
                       </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import Title from "./Title";
-import Loading from "../../components/Loading";
-import { getRecipes } from "../../components/dataHandling";
-import "./_Page.css";
+import Title from "./Title.js";
+import Loading from "../../components/Loading.js";
+import { getRecipes } from "../../components/dataHandling.js";
+import PageTitle from "../../components/PageTitle.js";
+import "./_General.css";
 
 const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   const [titles, setTitles] = useState([]);
@@ -42,16 +43,8 @@ const SearchTitles = ({ searchQry, handleClearQry, APPDATA }) => {
   };
 
   return (
-    <div
-      className="page-container"
-      style={{
-        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-        marginBottom: "0",
-      }}
-    >
-      <div className="page-title">
-        <h2>-•≡ Search Results ≡•-</h2>
-      </div>
+    <div className="page-container">
+      <PageTitle titleText="Search Results" />
       <div
         className="page-box col-8"
         style={{

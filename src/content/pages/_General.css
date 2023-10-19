@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  background: white;
+}
+
+@media (min-width: 390px) {
+
+  body,
+  html {
+    margin : 0;
+    padding: 0;
+  }
+}
+
+.page-container {
+  background-image: linear-gradient(rgba(243, 238, 238, 0.96),
+      rgba(243, 238, 221, 0.96)), url("../../media/footer.png");
+  background-position: center;
+  background-size    : 6%;
+  display            : flex;
+  flex-direction     : column;
+  align-items        : center;
+  color              : rgb(59, 59, 59);
+  font-family        : "Amble LtCn", sans-serif;
+}
+
+.page-title {
+  background-color: transparent;
+  font-family     : "Amble LtCn", sans-serif;
+  font-size       : 2rem;
+  position        : relative;
+  padding         : 10px;
+  display         : flex;
+  justify-content : space-around;
+  color           : rgb(156, 71, 71);
+  font-weight     : lighter;
+  text-transform  : uppercase;
+}
+
+.page-box {
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  max-width       : 98%;
+  box-shadow      : 2px 4px 25px rgb(240, 237, 237);
+  background-color: rgb(255, 255, 255);
+  padding         : 2rem;
+  margin          : 0.5rem 0 2rem;
+}
+
+.page-error {
+  color           : red;
+  padding         : 2px;
+  background-color: rgba(255, 0, 0, 0.308);
+}
+
+.alert-container {
+  position  : fixed;
+  background: #00000050;
+  width     : 100%;
+  height    : 100vh;
+  top       : 0;
+  left      : 0;
+}
+
+.alert-box {
+  position     : relative;
+  width        : 70%;
+  margin       : 0 auto;
+  height       : auto;
+  max-height   : 70vh;
+  margin-top   : calc(100vh - 85vh - 20px);
+  background   : #fff;
+  border-radius: 4px;
+  padding      : 20px;
+  border       : 1px solid #999;
+  overflow     : auto;
+}
+
+.alert-close {
+  content      : "x";
+  cursor       : pointer;
+  position     : fixed;
+  right        : calc(15% - 30px);
+  top          : calc(100vh - 85vh - 33px);
+  background   : #ededed;
+  width        : 25px;
+  height       : 25px;
+  border-radius: 50%;
+  line-height  : 20px;
+  text-align   : center;
+  border       : 1px solid #999;
+  font-size    : 20px;
+}
+
+.modal-container {
+  position     : absolute;
+  top          : 25%;
+  left         : 22%;
+  border-radius: 10px;
+  width        : 60%;
+  padding      : 20px;
+  background   : rgba(250, 250, 200, 0.98);
+}
+
+.easteregg-box {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  border-radius : 6px;
+  background    : linear-gradient(black, #20205a, black);
+}
+
+.easteregg-img {
+  object-fit: cover;
+  width     : auto;
+  height    : 500px;
+}

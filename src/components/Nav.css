@@ -1,0 +1,65 @@
+#LOGO {
+  margin-right: 20px;
+  margin-left : 10px;
+  transition  : 0.4s ease-in-out;
+}
+
+#LOGO:hover {
+  background-color: #d1fde3;
+  transition      : 0.1s ease-in-out;
+  border-radius   : 50%;
+}
+
+#nav {
+  font-family     : "Amble LtCn", sans-serif;
+  background-color: white;
+  color           : white;
+}
+
+#nav li a {
+  color: black;
+}
+
+.nav-link {
+  position     : relative;
+  transition   : 0.4s ease-in-out;
+  border-radius: 15px;
+}
+
+.nav-link:hover {
+  align-content   : center;
+  align-items     : center;
+  background-color: #d1fde3;
+  transition      : 0.1s ease-in-out;
+  box-sizing      : border-box;
+}
+
+#nav-user:hover {
+  align-content   : center;
+  align-items     : center;
+  background-color: #d1fde3;
+  width           : 100px;
+  transition      : 0.1s ease-in-out;
+  box-sizing      : border-box;
+}
+
+#nav-find {
+  background-color: #A1EBBF;
+  border-radius   : 5px;
+}
+
+#nav-find:hover {
+  background-color: #d1fde3;
+}
+
+.nav-drop {
+  border-radius: 15px;
+}
+
+.nav-drop:hover {
+  transition      : 0.5s ease-in-out;
+  align-content   : center;
+  align-items     : center;
+  background-color: #d1fde3;
+  box-sizing      : border-box;
+}
