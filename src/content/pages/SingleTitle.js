@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading.js";
+import PageTitle from "../../components/PageTitle.js";
 import {
   get1Recipe,
   getUserLikes,
   postUserLike,
-} from "../../components/dataHandling";
-import "./_Page.css";
+} from "../../components/dataHandling.js";
+import "./_General.css";
 import "./SingleTitle.css";
 
 const SingleTitle = ({ APPDATA }) => {
@@ -89,16 +90,8 @@ const SingleTitle = ({ APPDATA }) => {
 
   return (
     <>
-      <div
-        className="page-container"
-        style={{
-          backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-          marginBottom: "0",
-        }}
-      >
-        <div className="page-title">
-          <h2>-•≡ {recipe.title} ≡•-</h2>
-        </div>
+      <div className="page-container">
+        <PageTitle titleText={recipe.title} />
         <div className="page-box col-11">
           {err ? (
             <Loading text={err} />
@@ -119,24 +112,24 @@ const SingleTitle = ({ APPDATA }) => {
                   {currentUser?.userName === recipe.username
                     ? "✍ Edit my Recipe "
                     : isLiked
-                    ? "✅ favourite Recipe!"
-                    : "👍Add to favourites"}
+                      ? "📎favourite Recipe!"
+                      : "👍Add to favourites"}
                 </button>
               </div>
 
-              <div className="row">
+              <div className="row" >
                 <div className="row">
-                  <object
-                    data={recipe.title_img || recipe.image}
-                    type="image/jpg,jpeg,png"
-                    className="col"
-                  >
-                    <img
-                      src={recipe.title_img || recipe.image}
-                      alt={recipe.slug}
-                      className="single_title_img"
-                    />
-                  </object>
+                  <div className="col">
+                    <object
+                      data={recipe.title_img || recipe.image}
+                      type="image/jpg,jpeg,png"
+                    >
+                      <img
+                        src={recipe.title_img || recipe.image}
+                        alt={recipe.slug}
+                        className="single_title_img"
+                      /></object>
+                  </div>
 
                   <div className="single_title_ingredients col">
                     <h5>
@@ -160,7 +153,7 @@ const SingleTitle = ({ APPDATA }) => {
             </>
           )}
         </div>
-      </div>
+      </div >
     </>
   );
 };

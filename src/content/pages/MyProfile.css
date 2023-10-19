@@ -3,37 +3,41 @@
 }
 
 .myprofile_profilepic {
-  display: flexbox;
-  margin-top: 30px;
-  min-height: 320px;
-  max-height: 330px;
-  object-fit: cover;
+  display    : flexbox;
+  margin-top : 30px;
+  min-height : 320px;
+  max-height : 330px;
+  object-fit : cover;
   font-weight: bold;
 }
-.myprofile_profilepic > object {
-  margin:0;
+
+.myprofile_profilepic>object {
+  margin: 0;
 }
-.myprofile_profilepic > object > img {
+
+.myprofile_profilepic>object>img {
   border-radius: 50%;
 }
 
 .myprofile_details {
-  display: flexbox;
-  margin-top: 30px;
-  padding: 30px;
-  border: black solid 1px;
+  display      : flexbox;
+  margin-top   : 30px;
+  padding      : 30px;
+  border       : black solid 1px;
   border-radius: 30px;
-  transition: 0.5s ease-in;  
+  transition   : 0.4s ease-in;
 }
+
 .myprofile_details:hover {
-  border-radius: 30px;
-  padding: 35px;  
+  border-radius   : 30px;
   background-color: lightsteelblue;
-  transition: 0.5s ease-in;
+  transition      : 0.1s ease-in;
 }
 
 .myprofile_map {
-  display: flexbox;
-  margin-top: 30px;
-  width: 40vh;
+  display         : flexbox;
+  background-color: aliceblue;
+  margin-top      : 30px;
+  width           : 40vh;
+  border-radius   : 30px;
 }

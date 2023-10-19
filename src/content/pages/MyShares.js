@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { datify } from "../../components/formatting";
-import Loading from "../../components/Loading";
+import { datify } from "../../components/formatting.js";
+import Loading from "../../components/Loading.js";
+import PageTitle from "../../components/PageTitle.js";
 import {
   getShareitems,
   setShareitems,
   getUser,
-} from "../../components/dataHandling";
-import "./_Page.css";
+} from "../../components/dataHandling.js";
+import "./_General.css";
+import "./MyShares.css";
 
 const MyShares = ({ APPDATA }) => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -34,40 +36,44 @@ const MyShares = ({ APPDATA }) => {
             const results1 = await getUser(currentUser.userName);
             userPLZ.current = results1.plz;
             userLoc.current = results1.location;
-            let results = await getShareitems(currentUser.userName);
-            if (results) {
-              if (APPDATA.MODE.substring(0, 3).toUpperCase() !== "DEV") {
-                results = results.filter((e) => e.sharestatus !== "D");
-              }
-              let sorted = results;
-              sorted.sort((a, b) => {
-                if (a.sharestatus === "B") return -1;
-                if (a.sharestatus < b.sharestatus) return 1;
-                if (a.sharestatus === b.sharestatus && a.datetime > b.datetime)
-                  return -1;
-                return 0;
-              });
-              setShareItems(sorted);
-              let tArr = [];
-              for (let index = 0; index < sorted.length; index++) {
-                if (sorted[index].messages) {
-                  tArr.push([
-                    sorted[index].bookedby,
-                    sorted[index].messages.msg,
-                    sorted[index].messages.read,
-                    sorted[index].arrayofitems,
-                  ]);
+            try {
+              let results = await getShareitems(currentUser.userName);
+              if (results) {
+                if (APPDATA.MODE.substring(0, 3).toUpperCase() !== "DEV") {
+                  results = results.filter((e) => e.sharestatus !== "D");
                 }
+                let sorted = results;
+                sorted.sort((a, b) => {
+                  if (a.sharestatus === "B") return -1;
+                  if (a.sharestatus < b.sharestatus) return 1;
+                  if (a.sharestatus === b.sharestatus && a.datetime > b.datetime)
+                    return -1;
+                  return 0;
+                });
+                setShareItems(sorted);
+                let tArr = [];
+                for (let index = 0; index < sorted.length; index++) {
+                  if (sorted[index].messages) {
+                    tArr.push([
+                      sorted[index].bookedby,
+                      sorted[index].messages.msg,
+                      sorted[index].messages.read,
+                      sorted[index].arrayofitems,
+                    ]);
+                  }
+                }
+                setShareMessages(tArr);
               }
-              setShareMessages(tArr);
+              window.scrollTo(0, 0);
+            } catch (error) {
+              if (!error.response.data.info.result === false) {
+                setErr(error.message);
+              } else {
+                // just go on - there are no tuple for this user
+              }
             }
-            window.scrollTo(0, 0);
           } catch (error) {
-            if (!error.response.data.info.result === false) {
-              setErr(error.message);
-            } else {
-              // just go on - there are no tuple for this user
-            }
+            setErr("No data");
           }
         })();
         setGetData(false);
@@ -154,18 +160,10 @@ const MyShares = ({ APPDATA }) => {
 
   let k = 0;
   let k2 = 0;
+
   return (
-    <div
-      className="page-container"
-      style={{
-        backgroundImage: "url(" + APPDATA.TITLEIMG + ")",
-      }}
-    >
-      <div className="page-title">
-        <h2>
-          <span>-•≡ My Sharing ≡•- </span>
-        </h2>
-      </div>
+    <div className="page-container">
+      <PageTitle titleText="My Sharing" />
       {currentUser ? (
         <div>
           <button className="btn U-btn" onClick={addItem}>
@@ -262,7 +260,7 @@ const MyShares = ({ APPDATA }) => {
                         </b>
                         &nbsp;&nbsp;&nbsp;
                         {selectedInfo.messages &&
-                        !selectedInfo.messages.read ? (
+                          !selectedInfo.messages.read ? (
                           <input
                             type="button"
                             placeholder="Mark as read"
@@ -290,58 +288,58 @@ const MyShares = ({ APPDATA }) => {
                   {shareItems.length === 0
                     ? null
                     : shareItems.map((each) => (
-                        // <>
-                        <li
-                          onClick={() => editItem(each)}
-                          key={k2++}
-                          title={
-                            "click to edit" +
-                            (each.bookedby
-                              ? "\nBooked by: " + each.bookedby.toUpperCase()
-                              : "") +
-                            (each.messages?.msg
-                              ? "\nMessages: - " + each.messages.msg
-                              : "")
-                          }
-                          style={{
-                            backgroundColor:
-                              each.sharestatus === "D" ||
+                      // <>
+                      <li
+                        onClick={() => editItem(each)}
+                        key={k2++}
+                        title={
+                          "click to edit" +
+                          (each.bookedby
+                            ? "\nBooked by: " + each.bookedby.toUpperCase()
+                            : "") +
+                          (each.messages?.msg
+                            ? "\nMessages: - " + each.messages.msg
+                            : "")
+                        }
+                        style={{
+                          backgroundColor:
+                            each.sharestatus === "D" ||
                               each.sharestatus === "C"
-                                ? "#e0e0e0"
-                                : each.sharestatus === "B"
+                              ? "#e0e0e0"
+                              : each.sharestatus === "B"
                                 ? "#f3eea4"
                                 : "#d3ffe0",
-                            textDecorationLine:
-                              each.sharestatus === "D" ? "line-through" : "",
-                            cursor: "pointer",
-                            margin: "10px",
-                            borderRadius: "0px 15px 25px 20px",
-                            padding: "10px",
-                          }}
+                          textDecorationLine:
+                            each.sharestatus === "D" ? "line-through" : "",
+                          cursor: "pointer",
+                          margin: "10px",
+                          borderRadius: "0px 15px 25px 20px",
+                          padding: "10px",
+                        }}
+                      >
+                        {k2 + 1}. -{" "}
+                        <strong
+                          style={{ color: "black", fontWeight: "1000" }}
                         >
-                          {k2 + 1}. -{" "}
-                          <strong
-                            style={{ color: "black", fontWeight: "1000" }}
-                          >
-                            {each.message}
-                          </strong>
-                          <i style={{ fontSize: "0.8rem" }}>
-                            &nbsp;** Status: {shareStatus[each.sharestatus]} **
-                            Posted: {datify(each.datetime)}
-                          </i>
-                          <ul style={{ cursor: "pointer" }}>
-                            {each.arrayofitems.map((item) => (
-                              <li
-                                key={k2 + "-" + k++}
-                                style={{ padding: 0, color: "gray" }}
-                              >
-                                <strong>{item}</strong>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                        // </>
-                      ))}
+                          {each.message}
+                        </strong>
+                        <i style={{ fontSize: "0.8rem" }}>
+                          &nbsp;** Status: {shareStatus[each.sharestatus]} **
+                          Posted: {datify(each.datetime)}
+                        </i>
+                        <ul style={{ cursor: "pointer" }}>
+                          {each.arrayofitems.map((item) => (
+                            <li
+                              key={k2 + "-" + k++}
+                              style={{ padding: 0, color: "gray" }}
+                            >
+                              <strong>{item}</strong>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                      // </>
+                    ))}
                 </ol>
               </div>
             </div>

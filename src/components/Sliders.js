@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
-import ctgType from "../../components/ctgType";
+import ctgType from "./ctgType.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./RecipesSlider.css";
+import "./Sliders.css";
 
-const HomeSlider = ({ sliderData }) => {
+const Slider1 = ({ sliderData }) => {
   const navigate = useNavigate();
   if (sliderData.length < 1)
     return (
@@ -47,17 +47,18 @@ const HomeSlider = ({ sliderData }) => {
     // variableWidth: true,
   };
 
-  let key = 0;
   return (
-    <div>
+    <>
       <div style={{ marginBottom: "0.8rem", textAlign: "center" }}>
         <i>Drag slider ◄ or ►. Click each Title to open the Recipe Page</i>
         <br />
         <br />
       </div>
-      <Slider {...settings}>
+      <div className="sliderPortal">
+        {/* {sliderData.map((data) => <>{data.title}</>)} */}
+        {/* <Slider {...settings}> */}
         {sliderData.map((data) => (
-          <div key={key++}>
+          <div key={data.slug}>
             <object
               data={data.title_img || data.image}
               type="image/jpg,jpeg,png"
@@ -83,10 +84,11 @@ const HomeSlider = ({ sliderData }) => {
             </Link>
           </div>
         ))}
-      </Slider>
-      <div className="slider-page">Slider Pages:</div>
-    </div>
+        {/* </Slider> */}
+        <div className="slider-page">Slider Pages:</div>
+      </div>
+    </>
   );
 };
 
-export default HomeSlider;
+export default Slider1;

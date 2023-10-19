@@ -6,8 +6,9 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/continents/europe.json"
+// "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
+// "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const markerOffset = -15;
 
@@ -44,20 +45,19 @@ const MapChart = ({ coordinates, plz }) => {
 
   return (
     <ComposableMap
-      projection="geoAzimuthalEqualArea"
-      // projection="geoAlbers"
       height={290}
       width={270}
+      projection="geoAzimuthalEqualArea"
       projectionConfig={{
         rotate: [-10, -51, 0],
-        scale: 1500,
+        scale: 1200,
       }}
     >
       <ZoomableGroup zoom={1}>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies
-              .filter((d) => d.properties.REGION_UN === "Europe")
+              // .filter((d) => d.properties.REGION_UN === "Europe")
               .map((geo) => (
                 <Geography
                   key={geo.rsmKey}
