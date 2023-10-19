@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Marquee from "react-easy-marquee";
 // Local components
-import NavbarTop from "./components/NavbarTop";
-import Loading from "./components/Loading";
-// Local content
-import Header from "./content/pages/Header";
-import Footer from "./content/pages/Footer";
-import About from "./content/pages/About";
-import Recipes from "./content/pages/Recipes";
-import Sharing from "./content/pages/Sharing";
-import Login from "./content/pages/Login";
+import NavbarTop from "./components/NavbarTop.js";
+import Loading from "./components/Loading.js";
+import Header from "./content/pages/Header.js";
+import Footer from "./content/pages/Footer.js";
+import Home from "./content/pages/Home.js";
+import About from "./content/pages/About.js";
+import Recipes from "./content/pages/Recipes.js";
+import Sharing from "./content/pages/Sharing.js";
+import Login from "./content/pages/Login.js";
 import Category from "./content/pages/Category.js";
-import SingleTitle from "./content/pages/SingleTitle";
-import SearchTitles from "./content/pages/SearchTitles";
-import MyProfile from "./content/pages/MyProfile";
-import MyRecipes from "./content/pages/MyRecipes";
-import MyShares from "./content/pages/MyShares";
-import CreateTitle from "./content/pages/CreateTitle";
+import SingleTitle from "./content/pages/SingleTitle.js";
+import SearchTitles from "./content/pages/SearchTitles.js";
+import MyProfile from "./content/pages/MyProfile.js";
+import MyRecipes from "./content/pages/MyRecipes.js";
+import MyShares from "./content/pages/MyShares.js";
+import CreateTitle from "./content/pages/CreateTitle.js";
 //-------------------------------------------------
-import {
-  name as appName,
-  suffix as appSuffix,
-  version as appVer,
-  info as appInfo,
-  homepage as appHomepage,
-} from "../package.json";
-
+import packageJson from '../package.json'; //* available in Prod, otw fallbacks.
+let appName = packageJson.name || "Share My Food (Test)";
+let appSuffix = packageJson.suffix || "final-project-wbs#020";
+let appVer = packageJson.version || "Test";
+let appInfo = packageJson.info || "for Testing only";
+let appHomepage = packageJson.homepage || ".";
 const APPDATA = {
-  TITLE: appName || "New App Name",
+  TITLE: appName,
   NAME:
     appName
       .replace(/-/g, " ")
@@ -36,9 +33,8 @@ const APPDATA = {
   PROJECT:
     appName.replace(/-/g, " ").toUpperCase() + ` (${appSuffix})` ||
     "Project Not Set",
-  VER: appVer || "0.1.0",
-  INFO: appInfo || "App info not Set",
-  // HOME: "/",
+  VER: appVer,
+  INFO: appInfo,
   //---------------------------------------
   TITLEIMG: process.env.REACT_APP_IMG_TITLE || "/img-title.jpg",
   FOOTERIMG: process.env.REACT_APP_IMG_FOOTER || "/img-footer.jpg",
@@ -56,10 +52,10 @@ const APPDATA = {
   LOCATION: process.env.REACT_APP_DEV_ADDR || "83707, Germany",
   MODE: process.env.REACT_APP_PROJECT_MODE || process.env.NODE_ENV || "Dev",
   DESCRIPTION: process.env.REACT_APP_PROJECT_DESCRIPTION || "-in development-",
-  WEBSITE: appHomepage || process.env.HOST || "http://127.0.0.1",
-  HOST: process.env.HOST || appHomepage || "http://127.0.0.1",
+  WEBSITE: process.env.HOST || appHomepage || "App HOMEPAGE Not Set",
+  HOST: process.env.HOST || "http://127.0.0.1",
   PORT: process.env.PORT || 5000,
-  ROOT: "/",
+  ROOT: process.env.REACT_APP_FRONTEND || window.location.host || '/',
 };
 document.title = "Welcome to " + APPDATA.NAME;
 //-------------------------------------------------
@@ -120,20 +116,8 @@ function App() {
 
   return (
     <>
-      {APPDATA.MODE.substring(0, 4).toUpperCase() !== "PROD" ? (
-        <Marquee
-          duration="20000"
-          height="1rem"
-          background="red"
-          pauseOnHover={true}
-        >
-          <div style={{ fontSize: 10 }} title="Change MODE in process.env">
-            App is in {APPDATA.MODE} Mode (this will not show in poduction mode)
-          </div>
-        </Marquee>
-      ) : null}
-      {spinUp ? spinUp : null}
       <Header APPDATA={APPDATA} />
+      {spinUp ? spinUp : null}
       <NavbarTop
         APPDATA={APPDATA}
         handleSearchClick={handleSearchClick}
@@ -152,11 +136,11 @@ function App() {
             />
           ) : (
             <Routes>
-              <Route path="/" exact element={<About APPDATA={APPDATA} />} />
+              <Route path="/" exact element={<Home APPDATA={APPDATA} />} />
               <Route
-                path="/about"
+                path="/home"
                 exact
-                element={<About APPDATA={APPDATA} />}
+                element={<Home APPDATA={APPDATA} />}
               />
               <Route
                 path="/sharing"
@@ -166,17 +150,11 @@ function App() {
               <Route
                 path="/recipes"
                 exact
-                element={
-                  <Recipes
-                    // loading={loading}
-                    // categories={categories}
-                    APPDATA={APPDATA}
-                  />
-                }
+                element={<Recipes APPDATA={APPDATA} />}
               />
               <Route
-                exact
                 path="/login"
+                exact
                 element={
                   <Login setCurrentUser={setCurrentUser} APPDATA={APPDATA} />
                 }
@@ -221,14 +199,18 @@ function App() {
                 </>
               ) : null}
               <Route
+                path="/about"
                 exact
+                element={<About APPDATA={APPDATA} />}
+              />
+              <Route
                 path="/categories/:category"
-                // element={<Category categories={categories} APPDATA={APPDATA} />}
+                exact
                 element={<Category APPDATA={APPDATA} />}
               />
               <Route
-                exact
                 path="/recipes/:id"
+                exact
                 element={<SingleTitle APPDATA={APPDATA} />}
               />
               <Route
