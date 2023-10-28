@@ -4,7 +4,7 @@
   "version": "0.2.6",
   "info": "Sharing is Caring",
   "description": "The Final Project for the Full Stack Web & App Development Bootcamp course. Data provided by ElephantSQL. Backend API at sharemyfood-backend.herokuapp.com.",
-  "private": false,
+  "private": true,
   "type": "module",
   "//homepage": "https://sharemyfood-prerelease.vercel.app",
   "///homepage": "https://sharemyfood.vercel.app",
