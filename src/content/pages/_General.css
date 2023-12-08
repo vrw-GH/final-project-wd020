@@ -17,8 +17,7 @@ body {
 }
 
 .page-container {
-  background-image: linear-gradient(rgba(243, 238, 238, 0.96),
-      rgba(243, 238, 221, 0.96)), url("../../media/footer.png");
+  background-color: white; 
   background-position: center;
   background-size    : 6%;
   display            : flex;
